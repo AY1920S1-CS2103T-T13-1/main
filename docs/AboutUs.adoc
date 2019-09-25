@@ -14,7 +14,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::williamryank.png[width="150", align="left"]
 {empty}[https://github.com/WilliamRyank[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead + 
+Role: Team Lead +
 Responsibilities: Overall project coordination
 
 '''
@@ -41,7 +41,7 @@ Responsibilities: Testing
 image::simnee.png[width="150", align="left"]
 {empty}[https://github.com/SimNee[github]] [<<johndoe#, portfolio>>]
 
-Role: Code Quality
+Role: Code Quality +
 Responsibilities: Ensure proper coding standards are followed
 
 '''
