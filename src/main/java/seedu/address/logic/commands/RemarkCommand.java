@@ -63,6 +63,11 @@ public class RemarkCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
+    /**
+     * Generates a success message to show success in adding or deleting remarks.
+     * @param personToEdit {@code Person} whose remark to add or delete
+     * @return {@code String} representing success message
+     */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !remark.value.isEmpty()
                 ? MESSAGE_ADD_REMARK_SUCCESS
