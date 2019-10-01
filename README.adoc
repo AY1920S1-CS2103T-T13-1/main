@@ -3,7 +3,9 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 == Motivation
 It is undeniable that Organ Transplant is one of the greatest achievements we have.
+
 However, for a transplant to be successful, we need to have organ which matched the receiver.
+
 Since time is precious during transplant, we aim to provide an organ matching system to efficiently match the organs from donors to the patients who need them.
 
 == Build Status
@@ -24,9 +26,11 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 == Introduction
-* Organice is a desktop Organ Transplant Manager
-* We aim to facilitate the matching of organ transplants between patients and organ donors in hospitals.
-* It is written in Java language in an Object-oriented fashion
+Organice is a desktop Organ Transplant Manager
+
+We aim to facilitate the matching of organ transplants between patients and organ donors in hospitals.
+
+It is written in Java language in an Object-oriented fashion
 
 == Target Users
 
@@ -42,6 +46,9 @@ You can refer to the https://google.com/[user guide] for a more detailed explana
 
 == Technology and Framework Used
 
+    Java SE Development Kit 11.0.4
+    Travis
+    Gradle
 
 == Site Map
 
