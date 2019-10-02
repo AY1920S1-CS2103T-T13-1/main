@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>AddressBook Level 3 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>ORGANice - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>AddressBook Level 3 - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>ORGANice - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>CS2103T-T13-1</code>      Since: <code>Sep 2019</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -13,20 +13,31 @@
 <li><a href="#quick-start">2. Quick Start</a></li>
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.7. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.8. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.9. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.10. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#list-of-attributes">3.1. List of Attributes</a></li>
+<li><a href="#viewing-help-code-help-code">3.2. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-person-code-add-code">3.3. Adding a person: <code>add</code></a></li>
+<li><a href="#listing-persons-code-list-code">3.4. Listing persons : <code>list</code></a></li>
+<li><a href="#editing-a-person-code-edit-code">3.5. Editing a person : <code>edit</code></a></li>
+<li><a href="#locating-persons-by-name-code-find-code">3.6. Locating persons by name: <code>find</code></a></li>
+<li><a href="#deleting-a-person-code-delete-code">3.7. Deleting a person : <code>delete</code></a></li>
+<li><a href="#detecting-matches-code-match-code">3.8. Detecting matches: <code>match</code></a></li>
+<li><a href="#sorting-matches">3.9. Sorting matches</a></li>
+<li><a href="#processing-potential-matches-code-processing-code">3.10. Processing potential matches: <code>processing</code></a></li>
+<li><a href="#mark-as-done-code-done-code">3.11. Mark as done : <code>done</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.13. Saving the data</a></li>
+<li><a href="#detecting-duplicates">3.14. Detecting duplicates</a></li>
 </ul>
 </li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#future-improvements">4. Future improvements</a>
+<ul class="sectlevel2">
+<li><a href="#proposed-new-features">4.1. Proposed New Features</a></li>
+<li><a href="#proposed-extensions">4.2. Proposed Extensions</a></li>
+</ul>
+</li>
+<li><a href="#faq">5. FAQ</a></li>
+<li><a href="#command-summary">6. Command Summary</a></li>
+<li><a href="#glossary">7. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -34,26 +45,49 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook Level 3 (AB3) is for those who <strong>prefer to use a desktop app for managing contacts</strong>. More importantly, AB3 is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>ORGANice is a desktop application for hospital administration staff<br>
+to manage organ transplants.
+With ORGANice, you can easily do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>organise information about patients, doctors, and donors</p>
+</li>
+<li>
+<p>find matches between organ donors and patients</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>ORGANice is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI)<br>
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast,<br>
+ORGANice can get your administration tasks done faster than traditional GUI apps. Interested?<br>
+Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Below is a list of things to do to use the application:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
+<p>Ensure you have Java <code>11</code> or above installed in your computer.<br>
+If not, install it <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html">here</a>.</p>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level3/releases">here</a>.</p>
+<p>Download the latest <code>organice.jar</code> <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the jar file to the folder you want to use as the home folder for your application.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the application. The application should appear in a few seconds. The following screenshot<br>
+is a sample of how the application looks like:</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
@@ -65,25 +99,6 @@
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
 </li>
 <li>
-<p>Some example commands you can try:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
-</li>
-<li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
-</li>
-<li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
-</li>
-<li>
-<p><strong><code>exit</code></strong> : exits the app</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
 <p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
@@ -93,6 +108,14 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect1">
 <h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The following section describes the list of features and commands
+in this application.<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The list below how the format of the commands should be interpreted:</p>
+</div>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
@@ -101,32 +124,242 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+<p>The first word in a command is the command word. The rest of the words are parameters, which
+are either compulsory or optional.<br>
+e.g. in a command <code>add n/<strong>NAME</strong> p/<strong>PHONE</strong></code>, <code>add</code> is the command word while <code>n/<strong>NAME</strong> p/<strong>PHONE</strong></code>
+are parameters.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+<p>Words in bold are the parameters to be supplied by the user<br>
+e.g. in <code>add <strong>n/NAME</strong></code>, <code><strong>NAME</strong></code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+<p><code>[attributes]</code> refer to all the attributes in the <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a>.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order<br>
+e.g. if the command specifies <code>n/<strong>NAME</strong> p/<strong>PHONE</strong></code>, <code>p/<strong>PHONE</strong> n/<strong>NAME</strong></code>
+is also acceptable.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="list-of-attributes"><a class="link" href="#list-of-attributes">3.1. List of Attributes</a></h3>
+<div class="paragraph">
+<p>In this application, a person&#8217;s data is represented by attributes. Attributes
+refer to personal particulars such as name, type of person and blood type.<br></p>
+</div>
+<div class="paragraph">
+<p>The following list shows the list of attributes that can be specified for
+a person and the criteria for valid inputs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>n/<strong>NAME</strong>: the name of the person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients, doctors, donors</p>
+</li>
+<li>
+<p>Valid input: alphabets</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>t/<strong>TYPE</strong>: the type of person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients, doctors, donors</p>
+</li>
+<li>
+<p>Valid input: patient/donor/doctor</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>o/<strong>ORGAN</strong>: the type of organs</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients, donors</p>
+</li>
+<li>
+<p>Valid input: kidney</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>b/<strong>BLOODTYPE</strong> - the blood type of the person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients and donors</p>
+</li>
+<li>
+<p>Valid input: A/B/AB/O</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>p/<strong>PHONE</strong> - contact number of a person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients, doctors, donors</p>
+</li>
+<li>
+<p>Valid input: 8 digit number sequence, starting with 6, 8 or 9</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ic/<strong>NRIC</strong> - NRIC number of a person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients, doctors and donors</p>
+</li>
+<li>
+<p>Valid input: any sequence of alphabets and numbers that fulfill these criteria:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>starts with a capital S, F, T, or G</p>
+</li>
+<li>
+<p>followed by a 7 digit number sequence</p>
+</li>
+<li>
+<p>ends with a capital letter</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>pr/<strong>PRIORITY</strong> - priority of the patient, the value of which is determined by a doctor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients</p>
+</li>
+<li>
+<p>Valid input: high/medium/low</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>a/<strong>AGE</strong> - age of a person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients and donors</p>
+</li>
+<li>
+<p>Valid input: a number</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>d/<strong>DOCTOR</strong> - doctor in charge of a patient</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients</p>
+</li>
+<li>
+<p>Valid input: NRIC of the doctor</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>tt/<strong>TISSUE TYPE</strong> - the type of tissues</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: patients and donors</p>
+</li>
+<li>
+<p>Valid input: a string of 6 numbers (from 1 - 12), separated by commas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>exp/<strong>EXPIRY</strong> - expiry date of a donor&#8217;s organ</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applicable to: donors</p>
+</li>
+<li>
+<p>Valid input: a valid date in DD-MMM-YYYY format</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.2. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.3. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Adds a patient, doctor, or donor to ORGANice with the attributes given, depending on what is specified.</p>
+</div>
+<div class="paragraph">
+<p>There are two ways to add a person:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Normal Add</p>
+</li>
+<li>
+<p>Add with system prompting</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="normal-add"><a class="link" href="#normal-add">3.3.1. Normal Add</a></h4>
+<div class="paragraph">
+<p>Normal add refers to specifying all the attributes in the command. To add, type in the following
+commands to add a person:</p>
+</div>
+<div class="paragraph">
+<p>Format for adding patients: <code>add t/patient n/<strong>NAME</strong> o/<strong>ORGAN</strong> b/<strong>BLOOD TYPE</strong> tt/<strong>TISSUE TYPE</strong>
+p/<strong>PHONE</strong> pr/<strong>PRIORITY</strong> ic/<strong>NRIC</strong> d/<strong>DOCTOR</strong> a/<strong>AGE</strong></code><br></p>
+</div>
+<div class="paragraph">
+<p>Format for adding donors: <code>add t/donor n/<strong>NAME</strong> o/<strong>ORGAN</strong> b/<strong>BLOOD TYPE</strong> tt/<strong>TISSUE TYPE</strong>
+p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/<strong>AGE</strong></code><br></p>
+</div>
+<div class="paragraph">
+<p>Format for adding doctors: <code>add t/doctor n/<strong>NAME</strong> ic/<strong>NRIC</strong> p/<strong>PHONE</strong> ic/<strong>NRIC</strong></code></p>
+</div>
+<div class="paragraph">
+<p>After adding a person, ORGANice will display a form which contains the attributes of the person. Press
+the Enter key to confirm the details.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -135,7 +368,7 @@ Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;<
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A person can have any number of tags (including 0)
+View <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a> to find out what each attribute mean.
 </td>
 </tr>
 </table>
@@ -146,49 +379,45 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+d/S2235456D a/29</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+exp/23-Nov-2020 a/21</code></p>
+</li>
+<li>
+<p><code>add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D</code></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></h3>
+<div class="sect3">
+<h4 id="add-with-system-prompting"><a class="link" href="#add-with-system-prompting">3.3.2. Add with system prompting</a></h4>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
-Format: <code>list</code></p>
+<p>In this mode, the user can add the person&#8217;s attributes one by one.
+After entering an attribute, the system will prompt the user input for another attribute.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>add t/<strong>TYPE</strong></code></p>
+</div>
+<div class="paragraph">
+<p>ORGANice will prompt the user to type in each attribute, one by one.</p>
+</div>
+<div class="paragraph">
+<p>In the display box, there will be a form that reflects the attributes typed by the user.</p>
+</div>
+<div class="paragraph">
+<p>After the inputs are added, ORGANice will display a template that shows what the user data will look like
+if the changes are finalised. Press the Enter key to confirm the changes.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></h3>
+<h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">3.4. Listing persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
-</li>
-</ul>
-</div>
-</div>
+<p>Shows a list of all doctors, donors, or patients in ORGANice, depending on the type of person specified.
+Format: <code>list t/<strong>TYPE</strong></code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -196,21 +425,58 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+<p><code>list t/patient</code></p>
 </li>
 <li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+<p><code>list t/doctor</code></p>
+</li>
+<li>
+<p><code>list t/donor</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.5. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Edits the information of the person with the specified NRIC to the attributes specified.
+It is up to the user to specify which attributes should be updated.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>edit ic/<strong>NRIC</strong></code>
+Optional parameters: any parameter from the <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a></p>
+</div>
+<div class="paragraph">
+<p>After editing, ORGANice will display a form to show what information will be stored about
+the person after confirming the changes. The user is free to edit the fields before
+changes are confirmed.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit ic/S8732457G p/91234567</code><br>
+Edits the phone number of the specified patient to be <code>91234567</code>.</p>
+</li>
+<li>
+<p><code>edit ic/S8732457G n/Betsy Crower b/A</code><br>
+Edits the name and blood type of the specified donor to be <code>Betsy Crower</code> and <code>A</code> respectively.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.6. Locating persons by name: <code>find</code></a></h3>
+<div class="paragraph">
+<p>Finds persons whose attributes contain any of the given keywords.
+A list of patient/donor/doctor&#8217;s information whose attributes partially match the keywords
+will be displayed.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find</code><br>
+Optional parameters: any parameter from <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -220,16 +486,9 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>Persons matching at least one attribute will be returned.<br>
+e.g. <code>a/28 n/Hans Bo</code> will return people whose attributes are <code>n/Hans Gruber</code>, <code>n/Bo Yang</code>,
+<code>a/28 n/Jane</code></p>
 </li>
 </ul>
 </div>
@@ -241,38 +500,85 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
-</li>
-<li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+<p><code>find t/patient n/Lim</code><br>
+Returns any patient whose name contains 'Lim'</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.7. Deleting a person : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
-Format: <code>delete INDEX</code></p>
+<p>Deletes the specified person from ORGANice.
+Match history of a deleted patient or donor with other patients/donors will be removed.<br>
+Format: <code>delete ic/<strong>NRIC</strong></code></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed person list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>delete ic/S98654322D</code><br></p>
+</div>
+<div class="paragraph">
+<p>Deletes a person with the NRIC S98654322D in ORGANice.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="detecting-matches-code-match-code"><a class="link" href="#detecting-matches-code-match-code">3.8. Detecting matches: <code>match</code></a></h3>
+<div class="paragraph">
+<p>Currently, ORGANice only supports kidney matching. Refer to <a href="#faq">Section 5, &#8220;FAQ&#8221;</a> to know the
+procedure for kidney matching.</p>
+</div>
+<div class="paragraph">
+<p>This command displays a list of patient-donor pairs that passes both the blood type and tissue
+typing tests.<br></p>
+</div>
+<div class="paragraph">
+<p>To get a list of patients and their number of matches, the format is: <code>match all/</code></p>
+</div>
+<div class="paragraph">
+<p>To get a list of potential matches a patient has with a donor, the format is: <code>match ic/<strong>NRIC</strong></code></p>
+</div>
+<div class="paragraph">
+<p>Each match is accompanied by a success rate number,
+which indicates the degree of compatibility
+between the patient and donor.<br>
+This is so that the doctors can schedule for cross matching between the patient-donor pair.</p>
+</div>
+<div class="paragraph">
+<p>Matches can be sorted. Refer to <a href="#sorting-matches">Section 3.9, &#8220;Sorting matches&#8221;</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-matches"><a class="link" href="#sorting-matches">3.9. Sorting matches</a></h3>
+<div class="paragraph">
+<p>Users can specify how they want the patient-donor pairs to be sorted.<br>
+Sorting is done by passing in optional parameters to the <code>match</code> command.<br></p>
+</div>
+<div class="paragraph">
+<p>Matches can be sorted according to three categories:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Success rate of match</p>
+</li>
+<li>
+<p>Priority of patient</p>
+</li>
+<li>
+<p>Date of expiry of donors' organs</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To return a sorted list of patient-donor pairs, include the <code>sort/</code> flag in the command.<br>
+Format:
+<code>match ic/<strong>NRIC</strong> sort/[rate/priority/expiry]</code></p>
+</div>
+<div class="paragraph">
+<p>Typing this command causes the application to display a list of matches sorted
+according to the specified criteria. More than one sorting criteria can be included.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -280,87 +586,354 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd person in the address book.</p>
+<p><code>match ic/S7778983D sort/rate</code></p>
 </li>
 <li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
+<p><code>match ic/S7778983D sort/rate, priority, expiry</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.7. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">3.10. Processing potential matches: <code>processing</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+<p>After finding a list of matches, the hospital is free to schedule a cross-matching test between
+a specific donor and patient.<br></p>
+</div>
+<div class="paragraph">
+<p>After typing this command, the following changes occur:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the patient and donor statuses will be set to 'under cross matching'</p>
+</li>
+<li>
+<p>the patient and donor will not be included in matching with other donor and patients until a status update.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>processing icP/<strong>PATIENT NRIC</strong> icD/<strong>DONOR NRIC</strong></code><br></p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>processing icP/S6764235G icD/S1234567D</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.8. Exiting the program : <code>exit</code></a></h3>
+<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">3.11. Mark as done : <code>done</code></a></h3>
+<div class="paragraph">
+<p>After the hospital has the results of the cross matching test, they can
+update the results in ORGANice. Cross matching tests have two possible results: pass or fail.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>done icP/<strong>NRIC OF PATIENT</strong> icD/<strong>NRIC OF DONOR</strong> res/[pass/fail]</code></p>
+</div>
+<div class="paragraph">
+<p><code>icP/<strong>NRIC OF PATIENT</strong></code> refers to the NRIC of the patient, while <code>icD/<strong>NRIC OF DONOR</strong></code>
+refers to the NRIC of the donor.</p>
+</div>
+<div class="paragraph">
+<p>The following section outlines what happens based on the two results:<br></p>
+</div>
+<div class="paragraph">
+<p>If the result of the cross matching is a 'pass':</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It is up to the hospital staff to schedule an organ transplant surgery
+between the patient and donor.</p>
+</li>
+<li>
+<p>Mark the patient and donor as 'done', based on the command format.</p>
+</li>
+<li>
+<p>After running the command, the system removes the patient and donor from the matching pool.
+The patient and donor statuses will be marked to 'done'.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the result of the cross matching is a 'fail':<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the command based on the given format</p>
+</li>
+<li>
+<p>The patient and donor will be added back to the matching pool for
+match detection with other patients and donors.</p>
+</li>
+<li>
+<p>The patient-donor pair will not be considered a potential match in future match detection.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>done icP/S7896432A icD/S4578902G res/pass</code></p>
+</li>
+<li>
+<p><code>done icP/S7896432A icD/S4578902G res/fail</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.9. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.13. Saving the data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>Data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.10. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="detecting-duplicates"><a class="link" href="#detecting-duplicates">3.14. Detecting duplicates</a></h3>
 <div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
+A duplicate is defined as: Two persons of the same type who have the same NRIC.</p>
+</div>
+<div class="paragraph">
+<p>When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
+should be changed.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<h2 id="future-improvements"><a class="link" href="#future-improvements">4. Future improvements</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<p>This section describes features that can be added or improved in version 2.0.
+It is further divided into two sub-sections: <strong>Proposed New Features</strong> and <strong>Proposed Extensions</strong>.</p>
 </div>
+<div class="sect2">
+<h3 id="proposed-new-features"><a class="link" href="#proposed-new-features">4.1. Proposed New Features</a></h3>
+<div class="paragraph">
+<p>This section describes features that can be added to ORGANice in version 2.0.</p>
 </div>
+<div class="sect3">
+<h4 id="filtering-persons-code-filter-code"><a class="link" href="#filtering-persons-code-filter-code">4.1.1. Filtering persons: <code>filter</code></a></h4>
+<div class="paragraph">
+<p>Filters a patient/doctor/donor by specific attributes.</p>
 </div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>Format: <code>filter [patient/donor/doctor] [options]</code></p>
+</div>
+<div class="paragraph">
+<p>Returns a list of patients/doctors/doctors that has the specified attributes.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><code>filter t/patient g/M</code></p>
 </li>
 <li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
+<p><code>filter t/donor g/M n/Chua</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-01 12:10:16 UTC</div></div></div></body></html>
+</div>
+<div class="sect2">
+<h3 id="proposed-extensions"><a class="link" href="#proposed-extensions">4.2. Proposed Extensions</a></h3>
+<div class="paragraph">
+<p>This section describes features that can be improved on and its proposed improvements.</p>
+</div>
+<div class="sect3">
+<h4 id="mass-addition-of-data"><a class="link" href="#mass-addition-of-data">4.2.1. Mass addition of data</a></h4>
+<div class="paragraph">
+<p>Add more than one patient/doctor/donor from data in a specified text file.</p>
+</div>
+<div class="paragraph">
+<p>A duplicate is defined as: two persons of the same type having the same ID.
+When a duplicate is detected, it prompts the user to change the data in the text file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="supporting-more-types-of-transplants"><a class="link" href="#supporting-more-types-of-transplants">4.2.2. Supporting more types of transplants</a></h4>
+<div class="paragraph">
+<p>Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for<br>
+more types of organs.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="processing-a-match-code-process-code"><a class="link" href="#processing-a-match-code-process-code">4.2.3. Processing a match: <code>process</code></a></h4>
+<div class="paragraph">
+<p>Emails the doctor in charge of a patient when an organ match for the patient is found.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>process <strong>NRIC</strong></code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="advanced-find"><a class="link" href="#advanced-find">4.2.4. Advanced find</a></h4>
+<div class="paragraph">
+<p>Finding in v2.0 is more advanced with the implementation of fuzzy search and partial matching of keywords.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file<br>
+that contains the data of your previous ORGANice folder.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: What are the steps to find a patient-donor kidney match?<br>
+<strong>A</strong>: There are three steps to finding a patient-donor match:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Do a blood test to determine donor and patient blood type.</p>
+</li>
+<li>
+<p>Do a tissue typing test to determine the HLA antigens of the patient and the donor.</p>
+</li>
+<li>
+<p>Do a cross match, which is a trial transfusion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section summarises the commands to use this application. The following list
+contains the summary of the commands.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add (Normal Mode):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add patient: <code>add t/patient n/NAME o/ORGAN b/BLOOD TYPE tt/TISSUE TYPE p/PHONE pr/PRIORITY ic/NRIC d/DOCTOR a/AGE</code></p>
+</li>
+<li>
+<p>Add donor: <code>add t/donor n/<strong>NAME</strong> o/<strong>ORGAN</strong> b/<strong>BLOOD TYPE</strong> tt/<strong>TISSUE TYPE</strong>
+p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/<strong>AGE</strong></code></p>
+</li>
+<li>
+<p>Add doctor: <code>add t/doctor n/<strong>NAME</strong> ic/<strong>NRIC</strong> p/<strong>PHONE</strong> ic/<strong>NRIC</strong></code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Add (System Prompt Mode)</strong>: <code>add t/<strong>TYPE</strong></code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete ic/<strong>NRIC</strong></code><br></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit ic/<strong>NRIC</strong></code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional parameters: any parameter from <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional parameters: any parameter from <a href="#list-of-attributes">Section 3.1, &#8220;List of Attributes&#8221;</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Match</strong> : <code>match [all/ic]</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional parameters: <code>sort/[rate/expiry/priority]</code><br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Processing</strong>: <code>processing icP/<strong>NRIC of Patient</strong> icD/<strong>NRIC OF DONOR</strong></code></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list t/<strong>TYPE</strong></code></p>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Done</strong> : `done icP/<strong>NRIC of Patient</strong> icD/<strong>NRIC OF DONOR</strong> `</p>
+</li>
+<li>
+<p><strong>Exit</strong> : <code>exit</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">7. Glossary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section contains a list of words used in this user guide and its intended meaning.
+It is meant to clarify the meaning and context of the words used in this user guide.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>user: refers to hospital administration staff who are using this desktop application</p>
+</li>
+<li>
+<p>person: refers to doctors, patients or donors</p>
+</li>
+<li>
+<p>blood type match: refers to a donor and patient whose blood types are compatible.</p>
+</li>
+<li>
+<p>tissue match: refers to a donor and patient whose tissues match</p>
+</li>
+<li>
+<p>cross match: a trial blood transfusion, where donor and patient&#8217;s blood are mixed in a test tube to check<br>
+for harmful interactions between patient and donor&#8217;s blood</p>
+</li>
+<li>
+<p>potential match: refers to a donor-patient pair whose organs pass the blood test and tissue typing test.</p>
+</li>
+<li>
+<p>match: refers to a donor-patient pair whose organs pass all three matching tests</p>
+</li>
+<li>
+<p>duplicate: refers to two persons of the same type which have the same NRIC</p>
+</li>
+</ul>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-02 09:05:18 UTC</div></div></div></body></html>
