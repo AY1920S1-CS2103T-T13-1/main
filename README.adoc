@@ -19,7 +19,7 @@ This application is intended for hospital admin staff such as doctors and nurses
 
 == Installation
 
-You can download the https://github.com/AY1920S1-CS2103T-T13-1/main/releases/[jar] file and run it from your desktop
+You can download the https://github.com/AY1920S1-CS2103T-T13-1/main/releases/[jar] file and run it from your desktop.
 
 == Usage
 
