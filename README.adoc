@@ -1,4 +1,4 @@
-= ORGANice (Organ Transplant Manager)
+= ORGANice
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 == Introduction
@@ -19,7 +19,7 @@ This application is intended for hospital admin staff such as doctors and nurses
 
 == Installation
 
-You can download the https://google.com/[jar] file and run it from your desktop
+You can download the https://github.com/AY1920S1-CS2103T-T13-1/main/releases/[jar] file and run it from your desktop
 
 == Usage
 
@@ -56,7 +56,7 @@ https://coveralls.io/github/AY1920S1-CS2103T-T13-1/main?branch=master[image:http
 
 == Acknowledgements
 
-* Some parts of Organice were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
+* Some parts of ORGANice were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://openjfx.io/[JavaFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/junit-team/junit5[JUnit5]
 * ORGANice is adapted from AddressBook-Level3 project created by SE-EDU initiative at https://se-education.org
