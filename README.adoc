@@ -41,7 +41,6 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 == Build Status
-
 https://travis-ci.org/AY1920S1-CS2103T-T13-1/main[image:https://travis-ci.org/AY1920S1-CS2103T-T13-1/main.svg?branch=master[Build Status]]
 
 == Coverage
