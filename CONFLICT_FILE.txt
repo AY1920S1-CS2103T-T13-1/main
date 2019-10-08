@@ -1,13 +1,13 @@
 After completing v1.1, you can reduce process rigor to suit your team's pace. Here are some examples:
 
-    Reduce automated tests: Automated tests have benefits, but they can be a pain to write/maintain; GUI tests are especially hard to maintain because their behavior can sometimes depend on things such as the OS, resolution etc.
+    MORE TESTING PLEASE: Automated tests have benefits, but they can be a pain to write/maintain; GUI tests are especially hard to maintain because their behavior can sometimes depend on things such as the OS, resolution etc.
     It is OK to get rid of some of the troublesome tests and rely more on manual testing instead. The less automated tests you have, the higher the risk of regressions; but it may be an acceptable trade-off under the circumstances if tests are slowing you down too much.
     There is no direct penalty for removing tests. Also note our expectation on test code.
 
-    Reduce automated checks: You can also reduce the rigor of checkstyle checks to expedite PR processing.
+    CHECK EVERYTHING NOW: You can also reduce the rigor of checkstyle checks to expedite PR processing.
 
-    Switch to a lighter workflow: While forking workflow is the safest, it is also rather heavy. You an switch to a simpler workflow if the forking workflow is slowing you down. Refer the textbook to find more about alternative workflows: branching workflow, centralized workflow. However, we still recommend that you use PR reviews, at least for PRs affecting others' features.
+    HIGHER WORKLOAD!!!!: While forking workflow is the safest, it is also rather heavy. You an switch to a simpler workflow if the forking workflow is slowing you down. Refer the textbook to find more about alternative workflows: branching workflow, centralized workflow. However, we still recommend that you use PR reviews, at least for PRs affecting others' features.
 
 You can also increase the rigor/safety of your workflow in the following ways:
 
-    Use GitHub's Protected Branches feature to protect your master branch against rogue PRs.
+    Use GitHub's PROTECTED BRANCHES feature to protect your master branch against rogue PRs.
