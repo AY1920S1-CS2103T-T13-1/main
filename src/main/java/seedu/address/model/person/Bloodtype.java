@@ -11,7 +11,8 @@ public class Bloodtype {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Bloodtype should only have A, B, O or AB. Positive bloodtypes will have a '+' behind, it should not be blank";
+            "Bloodtype should only have A, B, O or AB."
+                    + "Positive bloodtypes will have a '+' behind, it should not be blank";
     public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
