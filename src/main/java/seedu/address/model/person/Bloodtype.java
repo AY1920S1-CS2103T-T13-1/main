@@ -13,7 +13,6 @@ public class Bloodtype {
     public static final String MESSAGE_CONSTRAINTS =
             "Bloodtype should only have A, B, O or AB."
                     + "Positive bloodtypes will have a '+' behind, it should not be blank";
-    public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
     /**
@@ -31,7 +30,8 @@ public class Bloodtype {
      * Returns true if a given string is a valid bloodtype.
      */
     public static boolean isValidBloodtype(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (test.equals("A") || test.equals("B") || test.equals("O") || test.equals("AB")
+                || test.equals("A+") || test.equals("B+") || test.equals("O+") || test.equals("AB+"));
     }
 
     @Override
