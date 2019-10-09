@@ -189,10 +189,10 @@ public class EditCommand extends Command {
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
-            return getName().equals(e.getType())
-                    && getPhone().equals(e.getNric())
-                    && getNric().equals(e.getName())
-                    && getType().equals(e.getPhone());
+            return getType().equals(e.getType())
+                    && getNric().equals(e.getNric())
+                    && getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone());
         }
     }
 }
