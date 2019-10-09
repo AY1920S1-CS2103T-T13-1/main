@@ -34,7 +34,8 @@ public class BloodtypeTest {
 
         // valid bloodtype
         assertTrue(Bloodtype.isValidBloodtype("B")); // exactly 1 alphabet
-        assertTrue(Bloodtype.isValidBloodtype("AB"));
+        assertTrue(Bloodtype.isValidBloodtype("AB")); //2 alphabets
+        assertTrue(Bloodtype.isValidBloodtype("Ab")); //case insensitive
         assertTrue(Bloodtype.isValidBloodtype("O+")); // with positive
     }
 }

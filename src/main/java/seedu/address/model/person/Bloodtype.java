@@ -30,8 +30,9 @@ public class Bloodtype {
      * Returns true if a given string is a valid bloodtype.
      */
     public static boolean isValidBloodtype(String test) {
-        return (test.equals("A") || test.equals("B") || test.equals("O") || test.equals("AB")
-                || test.equals("A+") || test.equals("B+") || test.equals("O+") || test.equals("AB+"));
+        return (test.toUpperCase().equals("A") || test.toUpperCase().equals("B") || test.toUpperCase().equals("O")
+                || test.toUpperCase().equals("AB") || test.toUpperCase().equals("A+") || test.toUpperCase().equals("B+")
+                || test.toUpperCase().equals("O+") || test.toUpperCase().equals("AB+"));
     }
 
     @Override
