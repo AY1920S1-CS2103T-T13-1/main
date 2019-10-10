@@ -38,11 +38,12 @@ public class DonorTest {
         editedJohn = new DonorBuilder(JOHN).withName(VALID_NAME_BOB).build();
         assertTrue(JOHN.isSamePerson(editedJohn));
 
-        // different nric, same attributes -> returns false
-        editedJohn = new DonorBuilder(JOHN).withNric(VALID_NRIC_BOB).build();
+        // different nric, different other attributes -> returns false
+        editedJohn = new DonorBuilder(JOHN).withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
         assertFalse(JOHN.isSamePerson(editedJohn));
 
-        // same nric, different attributes -> returns true
+        // same nric, different other attributes -> returns true
         editedJohn = new DonorBuilder(JOHN).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertTrue(JOHN.isSamePerson(editedJohn));
     }
