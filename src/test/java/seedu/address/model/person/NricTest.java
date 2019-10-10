@@ -15,12 +15,12 @@ public class NricTest {
 
     @Test
     public void constructor_invalidNric_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Nric(invalidName));
+        String invalidNric = "";
+        assertThrows(IllegalArgumentException.class, () -> new Nric(invalidNric));
     }
 
     @Test
-    public void isValidName() {
+    public void isValidNric() {
         // null nric
         assertThrows(NullPointerException.class, () -> Nric.isValidNric(null));
 
@@ -31,11 +31,13 @@ public class NricTest {
         assertFalse(Nric.isValidNric("9312930R")); // begins with a number
         assertFalse(Nric.isValidNric("S123456A")); // contains less than 7 numbers
         assertFalse(Nric.isValidNric("S1234567")); // ends with a number
-        assertFalse(Nric.isValidNric("s1234512b")); // small cases for beginning and ending letters
         assertFalse(Nric.isValidNric("AAAAAAAAA")); // contains only letters
         assertFalse(Nric.isValidNric("N1234567A")); // starts with letter other than S/T/F/G
 
         // valid nric
+        assertTrue(Nric.isValidNric("s1234512b")); // should be case insensitive
+        assertTrue(Nric.isValidNric("s1234512R")); // should be case insensitive
+        assertTrue(Nric.isValidNric("T1234512a")); // should be case insensitive
         assertTrue(Nric.isValidNric("S1234567B")); // starts with 'S'
         assertTrue(Nric.isValidNric("T2222222A")); // starts with 'T'
         assertTrue(Nric.isValidNric("F3333333A")); // starts with 'F'
