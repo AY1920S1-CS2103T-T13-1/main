@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import java.util.Objects;
 
 /**
- * Represents a Patient in ORGANice.
+ * Represents a Donor in ORGANice.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Donor extends Person {
@@ -21,6 +22,34 @@ public class Donor extends Person {
 
     public Age getAge() {
         return age;
+    }
+
+    /**
+     * Returns true if both donors have the same identity and data fields.
+     * This defines a stronger notion of equality between two donors.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Donor)) {
+            return false;
+        }
+
+        Donor otherPerson = (Donor) other;
+        return otherPerson.getNric().equals(getNric())
+            && otherPerson.getName().equals(getName())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getType().equals(getType())
+            && otherPerson.getAge().equals(getAge());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(type, nric, name, phone, age);
     }
 
     @Override
