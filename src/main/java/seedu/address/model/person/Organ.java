@@ -12,10 +12,6 @@ public class Organ {
     public static final String MESSAGE_CONSTRAINTS =
             "Please key in a valid organ. Valid organ(s): kidney.";
 
-    /*
-     * The first character of the organ must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public static final String KIDNEY = "kidney";
