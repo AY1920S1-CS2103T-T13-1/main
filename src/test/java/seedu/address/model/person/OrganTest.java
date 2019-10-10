@@ -67,6 +67,6 @@ public class OrganTest {
         Organ organ = new Organ("kidney");
 
         assertEquals(organ.hashCode(), new Organ("KIDNEY").hashCode());
-        assertNotEquals(organ.hashCode(), new Organ("kidny"));
+        assertNotEquals(organ.hashCode(), new Organ("kidny").hashCode());
     }
 }
