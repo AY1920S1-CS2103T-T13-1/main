@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class DoctorInCharge {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Doctor in charge's NRIC must start with a letter 'S/T/F/G', 7 numbers afterward "
                     + "and its must end with a letter";
