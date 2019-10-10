@@ -28,7 +28,7 @@ public class Nric {
     public Nric(String nric) {
         requireNonNull(nric);
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
-        value = nric;
+        value = nric.toUpperCase();
     }
 
     /**

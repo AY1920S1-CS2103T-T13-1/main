@@ -26,7 +26,7 @@ public class DoctorInCharge {
     public DoctorInCharge(String doctorInCharge) {
         requireNonNull(doctorInCharge);
         checkArgument(isValidDoctorInCharge(doctorInCharge), MESSAGE_CONSTRAINTS);
-        value = doctorInCharge;
+        value = doctorInCharge.toUpperCase();
     }
 
     /**

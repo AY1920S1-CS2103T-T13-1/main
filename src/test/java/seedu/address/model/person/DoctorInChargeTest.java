@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -42,5 +44,28 @@ public class DoctorInChargeTest {
         assertTrue(DoctorInCharge.isValidDoctorInCharge("T2222222A")); // starts with 'T'
         assertTrue(DoctorInCharge.isValidDoctorInCharge("F3333333A")); // starts with 'F'
         assertTrue(DoctorInCharge.isValidDoctorInCharge("G4444444A")); // starts with 'G'
+    }
+
+    @Test
+    public void toStringTest() {
+        assertEquals(new DoctorInCharge("S1111111A").toString(), "S1111111A");
+    }
+
+    @Test
+    public void equals() {
+        DoctorInCharge doctorInCharge = new DoctorInCharge("S1111111A");
+
+        assertFalse(doctorInCharge.equals(null));
+        assertFalse(doctorInCharge.equals(new DoctorInCharge("S1111111B")));
+        assertTrue(doctorInCharge.equals(doctorInCharge));
+        assertTrue(doctorInCharge.equals(new DoctorInCharge("S1111111A")));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        DoctorInCharge doctorInCharge = new DoctorInCharge("S1111111A");
+
+        assertEquals(doctorInCharge.hashCode(), new DoctorInCharge("S1111111A").hashCode());
+        assertNotEquals(doctorInCharge.hashCode(), new DoctorInCharge("S1111111B").hashCode());
     }
 }
