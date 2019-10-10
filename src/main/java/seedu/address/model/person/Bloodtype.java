@@ -3,13 +3,17 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  * Represents a Person's bloodtype in ORGANice.
  * Guarantees: immutable; is valid as declared in {@link #isValidBloodtype(String)}
  */
 public class Bloodtype {
 
-
+    public static final HashSet<String> BLOOD_TYPES =
+            new HashSet<>(Arrays.asList("A", "B", "AB", "O", "A+", "AB+", "B+", "O+"));
     public static final String MESSAGE_CONSTRAINTS =
             "Bloodtype should only have A, B, O or AB."
                     + "Positive bloodtypes will have a '+' behind, it should not be blank";
@@ -30,9 +34,7 @@ public class Bloodtype {
      * Returns true if a given string is a valid bloodtype.
      */
     public static boolean isValidBloodtype(String test) {
-        return (test.toUpperCase().equals("A") || test.toUpperCase().equals("B") || test.toUpperCase().equals("O")
-                || test.toUpperCase().equals("AB") || test.toUpperCase().equals("A+") || test.toUpperCase().equals("B+")
-                || test.toUpperCase().equals("O+") || test.toUpperCase().equals("AB+"));
+        return BLOOD_TYPES.contains(test.toUpperCase());
     }
 
     @Override
