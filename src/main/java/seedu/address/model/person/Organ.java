@@ -12,8 +12,6 @@ public class Organ {
     public static final String MESSAGE_CONSTRAINTS =
             "Please key in a valid organ. Valid organ(s): kidney.";
 
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-
     public static final String KIDNEY = "kidney";
 
     public final String value;
@@ -26,15 +24,14 @@ public class Organ {
     public Organ(String organ) {
         requireNonNull(organ);
         checkArgument(isValidOrgan(organ), MESSAGE_CONSTRAINTS);
-        value = organ;
+        value = organ.toLowerCase();
     }
 
     /**
      * Returns true if a given string is a valid organ.
      */
     public static boolean isValidOrgan(String test) {
-        return test.matches(VALIDATION_REGEX)
-                && test.toLowerCase().equals(KIDNEY);
+        return test.toLowerCase().equals(KIDNEY);
     }
 
     @Override

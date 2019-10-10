@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -34,6 +36,37 @@ public class OrganTest {
 
         // valid organ
         assertTrue(Organ.isValidOrgan("kidney")); // alphabets only
-        assertTrue(Organ.isValidOrgan("Kidney")); // with capital letters
+        assertTrue(Organ.isValidOrgan("Kidney")); // case insensitive
+    }
+
+    @Test
+    public void toStringTest() {
+        assertEquals(new Organ("kidney").toString(), "kidney");
+        assertEquals(new Organ("KIDNEY").toString(), "kidney");
+    }
+
+    @Test
+    public void equals() {
+        Organ organ = new Organ("kidney");
+
+        // null -> returns false
+        assertFalse(organ.equals(null));
+
+        // misspelled -> returns false
+        assertFalse(organ.equals(new Organ("kidny")));
+
+        // same object -> returns true
+        assertTrue(organ.equals(organ));
+
+        // same organ name -> returns true
+        assertTrue(organ.equals(new Organ("kidney")));
+    }
+
+    @Test
+    public void hashCodeTest(){
+        Organ organ = new Organ("kidney");
+
+        assertEquals(organ.hashCode(), new Organ("KIDNEY").hashCode());
+        assertNotEquals(organ.hashCode(), new Organ("kidny"));
     }
 }
