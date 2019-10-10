@@ -97,6 +97,6 @@ public class PersonTest {
 
         assertEquals(alice.hashCode(), new PersonBuilder(ALICE).build().hashCode());
         assertNotEquals(alice.hashCode(),
-            new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build().hashCode());
+                new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build().hashCode());
     }
 }
