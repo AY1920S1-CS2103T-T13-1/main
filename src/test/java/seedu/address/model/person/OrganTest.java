@@ -52,9 +52,6 @@ public class OrganTest {
         // null -> returns false
         assertFalse(organ.equals(null));
 
-        // misspelled -> returns false
-        assertFalse(organ.equals(new Organ("kidny")));
-
         // same object -> returns true
         assertTrue(organ.equals(organ));
 
@@ -67,6 +64,5 @@ public class OrganTest {
         Organ organ = new Organ("kidney");
 
         assertEquals(organ.hashCode(), new Organ("KIDNEY").hashCode());
-        assertNotEquals(organ.hashCode(), new Organ("kidny").hashCode());
     }
 }
