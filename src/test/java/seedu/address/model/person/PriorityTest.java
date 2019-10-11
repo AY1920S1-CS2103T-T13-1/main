@@ -91,22 +91,24 @@ public class PriorityTest {
     @Test
     public void toString_allValidInputs() {
         assertEquals(PRIORITY_HIGH.toString(), "high");
-        assertEquals(PRIORITY_HIGH_CAPS.toString(), "HIGH");
+        assertEquals(PRIORITY_HIGH_CAPS.toString(), "high"); //converted to lowercase
 
         assertEquals(PRIORITY_LOW.toString(), "low");
-        assertEquals(PRIORITY_LOW_CAPS.toString(), "LOW");
+        assertEquals(PRIORITY_LOW_CAPS.toString(), "low");
 
         assertEquals(PRIORITY_MEDIUM.toString(), "medium");
-        assertEquals(PRIORITY_MEDIUM_CAPS.toString(), "MEDIUM");
+        assertEquals(PRIORITY_MEDIUM_CAPS.toString(), "medium");
     }
 
     @Test
     public void equals_validEquals() {
         assertTrue(PRIORITY_HIGH.equals(PRIORITY_HIGH)); //same object
         assertTrue(PRIORITY_MEDIUM.equals(PRIORITY_MEDIUM)); //same object
+        assertTrue(PRIORITY_HIGH.equals(PRIORITY_HIGH_CAPS)); //case insensitive
+
 
         assertFalse(PRIORITY_HIGH.equals(null)); //null object
-        assertFalse(PRIORITY_HIGH.equals(PRIORITY_HIGH_CAPS));
+        assertFalse(PRIORITY_LOW.equals("low")); //subject object
     }
 
     @Test

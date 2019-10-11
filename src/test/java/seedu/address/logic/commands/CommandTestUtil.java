@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -69,6 +70,8 @@ public class CommandTestUtil {
     public static final String NRIC_DESC_JOHN = " " + PREFIX_NRIC + VALID_NRIC_JOHN;
     public static final String TYPE_DESC_JOHN = " " + PREFIX_TYPE + VALID_TYPE_JOHN;
     public static final String AGE_DESC_JOHN = " " + PREFIX_AGE + VALID_AGE_JOHN;
+    public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
+    public static final String PRIORITY_DESC_IRENE = " " + PREFIX_PRIORITY + VALID_PRIORITY_IRENE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -76,6 +79,7 @@ public class CommandTestUtil {
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "student"; // only allow 'patient','donor',
     // 'doctor'
     public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "-9";
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "med";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

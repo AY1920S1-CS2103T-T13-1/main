@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_AGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -23,6 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_IRENE;
@@ -35,6 +38,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_IRENE;
@@ -56,14 +60,84 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Type;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresentPatient_success() {
+        Patient expectedPatient = new PatientBuilder(IRENE).build();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_IRENE + NRIC_DESC_IRENE
+                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE + PRIORITY_DESC_IRENE,
+                new AddCommand(expectedPatient));
+
+        // multiple names - last name accepted
+        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_AMY
+                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE + PRIORITY_DESC_IRENE,
+                new AddCommand(expectedPatient));
+
+        // multiple phones - last phone accepted
+        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE
+                + PHONE_DESC_AMY + PHONE_DESC_IRENE + AGE_DESC_IRENE + PRIORITY_DESC_IRENE,
+                new AddCommand(expectedPatient));
+
+        // multiple nrics - last nric accepted
+        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_AMY + NRIC_DESC_IRENE + NAME_DESC_IRENE
+                + PHONE_DESC_IRENE + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, new AddCommand(expectedPatient));
+
+        // multiple types - last type accepted
+        assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_IRENE + NRIC_DESC_IRENE
+                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE + PRIORITY_DESC_IRENE,
+                new AddCommand(expectedPatient));
+
+        //multiple priority - last priority accepted
+        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
+                + AGE_DESC_IRENE + PRIORITY_DESC_BOB + PRIORITY_DESC_IRENE, new AddCommand(expectedPatient));
+
+        // multiple ages - last age accepted
+        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
+                + AGE_DESC_BOB + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, new AddCommand(expectedPatient));
+
+    }
+
+    @Test
+    public void parse_allFieldsPresentDonor_success() {
+        //Testing all fields present for a Donor
+        Donor expectedDonor = JOHN;
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_JOHN + NRIC_DESC_JOHN
+                + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+
+        // multiple names - last name accepted
+        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_AMY
+                + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+
+        // multiple phones - last phone accepted
+        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN
+                + PHONE_DESC_AMY + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+
+        // multiple nrics - last nric accepted
+        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_AMY + NRIC_DESC_JOHN + NAME_DESC_JOHN
+                + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+
+        // multiple types - last type accepted
+        assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_JOHN + NRIC_DESC_JOHN
+                + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+
+        // multiple ages - last age accepted
+        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN
+                + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_BOB + AGE_DESC_JOHN, new AddCommand(expectedDonor));
+    }
+
+    @Test
+    public void parse_allFieldsPresentDoctor_success() {
         Person expectedPerson = new PersonBuilder(AMY).build();
 
         // whitespace only preamble
@@ -84,63 +158,8 @@ public class AddCommandParserTest {
 
         // multiple types - last type accepted
         assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_AMY + NRIC_DESC_AMY
-            + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
-
-        //Testing all fields present for a Donor
-        Patient expectedPatient = IRENE;
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_IRENE + NRIC_DESC_IRENE
-                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE, new AddCommand(expectedPatient));
-
-        // multiple names - last name accepted
-        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_AMY
-                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE, new AddCommand(expectedPatient));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE
-                + PHONE_DESC_AMY + PHONE_DESC_IRENE + AGE_DESC_IRENE, new AddCommand(expectedPatient));
-
-        // multiple nrics - last nric accepted
-        assertParseSuccess(parser, TYPE_DESC_IRENE + NRIC_DESC_AMY + NRIC_DESC_IRENE + NAME_DESC_IRENE
-                + PHONE_DESC_IRENE + AGE_DESC_IRENE, new AddCommand(expectedPatient));
-
-        // multiple types - last type accepted
-        assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_IRENE + NRIC_DESC_IRENE
-                + NAME_DESC_IRENE + PHONE_DESC_IRENE + AGE_DESC_IRENE, new AddCommand(expectedPatient));
-
-        //Testing all fields present for a Donor
-        Donor expectedDonor = JOHN;
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_JOHN + NRIC_DESC_JOHN
-            + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
-
-        // multiple names - last name accepted
-        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_AMY
-            + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN
-            + PHONE_DESC_AMY + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
-
-        // multiple nrics - last nric accepted
-        assertParseSuccess(parser, TYPE_DESC_JOHN + NRIC_DESC_AMY + NRIC_DESC_JOHN + NAME_DESC_JOHN
-            + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
-
-        // multiple types - last type accepted
-        assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_JOHN + NRIC_DESC_JOHN
-            + NAME_DESC_JOHN + PHONE_DESC_JOHN + AGE_DESC_JOHN, new AddCommand(expectedDonor));
-
+                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
     }
-
-    //    @Test
-    //    public void parse_optionalFieldsMissing_success() {
-    //        // zero tags
-    //        Person expectedPerson = new PersonBuilder(AMY).build();
-    //        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY,
-    //                new AddCommand(expectedPerson));
-    //    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -156,7 +175,7 @@ public class AddCommandParserTest {
 
         //missing nric prefix -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NAME_DESC_IRENE + VALID_NRIC_IRENE + PHONE_DESC_IRENE
-                + AGE_DESC_IRENE, expectedMessage);
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, expectedMessage);
 
         // missing name prefix -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + VALID_NAME_JOHN + PHONE_DESC_JOHN
@@ -164,7 +183,7 @@ public class AddCommandParserTest {
 
         // missing name prefix -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + VALID_NAME_IRENE + PHONE_DESC_IRENE
-                + AGE_DESC_IRENE, expectedMessage);
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, expectedMessage);
 
         // missing phone prefix -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN + VALID_PHONE_JOHN
@@ -172,7 +191,7 @@ public class AddCommandParserTest {
 
         // missing phone prefix -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + VALID_PHONE_IRENE
-            + AGE_DESC_IRENE, expectedMessage);
+            + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, expectedMessage);
 
         // missing age prefix -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN + PHONE_DESC_JOHN
@@ -180,7 +199,11 @@ public class AddCommandParserTest {
 
         // missing age prefix -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
-            + VALID_AGE_IRENE, expectedMessage);
+            + VALID_AGE_IRENE + PRIORITY_DESC_IRENE, expectedMessage);
+
+        // missing priority prefix -- patient
+        assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
+                + AGE_DESC_IRENE + VALID_PRIORITY_IRENE, expectedMessage);
 
         // all prefixes missing -- donor
         assertParseFailure(parser, VALID_TYPE_JOHN + VALID_NRIC_JOHN + VALID_NAME_JOHN + VALID_PHONE_JOHN
@@ -188,7 +211,7 @@ public class AddCommandParserTest {
 
         // all prefixes missing -- patient
         assertParseFailure(parser, VALID_TYPE_IRENE + VALID_NRIC_IRENE + VALID_NAME_IRENE + VALID_PHONE_IRENE
-            + VALID_AGE_IRENE, expectedMessage);
+            + VALID_AGE_IRENE + VALID_PRIORITY_IRENE, expectedMessage);
     }
 
     @Test
@@ -203,7 +226,7 @@ public class AddCommandParserTest {
 
         // invalid nric -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + INVALID_NRIC_DESC + NAME_DESC_IRENE + PHONE_DESC_IRENE
-                + AGE_DESC_IRENE, Nric.MESSAGE_CONSTRAINTS);
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, Nric.MESSAGE_CONSTRAINTS);
 
         // invalid name -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + INVALID_NAME_DESC + PHONE_DESC_JOHN
@@ -211,7 +234,7 @@ public class AddCommandParserTest {
 
         // invalid name -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + INVALID_NAME_DESC + PHONE_DESC_IRENE
-                + AGE_DESC_IRENE, Name.MESSAGE_CONSTRAINTS);
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN + INVALID_PHONE_DESC
@@ -219,7 +242,7 @@ public class AddCommandParserTest {
 
         // invalid phone -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + INVALID_PHONE_DESC
-                + AGE_DESC_IRENE, Phone.MESSAGE_CONSTRAINTS);
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid age -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN + PHONE_DESC_JOHN
@@ -227,15 +250,19 @@ public class AddCommandParserTest {
 
         // invalid age -- patient
         assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
-                + INVALID_AGE_DESC, Age.MESSAGE_CONSTRAINTS);
+                + INVALID_AGE_DESC + PRIORITY_DESC_IRENE, Age.MESSAGE_CONSTRAINTS);
+
+        //invalid priority -- patient
+        assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + NAME_DESC_IRENE + PHONE_DESC_IRENE
+                + AGE_DESC_IRENE + INVALID_PRIORITY_DESC, Priority.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported -- donor
         assertParseFailure(parser, TYPE_DESC_JOHN + NRIC_DESC_JOHN + INVALID_NAME_DESC + INVALID_PHONE_DESC
                 + AGE_DESC_JOHN, Name.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported -- patient
-        assertParseFailure(parser, TYPE_DESC_BOB + NRIC_DESC_BOB + INVALID_NAME_DESC + INVALID_PHONE_DESC
-                + AGE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, TYPE_DESC_IRENE + NRIC_DESC_IRENE + INVALID_NAME_DESC + INVALID_PHONE_DESC
+                + AGE_DESC_IRENE + PRIORITY_DESC_IRENE, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble -- donor
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TYPE_DESC_JOHN + NRIC_DESC_JOHN + NAME_DESC_JOHN

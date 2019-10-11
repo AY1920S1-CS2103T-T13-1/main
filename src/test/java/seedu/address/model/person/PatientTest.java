@@ -96,7 +96,8 @@ public class PatientTest {
     @Test
     public void toStringTest() {
         Patient irene = new PatientBuilder(IRENE).build();
-        assertEquals(irene.toString().trim() , "Irene Person Type: patient Nric: S1111111A Phone: 85355255 Age: 21");
+        assertEquals(irene.toString().trim() ,
+                "Irene Person Type: patient Nric: S1111111A Phone: 85355255 Age: 21 Priority: high");
     }
 
     @Test

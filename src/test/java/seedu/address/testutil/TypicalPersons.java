@@ -36,9 +36,9 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withType("doctor").withNric("T5231426Q")
             .withName("Benson Meier").withPhone("98765432").build();
     public static final Patient CARL = new PatientBuilder().withAge("22").withNric("G5642431P")
-            .withName("Carl Kurz").withPhone("95352563").build();
+            .withName("Carl Kurz").withPhone("95352563").withPriority("high").build();
     public static final Patient DANIEL = new PatientBuilder().withAge("34").withNric("F6423467F")
-            .withName("Daniel Meier").withPhone("87652533").build();
+            .withName("Daniel Meier").withPhone("87652533").withPriority("low").build();
     public static final Donor ELLE = new DonorBuilder().withAge("13").withNric("S9374923S")
             .withName("Elle Meyer").withPhone("9482224").build();
     public static final Donor FIONA = new DonorBuilder().withAge("25").withNric("F9183156L")
