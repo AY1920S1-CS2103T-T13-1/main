@@ -50,7 +50,7 @@ public class AddCommandTest {
     @Test
     public void execute_doctorAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validDoctor = new DoctorBuilder().build();
+        Doctor validDoctor = new DoctorBuilder().build();
 
         CommandResult commandResult = new AddCommand(validDoctor).execute(modelStub);
 
@@ -91,7 +91,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateDoctor_throwsCommandException() {
-        Person validDoctor = new DoctorBuilder().build();
+        Doctor validDoctor = new DoctorBuilder().build();
         AddCommand addCommand = new AddCommand(validDoctor);
         ModelStub modelStub = new ModelStubWithPerson(validDoctor);
 
