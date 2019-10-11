@@ -5,16 +5,16 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in ORGANice.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
     // Identity fields
-    private final Type type;
-    private final Nric nric;
-    private final Name name;
-    private final Phone phone;
+    protected final Type type;
+    protected final Nric nric;
+    protected final Name name;
+    protected final Phone phone;
 
     /**
      * Every field must be present and not null.

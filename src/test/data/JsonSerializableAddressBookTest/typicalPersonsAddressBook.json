@@ -14,26 +14,31 @@
     "type": "patient",
     "nric": "G5642431P",
     "name" : "Carl Kurz",
-    "phone" : "95352563"
+    "phone" : "95352563",
+    "age" : "22"
   }, {
     "type": "patient",
     "nric": "F6423467F",
     "name" : "Daniel Meier",
-    "phone" : "87652533"
+    "phone" : "87652533",
+    "age" : "34"
   }, {
     "type": "donor",
     "nric": "S9374923S",
     "name" : "Elle Meyer",
-    "phone" : "9482224"
+    "phone" : "9482224",
+    "age" : "13"
   }, {
     "type": "donor",
     "nric": "F9183156L",
     "name" : "Fiona Kunz",
-    "phone" : "9482427"
+    "phone" : "9482427",
+    "age" : "25"
   }, {
     "type": "donor",
     "nric": "S1234567A",
     "name" : "George Best",
-    "phone" : "9482442"
+    "phone" : "9482442",
+    "age" : "44"
   } ]
 }
