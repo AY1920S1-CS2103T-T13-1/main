@@ -9,18 +9,24 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Patient extends Person {
     //fields
     private final Age age;
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Type type, Nric nric, Name name, Phone phone, Age age) {
+    public Patient(Type type, Nric nric, Name name, Phone phone, Age age, Priority priority) {
         super(type, nric, name, phone);
-        requireAllNonNull(age);
+        requireAllNonNull(age, priority);
         this.age = age;
+        this.priority = priority;
     }
 
     public Age getAge() {
         return age;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     @Override
@@ -28,7 +34,9 @@ public class Patient extends Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(super.toString())
                 .append(" Age: ")
-                .append(getAge());
+                .append(getAge())
+                .append(" Priority: ")
+                .append(getPriority());
 
         return builder.toString();
     }

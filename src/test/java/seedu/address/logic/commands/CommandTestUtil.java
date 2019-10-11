@@ -47,6 +47,9 @@ public class CommandTestUtil {
     public static final String VALID_AGE_BOB = "21";
     public static final String VALID_AGE_JOHN = "60";
 
+    public static final String VALID_PRIORITY_BOB = "medium";
+    public static final String VALID_PRIORITY_IRENE = "high";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

@@ -11,6 +11,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Type;
 
 /**
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
 
     //Data fields of Patient
     protected final String age;
+    protected final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -34,13 +36,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("nric") String nric,
             @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("age") String age) {
+            @JsonProperty("age") String age, @JsonProperty("priority") String priority) {
         this.type = type;
         this.nric = nric;
         this.name = name;
         this.phone = phone;
 
         this.age = age;
+        this.priority = priority;
     }
 
     /**
@@ -54,10 +57,13 @@ class JsonAdaptedPerson {
 
         if (source instanceof Patient) {
             age = ((Patient) source).getAge().value;
+            priority = ((Patient) source).getPriority().value;
         } else if (source instanceof Donor) {
             age = ((Donor) source).getAge().value;
+            priority = "";
         } else { //TODO: change to else if instanceof Doctor
             age = "";
+            priority = "";
         }
     }
 
@@ -111,7 +117,17 @@ class JsonAdaptedPerson {
             }
             final Age modelAge = new Age(age);
 
-            return new Patient(modelType, modelNric, modelName, modelPhone, modelAge);
+            if (priority == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Priority.class.getSimpleName()));
+            }
+
+            if (!Priority.isValidPriority(priority)) {
+                throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+            }
+            final Priority modelPriority = new Priority(priority);
+
+            return new Patient(modelType, modelNric, modelName, modelPhone, modelAge, modelPriority);
         } else if (modelType.isDonor()) {
             if (age == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));

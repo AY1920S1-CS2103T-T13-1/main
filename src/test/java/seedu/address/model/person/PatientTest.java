@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.IRENE;
@@ -38,6 +39,10 @@ public class PatientTest {
 
         // different name -> returns true
         editedIrene = new PatientBuilder(IRENE).withName(VALID_NAME_BOB).build();
+        assertTrue(IRENE.isSamePerson(editedIrene));
+
+        // different priority -> returns true
+        editedIrene = new PatientBuilder(IRENE).withPriority(VALID_PRIORITY_BOB).build();
         assertTrue(IRENE.isSamePerson(editedIrene));
 
         // different nric, same attributes -> returns false
@@ -73,6 +78,10 @@ public class PatientTest {
 
         // different phone -> returns false
         editedIrene = new PatientBuilder(IRENE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(IRENE.equals(editedIrene));
+
+        // different priority -> return false
+        editedIrene = new PatientBuilder(IRENE).withPriority(VALID_PRIORITY_BOB).build();
         assertFalse(IRENE.equals(editedIrene));
 
         // different nric -> returns false

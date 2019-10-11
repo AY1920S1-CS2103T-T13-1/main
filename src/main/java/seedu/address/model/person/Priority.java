@@ -34,7 +34,7 @@ public class Priority {
     public Priority(String priority) {
         requireNonNull(priority);
         checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
-        value = priority;
+        value = priority.toLowerCase();
     }
 
     /**
