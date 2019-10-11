@@ -17,6 +17,13 @@ public class DoctorBuilder extends PersonBuilder {
     }
 
     /**
+     * Initializes the DoctorBuilder with the data of {@code personToCopy}.
+     */
+    public DoctorBuilder(Doctor doctorToCopy) {
+        super(doctorToCopy);
+    }
+
+    /**
      * Sets the {@code Nric} of the {@code Doctor} that we are building.
      */
     @Override
@@ -40,13 +47,6 @@ public class DoctorBuilder extends PersonBuilder {
     public DoctorBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
-    }
-
-    /**
-     * Initializes the DoctorBuilder with the data of {@code personToCopy}.
-     */
-    public DoctorBuilder(Doctor doctorToCopy) {
-        super(doctorToCopy);
     }
 
     public Doctor build() {
