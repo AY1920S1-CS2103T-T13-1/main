@@ -41,8 +41,14 @@ public class OrganExpiryDate {
      */
     public OrganExpiryDate(String expiryDate) {
         requireNonNull(expiryDate);
-        checkArgument(isValidExpiryDate(expiryDate), MESSAGE_CONSTRAINTS);
-        value = expiryDate.toUpperCase();
+        try {
+            expiryDate = expiryDate.substring(0, 3) + expiryDate.substring(3, 4).toUpperCase()
+                    + expiryDate.substring(4).toLowerCase();
+            checkArgument(isValidExpiryDate(expiryDate), MESSAGE_CONSTRAINTS);
+            value = expiryDate;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -51,7 +57,7 @@ public class OrganExpiryDate {
     public static boolean isValidExpiryDate(String test) {
         try {
             test = test.substring(0, 3) + test.substring(3, 4).toUpperCase()
-                    + test.substring(4); //Make the first letter of the month capital so that it can be parsed.
+                    + test.substring(4).toLowerCase();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
             LocalDate date = LocalDate.parse(test, formatter); //this parse will allow 31-Feb-YYYY
 
@@ -68,8 +74,6 @@ public class OrganExpiryDate {
             }
             return true;
         } catch (StringIndexOutOfBoundsException | NumberFormatException | DateTimeParseException e) {
-            return false;
-        } catch (Exception e) {
             return false;
         }
     }
