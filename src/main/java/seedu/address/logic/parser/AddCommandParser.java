@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Donor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -59,17 +60,16 @@ public class AddCommandParser implements Parser<AddCommand> {
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
 
-            Patient patient = new Patient(type, nric, name, phone, age);
+            Patient patient = new Patient(tyspe, nric, name, phone, age);
             return new AddCommand(patient);
         } else if (type.isDoctor()) {
-            //TODO: change implementation of creating a Doctor
             arePrefixesPresentDoctor(argMultimap);
             Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
-            Person person = new Person(type, nric, name, phone);
-            return new AddCommand(person);
+            Doctor doctor = new Doctor(type, nric, name, phone);
+            return new AddCommand(doctor);
         } else if (type.isDonor()) {
             arePrefixesPresentDonor(argMultimap);
 
