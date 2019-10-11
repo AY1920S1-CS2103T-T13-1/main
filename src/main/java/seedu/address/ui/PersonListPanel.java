@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Donor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -44,7 +45,9 @@ public class PersonListPanel extends UiPart<Region> {
                     setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
                 } else if (person instanceof Donor) {
                     setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
-                } else { //TODO: change into doctor card.
+                } else if (person instanceof Doctor) {
+                    setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
+                } else {
                     setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
                 }
             }
