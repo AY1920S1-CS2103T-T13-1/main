@@ -20,6 +20,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.person.Type;
 
 /**
@@ -58,8 +59,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+            Priority priority = new Priority("HIGH"); //dummy priority
 
-            Patient patient = new Patient(type, nric, name, phone, age);
+            Patient patient = new Patient(type, nric, name, phone, age, priority);
             return new AddCommand(patient);
         } else if (type.isDoctor()) {
             //TODO: change implementation of creating a Doctor
