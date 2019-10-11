@@ -60,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
 
-            Patient patient = new Patient(tyspe, nric, name, phone, age);
+            Patient patient = new Patient(type, nric, name, phone, age);
             return new AddCommand(patient);
         } else if (type.isDoctor()) {
             arePrefixesPresentDoctor(argMultimap);
