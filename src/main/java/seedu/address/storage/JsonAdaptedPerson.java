@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Donor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -56,7 +57,9 @@ class JsonAdaptedPerson {
             age = ((Patient) source).getAge().value;
         } else if (source instanceof Donor) {
             age = ((Donor) source).getAge().value;
-        } else { //TODO: change to else if instanceof Doctor
+        } else if (source instanceof Doctor){
+            age = "";
+        } else {
             age = "";
         }
     }
@@ -123,6 +126,8 @@ class JsonAdaptedPerson {
             final Age modelAge = new Age(age);
 
             return new Donor(modelType, modelNric, modelName, modelPhone, modelAge);
+        } else if (modelType.isDoctor()) {
+            return new Doctor(modelType, modelNric, modelName, modelPhone);
         }
 
         return new Person(modelType, modelNric, modelName, modelPhone);
