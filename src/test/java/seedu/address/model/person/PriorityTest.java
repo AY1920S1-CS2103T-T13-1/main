@@ -9,13 +9,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class PriorityTest {
-    private static final Priority PRIORITY_HIGH = new Priority("high");
-    private static final Priority PRIORITY_MEDIUM = new Priority("medium");
-    private static final Priority PRIORITY_LOW = new Priority("low");
+    private static final Priority PRIORITY_HIGH = new Priority(Priority.PRIORITY_HIGH);
+    private static final Priority PRIORITY_MEDIUM = new Priority(Priority.PRIORITY_MEDIUM);
+    private static final Priority PRIORITY_LOW = new Priority(Priority.PRIORITY_LOW);
 
-    private static final Priority PRIORITY_HIGH_CAPS = new Priority("HIGH");
-    private static final Priority PRIORITY_MEDIUM_CAPS = new Priority("MEDIUM");
-    private static final Priority PRIORITY_LOW_CAPS = new Priority("LOW");
+    private static final Priority PRIORITY_HIGH_CAPS = new Priority(Priority.PRIORITY_HIGH.toUpperCase());
+    private static final Priority PRIORITY_MEDIUM_CAPS = new Priority(Priority.PRIORITY_MEDIUM.toUpperCase());
+    private static final Priority PRIORITY_LOW_CAPS = new Priority(Priority.PRIORITY_LOW.toUpperCase());
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -112,6 +112,7 @@ public class PriorityTest {
     @Test
     public void hashCodeTest() {
         assertEquals(PRIORITY_HIGH.hashCode(), PRIORITY_HIGH.hashCode());
+        assertEquals(PRIORITY_HIGH.hashCode(), PRIORITY_HIGH_CAPS.hashCode());
         assertNotEquals(PRIORITY_HIGH.hashCode(), PRIORITY_LOW.hashCode());
         assertNotEquals(PRIORITY_HIGH.hashCode(), PRIORITY_MEDIUM.hashCode());
 
