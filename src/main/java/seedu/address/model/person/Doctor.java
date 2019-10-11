@@ -1,9 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Objects;
-
 /**
  * Represents a Doctor in ORGANice.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -38,7 +34,8 @@ public class Doctor extends Person {
                 && otherDoctor.getType().equals(getType());
     }
 
-    // Below methods intentionally created so developers will not forget to edit these two methods if Doctor class changes.
+    // Below methods intentionally created so developers will not forget to
+    // edit these two methods if Doctor class changes.
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

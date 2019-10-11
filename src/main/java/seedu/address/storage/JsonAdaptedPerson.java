@@ -53,13 +53,13 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
 
-        if (source instanceof Doctor){
+        if (source instanceof Doctor) {
             age = "";
         } else if (source instanceof Donor) {
             age = ((Donor) source).getAge().value;
         } else if (source instanceof Patient) {
             age = ((Patient) source).getAge().value;
-        }  else {
+        } else {
             age = "";
         }
     }
@@ -106,16 +106,16 @@ class JsonAdaptedPerson {
         if (modelType.isDoctor()) {
             return new Doctor(modelType, modelNric, modelName, modelPhone);
         } else if (modelType.isDonor()) {
-             if (age == null) {
-                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
-             }
+            if (age == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+            }
 
-             if (!Age.isValidAge(age)) {
-                 throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
-             }
-             final Age modelAge = new Age(age);
+            if (!Age.isValidAge(age)) {
+                throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
+            }
+            final Age modelAge = new Age(age);
 
-             return new Donor(modelType, modelNric, modelName, modelPhone, modelAge);
+            return new Donor(modelType, modelNric, modelName, modelPhone, modelAge);
         } else if (modelType.isPatient()) {
             if (age == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));

@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HOON;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,36 +54,36 @@ public class PersonTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Person hoonCopy = new PersonBuilder(HOON).build();
+        assertTrue(HOON.equals(hoonCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(HOON.equals(HOON));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(HOON.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(HOON.equals(5));
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(HOON.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Person editedHoon = new PersonBuilder(HOON).withName(VALID_NAME_BOB).build();
+        assertFalse(HOON.equals(editedHoon));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedHoon = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedHoon));
 
         // different nric -> returns false
-        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedHoon = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+        assertFalse(ALICE.equals(editedHoon));
 
         // different person type -> returns false
-        editedAlice = new PersonBuilder(ALICE).withType(VALID_TYPE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedHoon = new PersonBuilder(ALICE).withType(VALID_TYPE_BOB).build();
+        assertFalse(ALICE.equals(editedHoon));
     }
 
     @Test
