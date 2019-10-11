@@ -41,4 +41,26 @@ public class Patient extends Person {
         return builder.toString();
     }
 
+    /**
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Patient)) {
+            return false;
+        }
+
+        Patient otherPerson = (Patient) other;
+        return otherPerson.getNric().equals(getNric())
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getType().equals(getType())
+                && otherPerson.getPriority().equals(getPriority());
+    }
+
 }
