@@ -16,13 +16,13 @@ public class Bloodtype {
             new HashSet<>(Arrays.asList("A", "B", "AB", "O", "A+", "AB+", "B+", "O+"));
     public static final String MESSAGE_CONSTRAINTS =
             "Bloodtype should only have A, B, O or AB."
-                    + "Positive bloodtypes will have a '+' behind, it should not be blank";
+                    + "Positive blood types will have a '+' behind, it should not be blank";
     public final String value;
 
     /**
      * Constructs a {@code Bloodtype}.
      *
-     * @param bloodtype A valid bloodtype.
+     * @param bloodtype A valid blood type.
      */
     public Bloodtype(String bloodtype) {
         requireNonNull(bloodtype);
