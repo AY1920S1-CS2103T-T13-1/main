@@ -51,7 +51,7 @@ public class DoctorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new DoctorBuilder(ALICE).build();
+        Doctor aliceCopy = new DoctorBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -63,11 +63,11 @@ public class DoctorTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different doctor -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new DoctorBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Doctor editedAlice = new DoctorBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
@@ -79,19 +79,19 @@ public class DoctorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different person type -> returns false
-        editedAlice = new DoctorBuilder(ALICE).withType(VALID_TYPE_BOB).build();
+        editedAlice = (Doctor) new DoctorBuilder(ALICE).withType(VALID_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringTest() {
-        Person alice = new DoctorBuilder(ALICE).build();
+        Doctor alice = new DoctorBuilder(ALICE).build();
         assertEquals(alice.toString().trim() , "Alice Pauline Person Type: doctor Nric: S1532142A Phone: 94351253");
     }
 
     @Test
     public void hashCodeTest() {
-        Person alice = new DoctorBuilder(ALICE).build();
+        Doctor alice = new DoctorBuilder(ALICE).build();
 
         assertEquals(alice.hashCode(), new DoctorBuilder(ALICE).build().hashCode());
         assertNotEquals(alice.hashCode(),
