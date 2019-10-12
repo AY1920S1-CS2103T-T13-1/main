@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,20 +18,6 @@ import java.util.Map;
  */
 public class OrganExpiryDate {
 
-    public static final Map<Integer, Integer> NUMBER_OF_DAYS_IN_MONTHS = new HashMap<>() {{
-            put(1, 31);
-            put(2, 29);
-            put(3, 31);
-            put(4, 30);
-            put(5, 31);
-            put(6, 30);
-            put(7, 31);
-            put(8, 31);
-            put(9, 30);
-            put(10, 31);
-            put(11, 30);
-            put(12, 31);
-        }};
     public static final String MESSAGE_CONSTRAINTS = "Organ's expiry date must be in the format DD-MMM-YYYY"
             + " and is after current date. An example will be 27-Jan-2020";
 
@@ -55,22 +44,12 @@ public class OrganExpiryDate {
      * Returns true if a given string is a valid organ's expiry date.
      */
     public static boolean isValidExpiryDate(String test) {
+        DateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+        formatter.setLenient(false);
         try {
-            test = test.substring(0, 3) + test.substring(3, 4).toUpperCase()
-                    + test.substring(4).toLowerCase();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-            LocalDate date = LocalDate.parse(test, formatter); //this parse will allow 31-Feb-YYYY
-
-            int day = Integer.parseInt(test.split("-")[0]);
-            int month = date.getMonthValue();
-            if (day > NUMBER_OF_DAYS_IN_MONTHS.get(month)) { //check if day is more than number of days in that month
-                return false;
-            }
-            if (day > 28 && month == 2 && !date.isLeapYear()) { //check for leap year
-                return false;
-            }
+            formatter.parse(test);
             return true;
-        } catch (StringIndexOutOfBoundsException | NumberFormatException | DateTimeParseException e) {
+        } catch (ParseException e) {
             return false;
         }
     }
