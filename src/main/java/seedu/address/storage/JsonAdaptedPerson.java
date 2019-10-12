@@ -41,7 +41,6 @@ class JsonAdaptedPerson {
         this.nric = nric;
         this.name = name;
         this.phone = phone;
-
         this.age = age;
         this.priority = priority;
     }

@@ -56,10 +56,10 @@ public class Patient extends Person {
         }
 
         Patient otherPerson = (Patient) other;
-        return otherPerson.getNric().equals(getNric())
+        return otherPerson.getType().equals(getType())
+                && otherPerson.getNric().equals(getNric())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getType().equals(getType())
                 && otherPerson.getAge().equals(getAge())
                 && otherPerson.getPriority().equals(getPriority());
     }

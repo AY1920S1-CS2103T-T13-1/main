@@ -43,6 +43,9 @@ public class PriorityTest {
         assertFalse(Priority.isValidPriority("peter the 2nd")); // alphanumeric characters
         assertFalse(Priority.isValidPriority("Capital Tan")); // with capital letters
 
+        assertFalse(Priority.isValidPriority("medium high")); //permutations of high, medium and low
+        assertFalse(Priority.isValidPriority("highlow"));
+
         assertTrue(Priority.isValidPriority("high")); //high is valid
         assertTrue(Priority.isValidPriority("medium")); //medium is valid
         assertTrue(Priority.isValidPriority("low")); //low is valid

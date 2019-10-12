@@ -138,27 +138,27 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresentDoctor_success() {
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Person expectedDoctor = new PersonBuilder(AMY).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_AMY + NRIC_DESC_AMY
-                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
+                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedDoctor));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, TYPE_DESC_AMY + NRIC_DESC_AMY + NAME_DESC_BOB
-                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
+                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedDoctor));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, TYPE_DESC_AMY + NRIC_DESC_AMY + NAME_DESC_AMY
-                + PHONE_DESC_BOB + PHONE_DESC_AMY, new AddCommand(expectedPerson));
+                + PHONE_DESC_BOB + PHONE_DESC_AMY, new AddCommand(expectedDoctor));
 
         // multiple nrics - last nric accepted
         assertParseSuccess(parser, TYPE_DESC_AMY + NRIC_DESC_BOB + NRIC_DESC_AMY
-                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
+                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedDoctor));
 
         // multiple types - last type accepted
         assertParseSuccess(parser, TYPE_DESC_BOB + TYPE_DESC_AMY + NRIC_DESC_AMY
-                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedPerson));
+                + NAME_DESC_AMY + PHONE_DESC_AMY, new AddCommand(expectedDoctor));
     }
 
     @Test
