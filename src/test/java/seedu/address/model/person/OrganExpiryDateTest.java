@@ -35,11 +35,10 @@ public class OrganExpiryDateTest {
         assertFalse(OrganExpiryDate.isValidExpiryDate("22-01-2019")); // wrong data format
         assertFalse(OrganExpiryDate.isValidExpiryDate("30-Feb-2019")); // day is more than number of days
         assertFalse(OrganExpiryDate.isValidExpiryDate("00-Jan-2019")); // there is no day 00
-        assertFalse(OrganExpiryDate.isValidExpiryDate("03-Jan-2019")); // date given is before today's date
         assertFalse(OrganExpiryDate.isValidExpiryDate("29-Feb-2019")); // not leap year
 
         // valid organ's expiry date
-        assertTrue(OrganExpiryDate.isValidExpiryDate("23-Jan-2020")); // date is after today's date and valid
+        assertTrue(OrganExpiryDate.isValidExpiryDate("23-Jan-2020")); // valid date
         assertTrue(OrganExpiryDate.isValidExpiryDate("29-Feb-2020")); // leap year
         assertTrue(OrganExpiryDate.isValidExpiryDate("29-jan-2020")); // case insensitive
         assertTrue(OrganExpiryDate.isValidExpiryDate("29-JAN-2020")); // case insensitive

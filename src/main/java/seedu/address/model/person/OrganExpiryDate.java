@@ -69,9 +69,6 @@ public class OrganExpiryDate {
             if (day > 28 && month == 2 && !date.isLeapYear()) { //check for leap year
                 return false;
             }
-            if (date.isBefore(LocalDate.now())) { //check if inputted date is before today's date.
-                return false;
-            }
             return true;
         } catch (StringIndexOutOfBoundsException | NumberFormatException | DateTimeParseException e) {
             return false;
