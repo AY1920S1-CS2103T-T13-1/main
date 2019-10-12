@@ -1,18 +1,18 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_PATIENT_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_DONOR_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_PATIENT_IRENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONOR_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONOR_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DONOR_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DONOR_JOHN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DONOR_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PERSON_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PERSON_BOB;
 
@@ -54,17 +54,19 @@ public class TypicalPersons {
             .withName("Ida Mueller").withPhone("8482131").build();
 
     //Sample Patients
-    public static final Patient PATIENT_IRENE = new PatientBuilder().withAge(VALID_AGE_PATIENT_IRENE).withName(VALID_NAME_PATIENT_IRENE)
-        .withNric(VALID_NRIC_PATIENT_IRENE).withPhone(VALID_PHONE_PATIENT_IRENE).build();
+    public static final Patient PATIENT_IRENE = new PatientBuilder().withAge(VALID_AGE_PATIENT_IRENE)
+            .withName(VALID_NAME_PATIENT_IRENE).withNric(VALID_NRIC_PATIENT_IRENE).withPhone(VALID_PHONE_PATIENT_IRENE)
+            .build();
     //Sample Donors
-    public static final Donor DONOR_JOHN = new DonorBuilder().withAge(VALID_AGE_DONOR_JOHN).withName(VALID_NAME_DONOR_JOHN)
-            .withNric(VALID_NRIC_DONOR_JOHN).withPhone(VALID_PHONE_DONOR_JOHN).build();
+    public static final Donor DONOR_JOHN = new DonorBuilder().withAge(VALID_AGE_DONOR_JOHN)
+            .withName(VALID_NAME_DONOR_JOHN).withNric(VALID_NRIC_DONOR_JOHN).withPhone(VALID_PHONE_DONOR_JOHN).build();
 
     // Manually added - person's details found in {@code CommandTestUtil}
-    public static final Person PERSON_AMY = new PersonBuilder().withType(VALID_TYPE_PERSON_AMY).withNric(VALID_NRIC_PERSON_AMY)
-            .withName(VALID_NAME_PERSON_AMY).withPhone(CommandTestUtil.VALID_PHONE_PERSON_AMY).build();
-    public static final Person PERSON_BOB = new PersonBuilder().withType(VALID_TYPE_PERSON_BOB).withNric(VALID_NRIC_PERSON_BOB)
-            .withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+    public static final Person PERSON_AMY = new PersonBuilder().withType(VALID_TYPE_PERSON_AMY)
+            .withNric(VALID_NRIC_PERSON_AMY).withName(VALID_NAME_PERSON_AMY)
+            .withPhone(CommandTestUtil.VALID_PHONE_PERSON_AMY).build();
+    public static final Person PERSON_BOB = new PersonBuilder().withType(VALID_TYPE_PERSON_BOB)
+            .withNric(VALID_NRIC_PERSON_BOB).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -82,6 +84,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, DOCTOR_BENSON, PATIENT_CARL, PATIENT_DANIEL, DONOR_ELLE, DONOR_FIONA, DONOR_GEORGE));
+        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, DOCTOR_BENSON, PATIENT_CARL, PATIENT_DANIEL, DONOR_ELLE,
+                DONOR_FIONA, DONOR_GEORGE));
     }
 }

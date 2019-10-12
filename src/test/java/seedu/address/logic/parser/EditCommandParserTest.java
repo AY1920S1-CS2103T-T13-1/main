@@ -79,8 +79,8 @@ public class EditCommandParserTest {
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB + PHONE_DESC_PERSON_BOB + INVALID_PHONE_DESC,
-                Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB + PHONE_DESC_PERSON_BOB
+                + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + TYPE_DESC_PERSON_BOB + INVALID_NRIC_DESC + INVALID_NAME_DESC
@@ -90,7 +90,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB + PHONE_DESC_PERSON_BOB + NAME_DESC_PERSON_AMY;
+        String userInput = targetIndex.getOneBased() + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB
+                + PHONE_DESC_PERSON_BOB + NAME_DESC_PERSON_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PERSON_BOB)
             .withNric(VALID_NRIC_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).withName(VALID_NAME_PERSON_AMY).build();
@@ -102,7 +103,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB + PHONE_DESC_PERSON_BOB;
+        String userInput = targetIndex.getOneBased() + TYPE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB
+                + PHONE_DESC_PERSON_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PERSON_BOB)
                 .withNric(VALID_NRIC_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
@@ -163,7 +165,8 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_PERSON_BOB + NRIC_DESC_PERSON_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+        descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_PERSON_BOB)
+                .withPhone(VALID_PHONE_PERSON_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -34,7 +34,8 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_PERSON_AMY.equals(DESC_PERSON_BOB));
 
         // different nric -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_PERSON_AMY).withName(VALID_NRIC_PERSON_BOB).build();
+        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_PERSON_AMY)
+                .withName(VALID_NRIC_PERSON_BOB).build();
         assertFalse(DESC_PERSON_AMY.equals(editedAmy));
 
         // different name -> returns false

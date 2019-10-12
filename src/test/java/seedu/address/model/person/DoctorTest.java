@@ -44,7 +44,8 @@ public class DoctorTest {
         assertFalse(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // same nric, different attributes -> returns true
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB)
+                .withPhone(VALID_PHONE_PERSON_BOB).build();
         assertTrue(DOCTOR_ALICE.isSamePerson(editedAlice));
     }
 
@@ -86,7 +87,8 @@ public class DoctorTest {
     @Test
     public void toStringTest() {
         Doctor alice = new DoctorBuilder(DOCTOR_ALICE).build();
-        assertEquals(alice.toString().trim() , "Alice Pauline Person Type: doctor Nric: S1532142A Phone: 94351253");
+        assertEquals(alice.toString().trim() , "Alice Pauline Person Type: doctor"
+                + "Nric: S1532142A Phone: 94351253");
     }
 
     @Test

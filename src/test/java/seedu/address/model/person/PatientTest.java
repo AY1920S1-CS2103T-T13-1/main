@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
 import static seedu.address.testutil.TypicalPersons.PATIENT_IRENE;
+import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +45,8 @@ public class PatientTest {
         assertFalse(PATIENT_IRENE.isSamePerson(editedIrene));
 
         // same nric, different attributes -> returns true
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PERSON_BOB)
+                .withPhone(VALID_PHONE_PERSON_BOB).build();
         assertTrue(PATIENT_IRENE.isSamePerson(editedIrene));
     }
 
@@ -87,7 +88,8 @@ public class PatientTest {
     @Test
     public void toStringTest() {
         Patient irene = new PatientBuilder(PATIENT_IRENE).build();
-        assertEquals(irene.toString().trim() , "Irene Person Type: patient Nric: S1111111A Phone: 85355255 Age: 21");
+        assertEquals(irene.toString().trim() , "Irene Person Type: patient Nric: S1111111A"
+                + "Phone: 85355255 Age: 21");
     }
 
     @Test

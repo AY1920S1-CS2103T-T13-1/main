@@ -5,8 +5,8 @@ import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_BENSON;
-import static seedu.address.testutil.TypicalPersons.PATIENT_IRENE;
 import static seedu.address.testutil.TypicalPersons.DONOR_JOHN;
+import static seedu.address.testutil.TypicalPersons.PATIENT_IRENE;
 
 import org.junit.jupiter.api.Test;
 

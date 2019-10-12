@@ -57,9 +57,9 @@ public class CommandTestUtil {
     public static final String TYPE_DESC_PERSON_BOB = " " + PREFIX_TYPE + VALID_TYPE_PERSON_BOB;
     public static final String AGE_DESC_PERSON_BOB = " " + PREFIX_AGE + VALID_AGE_PERSON_BOB;
     public static final String NAME_DESC_PATIENT_IRENE = " " + PREFIX_NAME + VALID_NAME_PATIENT_IRENE;
-    public static final String PHONE_DESC_PERSON_IRENE = " " + PREFIX_PHONE + VALID_PHONE_PATIENT_IRENE;
-    public static final String NRIC_DESC_PERSON_IRENE = " " + PREFIX_NRIC + VALID_NRIC_PATIENT_IRENE;
-    public static final String TYPE_DESC_PERSON_IRENE = " " + PREFIX_TYPE + VALID_TYPE_PATIENT_IRENE;
+    public static final String PHONE_DESC_PATIENT_IRENE = " " + PREFIX_PHONE + VALID_PHONE_PATIENT_IRENE;
+    public static final String NRIC_DESC_PATIENT_IRENE = " " + PREFIX_NRIC + VALID_NRIC_PATIENT_IRENE;
+    public static final String TYPE_DESC_PATIENT_IRENE = " " + PREFIX_TYPE + VALID_TYPE_PATIENT_IRENE;
     public static final String AGE_DESC_PERSON_IRENE = " " + PREFIX_AGE + VALID_AGE_PATIENT_IRENE;
     public static final String NAME_DESC_DONOR_JOHN = " " + PREFIX_NAME + VALID_NAME_DONOR_JOHN;
     public static final String PHONE_DESC_DONOR_JOHN = " " + PREFIX_PHONE + VALID_PHONE_DONOR_JOHN;

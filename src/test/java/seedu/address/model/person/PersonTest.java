@@ -47,7 +47,8 @@ public class PersonTest {
         assertFalse(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // same nric, different attributes -> returns false
-        editedAlice = new PersonBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedAlice = new PersonBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB)
+                .withPhone(VALID_PHONE_PERSON_BOB).build();
         assertTrue(DOCTOR_ALICE.isSamePerson(editedAlice));
     }
 

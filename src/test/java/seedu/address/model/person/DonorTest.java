@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
 import static seedu.address.testutil.TypicalPersons.DONOR_JOHN;
+import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,8 @@ public class DonorTest {
         assertFalse(DONOR_JOHN.isSamePerson(editedJohn));
 
         // same nric, different other attributes -> returns true
-        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PERSON_BOB)
+                .withPhone(VALID_PHONE_PERSON_BOB).build();
         assertTrue(DONOR_JOHN.isSamePerson(editedJohn));
     }
 
