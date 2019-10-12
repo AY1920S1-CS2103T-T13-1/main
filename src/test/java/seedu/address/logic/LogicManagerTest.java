@@ -3,12 +3,12 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_PERSON_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_PERSON_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_PERSON_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_PERSON_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.PERSON_AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -79,8 +79,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + TYPE_DESC_AMY + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        String addCommand = AddCommand.COMMAND_WORD + TYPE_DESC_PERSON_AMY + NRIC_DESC_PERSON_AMY + NAME_DESC_PERSON_AMY + PHONE_DESC_PERSON_AMY;
+        Person expectedPerson = new PersonBuilder(PERSON_AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
