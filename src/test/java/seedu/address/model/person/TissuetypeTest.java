@@ -33,16 +33,19 @@ public class TissuetypeTest {
         assertFalse(Tissuetype.isValidTissuetype("1")); // single numeric
         assertFalse(Tissuetype.isValidTissuetype("1,,2,,3,,4,,5,,6")); // wrong usage of commas
         assertFalse(Tissuetype.isValidTissuetype("1 2 3 4 5 6")); // spaces within tissuetype
+        assertFalse(Tissuetype.isValidTissuetype("1, 2, 3, 4, 5, 6")); // spaces within tissuetype with commas
+        assertFalse(Tissuetype.isValidTissuetype("13,2,3,4,5,6")); // wrong tissuetype
+        assertFalse(Tissuetype.isValidTissuetype("1,1,1,1,1,1")); // duplicates
 
         // valid tissuetype
         assertTrue(Tissuetype.isValidTissuetype("1,2,3,4,5,6")); // exactly 6 tissuetype
-        assertTrue(Tissuetype.isValidTissuetype("6,7,8,9,10,11")); //2 digits tissuetype
+        assertTrue(Tissuetype.isValidTissuetype("12,7,8,9,10,11")); //2 digits tissuetype
     }
 
     @Test
     public void toStringTest() {
         assertEquals(new Tissuetype("1,2,3,4,5,6").toString(), "1,2,3,4,5,6");
-        assertEquals(new Tissuetype("10,11,12,13,14,15").toString(), "10,11,12,13,14,15");
+        assertEquals(new Tissuetype("10,11,12,3,4,5").toString(), "10,11,12,3,4,5");
     }
 
     @Test

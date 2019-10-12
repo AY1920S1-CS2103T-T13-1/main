@@ -22,7 +22,7 @@ public class Tissuetype {
     public Tissuetype (String tissuetype) {
         requireNonNull(tissuetype);
         checkArgument(isValidTissuetype(tissuetype), MESSAGE_CONSTRAINTS);
-        value = tissuetype.toUpperCase();
+        value = tissuetype;
     }
 
     /**
@@ -30,18 +30,35 @@ public class Tissuetype {
      */
     public static boolean isValidTissuetype(String test) {
         String[] tissuetypeValue = test.split(",");
-        if (tissuetypeValue.length != 6) {
+        if (tissuetypeValue.length != 6 || isDuplicated(tissuetypeValue)) {
             return false;
         } else {
             for (int i = 0; i < tissuetypeValue.length; i++) {
                 try {
                     Integer tt = Integer.parseInt(tissuetypeValue[i]);
+                    if (tt > 12) {
+                        return false;
+                    }
                 } catch (NumberFormatException | NullPointerException nfe) {
                     return false;
                 }
             }
             return true;
         }
+    }
+
+    /**
+     * Returns true if a given string array contains duplicate.
+     */
+    public static boolean isDuplicated(String[] test) {
+        for (int i = 0; i < test.length; i++) {
+            for (int j = i + 1; j < test.length; j++) {
+                if (test[i].equals(test[j])) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
