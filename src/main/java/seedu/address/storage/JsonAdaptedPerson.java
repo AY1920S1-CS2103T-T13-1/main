@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) throws IllegalValueException {
+    public JsonAdaptedPerson(Person source) {
         type = source.getType().value;
         nric = source.getNric().value;
         name = source.getName().fullName;
