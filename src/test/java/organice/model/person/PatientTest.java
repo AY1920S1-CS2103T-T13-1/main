@@ -8,8 +8,8 @@ import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
-import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 import static organice.testutil.TypicalPersons.PATIENT_BOB;
+import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import org.junit.jupiter.api.Test;
 

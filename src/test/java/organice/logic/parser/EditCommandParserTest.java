@@ -94,7 +94,8 @@ public class EditCommandParserTest {
                 + PHONE_DESC_PATIENT_BOB + NAME_DESC_DOCTOR_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PATIENT_BOB)
-            .withNric(VALID_NRIC_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB).withName(VALID_NAME_DOCTOR_AMY).build();
+                .withNric(VALID_NRIC_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB)
+                .withName(VALID_NAME_DOCTOR_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

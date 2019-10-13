@@ -2,17 +2,17 @@ package organice.testutil;
 
 import static organice.logic.commands.CommandTestUtil.VALID_AGE_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.VALID_AGE_PATIENT_IRENE;
-import static organice.logic.commands.CommandTestUtil.VALID_NAME_DONOR_JOHN;
-import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_NAME_DOCTOR_AMY;
+import static organice.logic.commands.CommandTestUtil.VALID_NAME_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
-import static organice.logic.commands.CommandTestUtil.VALID_NRIC_DONOR_JOHN;
-import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
+import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_DOCTOR_AMY;
+import static organice.logic.commands.CommandTestUtil.VALID_NRIC_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_DONOR_JOHN;
-import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
+import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
