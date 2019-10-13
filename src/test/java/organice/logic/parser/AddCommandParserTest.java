@@ -55,8 +55,9 @@ import organice.model.person.Name;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Phone;
-import organice.model.person.Type;
 import organice.model.person.Priority;
+import organice.model.person.Type;
+
 import organice.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
@@ -68,37 +69,44 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE
-                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                        + PRIORITY_DESC_PATIENT_IRENE,
                 new AddCommand(expectedPatient));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_DOCTOR_AMY
-                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                        + PRIORITY_DESC_PATIENT_IRENE,
                 new AddCommand(expectedPatient));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE
-                        + PHONE_DESC_DOCTOR_AMY + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                        + PHONE_DESC_DOCTOR_AMY + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                        + PRIORITY_DESC_PATIENT_IRENE,
                 new AddCommand(expectedPatient));
 
         // multiple nrics - last nric accepted
-        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_DOCTOR_AMY + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE
-                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
+        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_DOCTOR_AMY + NRIC_DESC_PATIENT_IRENE
+                + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
 
         // multiple types - last type accepted
         assertParseSuccess(parser, TYPE_DESC_PATIENT_BOB + TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE
-                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                        + PRIORITY_DESC_PATIENT_IRENE,
                 new AddCommand(expectedPatient));
 
         //multiple priority - last priority accepted
-        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE
-                + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_BOB + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
+        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE
+                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_BOB
+                + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
 
         // multiple ages - last age accepted
-        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE
-                + AGE_DESC_PATIENT_BOB + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
+        assertParseSuccess(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE
+                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_BOB + AGE_DESC_PATIENT_IRENE
+                + PRIORITY_DESC_PATIENT_IRENE, new AddCommand(expectedPatient));
     }
-    
+
     @Test
     public void parse_allFieldsPresentDonor_success() {
         //Testing all fields present for a Donor
@@ -125,8 +133,8 @@ public class AddCommandParserTest {
                 + NAME_DESC_DONOR_JOHN + PHONE_DESC_DONOR_JOHN + AGE_DESC_DONOR_JOHN, new AddCommand(expectedDonor));
 
         // multiple ages - last age accepted
-        assertParseSuccess(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN
-                + NAME_DESC_DONOR_JOHN + PHONE_DESC_DONOR_JOHN + AGE_DESC_PATIENT_BOB + AGE_DESC_DONOR_JOHN, new AddCommand(expectedDonor));
+        assertParseSuccess(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN
+                + PHONE_DESC_DONOR_JOHN + AGE_DESC_PATIENT_BOB + AGE_DESC_DONOR_JOHN, new AddCommand(expectedDonor));
     }
 
     @Test
@@ -229,7 +237,8 @@ public class AddCommandParserTest {
 
         // invalid nric -- patient
         assertParseFailure(parser, TYPE_DESC_PATIENT_IRENE + INVALID_NRIC_DESC + NAME_DESC_PATIENT_IRENE
-                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE, Nric.MESSAGE_CONSTRAINTS);
+                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                Nric.MESSAGE_CONSTRAINTS);
 
         // invalid name -- donor
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + INVALID_NAME_DESC
@@ -237,7 +246,8 @@ public class AddCommandParserTest {
 
         // invalid name -- patient
         assertParseFailure(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + INVALID_NAME_DESC
-                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE, Name.MESSAGE_CONSTRAINTS);
+                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + PRIORITY_DESC_PATIENT_IRENE,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone -- donor
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN
@@ -257,7 +267,8 @@ public class AddCommandParserTest {
 
         // invalid priority -- patient
         assertParseFailure(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE + NAME_DESC_PATIENT_IRENE
-                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + INVALID_PRIORITY_DESC, Priority.MESSAGE_CONSTRAINTS);
+                + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE + INVALID_PRIORITY_DESC,
+                Priority.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported -- donor
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + INVALID_NAME_DESC

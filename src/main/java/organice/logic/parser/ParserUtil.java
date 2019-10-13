@@ -9,8 +9,8 @@ import organice.model.person.Age;
 import organice.model.person.Name;
 import organice.model.person.Nric;
 import organice.model.person.Phone;
-import organice.model.person.Type;
 import organice.model.person.Priority;
+import organice.model.person.Type;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
