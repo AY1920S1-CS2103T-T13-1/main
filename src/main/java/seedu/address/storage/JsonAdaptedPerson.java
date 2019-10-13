@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Donor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -48,7 +49,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Person source) throws IllegalValueException {
         type = source.getType().value;
         nric = source.getNric().value;
         name = source.getName().fullName;
@@ -60,7 +61,10 @@ class JsonAdaptedPerson {
         } else if (source instanceof Donor) {
             age = ((Donor) source).getAge().value;
             priority = "";
-        } else { //TODO: change to else if instanceof Doctor
+        } else if (source instanceof Doctor) {
+            age = "";
+            priority = "";
+        } else {
             age = "";
             priority = "";
         }
@@ -105,8 +109,21 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        //if it is a patient
-        if (modelType.isPatient()) {
+        if (modelType.isDoctor()) {
+            return new Doctor(modelType, modelNric, modelName, modelPhone);
+
+        } else if (modelType.isDonor()) {
+            if (age == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+            }
+
+            if (!Age.isValidAge(age)) {
+                throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
+            }
+            final Age modelAge = new Age(age);
+
+            return new Donor(modelType, modelNric, modelName, modelPhone, modelAge);
+        } else if (modelType.isPatient()) {
             if (age == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
             }
@@ -127,20 +144,9 @@ class JsonAdaptedPerson {
             final Priority modelPriority = new Priority(priority);
 
             return new Patient(modelType, modelNric, modelName, modelPhone, modelAge, modelPriority);
-        } else if (modelType.isDonor()) {
-            if (age == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
-            }
-
-            if (!Age.isValidAge(age)) {
-                throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
-            }
-            final Age modelAge = new Age(age);
-
-            return new Donor(modelType, modelNric, modelName, modelPhone, modelAge);
+        } else {
+            return new Person(modelType, modelNric, modelName, modelPhone);
         }
-
-        return new Person(modelType, modelNric, modelName, modelPhone);
     }
 
 }
