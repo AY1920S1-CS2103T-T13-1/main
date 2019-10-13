@@ -53,17 +53,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Donor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Type;
+import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
@@ -138,7 +138,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresentDoctor_success() {
-        Person expectedDoctor = new PersonBuilder(AMY).build();
+        Doctor expectedDoctor = new DoctorBuilder(AMY).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPE_DESC_AMY + NRIC_DESC_AMY

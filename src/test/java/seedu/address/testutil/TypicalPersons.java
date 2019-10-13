@@ -14,7 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JOHN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class TypicalPersons {
             .withNric(VALID_NRIC_JOHN).withPhone(VALID_PHONE_JOHN).build();
 
     // Manually added - person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withType(VALID_TYPE_AMY).withNric(VALID_NRIC_AMY)
+    public static final Doctor AMY = new DoctorBuilder().withNric(VALID_NRIC_AMY)
             .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).build();
     public static final Person BOB = new PersonBuilder().withType(VALID_TYPE_BOB).withNric(VALID_NRIC_BOB)
             .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
