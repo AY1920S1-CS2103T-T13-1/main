@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
+import static seedu.address.testutil.TypicalPersons.PATIENT_BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -92,17 +92,17 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniquePersonList.add(DOCTOR_ALICE);
-        uniquePersonList.setPerson(DOCTOR_ALICE, PERSON_BOB);
+        uniquePersonList.setPerson(DOCTOR_ALICE, PATIENT_BOB);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(PERSON_BOB);
+        expectedUniquePersonList.add(PATIENT_BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(DOCTOR_ALICE);
-        uniquePersonList.add(PERSON_BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(DOCTOR_ALICE, PERSON_BOB));
+        uniquePersonList.add(PATIENT_BOB);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(DOCTOR_ALICE, PATIENT_BOB));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class UniquePersonListTest {
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniquePersonList.add(DOCTOR_ALICE);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(PERSON_BOB);
+        expectedUniquePersonList.add(PATIENT_BOB);
         uniquePersonList.setPersons(expectedUniquePersonList);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
@@ -145,10 +145,10 @@ public class UniquePersonListTest {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniquePersonList.add(DOCTOR_ALICE);
-        List<Person> personList = Collections.singletonList(PERSON_BOB);
+        List<Person> personList = Collections.singletonList(PATIENT_BOB);
         uniquePersonList.setPersons(personList);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(PERSON_BOB);
+        expectedUniquePersonList.add(PATIENT_BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 

@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
 import static seedu.address.testutil.TypicalPersons.PATIENT_IRENE;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
+import static seedu.address.testutil.TypicalPersons.PATIENT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,24 +29,24 @@ public class PatientTest {
         Patient editedIrene = new PatientBuilder(PATIENT_IRENE).build();
 
         // different nric -> returns false
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(PATIENT_IRENE.isSamePerson(editedIrene));
 
         // different phone -> returns true
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(PATIENT_IRENE.isSamePerson(editedIrene));
 
         // different name -> returns true
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PATIENT_BOB).build();
         assertTrue(PATIENT_IRENE.isSamePerson(editedIrene));
 
         // different nric, same attributes -> returns false
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(PATIENT_IRENE.isSamePerson(editedIrene));
 
         // same nric, different attributes -> returns true
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PERSON_BOB)
-                .withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PATIENT_BOB)
+                .withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(PATIENT_IRENE.isSamePerson(editedIrene));
     }
 
@@ -66,18 +66,18 @@ public class PatientTest {
         assertFalse(PATIENT_IRENE.equals(5));
 
         // different person -> returns false
-        assertFalse(PATIENT_IRENE.equals(PERSON_BOB));
+        assertFalse(PATIENT_IRENE.equals(PATIENT_BOB));
 
         // different name -> returns false
-        Patient editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PERSON_BOB).build();
+        Patient editedIrene = new PatientBuilder(PATIENT_IRENE).withName(VALID_NAME_PATIENT_BOB).build();
         assertFalse(PATIENT_IRENE.equals(editedIrene));
 
         // different phone -> returns false
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertFalse(PATIENT_IRENE.equals(editedIrene));
 
         // different nric -> returns false
-        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedIrene = new PatientBuilder(PATIENT_IRENE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(PATIENT_IRENE.equals(editedIrene));
 
         // different person type -> returns false
@@ -98,6 +98,6 @@ public class PatientTest {
 
         assertEquals(irene.hashCode(), new PatientBuilder(PATIENT_IRENE).build().hashCode());
         assertNotEquals(irene.hashCode(),
-                new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PERSON_BOB).build().hashCode());
+                new PatientBuilder(PATIENT_IRENE).withPhone(VALID_PHONE_PATIENT_BOB).build().hashCode());
     }
 }

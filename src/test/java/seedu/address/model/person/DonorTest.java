@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
 import static seedu.address.testutil.TypicalPersons.DONOR_JOHN;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
+import static seedu.address.testutil.TypicalPersons.PATIENT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,25 +29,25 @@ public class DonorTest {
         Donor editedJohn = new DonorBuilder(DONOR_JOHN).build();
 
         // different nric -> returns false
-        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(DONOR_JOHN.isSamePerson(editedJohn));
 
         // different phone -> returns true
-        editedJohn = new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(DONOR_JOHN.isSamePerson(editedJohn));
 
         // different name -> returns true
-        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PATIENT_BOB).build();
         assertTrue(DONOR_JOHN.isSamePerson(editedJohn));
 
         // different nric, different other attributes -> returns false
-        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PERSON_BOB).withName(VALID_NAME_PERSON_BOB)
-                .withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PATIENT_BOB).withName(VALID_NAME_PATIENT_BOB)
+                .withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertFalse(DONOR_JOHN.isSamePerson(editedJohn));
 
         // same nric, different other attributes -> returns true
-        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PERSON_BOB)
-                .withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PATIENT_BOB)
+                .withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(DONOR_JOHN.isSamePerson(editedJohn));
     }
 
@@ -67,18 +67,18 @@ public class DonorTest {
         assertFalse(DONOR_JOHN.equals(5));
 
         // different person -> returns false
-        assertFalse(DONOR_JOHN.equals(PERSON_BOB));
+        assertFalse(DONOR_JOHN.equals(PATIENT_BOB));
 
         // different name -> returns false
-        Donor editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PERSON_BOB).build();
+        Donor editedJohn = new DonorBuilder(DONOR_JOHN).withName(VALID_NAME_PATIENT_BOB).build();
         assertFalse(DONOR_JOHN.equals(editedJohn));
 
         // different phone -> returns false
-        editedJohn = new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertFalse(DONOR_JOHN.equals(editedJohn));
 
         // different nric -> returns false
-        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedJohn = new DonorBuilder(DONOR_JOHN).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(DONOR_JOHN.equals(editedJohn));
 
         // different person type -> returns false
@@ -98,6 +98,6 @@ public class DonorTest {
 
         assertEquals(john.hashCode(), new DonorBuilder(DONOR_JOHN).build().hashCode());
         assertNotEquals(john.hashCode(),
-                new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PERSON_BOB).build().hashCode());
+                new DonorBuilder(DONOR_JOHN).withPhone(VALID_PHONE_PATIENT_BOB).build().hashCode());
     }
 }

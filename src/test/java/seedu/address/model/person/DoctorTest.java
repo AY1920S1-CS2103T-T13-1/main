@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PATIENT_BOB;
 import static seedu.address.testutil.TypicalPersons.DOCTOR_ALICE;
-import static seedu.address.testutil.TypicalPersons.PERSON_BOB;
+import static seedu.address.testutil.TypicalPersons.PATIENT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,24 +28,24 @@ public class DoctorTest {
         Doctor editedAlice;
 
         // different nric -> returns false
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // different phone -> returns true
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // different name -> returns true
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PATIENT_BOB).build();
         assertTrue(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // different nric, same attributes -> returns false
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.isSamePerson(editedAlice));
 
         // same nric, different attributes -> returns true
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB)
-                .withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PATIENT_BOB)
+                .withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertTrue(DOCTOR_ALICE.isSamePerson(editedAlice));
     }
 
@@ -65,22 +65,22 @@ public class DoctorTest {
         assertFalse(DOCTOR_ALICE.equals(5));
 
         // different doctor -> returns false
-        assertFalse(DOCTOR_ALICE.equals(PERSON_BOB));
+        assertFalse(DOCTOR_ALICE.equals(PATIENT_BOB));
 
         // different name -> returns false
-        Doctor editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PERSON_BOB).build();
+        Doctor editedAlice = new DoctorBuilder(DOCTOR_ALICE).withName(VALID_NAME_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.equals(editedAlice));
 
         // different nric -> returns false
-        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PERSON_BOB).build();
+        editedAlice = new DoctorBuilder(DOCTOR_ALICE).withNric(VALID_NRIC_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.equals(editedAlice));
 
         // different person type -> returns false
-        editedAlice = (Doctor) new DoctorBuilder(DOCTOR_ALICE).withType(VALID_TYPE_PERSON_BOB).build();
+        editedAlice = (Doctor) new DoctorBuilder(DOCTOR_ALICE).withType(VALID_TYPE_PATIENT_BOB).build();
         assertFalse(DOCTOR_ALICE.equals(editedAlice));
     }
 
@@ -97,6 +97,6 @@ public class DoctorTest {
 
         assertEquals(alice.hashCode(), new DoctorBuilder(DOCTOR_ALICE).build().hashCode());
         assertNotEquals(alice.hashCode(),
-                new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PERSON_BOB).build().hashCode());
+                new DoctorBuilder(DOCTOR_ALICE).withPhone(VALID_PHONE_PATIENT_BOB).build().hashCode());
     }
 }

@@ -4,17 +4,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_DONOR_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_PATIENT_IRENE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONOR_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DOCTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DONOR_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DOCTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DONOR_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PERSON_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_DOCTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_PATIENT_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,11 +62,10 @@ public class TypicalPersons {
             .withName(VALID_NAME_DONOR_JOHN).withNric(VALID_NRIC_DONOR_JOHN).withPhone(VALID_PHONE_DONOR_JOHN).build();
 
     // Manually added - person's details found in {@code CommandTestUtil}
-    public static final Person PERSON_AMY = new PersonBuilder().withType(VALID_TYPE_PERSON_AMY)
-            .withNric(VALID_NRIC_PERSON_AMY).withName(VALID_NAME_PERSON_AMY)
-            .withPhone(CommandTestUtil.VALID_PHONE_PERSON_AMY).build();
-    public static final Person PERSON_BOB = new PersonBuilder().withType(VALID_TYPE_PERSON_BOB)
-            .withNric(VALID_NRIC_PERSON_BOB).withName(VALID_NAME_PERSON_BOB).withPhone(VALID_PHONE_PERSON_BOB).build();
+    public static final Doctor DOCTOR_AMY = new DoctorBuilder().withNric(VALID_NRIC_DOCTOR_AMY)
+            .withName(VALID_NAME_DOCTOR_AMY).withPhone(CommandTestUtil.VALID_PHONE_DOCTOR_AMY).build();
+    public static final Patient PATIENT_BOB = new PatientBuilder().withNric(VALID_NRIC_PATIENT_BOB)
+            .withName(VALID_NAME_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

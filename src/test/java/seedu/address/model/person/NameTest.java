@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DOCTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -44,24 +44,24 @@ public class NameTest {
 
     @Test
     public void toStringTest() {
-        assertEquals(new Name(VALID_NAME_PERSON_BOB).toString(), VALID_NAME_PERSON_BOB);
+        assertEquals(new Name(VALID_NAME_PATIENT_BOB).toString(), VALID_NAME_PATIENT_BOB);
     }
 
     @Test
     public void equals() {
-        Name name = new Name(VALID_NAME_PERSON_BOB);
+        Name name = new Name(VALID_NAME_PATIENT_BOB);
 
         assertFalse(name.equals(null));
-        assertFalse(name.equals(new Name(VALID_NAME_PERSON_AMY)));
+        assertFalse(name.equals(new Name(VALID_NAME_DOCTOR_AMY)));
         assertTrue(name.equals(name));
-        assertTrue(name.equals(new Name(VALID_NAME_PERSON_BOB)));
+        assertTrue(name.equals(new Name(VALID_NAME_PATIENT_BOB)));
     }
 
     @Test
     public void hashCodeTest() {
-        Name name = new Name(VALID_NAME_PERSON_BOB);
+        Name name = new Name(VALID_NAME_PATIENT_BOB);
 
-        assertEquals(name.hashCode(), new Name(VALID_NAME_PERSON_BOB).hashCode());
-        assertNotEquals(name.hashCode(), new Name(VALID_NAME_PERSON_AMY).hashCode());
+        assertEquals(name.hashCode(), new Name(VALID_NAME_PATIENT_BOB).hashCode());
+        assertNotEquals(name.hashCode(), new Name(VALID_NAME_DOCTOR_AMY).hashCode());
     }
 }

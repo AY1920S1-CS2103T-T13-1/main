@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_PERSON_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PERSON_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PERSON_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_DOCTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,33 +18,33 @@ public class EditPersonDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_PERSON_AMY);
-        assertTrue(DESC_PERSON_AMY.equals(descriptorWithSameValues));
+        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_DOCTOR_AMY);
+        assertTrue(DESC_DOCTOR_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_PERSON_AMY.equals(DESC_PERSON_AMY));
+        assertTrue(DESC_DOCTOR_AMY.equals(DESC_DOCTOR_AMY));
 
         // null -> returns false
-        assertFalse(DESC_PERSON_AMY.equals(null));
+        assertFalse(DESC_DOCTOR_AMY.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_PERSON_AMY.equals(5));
+        assertFalse(DESC_DOCTOR_AMY.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_PERSON_AMY.equals(DESC_PERSON_BOB));
+        assertFalse(DESC_DOCTOR_AMY.equals(DESC_PATIENT_BOB));
 
         // different nric -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_PERSON_AMY)
-                .withName(VALID_NRIC_PERSON_BOB).build();
-        assertFalse(DESC_PERSON_AMY.equals(editedAmy));
+        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_DOCTOR_AMY)
+                .withName(VALID_NRIC_PATIENT_BOB).build();
+        assertFalse(DESC_DOCTOR_AMY.equals(editedAmy));
 
         // different name -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_PERSON_AMY).withName(VALID_NAME_PERSON_BOB).build();
-        assertFalse(DESC_PERSON_AMY.equals(editedAmy));
+        editedAmy = new EditPersonDescriptorBuilder(DESC_DOCTOR_AMY).withName(VALID_NAME_PATIENT_BOB).build();
+        assertFalse(DESC_DOCTOR_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_PERSON_AMY).withPhone(VALID_PHONE_PERSON_BOB).build();
-        assertFalse(DESC_PERSON_AMY.equals(editedAmy));
+        editedAmy = new EditPersonDescriptorBuilder(DESC_DOCTOR_AMY).withPhone(VALID_PHONE_PATIENT_BOB).build();
+        assertFalse(DESC_DOCTOR_AMY.equals(editedAmy));
 
     }
 }
