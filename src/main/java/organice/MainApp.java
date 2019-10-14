@@ -15,15 +15,15 @@ import organice.commons.util.ConfigUtil;
 import organice.commons.util.StringUtil;
 import organice.logic.Logic;
 import organice.logic.LogicManager;
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.Model;
 import organice.model.ModelManager;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.ReadOnlyUserPrefs;
 import organice.model.UserPrefs;
 import organice.model.util.SampleDataUtil;
-import organice.storage.AddressBookStorage;
-import organice.storage.JsonAddressBookStorage;
+import organice.storage.OrganiceStorage;
+import organice.storage.JsonOrganiceStorage;
 import organice.storage.JsonUserPrefsStorage;
 import organice.storage.Storage;
 import organice.storage.StorageManager;
@@ -56,7 +56,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        OrganiceStorage addressBookStorage = new JsonOrganiceStorage(userPrefs.getOrganiceFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -74,20 +74,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyOrganice> addressBookOptional;
+        ReadOnlyOrganice initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readOrganice();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Organice");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleOrganice);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Organice");
-            initialData = new AddressBook();
+            initialData = new Organice();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Organice");
-            initialData = new AddressBook();
+            initialData = new Organice();
         }
 
         return new ModelManager(initialData, userPrefs);

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import organice.commons.core.GuiSettings;
 import organice.model.person.NameContainsKeywordsPredicate;
-import organice.testutil.AddressBookBuilder;
+import organice.testutil.OrganiceBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new Organice(), new Organice(modelManager.getOrganice()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("organice/file/path"));
+        userPrefs.setOrganiceFilePath(Paths.get("organice/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/organice/file/path"));
+        userPrefs.setOrganiceFilePath(Paths.get("new/organice/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,14 +61,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setOrganiceFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setOrganiceFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setOrganiceFilePath_validPath_setsOrganiceFilePath() {
         Path path = Paths.get("organice/file/path");
-        modelManager.setAddressBookFilePath(path);
+        modelManager.setOrganiceFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
     }
 

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,9 +20,9 @@ import organice.model.person.Person;
 import organice.model.person.exceptions.DuplicatePersonException;
 import organice.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class OrganiceTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Organice addressBook = new Organice();
 
     @Test
     public void constructor() {
@@ -35,8 +35,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyOrganice_replacesData() {
+        Organice newData = getTypicalOrganice();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -46,7 +46,7 @@ public class AddressBookTest {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(DOCTOR_ALICE).withNric("S1532142A").build();
         List<Person> newPersons = Arrays.asList(DOCTOR_ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        OrganiceStub newData = new OrganiceStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -57,18 +57,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInOrganice_returnsFalse() {
         assertFalse(addressBook.hasPerson(DOCTOR_ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInOrganice_returnsTrue() {
         addressBook.addPerson(DOCTOR_ALICE);
         assertTrue(addressBook.hasPerson(DOCTOR_ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInOrganice_returnsTrue() {
         addressBook.addPerson(DOCTOR_ALICE);
         Person editedAlice = new PersonBuilder(DOCTOR_ALICE).withNric("S1532142A").build();
         assertTrue(addressBook.hasPerson(editedAlice));
@@ -82,10 +82,10 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyOrganice whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class OrganiceStub implements ReadOnlyOrganice {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        OrganiceStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

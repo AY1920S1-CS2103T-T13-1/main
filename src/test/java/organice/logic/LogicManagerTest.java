@@ -24,10 +24,10 @@ import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
 import organice.model.ModelManager;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.UserPrefs;
 import organice.model.person.Person;
-import organice.storage.JsonAddressBookStorage;
+import organice.storage.JsonOrganiceStorage;
 import organice.storage.JsonUserPrefsStorage;
 import organice.storage.StorageManager;
 import organice.testutil.PersonBuilder;
@@ -43,8 +43,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("organice.json"));
+        JsonOrganiceStorage addressBookStorage =
+                new JsonOrganiceStorage(temporaryFolder.resolve("organice.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -71,8 +71,8 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonOrganiceIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionOrganice.json"));
+        JsonOrganiceStorage addressBookStorage =
+                new JsonOrganiceIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionOrganice.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -129,7 +129,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getOrganice(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,13 +149,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonOrganiceIoExceptionThrowingStub extends JsonOrganiceStorage {
+        private JsonOrganiceIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveOrganice(ReadOnlyOrganice addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

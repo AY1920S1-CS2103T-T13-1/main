@@ -10,10 +10,10 @@ import organice.commons.core.LogsCenter;
 import organice.logic.commands.Command;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
-import organice.logic.parser.AddressBookParser;
+import organice.logic.parser.OrganiceParser;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.person.Person;
 import organice.storage.Storage;
 
@@ -26,12 +26,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final OrganiceParser addressBookParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new OrganiceParser();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveOrganice(model.getOrganice());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -52,8 +52,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyOrganice getOrganice() {
+        return model.getOrganice();
     }
 
     @Override
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getOrganiceFilePath() {
+        return model.getOrganiceFilePath();
     }
 
     @Override

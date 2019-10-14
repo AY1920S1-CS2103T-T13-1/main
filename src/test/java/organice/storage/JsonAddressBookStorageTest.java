@@ -6,7 +6,7 @@ import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
 import static organice.testutil.TypicalPersons.PERSON_HOON;
 import static organice.testutil.TypicalPersons.PERSON_IDA;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,21 +16,21 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import organice.commons.exceptions.DataConversionException;
-import organice.model.AddressBook;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.Organice;
+import organice.model.ReadOnlyOrganice;
 
-public class JsonAddressBookStorageTest {
+public class JsonOrganiceStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonOrganiceStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readOrganice_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readOrganice(null));
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyOrganice> readAddressBook(String filePath) throws Exception {
         return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 

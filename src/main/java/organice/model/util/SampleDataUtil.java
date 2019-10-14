@@ -1,7 +1,7 @@
 package organice.model.util;
 
-import organice.model.AddressBook;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.Organice;
+import organice.model.ReadOnlyOrganice;
 import organice.model.person.Name;
 import organice.model.person.Nric;
 import organice.model.person.Person;
@@ -9,7 +9,7 @@ import organice.model.person.Phone;
 import organice.model.person.Type;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Organice} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -24,8 +24,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyOrganice getSampleOrganice() {
+        Organice sampleAb = new Organice();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

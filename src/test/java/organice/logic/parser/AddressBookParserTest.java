@@ -29,9 +29,9 @@ import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 import organice.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class OrganiceParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final OrganiceParser parser = new AddressBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

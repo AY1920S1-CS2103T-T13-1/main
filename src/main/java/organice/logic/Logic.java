@@ -7,7 +7,7 @@ import organice.commons.core.GuiSettings;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.person.Person;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Organice.
      *
-     * @see organice.model.Model#getAddressBook()
+     * @see organice.model.Model#getOrganice()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyOrganice getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
