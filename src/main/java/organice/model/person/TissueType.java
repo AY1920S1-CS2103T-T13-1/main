@@ -5,9 +5,9 @@ import static organice.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's tissue type in ORGANice.
- * Guarantees: immutable; is valid as declared in {@link #isValidTissuetype(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTissueType(String)}
  */
-public class Tissuetype {
+public class TissueType {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Tissue types are 6 integers from 1 to 12 separated by commas"
@@ -15,42 +15,41 @@ public class Tissuetype {
     public final String value;
 
     /**
-     * Constructs a {@code Tissuetype}.
+     * Constructs a {@code TissueType}.
      *
-     * @param tissuetype A valid tissue type
+     * @param tissueType A valid tissue type
      */
-    public Tissuetype (String tissuetype) {
-        requireNonNull(tissuetype);
-        checkArgument(isValidTissuetype(tissuetype), MESSAGE_CONSTRAINTS);
-        value = tissuetype;
+    public TissueType(String tissueType) {
+        requireNonNull(tissueType);
+        checkArgument(isValidTissueType(tissueType), MESSAGE_CONSTRAINTS);
+        value = tissueType;
     }
 
     /**
      * Returns true if a given string is a valid tissue type.
      */
-    public static boolean isValidTissuetype(String test) {
-        String[] tissuetypeValue = test.split(",");
-        if (tissuetypeValue.length != 6 || isDuplicated(tissuetypeValue)) {
+    public static boolean isValidTissueType(String test) {
+        String[] tissueTypeValue = test.split(",");
+        if (tissueTypeValue.length != 6 || hasDuplicates(tissueTypeValue)) {
             return false;
-        } else {
-            for (int i = 0; i < tissuetypeValue.length; i++) {
-                try {
-                    Integer tt = Integer.parseInt(tissuetypeValue[i]);
-                    if (tt > 12) {
-                        return false;
-                    }
-                } catch (NumberFormatException | NullPointerException nfe) {
+        }
+        for (int i = 0; i < tissueTypeValue.length; i++) {
+            try {
+                Integer tt = Integer.parseInt(tissueTypeValue[i]);
+                if (tt < 1 || tt > 12) {
                     return false;
                 }
+            } catch (NumberFormatException | NullPointerException nfe) {
+                return false;
             }
-            return true;
         }
+        return true;
     }
 
     /**
      * Returns true if a given string array contains duplicate.
      */
-    public static boolean isDuplicated(String[] test) {
+    public static boolean hasDuplicates(String[] test) {
         for (int i = 0; i < test.length; i++) {
             for (int j = i + 1; j < test.length; j++) {
                 if (test[i].equals(test[j])) {
@@ -69,8 +68,8 @@ public class Tissuetype {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Tissuetype // instanceof handles nulls
-                && value.equals(((Tissuetype) other).value)); // state check
+                || (other instanceof TissueType // instanceof handles nulls
+                && value.equals(((TissueType) other).value)); // state check
     }
 
     @Override

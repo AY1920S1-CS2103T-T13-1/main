@@ -7,33 +7,33 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
- * Represents a Person's bloodtype in ORGANice.
- * Guarantees: immutable; is valid as declared in {@link #isValidBloodtype(String)}
+ * Represents a Person's blood type in ORGANice.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
  */
-public class Bloodtype {
+public class BloodType {
 
     public static final HashSet<String> BLOOD_TYPES =
             new HashSet<>(Arrays.asList("A", "B", "AB", "O", "A+", "AB+", "B+", "O+"));
     public static final String MESSAGE_CONSTRAINTS =
-            "Bloodtype should only have A, B, O or AB."
+            "Blood type should only have A, B, O or AB."
                     + "Positive blood types will have a '+' behind, it should not be blank";
     public final String value;
 
     /**
-     * Constructs a {@code Bloodtype}.
+     * Constructs a {@code BloodType}.
      *
-     * @param bloodtype A valid blood type.
+     * @param bloodType A valid blood type.
      */
-    public Bloodtype(String bloodtype) {
-        requireNonNull(bloodtype);
-        checkArgument(isValidBloodtype(bloodtype), MESSAGE_CONSTRAINTS);
-        value = bloodtype.toUpperCase();
+    public BloodType(String bloodType) {
+        requireNonNull(bloodType);
+        checkArgument(isValidBloodType(bloodType), MESSAGE_CONSTRAINTS);
+        value = bloodType.toUpperCase();
     }
 
     /**
-     * Returns true if a given string is a valid bloodtype.
+     * Returns true if a given string is a valid blood type.
      */
-    public static boolean isValidBloodtype(String test) {
+    public static boolean isValidBloodType(String test) {
         return BLOOD_TYPES.contains(test.toUpperCase());
     }
 
@@ -45,8 +45,8 @@ public class Bloodtype {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Bloodtype // instanceof handles nulls
-                && value.equals(((Bloodtype) other).value)); // state check
+                || (other instanceof BloodType // instanceof handles nulls
+                && value.equals(((BloodType) other).value)); // state check
     }
 
     @Override
