@@ -1,0 +1,8 @@
+{
+  "persons": [ {
+    "type": "doctor",
+    "nric": "S1234567A",
+    "name": "Hans Muster",
+    "phone": "9482424asd"
+  } ]
+}
