@@ -41,8 +41,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean containsDoctor(Nric doctor) {
         requireNonNull(doctor);
-        return internalList.stream().anyMatch(n -> n.getType().toString().equals("doctor")
-                && n.getNric().equals(doctor));
+        return internalList.stream().anyMatch(n -> n.getType().isDoctor() && n.getNric().equals(doctor));
     }
 
     /**
