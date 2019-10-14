@@ -37,6 +37,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent doctor in charge as the given argument.
+     */
+    public boolean containsDoctor(Nric doctor) {
+        requireNonNull(doctor);
+        return internalList.stream().anyMatch(n -> n.getType().toString().equals("doctor")
+                && n.getNric().equals(doctor));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
