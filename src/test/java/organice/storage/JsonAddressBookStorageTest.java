@@ -47,22 +47,22 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatOrganice.json"));
     }
 
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonOrganice.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonOrganice.json"));
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempOrganice.json");
         AddressBook original = getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
