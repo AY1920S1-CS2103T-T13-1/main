@@ -1,11 +1,11 @@
 package organice.logic.commands;
 
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import org.junit.jupiter.api.Test;
 
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.Model;
 import organice.model.ModelManager;
 import organice.model.UserPrefs;
@@ -13,7 +13,7 @@ import organice.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyOrganice_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,10 +21,10 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+    public void execute_nonEmptyOrganice_success() {
+        Model model = new ModelManager(getTypicalOrganice(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalOrganice(), new UserPrefs());
+        expectedModel.setOrganice(new Organice());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

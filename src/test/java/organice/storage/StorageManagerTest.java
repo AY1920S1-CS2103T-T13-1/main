@@ -2,7 +2,7 @@ package organice.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import organice.commons.core.GuiSettings;
-import organice.model.AddressBook;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.Organice;
+import organice.model.ReadOnlyOrganice;
 import organice.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonOrganiceStorage addressBookStorage = new JsonOrganiceStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -54,15 +54,15 @@ public class StorageManagerTest {
          * {@link JsonOrganiceStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonOrganiceStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        Organice original = getTypicalOrganice();
+        storageManager.saveOrganice(original);
+        ReadOnlyOrganice retrieved = storageManager.readOrganice().get();
+        assertEquals(original, new Organice(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getOrganiceFilePath() {
+        assertNotNull(storageManager.getOrganiceFilePath());
     }
 
 }

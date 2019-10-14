@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import organice.commons.exceptions.DataConversionException;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.ReadOnlyUserPrefs;
 import organice.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends OrganiceStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getOrganiceFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyOrganice> readOrganice() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveOrganice(ReadOnlyOrganice addressBook) throws IOException;
 
 }

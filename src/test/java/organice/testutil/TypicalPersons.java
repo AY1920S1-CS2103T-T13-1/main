@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import organice.logic.commands.CommandTestUtil;
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.person.Doctor;
 import organice.model.person.Donor;
 import organice.model.person.Patient;
@@ -72,8 +72,8 @@ public class TypicalPersons {
     /**
      * Returns an {@code Organice} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Organice getTypicalOrganice() {
+        Organice ab = new Organice();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

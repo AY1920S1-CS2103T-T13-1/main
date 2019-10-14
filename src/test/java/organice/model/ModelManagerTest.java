@@ -69,7 +69,7 @@ public class ModelManagerTest {
     public void setOrganiceFilePath_validPath_setsOrganiceFilePath() {
         Path path = Paths.get("organice/file/path");
         modelManager.setOrganiceFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        assertEquals(path, modelManager.getOrganiceFilePath());
     }
 
     @Test
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInOrganice_returnsFalse() {
         assertFalse(modelManager.hasPerson(DOCTOR_ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInOrganice_returnsTrue() {
         modelManager.addPerson(DOCTOR_ALICE);
         assertTrue(modelManager.hasPerson(DOCTOR_ALICE));
     }
@@ -95,8 +95,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(DOCTOR_ALICE).withPerson(DOCTOR_BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        Organice addressBook = new OrganiceBuilder().withPerson(DOCTOR_ALICE).withPerson(DOCTOR_BENSON).build();
+        Organice differentOrganice = new Organice();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -114,7 +114,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different organice -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentOrganice, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = DOCTOR_ALICE.getName().fullName.split("\\s+");
@@ -126,7 +126,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setOrganiceFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

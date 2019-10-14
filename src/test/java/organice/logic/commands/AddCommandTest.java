@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import organice.commons.core.GuiSettings;
 import organice.logic.commands.exceptions.CommandException;
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.Model;
-import organice.model.ReadOnlyAddressBook;
+import organice.model.ReadOnlyOrganice;
 import organice.model.ReadOnlyUserPrefs;
 import organice.model.person.Doctor;
 import organice.model.person.Donor;
@@ -170,12 +170,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getOrganiceFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setOrganiceFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -185,12 +185,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setOrganice(ReadOnlyOrganice newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyOrganice getOrganice() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,8 +257,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyOrganice getOrganice() {
+            return new Organice();
         }
     }
 

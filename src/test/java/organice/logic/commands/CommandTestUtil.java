@@ -15,7 +15,7 @@ import java.util.List;
 
 import organice.commons.core.index.Index;
 import organice.logic.commands.exceptions.CommandException;
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.Model;
 import organice.model.person.NameContainsKeywordsPredicate;
 import organice.model.person.Person;
@@ -130,11 +130,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Organice expectedOrganice = new Organice(actualModel.getOrganice());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedOrganice, actualModel.getOrganice());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**

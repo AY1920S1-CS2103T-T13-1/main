@@ -2,7 +2,7 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import organice.model.AddressBook;
+import organice.model.Organice;
 import organice.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setOrganice(new Organice());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

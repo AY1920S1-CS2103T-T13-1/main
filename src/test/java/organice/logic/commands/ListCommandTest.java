@@ -3,7 +3,7 @@ package organice.logic.commands;
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static organice.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalOrganice(), new UserPrefs());
+        expectedModel = new ModelManager(model.getOrganice(), new UserPrefs());
     }
 
     @Test

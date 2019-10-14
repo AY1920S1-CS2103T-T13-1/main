@@ -8,7 +8,7 @@ import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static organice.testutil.TypicalPersons.DONOR_ELLE;
 import static organice.testutil.TypicalPersons.DONOR_FIONA;
 import static organice.testutil.TypicalPersons.PATIENT_CARL;
-import static organice.testutil.TypicalPersons.getTypicalAddressBook;
+import static organice.testutil.TypicalPersons.getTypicalOrganice;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import organice.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalOrganice(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalOrganice(), new UserPrefs());
 
     @Test
     public void equals() {
