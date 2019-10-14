@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "organice.json"
+  "organiceFilePath" : "organice.json"
 }

@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "organice.json"
+  "organiceFilePath" : "organice.json"
 }

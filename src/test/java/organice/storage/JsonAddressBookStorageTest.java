@@ -20,7 +20,7 @@ import organice.model.AddressBook;
 import organice.model.ReadOnlyAddressBook;
 
 public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonOrganiceStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -92,7 +92,7 @@ public class JsonAddressBookStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code organice} at the specified {@code filePath}.
      */
     private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
         try {

@@ -12,7 +12,7 @@ import organice.model.ReadOnlyUserPrefs;
 import organice.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Organice data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -45,7 +45,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Organice methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {

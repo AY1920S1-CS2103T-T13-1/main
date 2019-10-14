@@ -15,7 +15,7 @@ import organice.commons.util.JsonUtil;
 import organice.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access Organice data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
@@ -37,7 +37,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readOrganice()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
@@ -65,7 +65,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveOrganice(ReadOnlyOrganice)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
