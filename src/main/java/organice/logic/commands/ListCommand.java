@@ -2,6 +2,9 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+import static organice.model.Model.PREDICATE_SHOW_ALL_DOCTORS;
+import static organice.model.Model.PREDICATE_SHOW_ALL_DONORS;
+import static organice.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static organice.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import organice.model.Model;
@@ -20,7 +23,12 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons of stated type";
 
-    private final Type type;
+    private static final String LIST_OF_DOCTORS = "";
+    private static final String LIST_OF_DONORS = "";
+    private static final String LIST_OF_PATIENTS = "";
+    private static final String TYPE_NOT_FOUND = "";
+
+    private static Type type;
 
     public ListCommand(Type type) {
         requireNonNull(type);
@@ -29,9 +37,23 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            if (type.isDoctor()) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
+                return new CommandResult(MESSAGE_SUCCESS + LIST_OF_DOCTORS);
+            } else if (type.isDonor()) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+                return new CommandResult(MESSAGE_SUCCESS + LIST_OF_DONORS);
+            } else if (type.isPatient()) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
+                return new CommandResult(MESSAGE_SUCCESS + LIST_OF_PATIENTS);
+            } else {
+                return new CommandResult(TYPE_NOT_FOUND);
+            }
+        } catch (NullPointerException e) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(TYPE_NOT_FOUND);
+        }
     }
 
     @Override
