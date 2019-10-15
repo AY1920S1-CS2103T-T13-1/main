@@ -3,8 +3,6 @@ package organice.logic.parser;
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.List;
-
 import java.util.NoSuchElementException;
 
 import java.util.stream.Stream;

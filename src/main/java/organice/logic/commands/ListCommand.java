@@ -11,12 +11,6 @@ import organice.model.person.Type;
  * Lists all persons of the same type in the address book to the user.
  */
 public class ListCommand extends Command {
-    private final Type type;
-
-    public ListCommand(Type type) {
-        requireNonNull(type);
-        this.type = type;
-    }
 
     public static final String COMMAND_WORD = "list";
 
@@ -25,6 +19,13 @@ public class ListCommand extends Command {
             + PREFIX_TYPE + "PERSON TYPE ";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons of stated type";
+
+    private final Type type;
+
+    public ListCommand(Type type) {
+        requireNonNull(type);
+        this.type = type;
+    }
 
     @Override
     public CommandResult execute(Model model) {
