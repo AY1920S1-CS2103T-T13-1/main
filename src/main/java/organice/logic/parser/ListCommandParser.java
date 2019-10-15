@@ -5,8 +5,6 @@ import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.NoSuchElementException;
 
-import java.util.stream.Stream;
-
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Type;
@@ -35,7 +33,6 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
-        arePrefixesPresent(argMultimap);
         Type type;
         try {
             type = parseType(argMultimap);
@@ -43,23 +40,5 @@ public class ListCommandParser implements Parser<ListCommand> {
             type = null;
         }
         return new ListCommand(type);
-    }
-
-    /**
-     * Returns true if there is a prefix {@code Optional} in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
-     * Throws ParseException when the required prefix for {@code ListCommand} is absent.
-     */
-    private static void arePrefixesPresent(ArgumentMultimap argMultimap) throws ParseException {
-        if (!isPrefixPresent(argMultimap, PREFIX_TYPE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }
     }
 }
