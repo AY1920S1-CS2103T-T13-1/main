@@ -20,12 +20,13 @@ public class ListCommand extends Command {
             + "Parameter:\n"
             + PREFIX_TYPE + "PERSON TYPE ";
 
-    private static final String LIST_OF_DOCTORS = "Listed all doctors";
-    private static final String LIST_OF_DONORS = "Listed all donors";
-    private static final String LIST_OF_PATIENTS = "Listed all patients";
-    private static final String TYPE_NOT_FOUND =
+    public static final String LIST_OF_DOCTORS = "Listed all doctors";
+    public static final String LIST_OF_DONORS = "Listed all donors";
+    public static final String LIST_OF_PATIENTS = "Listed all patients";
+    public static final String TYPE_NOT_FOUND =
             "The type of person to list is either missing or invalid.\n"
-                    + "Please indicate a valid type i.e.'doctor', 'donor' or 'patient'.\n";
+                    + "Please indicate a valid type i.e.'doctor', 'donor' or 'patient'.\n"
+                    + "Listed all persons";
 
     private static Type type;
 
@@ -58,6 +59,7 @@ public class ListCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
+                || type == null && (((ListCommand) other).type) == null // no arguments given should be same objects
                 || (other instanceof ListCommand // instanceof handles nulls
                 && type.equals(((ListCommand) other).type)); // state check
     }
