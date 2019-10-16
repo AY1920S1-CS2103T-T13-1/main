@@ -33,12 +33,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
-        Type type;
-        try {
-            type = parseType(argMultimap);
-        } catch (ParseException e) {
-            type = null;
-        }
+        Type type = parseType(argMultimap);
         return new ListCommand(type);
     }
 }
