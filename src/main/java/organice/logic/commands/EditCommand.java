@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 import organice.commons.core.Messages;
-import organice.commons.core.index.Index;
 import organice.commons.util.CollectionUtil;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
@@ -22,52 +21,54 @@ import organice.model.person.Phone;
 import organice.model.person.Type;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in ORGANice.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by their NRIC in ORGANice. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: NRIC (must be a valid NRIC in ORGANice) "
             + "[" + PREFIX_TYPE + "PERSON TYPE] "
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NRIC + "S9912345A"
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param nric of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Nric nric, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(nric);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (nric.isValidNric(nric.toString())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = NricToPerson(nric, lastShownList);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -77,6 +78,15 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    private Person NricToPerson(Nric nric, List<Person> lastShownList) throws CommandException {
+        for (Person person : lastShownList) {
+            if (person.getNric().value.equals(nric)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     /**
@@ -108,7 +118,7 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return nric.equals(e.nric)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 

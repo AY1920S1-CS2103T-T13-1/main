@@ -11,6 +11,7 @@ import organice.commons.core.index.Index;
 import organice.logic.commands.EditCommand;
 import organice.logic.commands.EditCommand.EditPersonDescriptor;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.person.Nric;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -27,10 +28,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE);
 
-        Index index;
+        Nric nric;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -56,7 +57,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(nric, editPersonDescriptor);
     }
 
 }
