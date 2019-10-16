@@ -19,11 +19,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if the type is not specified correctly in the input arguments
      */
     private static Type parseType(ArgumentMultimap argumentMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
-        } catch (NoSuchElementException ex) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }
+        return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
     }
 
     /**
