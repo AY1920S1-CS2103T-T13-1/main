@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import organice.commons.core.GuiSettings;
 import organice.model.person.Nric;
+import organice.model.person.Patient;
 import organice.model.person.Person;
+import organice.model.person.exceptions.PersonNotFoundException;
 
 /**
  * The API of the Model component.
@@ -64,6 +66,11 @@ public interface Model {
     boolean hasDoctor(Nric doctor);
 
     /**
+     * Returns true if a patient with the specified Nric exists in ORGANice.
+     */
+    boolean hasPatient(Nric patient);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -91,4 +98,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Retrieves the {@code Patient} with the specified {@code Nric}
+     * @throws PersonNotFoundException if the {@code Patient} with the {@code Nric} cannot be found.
+     */
+    Patient getPatient(Nric patientNric) throws PersonNotFoundException;
 }

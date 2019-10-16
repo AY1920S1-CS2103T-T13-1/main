@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.model.person.Nric;
+import organice.model.person.Patient;
 import organice.model.person.Person;
+import organice.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -102,6 +104,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPatient(Nric patient) {
+        requireNonNull(patient);
+        return addressBook.hasPatient(patient);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -117,6 +125,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+        requireNonNull(patientNric);
+
+        return addressBook.getPatient(patientNric);
     }
 
     //=========== Filtered Person List Accessors =============================================================
