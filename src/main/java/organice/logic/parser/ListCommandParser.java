@@ -4,7 +4,6 @@ import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
