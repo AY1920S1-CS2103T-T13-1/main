@@ -36,7 +36,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
 
         Type type = null;
-        if (isTypePresent(argMultimap, PREFIX_TYPE)) {
+        if (isTypePresent(argMultimap)) {
             type = parseType(argMultimap);
             return new ListCommand(type);
         }
@@ -47,7 +47,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean isTypePresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean isTypePresent(ArgumentMultimap argumentMultimap) {
+        return argumentMultimap.getValue(PREFIX_TYPE).isPresent();
     }
 }
