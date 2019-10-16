@@ -23,10 +23,7 @@ public class ListCommand extends Command {
     public static final String LIST_OF_DOCTORS = "Listed all doctors";
     public static final String LIST_OF_DONORS = "Listed all donors";
     public static final String LIST_OF_PATIENTS = "Listed all patients";
-    public static final String TYPE_NOT_FOUND =
-            "The type of person to list is either missing or invalid.\n"
-                    + "Please indicate a valid type i.e.'doctor', 'donor' or 'patient'.\n"
-                    + "Listed all persons";
+    public static final String LIST_OF_PERSONS = "Listed all persons";
 
     private static Type type;
 
@@ -36,23 +33,23 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        String resultMessage = "";
         try {
-            if (type.isDoctor()) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
-                return new CommandResult(LIST_OF_DOCTORS);
+            if (type.isPatient()) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
+                resultMessage = LIST_OF_PATIENTS;
             } else if (type.isDonor()) {
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
-                return new CommandResult(LIST_OF_DONORS);
-            } else if (type.isPatient()) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
-                return new CommandResult(LIST_OF_PATIENTS);
-            } else {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(TYPE_NOT_FOUND);
+                resultMessage = LIST_OF_DONORS;
+            } else if (type.isDoctor()) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
+                resultMessage = LIST_OF_DOCTORS;
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) { // if no type specified return list of all persons
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(TYPE_NOT_FOUND);
+            resultMessage = LIST_OF_PERSONS;
+        } finally {
+            return new CommandResult(resultMessage);
         }
     }
 
@@ -61,6 +58,7 @@ public class ListCommand extends Command {
         return other == this // short circuit if same object
                 || type == null && (((ListCommand) other).type) == null // no arguments given should be same objects
                 || (other instanceof ListCommand // instanceof handles nulls
+                && type != null
                 && type.equals(((ListCommand) other).type)); // state check
     }
 }
