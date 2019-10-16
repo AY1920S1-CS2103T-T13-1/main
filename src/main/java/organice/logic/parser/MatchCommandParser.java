@@ -9,7 +9,7 @@ import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Nric;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new MatchCommand object
  */
 public class MatchCommandParser implements Parser<MatchCommand> {
 
