@@ -195,7 +195,7 @@ persons in ORGANice if no type is specified
 
 Format: `list`
 
-Optional parameters: type parameter - `t\TYPE`
+Optional parameters: Type parameter - `t\TYPE`
 
 Examples:
 
