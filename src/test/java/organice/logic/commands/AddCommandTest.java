@@ -201,6 +201,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPatient(Nric patientNric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Patient getPatient(Nric patientNric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

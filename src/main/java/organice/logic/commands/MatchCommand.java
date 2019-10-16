@@ -37,6 +37,12 @@ public class MatchCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Returns true if the donor and patient is a match.
+     * A match happens when the donor and patient's blood type and tissue types are compatible.
+     * @param donor {@code Donor} who will tested for suitability of donation
+     * @param patient {@code Patient} in need of organ
+     */
     public boolean match(Person donor, Patient patient) {
         if (!(donor instanceof Donor)) {
             return false;
@@ -48,8 +54,8 @@ public class MatchCommand extends Command {
         TissueType donorTissueType = ((Donor) donor).getTissueType();
         TissueType patientTissueType = patient.getTissueType();
 
-        if (patientBloodType.isBloodTypeMatch(donorBloodType) &&
-                donorTissueType.getPercentageMatch(patientTissueType) >= SUCCESSFUL_PERCENTAGE) {
+        if (patientBloodType.isBloodTypeMatch(donorBloodType)
+                && donorTissueType.getPercentageMatch(patientTissueType) >= SUCCESSFUL_PERCENTAGE) {
             return true;
         } else {
             return false;
