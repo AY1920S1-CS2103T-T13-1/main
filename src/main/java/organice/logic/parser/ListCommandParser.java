@@ -4,6 +4,7 @@ import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
@@ -33,7 +34,20 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
-        Type type = parseType(argMultimap);
-        return new ListCommand(type);
+
+        Type type = null;
+        if (isTypePresent(argMultimap, PREFIX_TYPE)) {
+            type = parseType(argMultimap);
+            return new ListCommand(type);
+        }
+        return new ListCommand(type); // if no type specified return list of all persons
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isTypePresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
