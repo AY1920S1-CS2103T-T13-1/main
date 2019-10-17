@@ -7,6 +7,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 import static organice.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,10 +65,6 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (nric.isValidNric(nric.toString())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
         Person personToEdit = NricToPerson(nric, lastShownList);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
@@ -81,8 +78,10 @@ public class EditCommand extends Command {
     }
 
     private Person NricToPerson(Nric nric, List<Person> lastShownList) throws CommandException {
-        for (Person person : lastShownList) {
-            if (person.getNric().value.equals(nric)) {
+        Iterator<Person> iterator = lastShownList.iterator();
+        while (iterator.hasNext()) {
+            Person person = iterator.next();
+            if (person.getNric().equals(nric)) {
                 return person;
             }
         }

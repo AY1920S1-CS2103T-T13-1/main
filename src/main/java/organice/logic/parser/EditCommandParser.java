@@ -7,9 +7,11 @@ import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import organice.commons.core.Messages;
 import organice.commons.core.index.Index;
 import organice.logic.commands.EditCommand;
 import organice.logic.commands.EditCommand.EditPersonDescriptor;
+import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Nric;
 

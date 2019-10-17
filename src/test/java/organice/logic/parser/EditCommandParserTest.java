@@ -89,27 +89,27 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
+        Nric targetNric = INDEX_SECOND_PERSON;
+        String userInput = targetNric + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
                 + PHONE_DESC_PATIENT_BOB + NAME_DESC_DOCTOR_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PATIENT_BOB)
                 .withNric(VALID_NRIC_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB)
                 .withName(VALID_NAME_DOCTOR_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
+        Nric targetNric = INDEX_FIRST_PERSON;
+        String userInput = targetNric + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
                 + PHONE_DESC_PATIENT_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PATIENT_BOB)
                 .withNric(VALID_NRIC_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -117,40 +117,40 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_DOCTOR_AMY;
+        Nric targetNric = INDEX_THIRD_PERSON;
+        String userInput = targetNric + NAME_DESC_DOCTOR_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_DOCTOR_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_DOCTOR_AMY;
+        userInput = targetNric + PHONE_DESC_DOCTOR_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_DOCTOR_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // nric
-        userInput = targetIndex.getOneBased() + NRIC_DESC_DOCTOR_AMY;
+        userInput = targetNric + NRIC_DESC_DOCTOR_AMY;
         descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_DOCTOR_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // type
-        userInput = targetIndex.getOneBased() + TYPE_DESC_DOCTOR_AMY;
+        userInput = targetNric + TYPE_DESC_DOCTOR_AMY;
         descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_DOCTOR_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + TYPE_DESC_DOCTOR_AMY + TYPE_DESC_PATIENT_BOB
+        Nric targetNric = INDEX_FIRST_PERSON;
+        String userInput = targetNric + TYPE_DESC_DOCTOR_AMY + TYPE_DESC_PATIENT_BOB
                 + PHONE_DESC_DOCTOR_AMY + PHONE_DESC_PATIENT_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withType(VALID_TYPE_PATIENT_BOB)
                 .withPhone(VALID_PHONE_PATIENT_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -158,17 +158,17 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_PATIENT_BOB;
+        Nric targetNric = INDEX_FIRST_PERSON;
+        String userInput = targetNric + INVALID_PHONE_DESC + PHONE_DESC_PATIENT_BOB;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_PATIENT_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB;
+        userInput = targetNric + INVALID_PHONE_DESC + PHONE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB;
         descriptor = new EditPersonDescriptorBuilder().withNric(VALID_NRIC_PATIENT_BOB)
                 .withPhone(VALID_PHONE_PATIENT_BOB).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
