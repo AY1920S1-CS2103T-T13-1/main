@@ -21,8 +21,8 @@ public class MatchCommand extends Command {
     public static final String COMMAND_WORD = "match";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Matches patients and donors who passes matching tests"
-            + "Parameters: all/ (to match all patients and donors)"
-            + "Parameters: ic/NRIC (to match a patient of specified NRIC)";
+            + "Parameters: ic/all (to match all patients and donors)"
+            + "Parameters: ic/(NRIC) (to match a patient of specified NRIC)";
 
     public static final String MESSAGE_SUCCESS = "Matched all patients and donors";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The patient with Nric %1$s cannot be found in ORGANice!";
@@ -34,6 +34,7 @@ public class MatchCommand extends Command {
     private Patient patient;
 
     public MatchCommand(String input) {
+        requireNonNull(input);
         this.input = input;
     }
 
