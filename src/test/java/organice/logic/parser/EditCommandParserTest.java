@@ -20,9 +20,9 @@ import static organice.logic.commands.CommandTestUtil.VALID_TYPE_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.VALID_TYPE_PATIENT_BOB;
 import static organice.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static organice.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static organice.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static organice.testutil.TypicalNrics.NRIC_FIRST_PERSON;
+import static organice.testutil.TypicalNrics.NRIC_SECOND_PERSON;
+import static organice.testutil.TypicalNrics.NRIC_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -89,7 +89,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Nric targetNric = INDEX_SECOND_PERSON;
+        Nric targetNric = NRIC_SECOND_PERSON;
         String userInput = targetNric + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
                 + PHONE_DESC_PATIENT_BOB + NAME_DESC_DOCTOR_AMY;
 
@@ -103,7 +103,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Nric targetNric = INDEX_FIRST_PERSON;
+        Nric targetNric = NRIC_FIRST_PERSON;
         String userInput = targetNric + TYPE_DESC_PATIENT_BOB + NRIC_DESC_PATIENT_BOB
                 + PHONE_DESC_PATIENT_BOB;
 
@@ -117,7 +117,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Nric targetNric = INDEX_THIRD_PERSON;
+        Nric targetNric = NRIC_THIRD_PERSON;
         String userInput = targetNric + NAME_DESC_DOCTOR_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_DOCTOR_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
@@ -144,7 +144,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Nric targetNric = INDEX_FIRST_PERSON;
+        Nric targetNric = NRIC_FIRST_PERSON;
         String userInput = targetNric + TYPE_DESC_DOCTOR_AMY + TYPE_DESC_PATIENT_BOB
                 + PHONE_DESC_DOCTOR_AMY + PHONE_DESC_PATIENT_BOB;
 
@@ -158,7 +158,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Nric targetNric = INDEX_FIRST_PERSON;
+        Nric targetNric = NRIC_FIRST_PERSON;
         String userInput = targetNric + INVALID_PHONE_DESC + PHONE_DESC_PATIENT_BOB;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_PATIENT_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
