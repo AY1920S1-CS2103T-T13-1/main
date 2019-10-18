@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_AGE + "AGE "
             + PREFIX_PRIORITY + "PRIORITY "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TYPE + "doctor "
+            + PREFIX_TYPE + "patient "
             + PREFIX_NRIC + "S1234568R "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

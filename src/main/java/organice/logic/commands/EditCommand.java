@@ -37,7 +37,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S9912345A"
+            + "S9912345A "
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
