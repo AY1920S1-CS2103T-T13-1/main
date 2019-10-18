@@ -27,7 +27,7 @@ public class MatchCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Matched all patients and donors";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The patient with Nric %1$s cannot be found in ORGANice!";
 
-    public static final Double SUCCESSFUL_PERCENTAGE = 80.0;
+    public static final Double SUCCESSFUL_PERCENTAGE = 60.0;
 
 
     private String input;
@@ -74,8 +74,10 @@ public class MatchCommand extends Command {
                 patient = model.getPatient(patientNric);
                 Predicate<Person> matchesWithNric = donor -> match(donor, patient);
                 model.updateFilteredPersonList(matchesWithNric);
+                return new CommandResult(MESSAGE_SUCCESS);
+            } else {
+                return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));
             }
-            return new CommandResult(MESSAGE_SUCCESS);
         } catch (PersonNotFoundException pne) {
             return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));
         }

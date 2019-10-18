@@ -4,146 +4,177 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static organice.logic.commands.CommandTestUtil.COMPATIBLE_TISSUE_TYPE_IRENE;
+import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
+import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
+import static organice.model.person.BloodType.BLOODTYPE_A;
+import static organice.model.person.BloodType.BLOODTYPE_AB;
+import static organice.model.person.BloodType.BLOODTYPE_B;
+import static organice.model.person.BloodType.BLOODTYPE_O;
 import static organice.testutil.Assert.assertThrows;
+import static organice.testutil.TypicalPersons.DONOR_IRENE_DONOR;
+import static organice.testutil.TypicalPersons.PATIENT_BOB;
+import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
-import organice.logic.commands.exceptions.CommandException;
 import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.ReadOnlyAddressBook;
 import organice.model.ReadOnlyUserPrefs;
-import organice.model.person.Doctor;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
-import organice.testutil.DoctorBuilder;
+import organice.model.person.exceptions.PersonNotFoundException;
+import organice.testutil.AddressBookBuilder;
 import organice.testutil.DonorBuilder;
 import organice.testutil.PatientBuilder;
-import organice.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class MatchCommandTest {
+    //Donors of all types
+    static final Donor DONOR_A = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_A.toString()).build();
+    static final Donor DONOR_B = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_B.toString()).build();
+    static final Donor DONOR_AB = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_AB.toString()).build();
+    static final Donor DONOR_O = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_O.toString()).build();
+    static final Donor DONOR_SIMILAR_TISSUE = new DonorBuilder(DONOR_IRENE_DONOR)
+            .withTissueType(COMPATIBLE_TISSUE_TYPE_IRENE).build();
+
+    //Patient of all types
+    static final Patient PATIENT_A = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_A.toString()).build();
+    static final Patient PATIENT_B = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_B.toString()).build();
+    static final Patient PATIENT_AB = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_AB.toString()).build();
+    static final Patient PATIENT_O = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_O.toString()).build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new MatchCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_patientExists_haveMatch() throws Exception {
+        ModelStubWithDonor modelStub = new ModelStubWithDonor(PATIENT_IRENE, DONOR_IRENE_DONOR);
+        String validNric = VALID_NRIC_PATIENT_IRENE;
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
+        ObservableList<Person> listOfDonors = modelStub.getFilteredPersonList();
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(DONOR_IRENE_DONOR), listOfDonors);
     }
 
     @Test
-    public void execute_doctorAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Doctor validDoctor = new DoctorBuilder().build();
+    public void execute_patientExists_noMatch() throws Exception {
+        ModelStubWithoutDonor modelStub = new ModelStubWithoutDonor(PATIENT_IRENE);
+        String validNric = VALID_NRIC_PATIENT_IRENE;
 
-        CommandResult commandResult = new AddCommand(validDoctor).execute(modelStub);
+        CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
+        ObservableList<Person> listOfDonors = modelStub.getFilteredPersonList();
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validDoctor), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validDoctor), modelStub.personsAdded);
+        assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
+        assertEquals(listOfDonors.size(), 0); //assert that there is no donor
     }
 
     @Test
-    public void execute_donorAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Donor validDonor = new DonorBuilder().withAge("23").build();
+    public void execute_patientDoesNotExist_throwsCommandException() throws Exception {
+        ModelStubWithoutDonor modelStub = new ModelStubWithoutDonor(PATIENT_BOB);
 
-        CommandResult commandResultDonor = new AddCommand(validDonor).execute(modelStub);
+        String validNric = VALID_NRIC_PATIENT_IRENE;
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validDonor), commandResultDonor.getFeedbackToUser());
-        assertEquals(Arrays.asList(validDonor), modelStub.personsAdded);
+        CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
+        assertEquals(String.format(MatchCommand.MESSAGE_PERSON_NOT_FOUND, validNric),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_patientAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Patient validPatient = new PatientBuilder().withNric("S1234567A").build();
+    public void match_isSuccessfulMatch() throws Exception {
+        MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
 
-        CommandResult commandResultPatient = new AddCommand(validPatient).execute(modelStub);
+        boolean matchResult = matchCommand.match(DONOR_IRENE_DONOR, PATIENT_IRENE);
+        assertTrue(matchResult); //100% match and same blood type
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPatient), commandResultPatient.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPatient), modelStub.personsAdded);
+        //donor with 4/6 matching tissues and same blood type.
+        matchResult = matchCommand.match(DONOR_SIMILAR_TISSUE, PATIENT_IRENE);
+        assertTrue(matchResult);
+
+        //donor with blood type A matches patient with blood type A and AB
+        assertEquals(matchCommand.match(DONOR_A, PATIENT_A), true);
+        assertEquals(matchCommand.match(DONOR_A, PATIENT_AB), true);
+
+        //donor with blood type B matches patient with blood type B and AB
+        assertEquals(matchCommand.match(DONOR_B, PATIENT_B), true);
+        assertEquals(matchCommand.match(DONOR_B, PATIENT_AB), true);
+
+        //donor with blood type AB matches patient with blood type AB
+        assertEquals(matchCommand.match(DONOR_AB, PATIENT_AB), true);
+
+        //donor with blood type O matches patient with blood type A, B, AB and O
+        assertEquals(matchCommand.match(DONOR_O, PATIENT_A), true);
+        assertEquals(matchCommand.match(DONOR_O, PATIENT_B), true);
+        assertEquals(matchCommand.match(DONOR_O, PATIENT_AB), true);
+        assertEquals(matchCommand.match(DONOR_O, PATIENT_O), true);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void match_isNotSuccessfulMatch() throws Exception {
+        MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
+        Donor differentBloodType = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType("B").build();
+        boolean matchResult = matchCommand.match(differentBloodType, PATIENT_IRENE);
+        assertFalse(matchResult); //100% tissue match and different blood type
 
-    @Test
-    public void execute_duplicateDoctor_throwsCommandException() {
-        Doctor validDoctor = new DoctorBuilder().build();
-        AddCommand addCommand = new AddCommand(validDoctor);
-        ModelStub modelStub = new ModelStubWithPerson(validDoctor);
+        //donor with 4/6 matching tissues and different blood type.
+        //Hardcoded because there is no way to change tissue types in a more elegant manner
+        Donor someMatchingTissues = new DonorBuilder(DONOR_IRENE_DONOR).withTissueType(COMPATIBLE_TISSUE_TYPE_IRENE)
+                .withBloodType("B").build();
+        matchResult = matchCommand.match(someMatchingTissues, PATIENT_IRENE);
+        assertFalse(matchResult);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
+        //donor with blood type A do not match patients with blood type B and O
+        assertEquals(matchCommand.match(DONOR_A, PATIENT_B), false);
+        assertEquals(matchCommand.match(DONOR_A, PATIENT_O), false);
 
-    @Test
-    public void execute_duplicateDonor_throwsCommandException() {
-        Donor validDonor = new DonorBuilder().build();
-        AddCommand addCommand = new AddCommand(validDonor);
-        ModelStub modelStub = new ModelStubWithPerson(validDonor);
+        //donor with blood type B do not match patients with blood type A and P
+        assertEquals(matchCommand.match(DONOR_B, PATIENT_A), false);
+        assertEquals(matchCommand.match(DONOR_B, PATIENT_O), false);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_duplicatePatient_throwsCommandException() {
-        Patient validPatient = new PatientBuilder().build();
-        AddCommand addCommand = new AddCommand(validPatient);
-        ModelStub modelStub = new ModelStubWithPerson(validPatient);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        //donor with blood type AB do not match patients with blood type A, B and O
+        assertEquals(matchCommand.match(DONOR_AB, PATIENT_A), false);
+        assertEquals(matchCommand.match(DONOR_AB, PATIENT_B), false);
+        assertEquals(matchCommand.match(DONOR_AB, PATIENT_O), false);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        Patient alicePatient = new PatientBuilder().withName("Alice").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-        AddCommand addAlicePatientCommand = new AddCommand(alicePatient);
+        MatchCommand matchIreneCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
+        MatchCommand matchBobCommand = new MatchCommand(VALID_NRIC_PATIENT_BOB);
 
+        AddCommand addIreneCommand = new AddCommand(PATIENT_IRENE);
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(matchIreneCommand.equals(matchIreneCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        MatchCommand matchIreneCommandCopy = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
+        assertTrue(matchIreneCommand.equals(matchIreneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(matchIreneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(matchIreneCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(matchIreneCommand.equals(matchBobCommand));
 
-        // different person type -> return false
-        assertFalse(addAliceCommand.equals(addAlicePatientCommand));
+        //different command type -> returns false
+        assertFalse(matchIreneCommand.equals(addIreneCommand));
     }
 
     /**
@@ -237,45 +268,84 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a matching donor.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithDonor extends ModelStub {
+        private FilteredList<Person> filteredPersons;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithDonor(Patient patient, Donor donor) {
+            AddressBook addressBook = new AddressBookBuilder().withPerson(patient).withPerson(donor).build();
+            filteredPersons = new FilteredList<>(addressBook.getPersonList());
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasPatient(Nric patientNric) {
+            requireNonNull(patientNric);
+            return filteredPersons.stream().anyMatch(patient -> patient.getNric().equals(patientNric));
+        }
+
+        @Override
+        public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+            requireNonNull(patientNric);
+
+            for (Person person : filteredPersons) {
+                if (person instanceof Patient && person.getNric().equals(patientNric)) {
+                    return (Patient) person;
+                }
+            }
+
+            throw new PersonNotFoundException();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            filteredPersons.setPredicate(predicate);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersons;
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubWithoutDonor extends ModelStub {
+        private FilteredList<Person> filteredPersons;
 
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public ModelStubWithoutDonor(Patient patient) {
+            AddressBook addressBook = new AddressBookBuilder().withPerson(patient).build();
+            filteredPersons = new FilteredList<>(addressBook.getPersonList());
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public boolean hasPatient(Nric patientNric) {
+            requireNonNull(patientNric);
+            return filteredPersons.stream().anyMatch(patient -> patient.getNric().equals(patientNric));
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+            requireNonNull(patientNric);
+
+            for (Person person : filteredPersons) {
+                if (person instanceof Patient && person.getNric().equals(patientNric)) {
+                    return (Patient) person;
+                }
+            }
+
+            throw new PersonNotFoundException();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            filteredPersons.setPredicate(predicate);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersons;
         }
     }
-
 }
