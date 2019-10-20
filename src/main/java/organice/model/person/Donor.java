@@ -2,6 +2,7 @@ package organice.model.person;
 
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -15,6 +16,9 @@ public class Donor extends Person {
     private final TissueType tissueType;
     private final Organ organ;
     private final OrganExpiryDate organExpiryDate;
+    private HashMap<Nric, Double> successRateMap;
+    private String successRate;
+    private boolean matched;
 
     /**
      * Every field must be present and not null.
@@ -28,6 +32,8 @@ public class Donor extends Person {
         this.tissueType = tissueType;
         this.organ = organ;
         this.organExpiryDate = organExpiryDate;
+        this.matched = false;
+        successRateMap = new HashMap<>();
     }
 
     public Age getAge() {
@@ -48,6 +54,44 @@ public class Donor extends Person {
 
     public OrganExpiryDate getOrganExpiryDate() {
         return organExpiryDate;
+    }
+
+    /**
+     * Returns a {@code String} detailing the success rate to be displayed in the {@code DonorCard}.
+     */
+    public String getSuccessRate() {
+        return successRate;
+    }
+
+    /**
+     * Sets the matching status of the {@code Donor}.
+     */
+    public void setMatched(boolean matched) {
+        this.matched = matched;
+    }
+
+    /**
+     * Getter method for matching status.
+     */
+    public boolean isMatched() {
+        return matched;
+    }
+
+    /**
+     * Sets the success rate of a match with the specified {@code Patient}.
+     */
+    public void setSuccessRate(Nric patientMatched) {
+        Double successRate = successRateMap.get(patientMatched);
+
+        if (successRate == null) {
+            this.successRate = "";
+        } else {
+            this.successRate = successRate.toString() + "%";
+        }
+    }
+
+    public void addMatchResult(Nric patientMatched, Double successRate) {
+        successRateMap.put(patientMatched, successRate);
     }
 
     /**
