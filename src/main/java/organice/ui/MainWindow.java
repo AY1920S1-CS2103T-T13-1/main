@@ -2,6 +2,8 @@ package organice.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -10,6 +12,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.Logic;
@@ -172,12 +175,26 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    private CommandResult getName(String commandText) {
+    private CommandResult getName(String commandText) throws ParseException {
         if (!Name.isValidName(commandText)) {
             resultDisplay.setFeedbackToUser(Name.MESSAGE_CONSTRAINTS);
-            return new CommandResult(commandText);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        doctorForm.setName(new Name(commandText));
+
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(500));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = commandText.length();
+                final int n = Math.round(length * (float) frac);
+                doctorForm.setName(commandText.substring(0, n));
+            }
+
+        };
+        animation.play();
+
         CommandBox commandBox = new CommandBox(this::getNric);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -189,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(Nric.MESSAGE_CONSTRAINTS);
             return new CommandResult(commandText);
         }
-        doctorForm.setNric(new Nric(commandText));
+        doctorForm.setNric(commandText);
         CommandBox commandBox = new CommandBox(this::getPhone);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -201,7 +218,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(Phone.MESSAGE_CONSTRAINTS);
             return new CommandResult(commandText);
         }
-        doctorForm.setPhone(new Phone(commandText));
+        doctorForm.setPhone(commandText);
         CommandBox commandBox = new CommandBox(this::addDone);
         commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

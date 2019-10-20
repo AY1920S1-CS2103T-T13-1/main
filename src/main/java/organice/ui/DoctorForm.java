@@ -52,16 +52,16 @@ public class DoctorForm extends UiPart<Region> {
         return nric;
     }
 
-    public void setName(Name name) {
-        this.name.setText(name.fullName);
+    public void setName(String name) {
+        this.name.setText(name);
     }
 
-    public void setPhone(Phone phone) {
-        this.phone.setText(phone.value);
+    public void setPhone(String phone) {
+        this.phone.setText(phone);
     }
 
-    public void setNric(Nric nric) {
-        this.nric.setText(nric.value);
+    public void setNric(String nric) {
+        this.nric.setText(nric);
     }
 
     @Override
