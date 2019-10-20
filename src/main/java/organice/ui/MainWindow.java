@@ -211,12 +211,14 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult addDone(String commandText) throws ParseException, CommandException{
         if (commandText.equals("/done")) {
             String command = "add t/doctor " + "n/" + doctorForm.getName().getText() + " ic/" + doctorForm.getNric().getText()
-                    + "p/" + doctorForm.getPhone().getText();
+                    + " p/" + doctorForm.getPhone().getText();
             CommandResult commandResult = logic.execute(command);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             personListPanelPlaceholder.getChildren().clear();
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            commandBoxPlaceholder.getChildren().clear();
+            commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
             return new CommandResult(commandText);
         }
         return new CommandResult(commandText);
