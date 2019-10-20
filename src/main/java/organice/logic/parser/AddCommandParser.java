@@ -65,6 +65,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Type type = parseType(argMultimap);
 
         if (type.isDoctor()) {
+            if (arePrefixesNotPresentDoctor(argMultimap)) {
+                return new AddCommand(type);
+            }
+
             arePrefixesPresentDoctor(argMultimap);
             Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -148,6 +152,14 @@ public class AddCommandParser implements Parser<AddCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+    }
+
+    private static boolean arePrefixesNotPresentDoctor(ArgumentMultimap argMultimap) {
+        if (arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
+            && argMultimap.getPreamble().isEmpty()) {
+           return false;
+        }
+        return true;
     }
 
 }

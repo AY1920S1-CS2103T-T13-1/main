@@ -16,6 +16,7 @@ import organice.logic.Logic;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.person.Type;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private DoctorForm doctorForm;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -110,6 +112,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        doctorForm = new DoctorForm();
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -174,6 +178,15 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isForm()) {
+                Type formType = commandResult.getFormType();
+                if (formType.isDoctor()) {
+                    doctorForm = new DoctorForm();
+                    personListPanelPlaceholder.getChildren().clear();
+                    personListPanelPlaceholder.getChildren().add(doctorForm.getRoot());
+                }
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
