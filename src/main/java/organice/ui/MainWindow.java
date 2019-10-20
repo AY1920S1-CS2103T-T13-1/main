@@ -13,9 +13,13 @@ import javafx.stage.Stage;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.Logic;
+import organice.logic.commands.Command;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.person.Name;
+import organice.model.person.Nric;
+import organice.model.person.Phone;
 import organice.model.person.Type;
 
 /**
@@ -168,6 +172,56 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    private CommandResult getName(String commandText) {
+        if (!Name.isValidName(commandText)) {
+            resultDisplay.setFeedbackToUser(Name.MESSAGE_CONSTRAINTS);
+            return new CommandResult(commandText);
+        }
+        doctorForm.setName(new Name(commandText));
+        CommandBox commandBox = new CommandBox(this::getNric);
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        return new CommandResult(commandText);
+    }
+
+    private CommandResult getNric(String commandText) {
+        if (!Nric.isValidNric(commandText)) {
+            resultDisplay.setFeedbackToUser(Nric.MESSAGE_CONSTRAINTS);
+            return new CommandResult(commandText);
+        }
+        doctorForm.setNric(new Nric(commandText));
+        CommandBox commandBox = new CommandBox(this::getPhone);
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        return new CommandResult(commandText);
+    }
+
+    private CommandResult getPhone(String commandText) {
+        if (!Phone.isValidPhone(commandText)) {
+            resultDisplay.setFeedbackToUser(Phone.MESSAGE_CONSTRAINTS);
+            return new CommandResult(commandText);
+        }
+        doctorForm.setPhone(new Phone(commandText));
+        CommandBox commandBox = new CommandBox(this::addDone);
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        return new CommandResult(commandText);
+    }
+
+    private CommandResult addDone(String commandText) throws ParseException, CommandException{
+        if (commandText.equals("/done")) {
+            String command = "add t/doctor " + "n/" + doctorForm.getName().getText() + " ic/" + doctorForm.getNric().getText()
+                    + "p/" + doctorForm.getPhone().getText();
+            CommandResult commandResult = logic.execute(command);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            personListPanelPlaceholder.getChildren().clear();
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            return new CommandResult(commandText);
+        }
+        return new CommandResult(commandText);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -180,6 +234,9 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isForm()) {
+                CommandBox commandBox = new CommandBox(this::getName);
+                commandBoxPlaceholder.getChildren().clear();
+                commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
                 Type formType = commandResult.getFormType();
                 if (formType.isDoctor()) {
                     doctorForm = new DoctorForm();

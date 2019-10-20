@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import organice.model.person.Doctor;
+import organice.model.person.Name;
+import organice.model.person.Nric;
+import organice.model.person.Phone;
 
 /**
  * An UI component that displays information of a {@code Doctor}.
@@ -32,6 +35,33 @@ public class DoctorForm extends UiPart<Region> {
 
     public DoctorForm() {
         super(FXML);
+        name.setText("");
+        phone.setText("");
+        nric.setText("");
+    }
+
+    public Label getName() {
+        return name;
+    }
+
+    public Label getPhone() {
+        return phone;
+    }
+
+    public Label getNric() {
+        return nric;
+    }
+
+    public void setName(Name name) {
+        this.name.setText(name.fullName);
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone.setText(phone.value);
+    }
+
+    public void setNric(Nric nric) {
+        this.nric.setText(nric.value);
     }
 
     @Override
@@ -46,6 +76,11 @@ public class DoctorForm extends UiPart<Region> {
             return false;
         }
 
-        return false;
+        // state check
+        DoctorForm form = (DoctorForm) other;
+        return name.getText().equals(form.name.getText())
+            && phone.equals(form.phone.getText())
+            && nric.equals(form.nric.getText());
+
     }
 }
