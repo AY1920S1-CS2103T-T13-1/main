@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -25,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    //private final FilteredList<Match> listOfMatches;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        //filteredList = new FilteredList<Match>();
     }
 
     public ModelManager() {
@@ -170,4 +173,19 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== Filtered Person List Accessors =============================================================
+
+    /**
+     * Updates a list of matches between a {@code Patient} and all matching {@code Donor}
+     */
+    public void updateMatches(Nric patientNric) {
+        for (Person person : filteredPersons) {
+            if (!(person instanceof Donor)) {
+                continue;
+            }
+
+            ((Donor) person).setSuccessRate(patientNric);
+            ((Donor) person).setMatched(true);
+        }
+    }
 }

@@ -55,8 +55,10 @@ public class MatchCommand extends Command {
         TissueType donorTissueType = ((Donor) donor).getTissueType();
         TissueType patientTissueType = patient.getTissueType();
 
-        if (patientBloodType.isBloodTypeMatch(donorBloodType)
-                && donorTissueType.getPercentageMatch(patientTissueType) >= SUCCESSFUL_PERCENTAGE) {
+        Double successRate = donorTissueType.getPercentageMatch(patientTissueType);
+
+        if (patientBloodType.isBloodTypeMatch(donorBloodType) && successRate >= SUCCESSFUL_PERCENTAGE) {
+            ((Donor) donor).addMatchResult(patient.getNric(), successRate);
             return true;
         } else {
             return false;
@@ -74,6 +76,7 @@ public class MatchCommand extends Command {
                 patient = model.getPatient(patientNric);
                 Predicate<Person> matchesWithNric = donor -> match(donor, patient);
                 model.updateFilteredPersonList(matchesWithNric);
+                model.updateMatches(patientNric);
                 return new CommandResult(MESSAGE_SUCCESS);
             } else {
                 return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));

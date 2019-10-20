@@ -113,4 +113,9 @@ public interface Model {
      * @throws PersonNotFoundException if the {@code Patient} with the {@code Nric} cannot be found.
      */
     Patient getPatient(Nric patientNric) throws PersonNotFoundException;
+
+    /**
+     * Updates a list with matches between a {@code Patient} and all matching {@code Donor}
+     */
+    void updateMatches(Nric patientNric);
 }
