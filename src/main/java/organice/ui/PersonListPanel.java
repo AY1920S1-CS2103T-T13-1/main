@@ -44,7 +44,13 @@ public class PersonListPanel extends UiPart<Region> {
                 if (person instanceof Doctor) {
                     setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
                 } else if (person instanceof Donor) {
-                    setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
+                    Donor donor = (Donor) person;
+                    if (donor.isMatched()) {
+                        setGraphic(new MatchCard(donor, getIndex() + 1).getRoot());
+                        donor.setMatched(false);
+                    } else {
+                        setGraphic(new DonorCard(donor, getIndex() + 1).getRoot());
+                    }
                 } else if (person instanceof Patient) {
                     setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
                 } else {
