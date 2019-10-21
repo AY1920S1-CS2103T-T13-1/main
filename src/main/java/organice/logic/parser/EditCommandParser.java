@@ -37,11 +37,11 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-            editPersonDescriptor.setType(ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get()));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            editPersonDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
