@@ -6,54 +6,60 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane prefHeight="45.0" prefWidth="600.0">
+
+<VBox prefHeight="245.0" prefWidth="385.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>  
+      <AnchorPane prefHeight="45.0" prefWidth="500.0">
          <children>
-            <Text fill="WHITE" layoutX="202.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doctor Form" wrappingWidth="181.13671875">
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="2.0" prefHeight="45.0" prefWidth="582.0" style="-fx-font-size: 29; -fx-font-weight: bold; -fx-font-family: Malgun Gothic;" text="Doctor Form" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Malgun Gothic Bold" size="29.0" />
                </font>
-            </Text>
+            </Label>
          </children>
       </AnchorPane>
-      <VBox prefHeight="200.0" prefWidth="600.0">
+      <VBox prefHeight="200.0" prefWidth="500.0">
          <children>
-            <AnchorPane prefHeight="66.0" prefWidth="600.0">
+            <AnchorPane prefHeight="66.0">
                <children>
-                  <Label fx:id="name" layoutX="75.0" layoutY="25.0" prefHeight="17.0" prefWidth="511.0" text="Label" textFill="WHITE">
+                  <Label fx:id="name" layoutX="75.0" layoutY="25.0" prefHeight="17.0" prefWidth="330.0" text="Label">
                      <font>
                         <Font name="Malgun Gothic" size="14.0" />
-                     </font></Label>
-                  <Text fill="WHITE" layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Name:" wrappingWidth="51.803375244140625">
+                     </font>
+                  </Label>
+                  <Text layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Name:" wrappingWidth="51.803375244140625">
                      <font>
                         <Font name="Malgun Gothic" size="14.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="66.0" prefWidth="600.0">
+            <AnchorPane prefHeight="66.0" prefWidth="500.0">
                <children>
-                  <Text fill="WHITE" layoutX="23.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NRIC:" wrappingWidth="51.803375244140625">
+                  <Text layoutX="23.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NRIC:" wrappingWidth="51.803375244140625">
                      <font>
                         <Font name="Malgun Gothic Bold" size="14.0" />
-                     </font></Text>
-                  <Label fx:id="nric" layoutX="75.0" layoutY="24.0" prefHeight="17.0" prefWidth="511.0" text="Label" textFill="WHITE">
+                     </font>
+                  </Text>
+                  <Label fx:id="nric" layoutX="75.0" layoutY="24.0" prefHeight="17.0" prefWidth="330.0" text="Label">
                      <font>
                         <Font name="Malgun Gothic" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="67.0" prefWidth="600.0">
+            <AnchorPane prefHeight="67.0" prefWidth="500.0">
                <children>
-                  <Text fill="WHITE" layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:" wrappingWidth="51.803375244140625">
+                  <Text layoutX="23.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:" wrappingWidth="51.803375244140625">
                      <font>
                         <Font name="Malgun Gothic Bold" size="14.0" />
-                     </font></Text>
-                  <Label fx:id="phone" layoutX="75.0" layoutY="25.0" prefHeight="17.0" prefWidth="511.0" text="Label" textFill="WHITE">
+                     </font>
+                  </Text>
+                  <Label fx:id="phone" layoutX="75.0" layoutY="25.0" prefHeight="17.0" prefWidth="330.0" text="Label">
                      <font>
                         <Font name="Malgun Gothic" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
