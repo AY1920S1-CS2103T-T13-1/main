@@ -2,15 +2,23 @@ package organice.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import organice.MainApp;
 import organice.commons.core.LogsCenter;
 import organice.commons.util.StringUtil;
 import organice.logic.Logic;
+import organice.logic.commands.CommandResult;
+import organice.logic.parser.exceptions.ParseException;
+import organice.model.Model;
+import organice.model.person.Name;
+import organice.model.person.Type;
 
 /**
  * The manager of the UI component.
@@ -23,11 +31,14 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
+    private Model model;
     private MainWindow mainWindow;
+    private FormUiManager formUiManager;
 
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, Model model) {
         super();
         this.logic = logic;
+        this.model = model;
     }
 
     @Override
@@ -38,9 +49,10 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
+            formUiManager = new FormUiManager(mainWindow, null, model);
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

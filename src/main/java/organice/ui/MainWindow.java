@@ -3,6 +3,7 @@ package organice.ui;
 import java.util.logging.Logger;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import organice.logic.commands.Command;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.Model;
 import organice.model.person.Name;
 import organice.model.person.Nric;
 import organice.model.person.Phone;
@@ -36,13 +38,16 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
+    private Model model;
     private Logic logic;
 
+    private CommandBox commandBox;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private DoctorForm doctorForm;
+    private Form form;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,12 +64,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -72,10 +78,42 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        form = null;
+
+        commandBox = new CommandBox(this::executeCommand);
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public StackPane getCommandBoxPlaceholder() {
+        return commandBoxPlaceholder;
+    }
+
+    public StackPane getPersonListPanelPlaceholder() {
+        return personListPanelPlaceholder;
+    }
+
+    public CommandBox getCommandBox() {
+        return commandBox;
+    }
+
+    public Form getForm() {
+        return form;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
+    }
+
+    public Logic getLogic() {
+        return logic;
+    }
+
+    public Model getModel() {
+        return model;
     }
 
     private void setAccelerators() {
@@ -119,15 +157,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        doctorForm = new DoctorForm();
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -175,72 +210,6 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    private CommandResult getName(String commandText) throws ParseException {
-        if (!Name.isValidName(commandText)) {
-            resultDisplay.setFeedbackToUser(Name.MESSAGE_CONSTRAINTS);
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-
-        final Animation animation = new Transition() {
-            {
-                setCycleDuration(Duration.millis(500));
-            }
-
-            protected void interpolate(double frac) {
-                final int length = commandText.length();
-                final int n = Math.round(length * (float) frac);
-                doctorForm.setName(commandText.substring(0, n));
-            }
-
-        };
-        animation.play();
-
-        CommandBox commandBox = new CommandBox(this::getNric);
-        commandBoxPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        return new CommandResult(commandText);
-    }
-
-    private CommandResult getNric(String commandText) {
-        if (!Nric.isValidNric(commandText)) {
-            resultDisplay.setFeedbackToUser(Nric.MESSAGE_CONSTRAINTS);
-            return new CommandResult(commandText);
-        }
-        doctorForm.setNric(commandText);
-        CommandBox commandBox = new CommandBox(this::getPhone);
-        commandBoxPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        return new CommandResult(commandText);
-    }
-
-    private CommandResult getPhone(String commandText) {
-        if (!Phone.isValidPhone(commandText)) {
-            resultDisplay.setFeedbackToUser(Phone.MESSAGE_CONSTRAINTS);
-            return new CommandResult(commandText);
-        }
-        doctorForm.setPhone(commandText);
-        CommandBox commandBox = new CommandBox(this::addDone);
-        commandBoxPlaceholder.getChildren().clear();
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        return new CommandResult(commandText);
-    }
-
-    private CommandResult addDone(String commandText) throws ParseException, CommandException{
-        if (commandText.equals("/done")) {
-            String command = "add t/doctor " + "n/" + doctorForm.getName().getText() + " ic/" + doctorForm.getNric().getText()
-                    + " p/" + doctorForm.getPhone().getText();
-            CommandResult commandResult = logic.execute(command);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            personListPanelPlaceholder.getChildren().clear();
-            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-            commandBoxPlaceholder.getChildren().clear();
-            commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
-            return new CommandResult(commandText);
-        }
-        return new CommandResult(commandText);
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -253,14 +222,17 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isForm()) {
-                CommandBox commandBox = new CommandBox(this::getName);
-                commandBoxPlaceholder.getChildren().clear();
-                commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+                FadeTransition ft = new FadeTransition(Duration.millis(1000), personListPanelPlaceholder);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
                 Type formType = commandResult.getFormType();
+                FormUiManager formUiManager = new FormUiManager(this, formType, model);
                 if (formType.isDoctor()) {
-                    doctorForm = new DoctorForm();
+                    form = new DoctorForm();
                     personListPanelPlaceholder.getChildren().clear();
-                    personListPanelPlaceholder.getChildren().add(doctorForm.getRoot());
+                    personListPanelPlaceholder.getChildren().add(((DoctorForm) form).getRoot());
+                    formUiManager.getPersonDetails();
                 }
             }
 

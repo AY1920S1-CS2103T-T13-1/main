@@ -1,5 +1,6 @@
 package organice.ui;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -8,11 +9,12 @@ import organice.model.person.Doctor;
 import organice.model.person.Name;
 import organice.model.person.Nric;
 import organice.model.person.Phone;
+import organice.model.person.Type;
 
 /**
  * An UI component that displays information of a {@code Doctor}.
  */
-public class DoctorForm extends UiPart<Region> {
+public class DoctorForm extends UiPart<Region> implements Form{
 
     private static final String FXML = "DoctorForm.fxml";
 
@@ -40,28 +42,39 @@ public class DoctorForm extends UiPart<Region> {
         nric.setText("");
     }
 
+    @Override
     public Label getName() {
         return name;
     }
 
+    @Override
     public Label getPhone() {
         return phone;
     }
 
+    @Override
     public Label getNric() {
         return nric;
     }
 
+    @Override
     public void setName(String name) {
         this.name.setText(name);
     }
 
+    @Override
+    public void setNric(String nric) {
+        this.nric.setText(nric);
+    }
+
+    @Override
     public void setPhone(String phone) {
         this.phone.setText(phone);
     }
 
-    public void setNric(String nric) {
-        this.nric.setText(nric);
+    @Override
+    public Type getType() {
+        return new Type("doctor");
     }
 
     @Override

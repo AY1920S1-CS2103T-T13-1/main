@@ -123,6 +123,14 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean areAnyPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent()).count() != 0;
+    }
+
+    /**
      * Throws ParseException when one of the required prefixes for {@code Patient} are absent.
      */
     private static void arePrefixesPresentPatient(ArgumentMultimap argMultimap) throws ParseException {
@@ -155,8 +163,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     private static boolean arePrefixesNotPresentDoctor(ArgumentMultimap argMultimap) {
-        if (arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
-            && argMultimap.getPreamble().isEmpty()) {
+        if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
+            || !argMultimap.getPreamble().isEmpty()) {
            return false;
         }
         return true;
