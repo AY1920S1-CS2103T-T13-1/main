@@ -26,6 +26,13 @@ public class FormUiManager {
     private Type formType;
     private Model model;
 
+    private static final String PROMPT_NAME = "Enter name:";
+    private static final String PROMPT_NRIC = "Enter NRIC:";
+    private static final String PROMPT_PHONE = "Enter phone number:";
+
+    private static final String PROMPT_DONE = "Please check again the details.\nType '/done' to confirm, '/abort' to cancel the addition";
+
+
     public FormUiManager(MainWindow mainWindow, Type formType, Model model) {
         this.mainWindow = mainWindow;
         this.formType = formType;
@@ -76,21 +83,26 @@ public class FormUiManager {
     public void getPersonDetails() {
         mainWindow.getCommandBoxPlaceholder().getChildren().clear();
         mainWindow.getCommandBoxPlaceholder().getChildren().add(new CommandBox(this::getName).getRoot());
+        mainWindow.getResultDisplay().setFeedbackToUser(PROMPT_NAME);
     }
 
     public void getPersonNric() {
         mainWindow.getCommandBoxPlaceholder().getChildren().clear();
         mainWindow.getCommandBoxPlaceholder().getChildren().add(new CommandBox(this::getNric).getRoot());
+        mainWindow.getResultDisplay().setFeedbackToUser(PROMPT_NRIC);
     }
 
     public void getPersonPhone() {
         mainWindow.getCommandBoxPlaceholder().getChildren().clear();
         mainWindow.getCommandBoxPlaceholder().getChildren().add(new CommandBox(this::getPhone).getRoot());
+        mainWindow.getResultDisplay().setFeedbackToUser(PROMPT_PHONE);
     }
 
     public void confirmPersonDetails() {
         mainWindow.getCommandBoxPlaceholder().getChildren().clear();
         mainWindow.getCommandBoxPlaceholder().getChildren().add(new CommandBox(this::setPersonDetails).getRoot());
+        mainWindow.getResultDisplay().setFeedbackToUser(PROMPT_DONE);
+
     }
 
     private CommandResult setPersonDetails(String commandText) throws ParseException, CommandException {
@@ -129,7 +141,7 @@ public class FormUiManager {
     private void formFillingAnimation(String commandText, String formField) {
         final Animation animation = new Transition() {
             {
-                setCycleDuration(Duration.millis(500));
+                setCycleDuration(Duration.millis(750));
             }
 
             protected void interpolate(double frac) {

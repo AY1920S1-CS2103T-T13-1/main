@@ -92,6 +92,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate);
             return new AddCommand(donor);
         } else if (type.isPatient()) {
+            if (arePrefixesNotPresentPatient(argMultimap)) {
+                return new AddCommand(type);
+            }
+
             arePrefixesPresentPatient(argMultimap);
 
             Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
@@ -166,6 +170,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
             || !argMultimap.getPreamble().isEmpty()) {
            return false;
+        }
+        return true;
+    }
+
+    private static boolean arePrefixesNotPresentPatient(ArgumentMultimap argMultimap) {
+        if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE,
+            PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN, PREFIX_DOCTOR_IN_CHARGE)
+            || !argMultimap.getPreamble().isEmpty()) {
+            return false;
         }
         return true;
     }

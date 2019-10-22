@@ -1,14 +1,9 @@
 package organice.ui;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import organice.model.person.Doctor;
-import organice.model.person.Name;
-import organice.model.person.Nric;
-import organice.model.person.Phone;
 import organice.model.person.Type;
 
 /**
