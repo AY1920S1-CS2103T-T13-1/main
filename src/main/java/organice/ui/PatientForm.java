@@ -67,7 +67,7 @@ public class PatientForm extends UiPart<Region> implements Form{
 
     @Override
     public Type getType() {
-        return new Type("doctor");
+        return new Type(Type.PATIENT);
     }
 
     @Override

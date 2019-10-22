@@ -69,7 +69,7 @@ public class DoctorForm extends UiPart<Region> implements Form{
 
     @Override
     public Type getType() {
-        return new Type("doctor");
+        return new Type(Type.DOCTOR);
     }
 
     @Override
