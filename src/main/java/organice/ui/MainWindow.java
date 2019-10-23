@@ -229,17 +229,16 @@ public class MainWindow extends UiPart<Stage> {
 
                 Type formType = commandResult.getFormType();
                 FormUiManager formUiManager = new FormUiManager(this, formType, model);
+                personListPanelPlaceholder.getChildren().clear();
                 if (formType.isDoctor()) {
                     form = new DoctorForm();
-                    personListPanelPlaceholder.getChildren().clear();
                     personListPanelPlaceholder.getChildren().add(((DoctorForm) form).getRoot());
-                    formUiManager.getPersonDetails();
                 } else if (formType.isPatient()) {
                     form = new PatientForm();
-                    personListPanelPlaceholder.getChildren().clear();
                     personListPanelPlaceholder.getChildren().add(((PatientForm) form).getRoot());
-                    formUiManager.getPersonDetails();
                 }
+                formUiManager.getPersonDetails();
+
             }
 
             if (commandResult.isShowHelp()) {
