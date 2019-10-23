@@ -191,7 +191,7 @@ if the changes are finalised. Press the Enter key to confirm the changes.
 === Listing persons : `list`
 
 Shows a list of all doctors, donors, or patients in ORGANice, depending on the type of person specified. Shows all
-persons in ORGANice if no type is specified
+persons in ORGANice if no type is specified.
 
 Format: `list`
 
@@ -199,8 +199,10 @@ Optional parameters: Type parameter - `t/TYPE`
 
 Examples:
 
-* `list`
-* `list t/patient`
+* `list` +
+Lists all patients, doctors and donors in the records.
+* `list t/patient` +
+Lists all patients only.
 
 === Editing a person : `edit`
 
@@ -281,7 +283,7 @@ This is so that the doctors can schedule for cross matching between the patient-
 
 Matches can be sorted. Refer to <<Sorting matches>> for more information.
 
-=== Sorting matches
+=== Sorting matches: `sort`
 Users can specify how they want the patient-donor pairs to be sorted. +
 Sorting is done by passing in optional parameters to the `match` command. +
 
