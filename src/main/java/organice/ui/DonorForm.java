@@ -4,14 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import organice.model.person.Donor;
 import organice.model.person.Type;
 
 /**
  * An UI component that displays information of a {@code Doctor}.
  */
-public class PatientForm extends UiPart<Region> implements Form{
+public class DonorForm extends UiPart<Region> implements Form{
 
-    private static final String FXML = "PatientForm.fxml";
+    private static final String FXML = "DonorForm.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,11 +39,9 @@ public class PatientForm extends UiPart<Region> implements Form{
     @FXML
     private Label tissueType;
     @FXML
-    private Label priority;
-    @FXML
-    private Label doctorIc;
+    private Label organExpiryDate;
 
-    public PatientForm() {
+    public DonorForm() {
         super(FXML);
         name.setText("");
         phone.setText("");
@@ -51,8 +50,7 @@ public class PatientForm extends UiPart<Region> implements Form{
         organ.setText("");
         bloodType.setText("");
         tissueType.setText("");
-        priority.setText("");
-        doctorIc.setText("");
+        organExpiryDate.setText("");
     }
 
     @Override
@@ -67,7 +65,7 @@ public class PatientForm extends UiPart<Region> implements Form{
 
     @Override
     public Type getType() {
-        return new Type(Type.PATIENT);
+        return new Type(Type.DONOR);
     }
 
     @Override
@@ -91,12 +89,8 @@ public class PatientForm extends UiPart<Region> implements Form{
         return tissueType;
     }
 
-    public Label getPriority() {
-        return priority;
-    }
-
-    public Label getDoctorIc() {
-        return doctorIc;
+    public Label getOrganExpiryDate() {
+        return organExpiryDate;
     }
 
     @Override
@@ -130,12 +124,8 @@ public class PatientForm extends UiPart<Region> implements Form{
         this.tissueType.setText(tissueType);
     }
 
-    public void setPriority(String priority) {
-        this.priority.setText(priority);
-    }
-
-    public void setDoctoIc(String doctoIc) {
-        this.doctorIc.setText(doctoIc);
+    public void setOrganExpiryDate(String organExpiryDate) {
+        this.organExpiryDate.setText(organExpiryDate);
     }
 
     @Override
@@ -151,7 +141,7 @@ public class PatientForm extends UiPart<Region> implements Form{
         }
 
         // state check
-        PatientForm form = (PatientForm) other;
+        DonorForm form = (DonorForm) other;
         return name.getText().equals(form.name.getText())
             && phone.equals(form.phone.getText())
             && nric.equals(form.nric.getText())
@@ -159,7 +149,6 @@ public class PatientForm extends UiPart<Region> implements Form{
             && organ.equals(form.organ.getText())
             && bloodType.equals(form.bloodType.getText())
             && tissueType.equals(form.tissueType.getText())
-            && priority.equals(form.priority.getText())
-            && doctorIc.equals(form.doctorIc.getText());
+            && organExpiryDate.equals(form.organExpiryDate.getText());
     }
 }

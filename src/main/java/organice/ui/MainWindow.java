@@ -167,6 +167,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Reset the UI to the initial state of the window
+     */
+    void resetInnerParts() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -222,23 +233,22 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isForm()) {
-                FadeTransition ft = new FadeTransition(Duration.millis(1000), personListPanelPlaceholder);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
-
+                FormAnimation.fadingAnimation(this);
                 Type formType = commandResult.getFormType();
                 FormUiManager formUiManager = new FormUiManager(this, formType, model);
                 personListPanelPlaceholder.getChildren().clear();
                 if (formType.isDoctor()) {
                     form = new DoctorForm();
                     personListPanelPlaceholder.getChildren().add(((DoctorForm) form).getRoot());
+                } else if (formType.isDonor()) {
+                    form = new DonorForm();
+                    personListPanelPlaceholder.getChildren().add(((DonorForm) form).getRoot());
                 } else if (formType.isPatient()) {
                     form = new PatientForm();
                     personListPanelPlaceholder.getChildren().add(((PatientForm) form).getRoot());
                 }
-                formUiManager.getPersonDetails();
 
+                formUiManager.getPersonDetails();
             }
 
             if (commandResult.isShowHelp()) {
