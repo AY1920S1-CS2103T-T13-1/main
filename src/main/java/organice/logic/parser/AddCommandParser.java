@@ -175,7 +175,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesNotPresentDoctor(ArgumentMultimap argMultimap) {
         if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
             || !argMultimap.getPreamble().isEmpty()) {
-           return false;
+            return false;
         }
         return true;
     }

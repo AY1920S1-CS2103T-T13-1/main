@@ -11,6 +11,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
@@ -29,11 +30,10 @@ import organice.model.person.Priority;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
+/**
+ * The manager of the Form UI component.
+ */
 public class FormUiManager {
-
-    private MainWindow mainWindow;
-    private Type formType;
-    private Model model;
 
     private static final String COMMAND_EXIT = "/abort";
     private static final String COMMAND_DONE = "/done";
@@ -48,9 +48,15 @@ public class FormUiManager {
     private static final String PROMPT_PRIORITY = "Enter priority:";
     private static final String PROMPT_DOCTOR_IC = "Enter doctor in charge's nric:";
     private static final String PROMPT_ORGAN_EXPIRY_DATE = "Enter organ expiry date:";
-    private static final String PROMPT_DONE = "Please check again the details.\nType '/done' to confirm, '/abort' to cancel the addition";
+    private static final String PROMPT_DONE = "Please check again the details."
+            + "\nType '/done' to confirm, '/abort' to cancel the addition";
 
     private static final String MESSAGE_EXIT = "Form is abandoned!";
+
+    private MainWindow mainWindow;
+    private Type formType;
+    private Model model;
+
 
     public FormUiManager(MainWindow mainWindow, Type formType, Model model) {
         this.mainWindow = mainWindow;
@@ -76,7 +82,7 @@ public class FormUiManager {
         return new CommandResult(personName);
     }
 
-    private CommandResult getNric(String personNric) throws ParseException{
+    private CommandResult getNric(String personNric) throws ParseException {
         personNric = personNric.trim();
         if (personNric.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -120,7 +126,7 @@ public class FormUiManager {
         return new CommandResult(personPhone);
     }
 
-    private CommandResult getAge(String personAge) throws ParseException{
+    private CommandResult getAge(String personAge) throws ParseException {
         personAge = personAge.trim();
         if (personAge.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -138,7 +144,7 @@ public class FormUiManager {
         return new CommandResult(personAge);
     }
 
-    private CommandResult getOrgan(String personOrgan) throws ParseException{
+    private CommandResult getOrgan(String personOrgan) throws ParseException {
         personOrgan = personOrgan.trim();
         if (personOrgan.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -156,7 +162,7 @@ public class FormUiManager {
         return new CommandResult(personOrgan);
     }
 
-    private CommandResult getBloodType(String personBloodType) throws ParseException{
+    private CommandResult getBloodType(String personBloodType) throws ParseException {
         personBloodType = personBloodType.trim();
         if (personBloodType.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -174,7 +180,7 @@ public class FormUiManager {
         return new CommandResult(personBloodType);
     }
 
-    private CommandResult getTissueType(String personTissueType) throws ParseException{
+    private CommandResult getTissueType(String personTissueType) throws ParseException {
         personTissueType = personTissueType.trim();
         if (personTissueType.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -197,7 +203,7 @@ public class FormUiManager {
         return new CommandResult(personTissueType);
     }
 
-    private CommandResult getPriority(String personPriority) throws ParseException{
+    private CommandResult getPriority(String personPriority) throws ParseException {
         personPriority = personPriority.trim();
         if (personPriority.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -218,7 +224,7 @@ public class FormUiManager {
         return new CommandResult(personPriority);
     }
 
-    private CommandResult getDoctorIc(String personDoctorIc) throws ParseException{
+    private CommandResult getDoctorIc(String personDoctorIc) throws ParseException {
         personDoctorIc = personDoctorIc.trim();
         if (personDoctorIc.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -242,7 +248,7 @@ public class FormUiManager {
         return new CommandResult(personDoctorIc);
     }
 
-    private CommandResult getOrganExpiryDate(String personOrganExpiryDate) throws ParseException{
+    private CommandResult getOrganExpiryDate(String personOrganExpiryDate) throws ParseException {
         personOrganExpiryDate = personOrganExpiryDate.trim();
         if (personOrganExpiryDate.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -304,6 +310,9 @@ public class FormUiManager {
         return new CommandResult(commandText);
     }
 
+    /**
+     * Adds {@code Doctor} to the ORGANice list.
+     */
     private CommandResult addDoctorToList() throws ParseException, CommandException {
         DoctorForm form = (DoctorForm) mainWindow.getForm();
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.DOCTOR + " " + PREFIX_NAME
@@ -314,6 +323,9 @@ public class FormUiManager {
         return commandResult;
     }
 
+    /**
+     * Adds {@code Donor} to the ORGANice list.
+     */
     private CommandResult addDonorToList() throws ParseException, CommandException {
         DonorForm form = (DonorForm) mainWindow.getForm();
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.DONOR + " " + PREFIX_NAME
@@ -327,14 +339,17 @@ public class FormUiManager {
         return commandResult;
     }
 
+    /**
+     * Adds {@code Patient} to the ORGANice list.
+     */
     private CommandResult addPatientToList() throws ParseException, CommandException {
         PatientForm form = (PatientForm) mainWindow.getForm();
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.PATIENT + " " + PREFIX_NAME
             + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
             + PREFIX_PHONE + form.getPhone().getText() + " " + PREFIX_AGE + form.getAge().getText() + " "
             + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE + form.getBloodType().getText() + " "
-            + PREFIX_TISSUE_TYPE + form.getTissueType().getText() + " " + PREFIX_PRIORITY + form.getPriority().getText() + " "
-            + PREFIX_DOCTOR_IN_CHARGE + form.getDoctorIc().getText();
+            + PREFIX_TISSUE_TYPE + form.getTissueType().getText() + " " + PREFIX_PRIORITY + form.getPriority().getText()
+            + " " + PREFIX_DOCTOR_IN_CHARGE + form.getDoctorIc().getText();
 
         CommandResult commandResult = mainWindow.getLogic().execute(command);
         return commandResult;

@@ -2,9 +2,6 @@ package organice.ui;
 
 import java.util.logging.Logger;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -13,18 +10,14 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.Logic;
-import organice.logic.commands.Command;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
-import organice.model.person.Name;
-import organice.model.person.Nric;
-import organice.model.person.Phone;
 import organice.model.person.Type;
 
 /**

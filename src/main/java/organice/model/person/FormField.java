@@ -1,5 +1,8 @@
 package organice.model.person;
 
+/**
+ * Contains constants for the form.
+ */
 public class FormField {
 
     public static final String NAME = "name";

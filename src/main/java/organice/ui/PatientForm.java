@@ -9,7 +9,7 @@ import organice.model.person.Type;
 /**
  * An UI component that displays information of a {@code Doctor}.
  */
-public class PatientForm extends UiPart<Region> implements Form{
+public class PatientForm extends UiPart<Region> implements Form {
 
     private static final String FXML = "PatientForm.fxml";
 
@@ -134,8 +134,8 @@ public class PatientForm extends UiPart<Region> implements Form{
         this.priority.setText(priority);
     }
 
-    public void setDoctoIc(String doctoIc) {
-        this.doctorIc.setText(doctoIc);
+    public void setDoctorIc(String doctorIc) {
+        this.doctorIc.setText(doctorIc);
     }
 
     @Override

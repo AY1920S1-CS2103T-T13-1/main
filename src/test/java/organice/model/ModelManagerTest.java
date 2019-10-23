@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import organice.commons.core.GuiSettings;
 import organice.model.person.NameContainsKeywordsPredicate;
+import organice.model.person.Person;
 import organice.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -72,10 +73,11 @@ public class ModelManagerTest {
         assertEquals(path, modelManager.getAddressBookFilePath());
     }
 
-//    @Test
-//    public void hasPerson_nullPerson_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
-//    }
+    @Test
+    public void hasPerson_nullPerson_throwsNullPointerException() {
+        Person person = null;
+        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(person));
+    }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {

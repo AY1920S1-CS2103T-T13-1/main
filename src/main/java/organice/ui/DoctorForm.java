@@ -9,7 +9,7 @@ import organice.model.person.Type;
 /**
  * An UI component that displays information of a {@code Doctor}.
  */
-public class DoctorForm extends UiPart<Region> implements Form{
+public class DoctorForm extends UiPart<Region> implements Form {
 
     private static final String FXML = "DoctorForm.fxml";
 

@@ -3,6 +3,7 @@ package organice.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+
 import organice.model.person.Type;
 
 /**

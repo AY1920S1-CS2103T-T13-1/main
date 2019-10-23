@@ -2,23 +2,17 @@ package organice.ui;
 
 import java.util.logging.Logger;
 
-import javafx.animation.Animation;
-import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
 import organice.MainApp;
 import organice.commons.core.LogsCenter;
 import organice.commons.util.StringUtil;
 import organice.logic.Logic;
-import organice.logic.commands.CommandResult;
-import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
-import organice.model.person.Name;
-import organice.model.person.Type;
 
 /**
  * The manager of the UI component.

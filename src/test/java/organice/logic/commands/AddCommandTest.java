@@ -32,10 +32,11 @@ import organice.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
-//    @Test
-//    public void constructor_nullPerson_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-//    }
+    @Test
+    public void constructor_nullPerson_throwsNullPointerException() {
+        Person person = null;
+        assertThrows(NullPointerException.class, () -> new AddCommand(person));
+    }
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
