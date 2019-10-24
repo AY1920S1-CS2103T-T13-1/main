@@ -402,14 +402,56 @@ After entering an attribute, the system will prompt the user input for another a
 <p>Format: <code>add t/<strong>TYPE</strong></code></p>
 </div>
 <div class="paragraph">
-<p>ORGANice will prompt the user to type in each attribute, one by one.</p>
+<p>When the user type in the command above, a form will be displayed. For example, if a user wants to add a patient,
+type <code>add t/patient</code> to the command box. The form will be as below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/form.png" alt="form" width="790">
+</div>
 </div>
 <div class="paragraph">
-<p>In the display box, there will be a form that reflects the attributes typed by the user.</p>
+<p>ORGANice will prompt the user to type in each attribute, one by one until all the fields are filled.</p>
 </div>
 <div class="paragraph">
-<p>After the inputs are added, ORGANice will display a template that shows what the user data will look like
-if the changes are finalised. Press the Enter key to confirm the changes.</p>
+<p>For example, when a user wants to add a patient, the display box will prompt the user to enter the patient&#8217;s name.
+For the user to add a patient that is named "John Doe", type <code>John Doe</code> and then press enter.
+After entering the name, the patient&#8217;s name will be displayed in the form, as shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/nameField.png" alt="nameField" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Inputs for each attribute will be checked, if it is a valid input then the user input will automatically reflected
+on the form, if it is not valid, ORGANice will show a warning to the user.</p>
+</div>
+<div class="paragraph">
+<p>The following screenshot shows the warning that ORGANice will give to the user if the input is not valid:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/wrongInput.png" alt="wrongInput" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>After all of the attributes have been specified, the user can type <code>/done</code> to add the person to the ORGANice list of persons
+or <code>/abort</code> if the user decided not to add the person into the list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/allField.png" alt="allField" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>When the user typed <code>/done</code> the UI will changed back to it&#8217;s original state and shows a success message suggesting that
+the user has successfully added a new person into the list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addSuccess.png" alt="addSuccess" width="790">
+</div>
 </div>
 </div>
 </div>
@@ -943,4 +985,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-16 11:42:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 23:19:19 UTC</div></div></div></body></html>
