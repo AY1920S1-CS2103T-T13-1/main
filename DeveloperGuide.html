@@ -36,6 +36,8 @@
 <li><a href="#use-cases">Appendix C: Use Cases</a>
 <ul class="sectlevel2">
 <li><a href="#use-case-match-a-patient-and-a-donor">C.1. Use case: Match a patient and a donor</a></li>
+<li><a href="#use-case-list-all-patients-donors-doctors">C.2. Use case: List all patients/donors/doctors</a></li>
+<li><a href="#use-case-sort">C.3. Use case: Sort</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -751,6 +753,96 @@ Additionally, it implements the following operations:</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="use-case-list-all-patients-donors-doctors"><a class="link" href="#use-case-list-all-patients-donors-doctors">C.2. Use case: List all patients/donors/doctors</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list patients/donors/doctors.</p>
+</li>
+<li>
+<p>ORGANice shows the list of patients/donors/doctors.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. ORGANice detects an invalid parameter.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. ORGANice requests for correct parameter.</p>
+</li>
+<li>
+<p>1a2. User enters correct parameter.</p>
+<div class="paragraph">
+<p>Steps 1a1-1a2 are repeated until the data entered are correct.</p>
+</div>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-sort"><a class="link" href="#use-case-sort">C.3. Use case: Sort</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to sort the list of donors of a particular patient.</p>
+</li>
+<li>
+<p>ORGANice sorts the list of donors according to the parameters.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. ORGANice detects invalid parameter(s).</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. ORGANice prompts for valid parameter(s).</p>
+</li>
+<li>
+<p>1a2. User enters correct parameter(s).</p>
+<div class="paragraph">
+<p>Steps 1a1-1a2 are repeated until the data entered are correct.</p>
+</div>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
 </div>
@@ -913,4 +1005,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 23:23:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 23:28:02 UTC</div></div></div></body></html>
