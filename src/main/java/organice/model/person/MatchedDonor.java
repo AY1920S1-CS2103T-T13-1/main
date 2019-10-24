@@ -1,59 +1,38 @@
 package organice.model.person;
 
-import static organice.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
 
 /**
- * Represents a Person in ORGANice.
+ * Represents a {@code Donor} that is a match with a specified {@code Patient}.
+ * It is a temporary instance and will be removed once a {@code MatchCommand} is executed.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class MatchedDonor {
-
-    // Identity fields
-    protected final Type type;
-    protected final Nric nric;
-    protected final Name name;
-    protected final Phone phone;
+public class MatchedDonor extends Donor {
+    private String successRate;
 
     /**
      * Every field must be present and not null.
      */
-    public MatchedDonor(Type type, Nric nric, Name name, Phone phone) {
-        requireAllNonNull(type, nric, name, phone);
-        this.type = type;
-        this.nric = nric;
-        this.name = name;
-        this.phone = phone;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Nric getNric() {
-        return nric;
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
+    public MatchedDonor(Type type, Nric nric, Name name, Phone phone, Age age,
+            BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate) {
+        super(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate);
+        successRate = "";
     }
 
     /**
-     * Returns true if both persons of the same nric.
-     * This defines a weaker notion of equality between two persons.
+     * Alternative constructor which takes in a {@code Donor} and constructs a {@code MatchedDonor}
      */
-    public boolean isSamePerson(MatchedDonor otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
+    public MatchedDonor(Donor toAdd) {
+        this(toAdd.getType(), toAdd.getNric(), toAdd.getName(), toAdd.getPhone(), toAdd.getAge(), toAdd.getBloodType(),
+                toAdd.getTissueType(), toAdd.getOrgan(), toAdd.getOrganExpiryDate());
+        successRate = toAdd.getSuccessRate();
+    }
 
-        return otherPerson != null
-                && otherPerson.getNric().equals(getNric());
+    /**
+     * Returns a {@code String} detailing the success rate to be displayed in the {@code DonorCard}.
+     */
+    public String getSuccessRate() {
+        return successRate;
     }
 
     /**
