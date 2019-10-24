@@ -169,7 +169,7 @@ Additionally, it implements the following operations:
 
 These operations are exposed in the `Logic` interface when the specific command is invoked by the user.
 
-Given below is an example usage scenario and how the `Form` mode mechanism behaves at each step.
+Given below is an example usage scenario and how the `Form` mode mechanism behaves at each step:
 
 Step 1. The user launches the application for the first time.
 
