@@ -18,7 +18,6 @@ public class Donor extends Person {
     private final OrganExpiryDate organExpiryDate;
     private HashMap<Nric, Double> successRateMap;
     private String successRate;
-    private boolean matched;
 
     /**
      * Every field must be present and not null.
@@ -32,7 +31,6 @@ public class Donor extends Person {
         this.tissueType = tissueType;
         this.organ = organ;
         this.organExpiryDate = organExpiryDate;
-        this.matched = false;
         successRateMap = new HashMap<>();
     }
 
@@ -61,20 +59,6 @@ public class Donor extends Person {
      */
     public String getSuccessRate() {
         return successRate;
-    }
-
-    /**
-     * Sets the matching status of the {@code Donor}.
-     */
-    public void setMatched(boolean matched) {
-        this.matched = matched;
-    }
-
-    /**
-     * Getter method for matching status.
-     */
-    public boolean isMatched() {
-        return matched;
     }
 
     /**
