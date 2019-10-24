@@ -577,7 +577,7 @@ Format: <code>delete ic/<strong>NRIC</strong></code></p>
 <div class="sect2">
 <h3 id="detecting-matches-code-match-code"><a class="link" href="#detecting-matches-code-match-code">3.8. Detecting matches: <code>match</code></a></h3>
 <div class="paragraph">
-<p>Currently, ORGANice only supports kidney matching. Refer to <a href="#faq">Section 5, &#8220;FAQ&#8221;</a> to know the
+<p>Currently, ORGANice only supports kidney matching. Refer to <a href="#faq">Section 5, &#8220;FAQ&#8221;</a> for a better understanding of the
 procedure for kidney matching.</p>
 </div>
 <div class="paragraph">
@@ -585,19 +585,68 @@ procedure for kidney matching.</p>
 typing tests.<br></p>
 </div>
 <div class="paragraph">
-<p>To get a list of patients and their number of matches, the format is: <code>match ic/all</code></p>
+<p>There are two types of match commands. The following list explains each type of match command and describes the result
+of executing each type of command:</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p>To get a list of patients and their number of matches, the format is: <code>match ic/all</code></p>
+</li>
+<li>
 <p>To get a list of potential matches a patient has with a donor, the format is: <code>match ic/<strong>NRIC</strong></code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Each match is accompanied by a success rate number,
 which indicates the degree of compatibility
-between the patient and donor.<br>
-This is so that the doctors can schedule for cross matching between the patient-donor pair.</p>
+between the patient and donor.<br></p>
+</div>
+<div class="sect3">
+<h4 id="matching-a-specific-patient"><a class="link" href="#matching-a-specific-patient">3.8.1. Matching a specific patient</a></h4>
+<div class="paragraph">
+<p>For example, a user wants to match a specific patient called "John Doe" and his NRIC is "S1234568R".</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type <code>match ic/S1234568R</code> in the command box and press Enter.</p>
+</li>
+<li>
+<p>The list of donors and their success rate are displayed as shown in the screenshot below.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/MatchingDonorsDisplayed.png" alt="MatchingDonorsDisplayed" width="790">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="matching-all-patients-to-all-donors"><a class="link" href="#matching-all-patients-to-all-donors">3.8.2. Matching all patients to all donors</a></h4>
+<div class="paragraph">
+<p>For example, a user wants to find how many donors matches each patient in ORGANice.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type <code>match ic/all</code> in the command box and press Enter.</p>
+</li>
+<li>
+<p>The list of patients and the number of matching donors each patient have are displayed in the screenshot below.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Patient%20Matches%20Displayed.png" alt="Patient Matches Displayed" width="790">
+</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Matches can be sorted. Refer to <a href="#Sorting matches">[Sorting matches]</a> for more information.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -987,4 +1036,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 23:28:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 23:31:00 UTC</div></div></div></body></html>
