@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.model.person.Nric;
 import organice.model.person.Person;
@@ -100,4 +101,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns a sorted list of person */
+    SortedList<Person> getSortedPersonList();
 }

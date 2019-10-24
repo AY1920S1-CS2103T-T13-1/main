@@ -9,8 +9,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+import organice.logic.comparator.ExpiryComparator;
+import organice.logic.comparator.PriorityComparator;
+import organice.logic.comparator.SuccessRateComparator;
 import organice.model.person.Nric;
 import organice.model.person.Person;
 
@@ -23,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -152,7 +157,39 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && sortedPersons.equals(other.sortedPersons);
     }
 
+}
+
+//=========== Sorted Person List Accessors =============================================================
+
+    /**
+     * Returns a sorted view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public SortedList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
+    @Override
+    public void sortByPriority() {
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(PriorityComparator);
+    }
+
+    @Override
+    public void sortByExpiry() {
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(ExpiryComparator);
+    }
+
+
+    @Override
+    public void sortBySuccessRate() {
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(SuccessRateComparator);
+    }
 }
