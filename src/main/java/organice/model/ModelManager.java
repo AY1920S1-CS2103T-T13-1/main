@@ -4,14 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+import organice.logic.commands.MatchCommand;
 import organice.model.person.Donor;
+import organice.model.person.MatchedDonor;
+import organice.model.person.MatchedPatient;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -26,8 +32,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    //private final FilteredList<Match> listOfMatches;
-
+    private ObservableList<Person> listOfMatches = FXCollections.observableArrayList();
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,7 +45,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        //filteredList = new FilteredList<Match>();
     }
 
     public ModelManager() {
@@ -173,19 +177,117 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Match List Accessors =============================================================
 
     /**
-     * Updates a list of matches between a {@code Patient} and all matching {@code Donor}
+     * Returns a list of {@code Patient} in ORGANice.
      */
-    public void updateMatches(Nric patientNric) {
+    private ArrayList<Patient> getListOfPatients() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ArrayList<Patient> listOfPatients = new ArrayList<>();
+
+        for (Person person : filteredPersons) {
+            if (!(person instanceof Patient)) {
+                continue;
+            }
+            listOfPatients.add(((Patient) person));
+        }
+
+        return listOfPatients;
+    }
+
+    /**
+     * Returns a list of {@code Donor} in ORGANice.
+     */
+    private ArrayList<Donor> getListOfDonors() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ArrayList<Donor> listOfDonors = new ArrayList<>();
+
         for (Person person : filteredPersons) {
             if (!(person instanceof Donor)) {
                 continue;
             }
 
-            ((Donor) person).setSuccessRate(patientNric);
-            ((Donor) person).setMatched(true);
+            listOfDonors.add((Donor) person);
         }
+
+        return listOfDonors;
+    }
+
+
+    /**
+     * Add a MatchedDonor to the list to be displayed.
+     * @param matchedDonorToAdd {@code MatchedDonor} to add to the list
+     */
+    public void addMatchedDonor(MatchedDonor matchedDonorToAdd) {
+        requireNonNull(matchedDonorToAdd);
+        listOfMatches.add(matchedDonorToAdd);
+    }
+
+    /**
+     * Adds a MatchedPatient to the list displayed.
+     * @param matchedPatientToAdd {@code MatchedPatient} to add to the list
+     */
+    public void addMatchedPatient(MatchedPatient matchedPatientToAdd) {
+        requireNonNull(matchedPatientToAdd);
+        listOfMatches.add(matchedPatientToAdd);
+    }
+
+    /**
+     * Remove all MatchedDonors instances. Meant to be called before adding new MatchedDonor instances.
+     * The purpose of calling this method before is to ensure that each MatchedDonor is a unique item in the list.
+     */
+    public void removeMatches() {
+        listOfMatches = FXCollections.observableArrayList();
+    }
+
+    /**
+     * Matches all Patients in ORGANice with all existing donors.
+     */
+    public void matchAllPatients() {
+        List<Patient> listOfPatients = getListOfPatients();
+        List<Donor> listOfDonors = getListOfDonors();
+
+        //display matches
+        for (Patient patient : listOfPatients) {
+            Integer numberOfMatches = 0;
+            for (Donor donor : listOfDonors) {
+                boolean isMatch = MatchCommand.match(donor, patient);
+
+                if (isMatch) {
+                    numberOfMatches += 1;
+                }
+            }
+
+            MatchedPatient matchedPatient = new MatchedPatient(patient);
+            matchedPatient.setNumberOfMatches(numberOfMatches);
+            addMatchedPatient(matchedPatient);
+        }
+    }
+
+    public void matchDonors(Patient patient) {
+        //filter out donors.
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+
+        //if match, create a MatchedDonor and add to the list.
+        for (Person person: filteredPersons) {
+            if (person instanceof MatchedDonor) {
+                continue;
+            }
+
+            boolean isMatch = MatchCommand.match(person, patient);
+
+            if (isMatch) {
+                MatchedDonor matchedDonor = new MatchedDonor((Donor) person);
+                addMatchedDonor(matchedDonor);
+            }
+        }
+    }
+
+    /**
+     * Retrieves the Match List
+     */
+    public ObservableList<Person> getMatchList() {
+        return listOfMatches;
     }
 }

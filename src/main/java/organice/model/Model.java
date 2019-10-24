@@ -115,7 +115,22 @@ public interface Model {
     Patient getPatient(Nric patientNric) throws PersonNotFoundException;
 
     /**
-     * Updates a list with matches between a {@code Patient} and all matching {@code Donor}
+     * Matches all Patients to all Donors in ORGANice.
      */
-    void updateMatches(Nric patientNric);
+    void matchAllPatients();
+
+    /**
+     * Removes all MatchedDonor instances from ORGANice.
+     */
+    void removeMatches();
+
+    /**
+     * Match Donors to a specified Patient.
+     */
+    void matchDonors(Patient patient);
+
+    /**
+     * Retrieves the match list.
+     */
+    ObservableList<Person> getMatchList();
 }

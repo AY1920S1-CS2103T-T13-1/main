@@ -2,8 +2,7 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
+import organice.logic.parser.MatchCommandParser;
 import organice.model.Model;
 import organice.model.person.BloodType;
 import organice.model.person.Donor;
@@ -44,7 +43,7 @@ public class MatchCommand extends Command {
      * @param donor {@code Donor} who will tested for suitability of donation
      * @param patient {@code Patient} in need of organ
      */
-    public boolean match(Person donor, Patient patient) {
+    public static boolean match(Person donor, Patient patient) {
         if (!(donor instanceof Donor)) {
             return false;
         }
@@ -59,32 +58,56 @@ public class MatchCommand extends Command {
 
         if (patientBloodType.isBloodTypeMatch(donorBloodType) && successRate >= SUCCESSFUL_PERCENTAGE) {
             ((Donor) donor).addMatchResult(patient.getNric(), successRate);
+            ((Donor) donor).setSuccessRate(patient.getNric());
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * Matches all {@code Patient} to all {@code Donor} in ORGANice.
+     */
+    private CommandResult executeMatchAll(Model model) {
+        model.removeMatches();
+        model.matchAllPatients();
+        CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS);
+        commandResult.setMatch(true);
+        return commandResult;
+    }
 
-    @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-
-        Nric patientNric = new Nric(input);
+    /**
+     * Matches all {@code Donor} to a {@code Patient} with the specified {@code Nric}.
+     */
+    private CommandResult executeMatchNric(Nric patientNric, Model model) {
         try {
             if (model.hasPatient(patientNric)) {
+                model.removeMatches();
+
                 patient = model.getPatient(patientNric);
-                Predicate<Person> matchesWithNric = donor -> match(donor, patient);
-                model.updateFilteredPersonList(matchesWithNric);
-                model.updateMatches(patientNric);
-                return new CommandResult(MESSAGE_SUCCESS);
+                model.matchDonors(patient);
+
+                CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS);
+                commandResult.setMatch(true);
+                return commandResult;
             } else {
                 return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));
             }
         } catch (PersonNotFoundException pne) {
             return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));
         }
+    }
 
+    @Override
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+
+        if (input.equals(MatchCommandParser.ALL)) {
+            return executeMatchAll(model);
+        } else {
+            Nric patientNric = new Nric(input);
+            return executeMatchNric(patientNric, model);
+        }
     }
 
     @Override

@@ -13,6 +13,8 @@ import organice.model.person.Nric;
  */
 public class MatchCommandParser implements Parser<MatchCommand> {
 
+    public static final String ALL = "all";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -20,19 +22,25 @@ public class MatchCommandParser implements Parser<MatchCommand> {
      */
     public MatchCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        //TODO: Add prefix for all/
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC);
-        String output;
+        String inputValue;
 
         //TODO: Add testing for all/
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            output = nric.toString();
+            inputValue = argMultimap.getValue(PREFIX_NRIC).get();
+            checkInputArgument(inputValue);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE));
         }
 
-        return new MatchCommand(output);
+        return new MatchCommand(inputValue);
+    }
+
+    /**
+     * Checks if the input value is "all" or a valid {@code Nric} value.
+     */
+    private boolean checkInputArgument(String inputValue) throws ParseException {
+        return (inputValue.equals(ALL) || Nric.isValidNric(inputValue));
     }
 
 }
