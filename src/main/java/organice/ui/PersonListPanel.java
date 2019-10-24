@@ -10,6 +10,8 @@ import javafx.scene.layout.Region;
 import organice.commons.core.LogsCenter;
 import organice.model.person.Doctor;
 import organice.model.person.Donor;
+import organice.model.person.MatchedDonor;
+import organice.model.person.MatchedPatient;
 import organice.model.person.Patient;
 import organice.model.person.Person;
 
@@ -43,16 +45,14 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 if (person instanceof Doctor) {
                     setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
+                } else if (person instanceof MatchedDonor) {
+                    setGraphic(new MatchCard((Donor) person, getIndex() + 1).getRoot());
                 } else if (person instanceof Donor) {
-                    Donor donor = (Donor) person;
-                    if (donor.isMatched()) {
-                        setGraphic(new MatchCard(donor, getIndex() + 1).getRoot());
-                        donor.setMatched(false);
-                    } else {
-                        setGraphic(new DonorCard(donor, getIndex() + 1).getRoot());
-                    }
+                    setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
+                } else if (person instanceof MatchedPatient) {
+                        setGraphic(new NumberOfMatches((MatchedPatient) person, getIndex() + 1).getRoot());
                 } else if (person instanceof Patient) {
-                    setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
+                        setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
                 } else {
                     setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
                 }
