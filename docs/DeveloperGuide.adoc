@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 ==== Implementation
 
 The `Form` mode mechanism is facilitated by `FormUiManager`.
-It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time a user inputted a specific attribute.
+It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time a user input a specific attribute.
 Additionally, it implements the following operations:
 
 * `FormUiManager#getPersonField()` -- Modifies `CommandBox` and prompts the user to input a specific attribute.
