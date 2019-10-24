@@ -6,23 +6,39 @@ import java.util.Objects;
  * Represents a Person in ORGANice.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class MatchedPatient extends Donor {
+public class MatchedPatient extends Patient {
 
+    private int numberOfMatches = 0;
     /**
      * Every field must be present and not null.
      */
-    public MatchedPatient(Type type, Nric nric, Name name, Phone phone, Age age,
-            BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate) {
-        super(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate);
+    public MatchedPatient(Type type, Nric nric, Name name, Phone phone, Age age, Priority priority,
+            BloodType bloodType, TissueType tissueType, Organ organ, DoctorInCharge doctorInCharge) {
+        super(type, nric, name, phone, age, priority, bloodType, tissueType, organ, doctorInCharge);
     }
 
     /**
-     * Alternative constructor which takes in a {@code Donor} and constructs a {@code MatchedDonor}
+     * Alternative constructor which takes in a {@code Patient} and constructs a {@code MatchedPatient}
      */
-    public MatchedPatient(Donor toAdd) {
-        this(toAdd.getType(), toAdd.getNric(), toAdd.getName(), toAdd.getPhone(), toAdd.getAge(), toAdd.getBloodType(),
-                toAdd.getTissueType(), toAdd.getOrgan(), toAdd.getOrganExpiryDate());
+    public MatchedPatient(Patient toAdd) {
+        this(toAdd.getType(), toAdd.getNric(), toAdd.getName(), toAdd.getPhone(), toAdd.getAge(), toAdd.getPriority(),
+                toAdd.getBloodType(), toAdd.getTissueType(), toAdd.getOrgan(), toAdd.getDoctorInCharge());
     }
+
+    /**
+     * Sets the number of matches the represented {@code Patient} has with all {@code Donors}.
+     */
+    public void setNumberOfMatches(int numberOfMatches) {
+        this.numberOfMatches = numberOfMatches;
+    }
+
+    /**
+     * Retrives the number of matches the represented {@code Patient} has with all {@code Donors}.
+     */
+    public int getNumberOfMatches() {
+        return numberOfMatches;
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
