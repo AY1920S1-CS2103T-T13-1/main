@@ -189,6 +189,8 @@ ORGANice will prompt the user to type in each attribute, one by one until all th
 For example, when adding a patient, the display box will first display a message, prompting the user to enter the patient's name.
 To add a patient that is named "John Doe", type `John Doe` and then press enter. After entering, the patient's name will be displayed in the form, as shown below.
 
+image::nameField.png[width="790"]
+
 Inputs for each attribute will be checked, if it is a valid input then the user input will automatically reflected
 on the form, if it is not valid, ORGANice will show a warning to the user.
 
@@ -198,6 +200,8 @@ image::wrongInput.png[width="790"]
 
 After all of the attributes have been specified, the user can type `/done` to add the person to the ORGANice list of persons
 or `/abort` if the user decided not to add the person into the list.
+
+image::allField.png[width="790"]
 
 When the user typed `/done` the UI will changed back to it's original state and shows a success message suggesting that
 the user has successfully added a new person into the list.
