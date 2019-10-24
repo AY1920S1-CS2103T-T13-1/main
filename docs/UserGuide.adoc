@@ -196,7 +196,7 @@ After all of the attributes have been specified, the user can type `/done` to ad
 or `/abort` if the user decided not to add the person into the list.
 
 When the user typed `/done` the UI will changed back to it's original state and shows a success message suggesting that
-the user has successfully added a new person into the list
+the user has successfully added a new person into the list.
 
 image::addSuccess.png[width="790"]
 
