@@ -265,6 +265,9 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Match Donors to the specified {@code Patient}.
+     */
     public void matchDonors(Patient patient) {
         //filter out donors.
         updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);

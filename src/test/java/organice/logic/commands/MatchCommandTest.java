@@ -1,6 +1,7 @@
 package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static javafx.collections.FXCollections.observableArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,6 +31,7 @@ import organice.model.Model;
 import organice.model.ReadOnlyAddressBook;
 import organice.model.ReadOnlyUserPrefs;
 import organice.model.person.Donor;
+import organice.model.person.MatchedDonor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -64,7 +66,7 @@ public class MatchCommandTest {
         String validNric = VALID_NRIC_PATIENT_IRENE;
 
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
-        ObservableList<Person> listOfDonors = modelStub.getFilteredPersonList();
+        ObservableList<Person> listOfDonors = modelStub.getMatchList();
 
         assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(DONOR_IRENE_DONOR), listOfDonors);
@@ -76,7 +78,7 @@ public class MatchCommandTest {
         String validNric = VALID_NRIC_PATIENT_IRENE;
 
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
-        ObservableList<Person> listOfDonors = modelStub.getFilteredPersonList();
+        ObservableList<Person> listOfDonors = modelStub.getMatchList();
 
         assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
         assertEquals(listOfDonors.size(), 0); //assert that there is no donor
@@ -242,7 +244,22 @@ public class MatchCommandTest {
         }
 
         @Override
-        public void updateMatches(Nric patientNric) {
+        public ObservableList<Person> getMatchList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void matchDonors(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void matchAllPatients() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeMatches() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -277,6 +294,7 @@ public class MatchCommandTest {
      */
     private class ModelStubWithDonor extends ModelStub {
         private FilteredList<Person> filteredPersons;
+        private ObservableList<Person> listOfMatches;
 
         ModelStubWithDonor(Patient patient, Donor donor) {
             AddressBook addressBook = new AddressBookBuilder().withPerson(patient).withPerson(donor).build();
@@ -311,6 +329,40 @@ public class MatchCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             return filteredPersons;
         }
+
+        private void addMatchedDonor(MatchedDonor matchedDonor) {
+            listOfMatches.add(matchedDonor);
+        }
+
+        @Override
+        public void matchDonors(Patient patient) {
+            //filter out donors.
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+
+            //if match, create a MatchedDonor and add to the list.
+            for (Person person: filteredPersons) {
+                if (person instanceof MatchedDonor) {
+                    continue;
+                }
+
+                boolean isMatch = MatchCommand.match(person, patient);
+
+                if (isMatch) {
+                    MatchedDonor matchedDonor = new MatchedDonor((Donor) person);
+                    addMatchedDonor(matchedDonor);
+                }
+            }
+        }
+
+        @Override
+        public ObservableList<Person> getMatchList() {
+            return listOfMatches;
+        }
+
+        @Override
+        public void removeMatches() {
+            listOfMatches = observableArrayList();
+        }
     }
 
     /**
@@ -318,6 +370,7 @@ public class MatchCommandTest {
      */
     private class ModelStubWithoutDonor extends ModelStub {
         private FilteredList<Person> filteredPersons;
+        private ObservableList<Person> listOfMatches;
 
         public ModelStubWithoutDonor(Patient patient) {
             AddressBook addressBook = new AddressBookBuilder().withPerson(patient).build();
@@ -351,6 +404,40 @@ public class MatchCommandTest {
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             return filteredPersons;
+        }
+
+        private void addMatchedDonor(MatchedDonor matchedDonor) {
+            listOfMatches.add(matchedDonor);
+        }
+
+        @Override
+        public void matchDonors(Patient patient) {
+            //filter out donors.
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+
+            //if match, create a MatchedDonor and add to the list.
+            for (Person person: filteredPersons) {
+                if (person instanceof MatchedDonor) {
+                    continue;
+                }
+
+                boolean isMatch = MatchCommand.match(person, patient);
+
+                if (isMatch) {
+                    MatchedDonor matchedDonor = new MatchedDonor((Donor) person);
+                    addMatchedDonor(matchedDonor);
+                }
+            }
+        }
+
+        @Override
+        public ObservableList<Person> getMatchList() {
+            return listOfMatches;
+        }
+
+        @Override
+        public void removeMatches() {
+            listOfMatches = observableArrayList();
         }
     }
 }
