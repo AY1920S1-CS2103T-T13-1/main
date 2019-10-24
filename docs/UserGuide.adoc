@@ -186,8 +186,9 @@ image::form.png[width="790"]
 
 ORGANice will prompt the user to type in each attribute, one by one until all the fields are filled.
 
-For example, when adding a patient, the display box will first display a message, prompting the user to enter the patient's name.
-To add a patient that is named "John Doe", type `John Doe` and then press enter. After entering, the patient's name will be displayed in the form, as shown below.
+For example, when a user wants to add a patient, the display box will prompt the user to enter the patient's name.
+For the user to add a patient that is named "John Doe", type `John Doe` and then press enter.
+After entering the name, the patient's name will be displayed in the form, as shown below.
 
 image::nameField.png[width="790"]
 
