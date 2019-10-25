@@ -169,6 +169,21 @@ For each Donor that matches the Patient, a `MatchedDonor` objected is created an
 After matching the patients and donors, the `MainWindow` decides which list to display via the `CommandResult#isMatch`
 method.
 
+=== Sort feature
+This section describes how the sort feature is implemented.
+
+Sorting is done by using `Comparators` in the `Logic` component.
+
+To facilitate the sorting, the following methods were added:
+
+{More to be added}
+
+Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort/rate)`
+
+.Structure of the Logic Component when executing `sort` command
+
+image::SortSequenceDiagram.png[width=790]
+
 ==== Design considerations
 ===== Aspect: Bugs introduced
 This section explains why the current implementation is chosen.
@@ -416,12 +431,6 @@ Use case ends.
 Steps 1a1-1a2 are repeated until the data entered are correct.
 +
 Use case resumes at step 2.
-+
-Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort/rate)`
-+
-.Structure of the Logic Component when executing `sort` command
-+
-image::SortSequenceDiagram.png[width=790]
 +
 
 _{More to be added}_
