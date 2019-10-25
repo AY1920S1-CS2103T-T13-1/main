@@ -54,10 +54,16 @@ public class MatchedPatient extends Patient {
         }
 
         MatchedPatient otherPerson = (MatchedPatient) other;
-        return otherPerson.getNric().equals(getNric())
+        return otherPerson.getType().equals(getType())
+                && otherPerson.getNric().equals(getNric())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getType().equals(getType());
+                && otherPerson.getAge().equals(getAge())
+                && otherPerson.getPriority().equals(getPriority())
+                && otherPerson.getBloodType().equals(getBloodType())
+                && otherPerson.getTissueType().equals(getTissueType())
+                && otherPerson.getOrgan().equals(getOrgan())
+                && otherPerson.getDoctorInCharge().equals(getDoctorInCharge());
     }
 
     @Override
@@ -68,15 +74,7 @@ public class MatchedPatient extends Patient {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Person Type: ")
-                .append(getType())
-                .append(" Nric: ")
-                .append(getNric())
-                .append(" Phone: ")
-                .append(getPhone());
-        return builder.toString();
+        return super.toString();
     }
 
 }
