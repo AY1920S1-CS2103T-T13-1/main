@@ -21,6 +21,7 @@ import java.util.List;
 
 import organice.commons.core.index.Index;
 import organice.logic.commands.exceptions.CommandException;
+import organice.logic.parser.MatchCommandParser;
 import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.person.NameContainsKeywordsPredicate;
@@ -148,6 +149,9 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String VALID_MATCHCOMMAND_ALL = " " + PREFIX_NRIC + MatchCommandParser.ALL;
+    public static final String INVALID_MATCHCOMMAND_ALL = " " + PREFIX_NRIC + "al";
 
     public static final EditCommand.EditPersonDescriptor DESC_DOCTOR_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_PATIENT_BOB;
