@@ -20,7 +20,7 @@ public class MatchCommand extends Command {
     public static final String COMMAND_WORD = "match";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Matches patients and donors who passes matching tests"
-            + "Parameters: ic/all (to match all patients and donors)"
+            + "Parameters: ic/all (to match all patients and donors) \n"
             + "Parameters: ic/(NRIC) (to match a patient of specified NRIC)";
 
     public static final String MESSAGE_SUCCESS = "Matched all patients and donors";
