@@ -14,7 +14,6 @@ import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import organice.logic.commands.MatchCommand;
-import organice.model.person.Nric;
 
 
 public class MatchCommandParserTest {
@@ -27,7 +26,7 @@ public class MatchCommandParserTest {
                         new MatchCommand(VALID_NRIC_PATIENT_IRENE));
 
         // multiple nrics -- last one accepted
-        assertParseSuccess(parser,  NRIC_DESC_DOCTOR_AMY + NRIC_DESC_PATIENT_IRENE,
+        assertParseSuccess(parser, NRIC_DESC_DOCTOR_AMY + NRIC_DESC_PATIENT_IRENE,
                         new MatchCommand(VALID_NRIC_PATIENT_IRENE));
 
         // white space only preamble -- all
@@ -44,7 +43,7 @@ public class MatchCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE);
 
         // missing nric prefix -- nric input
-        assertParseFailure(parser,  VALID_NRIC_PATIENT_IRENE, expectedMessage);
+        assertParseFailure(parser, VALID_NRIC_PATIENT_IRENE, expectedMessage);
 
         // missing nric prefix -- all input
         assertParseFailure(parser, MatchCommandParser.ALL, expectedMessage);
@@ -54,7 +53,7 @@ public class MatchCommandParserTest {
     public void parse_invalidValue_failure() {
 
         // wrongly typed nric
-        assertParseFailure(parser, INVALID_NRIC_DESC, Nric.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NRIC_DESC, MatchCommandParser.MESSAGE_INVALID_INPUTS);
 
         // wrongly typed all
         assertParseFailure(parser, INVALID_MATCHCOMMAND_ALL, MatchCommandParser.MESSAGE_INVALID_INPUTS);
