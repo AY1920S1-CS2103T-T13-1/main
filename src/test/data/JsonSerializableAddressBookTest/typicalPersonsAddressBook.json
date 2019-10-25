@@ -1,46 +1,66 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "type": "doctor",
+    "nric": "S1532142A",
     "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "phone" : "94351253"
   }, {
+    "type": "doctor",
+    "nric": "T5231426Q",
     "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "phone" : "98765432"
   }, {
+    "type": "patient",
+    "nric": "G5642431P",
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tagged" : [ ]
+    "age" : "22",
+    "priority": "high",
+    "bloodType": "A",
+    "tissueType": "1,2,3,4,5,6",
+    "organ": "kidney",
+    "doctorInCharge": "S1532142A"
   }, {
+    "type": "patient",
+    "nric": "F6423467F",
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "age" : "34",
+    "priority": "low",
+    "bloodType": "O+",
+    "tissueType": "10,5,3,1,6,8",
+    "organ": "kidney",
+    "doctorInCharge": "T5231426Q"
   }, {
+    "type": "donor",
+    "nric": "S9374923S",
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tagged" : [ ]
+    "age" : "13",
+    "bloodType": "O+",
+    "tissueType": "10,5,3,1,6,8",
+    "organ": "kidney",
+    "organExpiryDate": "10-May-2020"
   }, {
+    "type": "donor",
+    "nric": "F9183156L",
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tagged" : [ ]
+    "age" : "25",
+    "bloodType": "AB+",
+    "tissueType": "7,2,3,9,6,8",
+    "organ": "kidney",
+    "organExpiryDate": "10-Jun-2020"
   }, {
+    "type": "donor",
+    "nric": "S1234567A",
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tagged" : [ ]
+    "age" : "44",
+    "bloodType": "B",
+    "tissueType": "9,4,1,6,8,2",
+    "organ": "kidney",
+    "organExpiryDate": "10-Dec-2030"
   } ]
 }
