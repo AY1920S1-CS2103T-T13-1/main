@@ -53,7 +53,12 @@ public class MatchedDonor extends Donor {
         return otherPerson.getNric().equals(getNric())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getType().equals(getType());
+                && otherPerson.getType().equals(getType())
+                && otherPerson.getAge().equals(getAge())
+                && otherPerson.getBloodType().equals(getBloodType())
+                && otherPerson.getTissueType().equals(getTissueType())
+                && otherPerson.getOrgan().equals(getOrgan())
+                && otherPerson.getOrganExpiryDate().equals(getOrganExpiryDate());
     }
 
     @Override
@@ -64,15 +69,7 @@ public class MatchedDonor extends Donor {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Person Type: ")
-                .append(getType())
-                .append(" Nric: ")
-                .append(getNric())
-                .append(" Phone: ")
-                .append(getPhone());
-        return builder.toString();
+        return super.toString();
     }
 
 }
