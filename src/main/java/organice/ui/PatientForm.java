@@ -2,6 +2,7 @@ package organice.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import organice.model.person.Type;
@@ -41,6 +42,13 @@ public class PatientForm extends UiPart<Region> implements Form {
     private Label priority;
     @FXML
     private Label doctorIc;
+    @FXML
+    private Label progressPercentage;
+    @FXML
+    private ProgressBar progressBar;
+
+    private final int numberOfFields = 9;
+    private int filledFields = 0;
 
     public PatientForm() {
         super(FXML);
@@ -112,6 +120,14 @@ public class PatientForm extends UiPart<Region> implements Form {
     @Override
     public void setPhone(String phone) {
         this.phone.setText(phone);
+    }
+
+    @Override
+    public void setProgress() {
+        filledFields ++;
+        double currentProgress = (double)filledFields / numberOfFields;
+        FormAnimation.percentageChangeAnimation(currentProgress,
+            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
     }
 
     public void setAge(String age) {

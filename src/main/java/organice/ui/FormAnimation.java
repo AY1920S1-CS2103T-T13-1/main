@@ -2,7 +2,12 @@ package organice.ui;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.Transition;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.util.Duration;
 import organice.model.person.FormField;
 import organice.model.person.Type;
@@ -23,6 +28,28 @@ public class FormAnimation {
         ft.play();
     }
 
+    public static void percentageChangeAnimation(Double newValue, String newPercentage,
+                                                 Label percentage, ProgressBar bar) {
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(500));
+            }
+
+            protected void interpolate(double frac) {
+                final int length = newPercentage.length();
+                final int n = Math.round(length * (float) frac);
+                percentage.setText(newPercentage.substring(0, n) + "%");
+            }
+        };
+        animation.play();
+
+        //Progress Bar animation
+        Timeline timeline = new Timeline();
+        KeyValue keyValue = new KeyValue(bar.progressProperty(), newValue);
+        KeyFrame keyFrame = new KeyFrame(new Duration(500), keyValue);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+    }
     /**
      * Animation for typing the input into the form.
      */

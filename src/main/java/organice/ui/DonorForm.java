@@ -2,6 +2,7 @@ package organice.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import organice.model.person.Type;
@@ -39,6 +40,14 @@ public class DonorForm extends UiPart<Region> implements Form {
     private Label tissueType;
     @FXML
     private Label organExpiryDate;
+
+    @FXML
+    private Label progressPercentage;
+    @FXML
+    private ProgressBar progressBar;
+
+    private final int numberOfFields = 8;
+    private int filledFields = 0;
 
     public DonorForm() {
         super(FXML);
@@ -105,6 +114,14 @@ public class DonorForm extends UiPart<Region> implements Form {
     @Override
     public void setPhone(String phone) {
         this.phone.setText(phone);
+    }
+
+    @Override
+    public void setProgress() {
+        filledFields++;
+        double currentProgress = (double) filledFields / numberOfFields;
+        FormAnimation.percentageChangeAnimation(currentProgress,
+            String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     public void setAge(String age) {

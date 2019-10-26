@@ -16,6 +16,7 @@ public interface Form {
     void setName(String name);
     void setNric(String nric);
     void setPhone(String phone);
+    void setProgress();
 
     Type getType();
 }

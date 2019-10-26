@@ -19,6 +19,7 @@ import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
 import organice.model.person.Age;
 import organice.model.person.BloodType;
+import organice.model.person.Doctor;
 import organice.model.person.DoctorInCharge;
 import organice.model.person.FormField;
 import organice.model.person.Name;
@@ -76,6 +77,7 @@ public class FormUiManager {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personName, FormField.NAME);
         getPersonField(new CommandBox(this::getNric), PROMPT_NRIC);
 
@@ -97,6 +99,7 @@ public class FormUiManager {
             throw new ParseException(AddCommand.MESSAGE_DUPLICATE_PERSON);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personNric, FormField.NRIC);
         getPersonField(new CommandBox(this::getPhone), PROMPT_PHONE);
 
@@ -115,6 +118,7 @@ public class FormUiManager {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personPhone, FormField.PHONE);
 
         if (formType.isDoctor()) {
@@ -138,6 +142,7 @@ public class FormUiManager {
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personAge, FormField.AGE);
         getPersonField(new CommandBox(this::getOrgan), PROMPT_ORGAN);
 
@@ -156,6 +161,7 @@ public class FormUiManager {
             throw new ParseException(Organ.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personOrgan, FormField.ORGAN);
         getPersonField(new CommandBox(this::getBloodType), PROMPT_BLOOD_TYPE);
 
@@ -174,6 +180,7 @@ public class FormUiManager {
             throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personBloodType, FormField.BLOOD_TYPE);
         getPersonField(new CommandBox(this::getTissueType), PROMPT_TISSUE_TYPE);
 
@@ -192,6 +199,7 @@ public class FormUiManager {
             throw new ParseException(TissueType.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personTissueType, FormField.TISSUE_TYPE);
 
         if (formType.isPatient()) {
@@ -215,6 +223,7 @@ public class FormUiManager {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personPriority, FormField.PRIORITY);
 
         if (formType.isPatient()) {
@@ -239,6 +248,7 @@ public class FormUiManager {
             throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personDoctorIc, FormField.DOCTOR_IC);
 
         if (formType.isPatient()) {
@@ -260,6 +270,7 @@ public class FormUiManager {
             throw new ParseException(OrganExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
+        mainWindow.getForm().setProgress();
         FormAnimation.typingAnimation(mainWindow, personOrganExpiryDate, FormField.ORGAN_EXPIRY_DATE);
 
         if (formType.isDonor()) {

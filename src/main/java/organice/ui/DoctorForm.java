@@ -1,9 +1,19 @@
 package organice.ui;
 
+import java.text.Normalizer;
+import org.w3c.dom.ls.LSProgressEvent;
+import com.sun.javafx.binding.StringFormatter;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+import organice.model.person.FormField;
 import organice.model.person.Type;
 
 /**
@@ -29,12 +39,20 @@ public class DoctorForm extends UiPart<Region> implements Form {
     private Label phone;
     @FXML
     private Label nric;
+    @FXML
+    private Label progressPercentage;
+    @FXML
+    private ProgressBar progressBar;
+
+    private final int numberOfFields = 3;
+    private int filledFields = 0;
 
     public DoctorForm() {
         super(FXML);
         name.setText("");
         phone.setText("");
         nric.setText("");
+        progressPercentage.setText("0%");
     }
 
     @Override
@@ -65,6 +83,14 @@ public class DoctorForm extends UiPart<Region> implements Form {
     @Override
     public void setPhone(String phone) {
         this.phone.setText(phone);
+    }
+
+    @Override
+    public void setProgress() {
+        filledFields ++;
+        double currentProgress = (double)filledFields / numberOfFields;
+        FormAnimation.percentageChangeAnimation(currentProgress,
+            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
     }
 
     @Override
