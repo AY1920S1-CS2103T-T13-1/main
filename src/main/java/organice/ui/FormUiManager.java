@@ -370,4 +370,8 @@ public class FormUiManager {
         mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_EXIT);
         mainWindow.resetInnerParts();
     }
+
+    private void handleReset() {
+        getPersonField(new CommandBox(this::getName), PROMPT_NAME);
+    }
 }

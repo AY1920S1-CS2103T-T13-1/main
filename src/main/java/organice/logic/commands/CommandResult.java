@@ -19,10 +19,12 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-
     private final boolean form;
 
     private final Type formType;
+
+    /** This Command Result is marked as a Match Command */
+    private boolean isMatch;
 
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean form, Type formType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -30,6 +32,7 @@ public class CommandResult {
         this.exit = exit;
         this.form = form;
         this.formType = formType;
+        this.isMatch = false;
     }
 
     /**
@@ -72,6 +75,14 @@ public class CommandResult {
 
     public boolean isForm() {
         return form;
+    }
+
+    public void setMatch(boolean isMatch) {
+        this.isMatch = isMatch;
+    }
+
+    public boolean isMatch() {
+        return isMatch;
     }
 
     @Override
