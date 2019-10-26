@@ -16,20 +16,22 @@ public class Patient extends Person {
     private final TissueType tissueType;
     private final Organ organ;
     private final DoctorInCharge doctorInCharge;
+    private Status status;
 
     /**
      * Every field must be present and not null.
      */
     public Patient(Type type, Nric nric, Name name, Phone phone, Age age, Priority priority,
-                   BloodType bloodType, TissueType tissueType, Organ organ, DoctorInCharge doctorInCharge) {
+                   BloodType bloodType, TissueType tissueType, Organ organ, DoctorInCharge doctorInCharge, Status status) {
         super(type, nric, name, phone);
-        requireAllNonNull(age, priority, bloodType, tissueType, organ, doctorInCharge);
+        requireAllNonNull(age, priority, bloodType, tissueType, organ, doctorInCharge, status);
         this.age = age;
         this.priority = priority;
         this.bloodType = bloodType;
         this.tissueType = tissueType;
         this.organ = organ;
         this.doctorInCharge = doctorInCharge;
+        this.status = status;
     }
 
     public Age getAge() {
@@ -54,6 +56,17 @@ public class Patient extends Person {
 
     public DoctorInCharge getDoctorInCharge() {
         return doctorInCharge;
+    }
+
+    public Status getStatus() { return  status; }
+
+    /**
+     * Set the status of the patient.
+     * @param newStatus
+     */
+    public void setStatus(String newStatus) {
+        Status updatedStatus = new Status(newStatus);
+        this.status = updatedStatus;
     }
 
     @Override
@@ -100,12 +113,13 @@ public class Patient extends Person {
                 && otherPerson.getBloodType().equals(getBloodType())
                 && otherPerson.getTissueType().equals(getTissueType())
                 && otherPerson.getOrgan().equals(getOrgan())
-                && otherPerson.getDoctorInCharge().equals(getDoctorInCharge());
+                && otherPerson.getDoctorInCharge().equals(getDoctorInCharge())
+                && otherPerson.getStatus().equals(getStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(type, nric, name, phone, age, bloodType, tissueType, organ, doctorInCharge);
+        return Objects.hash(type, nric, name, phone, age, bloodType, tissueType, organ, doctorInCharge, status);
     }
 }

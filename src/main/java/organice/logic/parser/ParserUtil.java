@@ -14,6 +14,7 @@ import organice.model.person.Organ;
 import organice.model.person.OrganExpiryDate;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
+import organice.model.person.Status;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
@@ -202,5 +203,20 @@ public class ParserUtil {
             throw new ParseException(OrganExpiryDate.MESSAGE_CONSTRAINTS);
         }
         return new OrganExpiryDate(trimmedOrganExpiryDate);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return new Status(trimmedStatus);
     }
 }

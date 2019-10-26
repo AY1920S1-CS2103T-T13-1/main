@@ -92,6 +92,7 @@ import organice.model.person.OrganExpiryDate;
 import organice.model.person.Patient;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
+import organice.model.person.Status;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
@@ -574,6 +575,20 @@ public class AddCommandParserTest {
                 + PRIORITY_DESC_PATIENT_IRENE + BLOOD_TYPE_DESC_PATIENT_IRENE + TISSUE_TYPE_DESC_PATIENT_IRENE
                 + ORGAN_DESC_PATIENT_IRENE + INVALID_DOCTOR_IN_CHARGE_DESC,
                         DoctorInCharge.MESSAGE_CONSTRAINTS);
+
+        // invalid status -- donor
+        assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN
+                        + PHONE_DESC_DONOR_JOHN + AGE_DESC_DONOR_JOHN
+                        + BLOOD_TYPE_DESC_DONOR_JOHN + TISSUE_TYPE_DESC_DONOR_JOHN
+                        + ORGAN_DESC_DONOR_JOHN + ORGAN_EXPIRY_DATE_DESC_DONOR_JOHN, INVALID_STATUS_DESC,
+                Status.MESSAGE_CONSTRAINTS);
+
+        // invalid status -- patient
+        assertParseFailure(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE
+                        + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
+                        + PRIORITY_DESC_PATIENT_IRENE + BLOOD_TYPE_DESC_PATIENT_IRENE + TISSUE_TYPE_DESC_PATIENT_IRENE
+                        + ORGAN_DESC_PATIENT_IRENE + DOCTOR_IN_CHARGE_DESC_PATIENT_IRENE, INVALID_STATUS_IRENE,
+                Organ.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported -- donor
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN

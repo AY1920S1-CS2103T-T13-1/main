@@ -16,6 +16,7 @@ public class Donor extends Person {
     private final TissueType tissueType;
     private final Organ organ;
     private final OrganExpiryDate organExpiryDate;
+    private Status status;
     private HashMap<Nric, Double> successRateMap;
     private String successRate;
 
@@ -23,14 +24,15 @@ public class Donor extends Person {
      * Every field must be present and not null.
      */
     public Donor(Type type, Nric nric, Name name, Phone phone, Age age,
-                 BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate) {
+                 BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate, Status status) {
         super(type, nric, name, phone);
-        requireAllNonNull(age, bloodType, tissueType, organ, organExpiryDate);
+        requireAllNonNull(age, bloodType, tissueType, organ, organExpiryDate, status);
         this.age = age;
         this.bloodType = bloodType;
         this.tissueType = tissueType;
         this.organ = organ;
         this.organExpiryDate = organExpiryDate;
+        this.status = status;
         successRateMap = new HashMap<>();
     }
 
@@ -53,6 +55,8 @@ public class Donor extends Person {
     public OrganExpiryDate getOrganExpiryDate() {
         return organExpiryDate;
     }
+
+    public Status getStatus() { return  status; }
 
     /**
      * Returns a {@code String} detailing the success rate to be displayed in the {@code DonorCard}.
@@ -79,6 +83,15 @@ public class Donor extends Person {
     }
 
     /**
+     * Set the status of the donor.
+     * @param newStatus
+     */
+    public void setStatus(String newStatus) {
+        Status updatedStatus = new Status(newStatus);
+        this.status = updatedStatus;
+    }
+
+    /**
      * Returns true if both donors have the same identity and data fields.
      * This defines a stronger notion of equality between two donors.
      */
@@ -101,13 +114,14 @@ public class Donor extends Person {
             && otherPerson.getBloodType().equals(getBloodType())
             && otherPerson.getTissueType().equals(getTissueType())
             && otherPerson.getOrgan().equals(getOrgan())
-            && otherPerson.getOrganExpiryDate().equals(getOrganExpiryDate());
+            && otherPerson.getOrganExpiryDate().equals(getOrganExpiryDate())
+            && otherPerson.getStatus().equals(getStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate);
+        return Objects.hash(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate, status);
     }
 
     @Override
