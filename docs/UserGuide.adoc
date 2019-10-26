@@ -75,8 +75,8 @@ Now that you know the components of ORGANice, let's move on to <<Features>> to l
 [[Features]]
 == Features
 
-This section will introduce you to the list of features and commands
-in this application. Each feature is triggered by a command with a specific format. +
+This section will introduce you to the list of features and commands in this application.
+Each feature is triggered by a command with a specific format. +
 
 The list below explains how the format of the commands should be interpreted:
 ====
@@ -161,7 +161,6 @@ ORGANice. This command allows you to access the user guide to ORGANice.
 . Click the x button to close the window and return to the default display.
 
 .**Help Window**
-
 
 image::HelpWindow.png[width="790"]
 
