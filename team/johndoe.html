@@ -169,6 +169,94 @@ Format: <code>delete ic/<strong>NRIC</strong></code></p>
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="sort-feature"><a class="link" href="#sort-feature">Sort feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the sort feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>Sorting is done by using <code>Comparators</code> in the <code>Logic</code> component.</p>
+</div>
+<div class="paragraph">
+<p>To facilitate the sorting, the following methods were added:</p>
+</div>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for the interactions with the <code>Logic</code> component for the <code>execute(sort/rate)</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="790">
+</div>
+<div class="title">Figure 1. Structure of the Logic Component when executing <code>sort</code> command</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain the reason for having some aspects.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect"><a class="link" href="#aspect">Aspect:</a></h5>
+
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="processing-feature"><a class="link" href="#processing-feature">Processing feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the processing feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>Processing is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>, then creating an ArrayList named, <code>ProcessingList</code> to store the tasks needed to do.</p>
+</div>
+<div class="paragraph">
+<p>If the donor and patient pair had never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
+</div>
+<div class="paragraph">
+<p>If the user made any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain the reason for having some aspects.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-method-of-storing-the-code-processinglist-code"><a class="link" href="#aspect-method-of-storing-the-code-processinglist-code">Aspect: Method of storing the <code>ProcessingList</code></a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use ArrayList to store the tasks.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: It is not the most efficient algorithm and the huge number of <code>ProcessingList</code> may take up a huge datafile at the end of the day.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a new class that works like ArrayList.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to implement more specific methods for the ProcessingList.</p>
+</li>
+<li>
+<p>Cons: More methods and test cases needed and it is harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
@@ -184,4 +272,4 @@ Format: <code>delete ic/<strong>NRIC</strong></code></p>
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-26 00:55:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-26 01:09:57 UTC</div></div></div></body></html>
