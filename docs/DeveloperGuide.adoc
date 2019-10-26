@@ -462,7 +462,6 @@ Steps 1a1-1a2 are repeated until the data entered are correct.
 +
 Use case resumes at step 2.
 +
-
 _{More to be added}_
 
 [appendix]
