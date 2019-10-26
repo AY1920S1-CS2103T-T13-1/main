@@ -270,18 +270,14 @@ public class ModelManager implements Model {
      */
     public void matchDonors(Patient patient) {
         //filter out donors.
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+        List<Donor> listOfDonors = getListOfDonors();
 
         //if match, create a MatchedDonor and add to the list.
-        for (Person person: filteredPersons) {
-            if (person instanceof MatchedDonor) {
-                continue;
-            }
-
-            boolean isMatch = MatchCommand.match(person, patient);
+        for (Donor donor : listOfDonors) {
+            boolean isMatch = MatchCommand.match(donor, patient);
 
             if (isMatch) {
-                MatchedDonor matchedDonor = new MatchedDonor((Donor) person);
+                MatchedDonor matchedDonor = new MatchedDonor(donor);
                 addMatchedDonor(matchedDonor);
             }
         }
