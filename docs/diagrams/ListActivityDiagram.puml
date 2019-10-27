@@ -2,22 +2,23 @@
 
 start
 :user enters list command;
-if (type present?) then (yes)
-    :identify type parameter;
-    if (patient) then (yes)
+if (has parameter?) then (yes)
+    :identify parameter
+    is of what type;
+    if (is patient?) then (yes)
         :update list to show
               all patients;
-    elseif (donor) then (yes)
+    elseif (is donor?) then (yes)
         :update list to show
               all donors;
-    elseif (doctors) then (yes)
+    elseif (is doctor?) then (yes)
         :update list to show
               all doctors;
     else (invalid type)
-        : throw error message;
+        :display error message;
     endif
 else (no)
-    : list all persons;
+    :list all persons;
 endif
 stop
 @enduml
