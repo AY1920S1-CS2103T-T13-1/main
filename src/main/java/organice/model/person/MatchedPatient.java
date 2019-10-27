@@ -22,7 +22,8 @@ public class MatchedPatient extends Patient {
      */
     public MatchedPatient(Patient toAdd) {
         this(toAdd.getType(), toAdd.getNric(), toAdd.getName(), toAdd.getPhone(), toAdd.getAge(), toAdd.getPriority(),
-                toAdd.getBloodType(), toAdd.getTissueType(), toAdd.getOrgan(), toAdd.getDoctorInCharge(), toAdd.getStatus());
+                toAdd.getBloodType(), toAdd.getTissueType(), toAdd.getOrgan(), toAdd.getDoctorInCharge(),
+                toAdd.getStatus());
     }
 
     /**

@@ -24,7 +24,8 @@ public class Donor extends Person {
      * Every field must be present and not null.
      */
     public Donor(Type type, Nric nric, Name name, Phone phone, Age age,
-                 BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate, Status status) {
+                 BloodType bloodType, TissueType tissueType, Organ organ, OrganExpiryDate organExpiryDate,
+                 Status status) {
         super(type, nric, name, phone);
         requireAllNonNull(age, bloodType, tissueType, organ, organExpiryDate, status);
         this.age = age;
@@ -56,7 +57,9 @@ public class Donor extends Person {
         return organExpiryDate;
     }
 
-    public Status getStatus() { return  status; }
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Returns a {@code String} detailing the success rate to be displayed in the {@code DonorCard}.
@@ -137,7 +140,9 @@ public class Donor extends Person {
             .append(" Organ: ")
             .append(getOrgan())
             .append(" Organ Expiry Date: ")
-            .append(getOrganExpiryDate());
+            .append(getOrganExpiryDate())
+            .append(" Status: ")
+            .append(getStatus());
 
         return builder.toString();
     }

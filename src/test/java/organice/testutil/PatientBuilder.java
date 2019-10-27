@@ -134,7 +134,7 @@ public class PatientBuilder extends PersonBuilder {
     }
 
     /**
-     * Sets the {@code BloodType} of the {@code Patient} that we are building.
+     * Sets the {@code Status} of the {@code Patient} that we are building.
      */
     public PatientBuilder withStatus(String status) {
         this.status = new Status(status);

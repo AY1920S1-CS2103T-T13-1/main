@@ -22,7 +22,8 @@ public class Patient extends Person {
      * Every field must be present and not null.
      */
     public Patient(Type type, Nric nric, Name name, Phone phone, Age age, Priority priority,
-                   BloodType bloodType, TissueType tissueType, Organ organ, DoctorInCharge doctorInCharge, Status status) {
+                   BloodType bloodType, TissueType tissueType, Organ organ, DoctorInCharge doctorInCharge,
+                   Status status) {
         super(type, nric, name, phone);
         requireAllNonNull(age, priority, bloodType, tissueType, organ, doctorInCharge, status);
         this.age = age;
@@ -58,7 +59,9 @@ public class Patient extends Person {
         return doctorInCharge;
     }
 
-    public Status getStatus() { return  status; }
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Set the status of the patient.
@@ -84,7 +87,9 @@ public class Patient extends Person {
                 .append(" Organ: ")
                 .append(getOrgan())
                 .append(" Doctor In Charge: ")
-                .append(getDoctorInCharge());
+                .append(getDoctorInCharge())
+                .append(" Status: ")
+                .append(getStatus());
 
         return builder.toString();
     }

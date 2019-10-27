@@ -86,7 +86,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             OrganExpiryDate organExpiryDate =
                     ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get());
             Status status = new Status(Status.STATUS_NOT_PROCESSING);
-            Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate, status);
+            Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate,
+                    status);
             return new AddCommand(donor);
         } else if (type.isPatient()) {
             arePrefixesPresentPatient(argMultimap);
@@ -101,7 +102,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Organ organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
             DoctorInCharge doctorInCharge =
                     ParserUtil.parseDoctorInCharge(argMultimap.getValue(PREFIX_DOCTOR_IN_CHARGE).get());
-            Status status = new Status(Status.STATUS_PROCESSING);
+            Status status = new Status(Status.STATUS_NOT_PROCESSING);
             Patient patient = new Patient(type, nric, name, phone, age, priority,
                     bloodType, tissueType, organ, doctorInCharge, status);
             return new AddCommand(patient);
