@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.util.Duration;
@@ -28,6 +29,19 @@ public class FormAnimation {
         ft.play();
     }
 
+    /**
+     * Animation for fading in and out of the form mode.
+     */
+    public static void showButtonAnimation(Button button) {
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), button);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.play();
+    }
+
+    /**
+     * Animation for increase percentage of progress bar.
+     */
     public static void percentageChangeAnimation(Double newValue, String newPercentage,
                                                  Label percentage, ProgressBar bar) {
         final Animation animation = new Transition() {
@@ -50,6 +64,7 @@ public class FormAnimation {
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
     }
+
     /**
      * Animation for typing the input into the form.
      */

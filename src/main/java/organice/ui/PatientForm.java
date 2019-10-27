@@ -1,10 +1,26 @@
 package organice.ui;
 
+import static organice.logic.parser.CliSyntax.PREFIX_AGE;
+import static organice.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static organice.logic.parser.CliSyntax.PREFIX_DOCTOR_IN_CHARGE;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
+import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_ORGAN;
+import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
+import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
+import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import organice.logic.commands.AddCommand;
+import organice.logic.commands.CommandResult;
+import organice.logic.commands.MatchCommand;
+import organice.logic.commands.exceptions.CommandException;
+import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Type;
 
 /**
@@ -46,11 +62,14 @@ public class PatientForm extends UiPart<Region> implements Form {
     private Label progressPercentage;
     @FXML
     private ProgressBar progressBar;
+    @FXML
+    private Button findMatch;
 
+    private MainWindow mainWindow;
     private final int numberOfFields = 9;
     private int filledFields = 0;
 
-    public PatientForm() {
+    public PatientForm(MainWindow mainWindow) {
         super(FXML);
         name.setText("");
         phone.setText("");
@@ -61,6 +80,7 @@ public class PatientForm extends UiPart<Region> implements Form {
         tissueType.setText("");
         priority.setText("");
         doctorIc.setText("");
+        this.mainWindow = mainWindow;
     }
 
     @Override
@@ -125,9 +145,31 @@ public class PatientForm extends UiPart<Region> implements Form {
     @Override
     public void setProgress() {
         filledFields ++;
+
+        //Button is visible if all fields are filled
+        if (filledFields == numberOfFields) {
+            FormAnimation.showButtonAnimation(findMatch);
+            findMatch.setVisible(true);
+        }
+
         double currentProgress = (double)filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
             String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+    }
+
+    @FXML
+    public void handleEnter() throws ParseException, CommandException {
+        String matchCommand = MatchCommand.COMMAND_WORD + " " + PREFIX_NRIC + nric.getText();
+        String addCommand = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.PATIENT + " " + PREFIX_NAME
+            + name.getText() + " " + PREFIX_NRIC + nric.getText() + " "
+            + PREFIX_PHONE + phone.getText() + " " + PREFIX_AGE + age.getText() + " "
+            + PREFIX_ORGAN + organ.getText() + " " + PREFIX_BLOOD_TYPE + bloodType.getText() + " "
+            + PREFIX_TISSUE_TYPE + tissueType.getText() + " " + PREFIX_PRIORITY + priority.getText()
+            + " " + PREFIX_DOCTOR_IN_CHARGE + doctorIc.getText();
+
+        mainWindow.executeCommand(addCommand);
+        FormAnimation.fadingAnimation(mainWindow);
+        mainWindow.executeCommand(matchCommand);
     }
 
     public void setAge(String age) {

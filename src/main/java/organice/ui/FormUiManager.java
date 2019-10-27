@@ -12,6 +12,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import javafx.scene.layout.StackPane;
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
@@ -369,9 +370,5 @@ public class FormUiManager {
     private void handleAbort() {
         mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_EXIT);
         mainWindow.resetInnerParts();
-    }
-
-    private void handleReset() {
-        getPersonField(new CommandBox(this::getName), PROMPT_NAME);
     }
 }
