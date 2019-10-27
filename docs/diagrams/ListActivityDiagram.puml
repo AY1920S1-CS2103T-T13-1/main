@@ -1,0 +1,25 @@
+@startuml
+
+start
+:user enters list command;
+if (type present?) then (yes)
+    :identify type parameter;
+    if (patient) then (yes)
+        :update list to show
+              all patients;
+    elseif (donor) then (yes)
+        :update list to show
+              all donors;
+    elseif (doctors) then (yes)
+        :update list to show
+              all doctors;
+    else (invalid type)
+        : throw error message;
+    endif
+else (no)
+    : list all persons;
+endif
+
+stop
+
+@enduml

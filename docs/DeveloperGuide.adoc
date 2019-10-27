@@ -375,6 +375,10 @@ Use case ends.
 
 === Use case: List all patients/donors/doctors
 
+Given below is the activity diagram to illustrate what happens when user uses the list command.
+
+image::ListActivityDiagram.png[]
+
 *MSS*
 
 1.  User requests to list patients/donors/doctors.
