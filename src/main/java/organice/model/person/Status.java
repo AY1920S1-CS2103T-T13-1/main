@@ -21,7 +21,7 @@ public class Status {
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public static final String STATUS_PROCESSING = "processing";
-    public static final String STATUS_NOTPROCESSING = "not processing";
+    public static final String STATUS_NOT_PROCESSING = "not processing";
     public static final String STATUS_DONE = "done";
 
 
@@ -43,7 +43,7 @@ public class Status {
      */
     public static boolean isValidStatus(String test) {
         return test.matches(VALIDATION_REGEX)
-                && (test.toLowerCase().equals(STATUS_PROCESSING) || test.toLowerCase().equals(STATUS_NOTPROCESSING)
+                && (test.toLowerCase().equals(STATUS_PROCESSING) || test.toLowerCase().equals(STATUS_NOT_PROCESSING)
                 || test.toLowerCase().equals(STATUS_DONE));
     }
 
@@ -60,7 +60,7 @@ public class Status {
      * @return boolean if this Status value is 'not processing'
      */
     public boolean isNotProcessing() {
-        return value.toLowerCase().equals(STATUS_NOTPROCESSING);
+        return value.toLowerCase().equals(STATUS_NOT_PROCESSING);
     }
 
     /**

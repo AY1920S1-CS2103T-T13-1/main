@@ -18,6 +18,7 @@ import static organice.logic.commands.CommandTestUtil.INVALID_ORGAN_DESC;
 import static organice.logic.commands.CommandTestUtil.INVALID_ORGAN_EXPIRY_DATE_DESC;
 import static organice.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static organice.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
+import static organice.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static organice.logic.commands.CommandTestUtil.INVALID_TISSUE_TYPE_DESC;
 import static organice.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
 import static organice.logic.commands.CommandTestUtil.NAME_DESC_DOCTOR_AMY;
@@ -41,6 +42,7 @@ import static organice.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static organice.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static organice.logic.commands.CommandTestUtil.PRIORITY_DESC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.PRIORITY_DESC_PATIENT_IRENE;
+import static organice.logic.commands.CommandTestUtil.STATUS_DESC_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.TISSUE_TYPE_DESC_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.TISSUE_TYPE_DESC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.TISSUE_TYPE_DESC_PATIENT_IRENE;
@@ -66,6 +68,7 @@ import static organice.logic.commands.CommandTestUtil.VALID_PHONE_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_PRIORITY_PATIENT_IRENE;
+import static organice.logic.commands.CommandTestUtil.VALID_STATUS_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_TISSUE_TYPE_DONOR_JOHN;
 import static organice.logic.commands.CommandTestUtil.VALID_TISSUE_TYPE_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_TYPE_DONOR_JOHN;
@@ -580,15 +583,15 @@ public class AddCommandParserTest {
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN
                         + PHONE_DESC_DONOR_JOHN + AGE_DESC_DONOR_JOHN
                         + BLOOD_TYPE_DESC_DONOR_JOHN + TISSUE_TYPE_DESC_DONOR_JOHN
-                        + ORGAN_DESC_DONOR_JOHN + ORGAN_EXPIRY_DATE_DESC_DONOR_JOHN, INVALID_STATUS_DESC,
+                        + ORGAN_DESC_DONOR_JOHN + ORGAN_EXPIRY_DATE_DESC_DONOR_JOHN + INVALID_STATUS_DESC,
                 Status.MESSAGE_CONSTRAINTS);
 
         // invalid status -- patient
         assertParseFailure(parser, TYPE_DESC_PATIENT_IRENE + NRIC_DESC_PATIENT_IRENE
                         + NAME_DESC_PATIENT_IRENE + PHONE_DESC_PATIENT_IRENE + AGE_DESC_PATIENT_IRENE
                         + PRIORITY_DESC_PATIENT_IRENE + BLOOD_TYPE_DESC_PATIENT_IRENE + TISSUE_TYPE_DESC_PATIENT_IRENE
-                        + ORGAN_DESC_PATIENT_IRENE + DOCTOR_IN_CHARGE_DESC_PATIENT_IRENE, INVALID_STATUS_IRENE,
-                Organ.MESSAGE_CONSTRAINTS);
+                        + ORGAN_DESC_PATIENT_IRENE + DOCTOR_IN_CHARGE_DESC_PATIENT_IRENE + INVALID_STATUS_DESC,
+                Status.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported -- donor
         assertParseFailure(parser, TYPE_DESC_DONOR_JOHN + NRIC_DESC_DONOR_JOHN + NAME_DESC_DONOR_JOHN
