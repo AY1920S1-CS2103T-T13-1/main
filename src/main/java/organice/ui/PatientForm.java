@@ -158,7 +158,7 @@ public class PatientForm extends UiPart<Region> implements Form {
     }
 
     @FXML
-    public void handleEnter() throws ParseException, CommandException {
+    public void onHandleClick() throws ParseException, CommandException {
         String matchCommand = MatchCommand.COMMAND_WORD + " " + PREFIX_NRIC + nric.getText();
         String addCommand = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.PATIENT + " " + PREFIX_NAME
             + name.getText() + " " + PREFIX_NRIC + nric.getText() + " "
@@ -167,9 +167,11 @@ public class PatientForm extends UiPart<Region> implements Form {
             + PREFIX_TISSUE_TYPE + tissueType.getText() + " " + PREFIX_PRIORITY + priority.getText()
             + " " + PREFIX_DOCTOR_IN_CHARGE + doctorIc.getText();
 
-        mainWindow.executeCommand(addCommand);
+        mainWindow.getLogic().execute(addCommand);
         FormAnimation.fadingAnimation(mainWindow);
         mainWindow.executeCommand(matchCommand);
+        mainWindow.getCommandBoxPlaceholder().getChildren().add(mainWindow.getCommandBox().getRoot());
+        mainWindow.getCommandBox().requestFocus();
     }
 
     public void setAge(String age) {

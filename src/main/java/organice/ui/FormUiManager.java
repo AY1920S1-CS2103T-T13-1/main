@@ -368,6 +368,7 @@ public class FormUiManager {
     }
 
     private void handleAbort() {
+        FormAnimation.fadingAnimation(mainWindow);
         mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_EXIT);
         mainWindow.resetInnerParts();
     }
