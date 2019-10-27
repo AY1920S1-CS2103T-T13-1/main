@@ -19,7 +19,5 @@ if (type present?) then (yes)
 else (no)
     : list all persons;
 endif
-
 stop
-
 @enduml
