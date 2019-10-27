@@ -141,7 +141,12 @@ public class PatientBuilder extends PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the patient according to the attributes given.
+     * @return new Patient
+     */
     public Patient build() {
-        return new Patient(type, nric, name, phone, age, priority, bloodType, tissueType, organ, doctorInCharge, status);
+        return new Patient(type, nric, name, phone, age, priority, bloodType, tissueType, organ, doctorInCharge,
+                status);
     }
 }
