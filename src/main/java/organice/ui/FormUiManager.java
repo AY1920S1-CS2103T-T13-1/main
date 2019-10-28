@@ -470,7 +470,7 @@ public class FormUiManager {
 
             case FormField.DOCTOR_IC:
                 ((PatientForm)mainWindow.getForm()).getDoctorIc().setText("");
-                getPersonField(new CommandBox(this::getPriority), FormField.DOCTOR_IC);
+                getPersonField(new CommandBox(this::getDoctorIc), FormField.DOCTOR_IC);
                 break;
 
             case FormField.ORGAN_EXPIRY_DATE:
