@@ -5,8 +5,6 @@ import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import organice.logic.commands.FindCommand;

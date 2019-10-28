@@ -2,11 +2,17 @@ package organice.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static organice.logic.parser.CliSyntax.*;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import static organice.logic.parser.CliSyntax.PREFIX_AGE;
+import static organice.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static organice.logic.parser.CliSyntax.PREFIX_DOCTOR_IN_CHARGE;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
+import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_ORGAN;
+import static organice.logic.parser.CliSyntax.PREFIX_ORGAN_EXPIRY_DATE;
+import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
+import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
+import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,14 +29,17 @@ public class PersonContainsPrefixesPredicateTest {
         ArgumentMultimap secondPredicateKeywordList = ArgumentTokenizer
                 .tokenize("n/Alice Benson", PREFIX_NAME);
 
-        PersonContainsPrefixesPredicate firstPredicate = new PersonContainsPrefixesPredicate(firstPredicateKeywordList);
-        PersonContainsPrefixesPredicate secondPredicate = new PersonContainsPrefixesPredicate(secondPredicateKeywordList);
+        PersonContainsPrefixesPredicate firstPredicate =
+                new PersonContainsPrefixesPredicate(firstPredicateKeywordList);
+        PersonContainsPrefixesPredicate secondPredicate =
+                new PersonContainsPrefixesPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonContainsPrefixesPredicate firstPredicateCopy = new PersonContainsPrefixesPredicate(firstPredicateKeywordList);
+        PersonContainsPrefixesPredicate firstPredicateCopy =
+                new PersonContainsPrefixesPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -76,12 +85,14 @@ public class PersonContainsPrefixesPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Carol", PREFIX_NAME));
+        predicate =
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Carol", PREFIX_NAME));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match type, phone, nric and address, but does not match name
         predicate = new PersonContainsPrefixesPredicate(ArgumentTokenizer
-                .tokenize("find n/Benson t/doctor ic/S1111111A p/12345",PREFIX_NAME, PREFIX_TYPE, PREFIX_NRIC, PREFIX_PHONE));
+                .tokenize("find n/Benson t/doctor ic/S1111111A p/12345", PREFIX_NAME, PREFIX_TYPE,
+                        PREFIX_NRIC, PREFIX_PHONE));
         assertFalse(predicate.test(new PersonBuilder().withType("doctor").withNric("S1111111A").withName("Alice")
                 .withPhone("12345").build()));
 

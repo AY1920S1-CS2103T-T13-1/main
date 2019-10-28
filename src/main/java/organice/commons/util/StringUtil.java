@@ -35,8 +35,9 @@ public class StringUtil {
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        return Arrays.stream(preppedWords).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched || Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(word::equalsIgnoreCase), (isAnyWordsMatched, isNextWordHaveMatch) -> isAnyWordsMatched || isNextWordHaveMatch);
+        return Arrays.stream(preppedWords).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched
+                || Arrays.stream(wordsInPreppedSentence).anyMatch(word::equalsIgnoreCase), (
+                        isAnyWordsMatched, isNextWordHaveMatch) -> isAnyWordsMatched || isNextWordHaveMatch);
     }
 
     /**
@@ -51,7 +52,8 @@ public class StringUtil {
      * @param word cannot be null, cannot be empty, must be a single word
      */
     public static boolean containsWordIgnoreCase(String sentence, String word) {
-        checkArgument(word.trim().split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(word.trim()
+                .split("\\s+").length == 1, "Word parameter should be a single word");
         return containsWordsIgnoreCase(sentence, word);
     }
 

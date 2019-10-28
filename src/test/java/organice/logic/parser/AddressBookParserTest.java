@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
+import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,11 +23,8 @@ import organice.logic.commands.FindCommand;
 import organice.logic.commands.HelpCommand;
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
-import static organice.logic.parser.CliSyntax.PREFIX_NAME;
-import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
-import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
-import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 import organice.testutil.PersonUtil;

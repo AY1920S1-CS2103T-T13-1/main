@@ -16,7 +16,6 @@ import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 import static organice.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import organice.commons.core.index.Index;
@@ -26,8 +25,8 @@ import organice.logic.parser.ArgumentTokenizer;
 import organice.logic.parser.MatchCommandParser;
 import organice.model.AddressBook;
 import organice.model.Model;
-import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Status;
 import organice.testutil.EditPersonDescriptorBuilder;
 

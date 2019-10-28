@@ -1,9 +1,6 @@
 package organice.logic.parser;
 
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import organice.logic.commands.FindCommand;
-import organice.logic.parser.exceptions.ParseException;
 import static organice.logic.parser.CliSyntax.PREFIX_AGE;
 import static organice.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_DOCTOR_IN_CHARGE;
@@ -15,6 +12,9 @@ import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import organice.logic.commands.FindCommand;
+import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
 /**

@@ -3,6 +3,7 @@ package organice.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
@@ -12,7 +13,6 @@ import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,10 +22,9 @@ import organice.logic.parser.ArgumentMultimap;
 import organice.logic.parser.ArgumentTokenizer;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
-import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.AddressBookBuilder;
-import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 
 public class ModelManagerTest {
 
@@ -199,7 +198,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        ArgumentMultimap searchParams = ArgumentTokenizer.tokenize("find n/" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
+        ArgumentMultimap searchParams = ArgumentTokenizer
+                .tokenize("find n/" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
         modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
