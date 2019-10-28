@@ -23,7 +23,7 @@ import organice.commons.core.index.Index;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.AddressBook;
 import organice.model.Model;
-import organice.model.person.NameContainsKeywordsPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
 import organice.testutil.EditPersonDescriptorBuilder;
 
@@ -206,7 +206,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

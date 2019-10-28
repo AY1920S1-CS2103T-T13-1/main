@@ -1,7 +1,5 @@
 package organice.logic.parser;
 
-import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.Arrays;
 
 import organice.logic.commands.FindCommand;
@@ -17,7 +15,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
-import organice.model.person.NameContainsKeywordsPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -44,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN);
 
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new PersonContainsPrefixesPredicate(argMultimap));
     }
 
 }

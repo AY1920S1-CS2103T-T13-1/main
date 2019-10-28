@@ -23,7 +23,7 @@ import organice.logic.commands.FindCommand;
 import organice.logic.commands.HelpCommand;
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
-import organice.model.person.NameContainsKeywordsPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
@@ -73,7 +73,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new PersonContainsPrefixesPredicate(keywords)), command);
     }
 
     @Test

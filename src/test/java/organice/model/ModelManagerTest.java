@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import organice.commons.core.GuiSettings;
-import organice.model.person.NameContainsKeywordsPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -134,7 +134,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = DOCTOR_ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
