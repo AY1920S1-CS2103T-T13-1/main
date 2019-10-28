@@ -284,10 +284,18 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Retrieves the Match List
+     * Returns a copy of the match list.
      */
     public ObservableList<Person> getMatchList() {
-        return listOfMatches;
+        ObservableList<Person> listOfMatchesCopy = FXCollections.observableArrayList();
+        for (Person person : listOfMatches) {
+            if (person instanceof MatchedDonor) {
+                listOfMatchesCopy.add((MatchedDonor) person);
+            } else {
+                listOfMatchesCopy.add((MatchedPatient) person);
+            }
+        }
+        return listOfMatchesCopy;
     }
 
     /**
