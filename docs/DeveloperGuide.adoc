@@ -444,6 +444,8 @@ Use case ends.
 Steps 1a1-1a2 are repeated until the data entered are correct.
 +
 Use case resumes at step 2.
++
+[none]
 
 === Use case: List all patients/donors/doctors
 
