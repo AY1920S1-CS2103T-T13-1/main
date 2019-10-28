@@ -1,5 +1,7 @@
 package organice.logic.parser;
 
+import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import organice.logic.commands.FindCommand;
 import organice.logic.parser.exceptions.ParseException;
 import static organice.logic.parser.CliSyntax.PREFIX_AGE;
@@ -26,6 +28,13 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        args = args.replaceAll("\n", " ").replaceAll("\\s+", " ");
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
                 PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
                 PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN);

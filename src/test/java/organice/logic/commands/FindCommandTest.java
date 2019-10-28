@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static organice.logic.parser.CliSyntax.*;
 import static organice.testutil.TypicalPersons.DONOR_ELLE;
 import static organice.testutil.TypicalPersons.DONOR_FIONA;
 import static organice.testutil.TypicalPersons.PATIENT_CARL;
@@ -15,6 +16,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import organice.logic.parser.ArgumentTokenizer;
 import organice.model.Model;
 import organice.model.ModelManager;
 import organice.model.UserPrefs;
@@ -30,9 +32,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         PersonContainsPrefixesPredicate firstPredicate =
-                new PersonContainsPrefixesPredicate(Collections.singletonList("first"));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Alice", PREFIX_NAME));
         PersonContainsPrefixesPredicate secondPredicate =
-                new PersonContainsPrefixesPredicate(Collections.singletonList("second"));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Benson", PREFIX_NAME));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +59,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonContainsPrefixesPredicate predicate = preparePredicate(" ");
+        PersonContainsPrefixesPredicate predicate = preparePredicate("find ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +69,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonContainsPrefixesPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        PersonContainsPrefixesPredicate predicate = preparePredicate("find n/Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -78,6 +80,9 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private PersonContainsPrefixesPredicate preparePredicate(String userInput) {
-        return new PersonContainsPrefixesPredicate(Arrays.asList(userInput.split("\\s+")));
+        //TODO: Replace ArgumentTokenizer with stubs
+        return new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_NRIC,
+                PREFIX_PHONE, PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
+                PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN));
     }
 }

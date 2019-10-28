@@ -21,6 +21,8 @@ import java.util.List;
 
 import organice.commons.core.index.Index;
 import organice.logic.commands.exceptions.CommandException;
+import organice.logic.parser.ArgumentMultimap;
+import organice.logic.parser.ArgumentTokenizer;
 import organice.logic.parser.MatchCommandParser;
 import organice.model.AddressBook;
 import organice.model.Model;
@@ -180,6 +182,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(expectedCommandResult.getFeedbackToUser());
+            System.out.println(result.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(actualModel, expectedModel);
         } catch (CommandException ce) {
@@ -221,9 +225,10 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(Arrays.asList(splitName[0])));
+        final ArgumentMultimap searchParams = ArgumentTokenizer
+                .tokenize("find n/" + person.getName().fullName, PREFIX_NAME);
 
+        model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertEquals(1, model.getFilteredPersonList().size());
     }
 

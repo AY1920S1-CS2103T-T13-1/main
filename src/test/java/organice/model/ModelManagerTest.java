@@ -199,8 +199,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        ArgumentMultimap searchParams = ArgumentTokenizer.tokenize("/n" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
-
+        ArgumentMultimap searchParams = ArgumentTokenizer.tokenize("find n/" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
         modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

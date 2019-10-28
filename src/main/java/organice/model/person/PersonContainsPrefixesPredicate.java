@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import organice.commons.util.StringUtil;
 import organice.logic.parser.ArgumentMultimap;
+import organice.logic.parser.ArgumentTokenizer;
+
 import static organice.logic.parser.CliSyntax.PREFIX_AGE;
 import static organice.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_DOCTOR_IN_CHARGE;
@@ -18,7 +20,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s prefixes matches any of the prefix-keyword pairs given.
  */
 public class PersonContainsPrefixesPredicate implements Predicate<Person> {
     private final ArgumentMultimap argMultimap;
@@ -41,6 +43,13 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
         List<String> tissueTypeKeywords = argMultimap.getAllValues(PREFIX_TISSUE_TYPE);
         List<String> organExpiryDateKeywords = argMultimap.getAllValues(PREFIX_ORGAN_EXPIRY_DATE);
         List<String> organKeywords = argMultimap.getAllValues(PREFIX_ORGAN);
+
+        // Early return if argMultimap is empty
+        if (argMultimap.equals(ArgumentTokenizer.tokenize("find", PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
+                PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
+                PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN))) {
+            return false;
+        }
 
         return (nameKeywords.isEmpty() || nameKeywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getName().fullName, keyword)))

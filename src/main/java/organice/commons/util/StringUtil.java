@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
+     * Returns true if the {@code sentence} contains any word in {@code words}.
      *   Ignores case, but a full word match is required.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
@@ -28,13 +28,14 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(words);
 
-        String[] preppedWord = words.trim().split(" ");
-        checkArgument(preppedWord.length != 0, "Words parameter cannot be empty");
+        words = words.replace("\n", " ");
+        String[] preppedWords = words.split("\\s+");
+        checkArgument(preppedWords.length > 0, "Words parameter cannot be empty");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        return Arrays.stream(preppedWord).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched || Arrays.stream(wordsInPreppedSentence)
+        return Arrays.stream(preppedWords).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched || Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(word::equalsIgnoreCase), (isAnyWordsMatched, isNextWordHaveMatch) -> isAnyWordsMatched || isNextWordHaveMatch);
     }
 
