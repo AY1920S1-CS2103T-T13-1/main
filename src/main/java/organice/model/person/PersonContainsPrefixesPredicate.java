@@ -51,47 +51,27 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
             return false;
         }
 
-        return (nameKeywords.isEmpty() || nameKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getName().fullName, keyword)))
-                && (nricKeywords.isEmpty() || nricKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getNric().toString(), keyword)))
-                && (phoneKeywords.isEmpty() || phoneKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getPhone().toString(), keyword)))
-                && (typeKeywords.isEmpty() || typeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getType().toString(), keyword)))
-                && (ageKeywords.isEmpty() || (person.getType().isPatient() ? ageKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getAge().toString(), keyword))
-                    : !person.getType().isDonor() || ageKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Donor) person).getAge().toString(), keyword))))
-                && (priorityKeywords.isEmpty() || !person.getType().isPatient() || priorityKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getPriority().toString(), keyword)))
-                && (bloodTypeKeywords.isEmpty() || (person.getType().isPatient() ? bloodTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getBloodType().toString(), keyword))
-                    : !person.getType().isDonor() || bloodTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Donor) person).getBloodType().toString(), keyword))))
-                && (doctorInChargeKeywords.isEmpty() || !person.getType().isPatient() || doctorInChargeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getDoctorInCharge().toString(), keyword)))
-                && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient() ? tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getTissueType().toString(), keyword))
-                    : !person.getType().isDonor() || tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Donor) person).getTissueType().toString(), keyword))))
-                && (organExpiryDateKeywords.isEmpty() || !person.getType().isDonor() || organExpiryDateKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Donor) person).getOrganExpiryDate().toString(), keyword)))
-                && (organKeywords.isEmpty() || (person.getType().isPatient() ? organKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Patient) person).getOrgan().toString(), keyword))
-                    : !person.getType().isDonor() || tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
-                            .containsWordsIgnoreCase(((Donor) person).getOrgan().toString(), keyword))));
+        return (nameKeywords.isEmpty() || check(nameKeywords, person.getName().toString()))
+                && (nricKeywords.isEmpty() || check(nricKeywords, person.getNric().toString()))
+                && (phoneKeywords.isEmpty() || check(phoneKeywords, person.getPhone().toString()))
+                && (typeKeywords.isEmpty() || check(typeKeywords, person.getType().toString()))
+                && (ageKeywords.isEmpty() || (person.getType().isPatient() ? check(ageKeywords, ((Patient) person).getAge().toString())
+                    : !person.getType().isDonor() || check(ageKeywords, ((Donor) person).getAge().toString())))
+                && (priorityKeywords.isEmpty() || !person.getType().isPatient() || check(priorityKeywords, ((Patient) person).getPriority().toString()))
+                && ((person.getType().isPatient() || person.getType().isDonor()) && bloodTypeKeywords.isEmpty()
+                    || (person.getType().isPatient() ? check(bloodTypeKeywords, ((Patient) person).getBloodType().toString())
+                    : !person.getType().isDonor() || check(bloodTypeKeywords, ((Donor) person).getBloodType().toString())))
+                && (doctorInChargeKeywords.isEmpty() || !person.getType().isPatient() || check(doctorInChargeKeywords, ((Patient) person).getDoctorInCharge().toString()))
+                && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient() ? check(tissueTypeKeywords, ((Patient) person).getTissueType().toString())
+                    : !person.getType().isDonor() || check(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
+                && (organExpiryDateKeywords.isEmpty() || !person.getType().isDonor() || check(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
+                && (organKeywords.isEmpty() || (person.getType().isPatient() ? check(organKeywords, ((Patient) person).getOrgan().toString())
+                    : !person.getType().isDonor() || check(tissueTypeKeywords, ((Donor) person).getOrgan().toString())));
+    }
+
+    private boolean check(List<String> prefixKeywords, String personAttribute) {
+        return prefixKeywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(personAttribute, keyword));
     }
 
     @Override
