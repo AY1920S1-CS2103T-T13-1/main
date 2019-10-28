@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import organice.commons.core.GuiSettings;
+import organice.model.person.Nric;
+import organice.model.person.Patient;
 import organice.model.person.Person;
+import organice.model.person.exceptions.PersonNotFoundException;
 
 /**
  * The API of the Model component.
@@ -13,6 +16,15 @@ import organice.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true if person is a doctor */
+    Predicate<Person> PREDICATE_SHOW_ALL_DOCTORS = person -> person.getType().isDoctor();
+
+    /** {@code Predicate} that always evaluate to true  if person is a donor */
+    Predicate<Person> PREDICATE_SHOW_ALL_DONORS = person -> person.getType().isDonor();
+
+    /** {@code Predicate} that always evaluate to true if person is a patient */
+    Predicate<Person> PREDICATE_SHOW_ALL_PATIENTS = person -> person.getType().isPatient();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -58,6 +70,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a doctor in charge with the same nric as {@code doctorInCharge} exists in the address book.
+     */
+    boolean hasDoctor(Nric doctor);
+
+    /**
+     * Returns true if a patient with the specified Nric exists in ORGANice.
+     */
+    boolean hasPatient(Nric patient);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -85,4 +107,30 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Retrieves the {@code Patient} with the specified {@code Nric}
+     * @throws PersonNotFoundException if the {@code Patient} with the {@code Nric} cannot be found.
+     */
+    Patient getPatient(Nric patientNric) throws PersonNotFoundException;
+
+    /**
+     * Matches all Patients to all Donors in ORGANice.
+     */
+    void matchAllPatients();
+
+    /**
+     * Removes all MatchedDonor instances from ORGANice.
+     */
+    void removeMatches();
+
+    /**
+     * Match Donors to a specified Patient.
+     */
+    void matchDonors(Patient patient);
+
+    /**
+     * Retrieves the match list.
+     */
+    ObservableList<Person> getMatchList();
 }

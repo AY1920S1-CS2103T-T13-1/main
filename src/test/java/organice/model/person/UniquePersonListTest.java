@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
+import static organice.testutil.TypicalPersons.DONOR_GEORGE;
 import static organice.testutil.TypicalPersons.PATIENT_BOB;
+import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import organice.model.person.exceptions.DuplicatePersonException;
 import organice.model.person.exceptions.PersonNotFoundException;
+import organice.testutil.DoctorBuilder;
 import organice.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -42,6 +45,61 @@ public class UniquePersonListTest {
         uniquePersonList.add(DOCTOR_ALICE);
         Person editedAlice = new PersonBuilder(DOCTOR_ALICE).build();
         assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void contains_nullDoctor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsDoctor(null));
+    }
+
+    @Test
+    public void contains_doctorNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsDoctor(DOCTOR_ALICE.getNric()));
+    }
+
+    @Test
+    public void contains_doctorInList_returnsTrue() {
+        uniquePersonList.add(DOCTOR_ALICE);
+        assertTrue(uniquePersonList.containsDoctor(DOCTOR_ALICE.getNric()));
+    }
+
+    @Test
+    public void contains_doctorWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.add(DOCTOR_ALICE);
+        Person editedAlice = new DoctorBuilder(DOCTOR_ALICE).build();
+        assertTrue(uniquePersonList.containsDoctor(editedAlice.getNric()));
+    }
+
+    @Test
+    public void containsPatient_patientInList_returnsTrue() {
+        uniquePersonList.add(PATIENT_IRENE);
+        uniquePersonList.add(DOCTOR_ALICE);
+        assertTrue(uniquePersonList.containsPatient(PATIENT_IRENE.getNric()));
+    }
+
+    @Test
+    public void containsPatient_patientNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsPatient(PATIENT_IRENE.getNric()));
+    }
+
+    @Test
+    public void containsPatient_nullPatient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsPatient(null));
+    }
+
+    @Test
+    public void getPatient_patientInList_returnsPatient() {
+        uniquePersonList.add(PATIENT_BOB);
+        uniquePersonList.add(DONOR_GEORGE);
+
+        assertEquals(PATIENT_BOB, uniquePersonList.getPatient(PATIENT_BOB.getNric()));
+    }
+    @Test
+    public void getPatient_patientNotInAddressBook_throwsPersonNotFoundException() {
+        uniquePersonList.add(PATIENT_BOB);
+        uniquePersonList.add(DONOR_GEORGE);
+
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.getPatient(PATIENT_IRENE.getNric()));
     }
 
     @Test
