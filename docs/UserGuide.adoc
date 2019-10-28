@@ -439,8 +439,7 @@ Example:
 
 === Exiting the program : `exit`
 
-Exits the program. +
-Format: `exit`
+To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own.
 
 === Saving the data
 
