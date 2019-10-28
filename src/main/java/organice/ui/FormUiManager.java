@@ -12,7 +12,9 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.LinkedList;
 import javafx.scene.layout.StackPane;
+import jdk.jshell.PersistentSnippet;
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
@@ -39,6 +41,7 @@ public class FormUiManager {
 
     private static final String COMMAND_EXIT = "/abort";
     private static final String COMMAND_DONE = "/done";
+    private static final String COMMAND_UNDO = "/undo";
 
     private static final String PROMPT_NAME = "Enter name:";
     private static final String PROMPT_NRIC = "Enter NRIC:";
@@ -54,10 +57,16 @@ public class FormUiManager {
             + "\nType '/done' to confirm, '/abort' to cancel the addition";
 
     private static final String MESSAGE_EXIT = "Form is abandoned!";
+    private static final String MESSAGE_UNDO_SUCCESS = "Successfully undo the last entry!";
+    private static final String MESSAGE_UNDO_ERROR = "You can't undo at this stage!";
 
     private MainWindow mainWindow;
     private Type formType;
     private Model model;
+
+    // For undo feature purpose
+    private LinkedList<String> history = new LinkedList<>();
+    private int currentState = -1;
 
 
     public FormUiManager(MainWindow mainWindow, Type formType, Model model) {
@@ -68,8 +77,9 @@ public class FormUiManager {
 
     private CommandResult getName(String personName) throws ParseException {
         personName = personName.trim();
-        if (personName.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personName)) {
+            handleSpecialCommand(personName);
             return new CommandResult(personName);
         }
 
@@ -78,8 +88,7 @@ public class FormUiManager {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personName, FormField.NAME);
+        successFillingField(personName, FormField.NAME);
         getPersonField(new CommandBox(this::getNric), PROMPT_NRIC);
 
         return new CommandResult(personName);
@@ -87,8 +96,9 @@ public class FormUiManager {
 
     private CommandResult getNric(String personNric) throws ParseException {
         personNric = personNric.trim();
-        if (personNric.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personNric)) {
+            handleSpecialCommand(personNric);
             return new CommandResult(personNric);
         }
 
@@ -100,8 +110,7 @@ public class FormUiManager {
             throw new ParseException(AddCommand.MESSAGE_DUPLICATE_PERSON);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personNric, FormField.NRIC);
+        successFillingField(personNric, FormField.NRIC);
         getPersonField(new CommandBox(this::getPhone), PROMPT_PHONE);
 
         return new CommandResult(personNric);
@@ -109,8 +118,9 @@ public class FormUiManager {
 
     private CommandResult getPhone(String personPhone) throws ParseException {
         personPhone = personPhone.trim();
-        if (personPhone.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personPhone)) {
+            handleSpecialCommand(personPhone);
             return new CommandResult(personPhone);
         }
 
@@ -119,8 +129,7 @@ public class FormUiManager {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personPhone, FormField.PHONE);
+        successFillingField(personPhone, FormField.PHONE);
 
         if (formType.isDoctor()) {
             confirmPersonDetails();
@@ -133,8 +142,9 @@ public class FormUiManager {
 
     private CommandResult getAge(String personAge) throws ParseException {
         personAge = personAge.trim();
-        if (personAge.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personAge)) {
+            handleSpecialCommand(personAge);
             return new CommandResult(personAge);
         }
 
@@ -143,8 +153,7 @@ public class FormUiManager {
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personAge, FormField.AGE);
+        successFillingField(personAge, FormField.AGE);
         getPersonField(new CommandBox(this::getOrgan), PROMPT_ORGAN);
 
         return new CommandResult(personAge);
@@ -152,8 +161,9 @@ public class FormUiManager {
 
     private CommandResult getOrgan(String personOrgan) throws ParseException {
         personOrgan = personOrgan.trim();
-        if (personOrgan.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personOrgan)) {
+            handleSpecialCommand(personOrgan);
             return new CommandResult(personOrgan);
         }
 
@@ -162,8 +172,7 @@ public class FormUiManager {
             throw new ParseException(Organ.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personOrgan, FormField.ORGAN);
+        successFillingField(personOrgan, FormField.ORGAN);
         getPersonField(new CommandBox(this::getBloodType), PROMPT_BLOOD_TYPE);
 
         return new CommandResult(personOrgan);
@@ -171,8 +180,9 @@ public class FormUiManager {
 
     private CommandResult getBloodType(String personBloodType) throws ParseException {
         personBloodType = personBloodType.trim();
-        if (personBloodType.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personBloodType)) {
+            handleSpecialCommand(personBloodType);
             return new CommandResult(personBloodType);
         }
 
@@ -181,8 +191,7 @@ public class FormUiManager {
             throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personBloodType, FormField.BLOOD_TYPE);
+        successFillingField(personBloodType, FormField.BLOOD_TYPE);
         getPersonField(new CommandBox(this::getTissueType), PROMPT_TISSUE_TYPE);
 
         return new CommandResult(personBloodType);
@@ -190,8 +199,9 @@ public class FormUiManager {
 
     private CommandResult getTissueType(String personTissueType) throws ParseException {
         personTissueType = personTissueType.trim();
-        if (personTissueType.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personTissueType)) {
+            handleSpecialCommand(personTissueType);
             return new CommandResult(personTissueType);
         }
 
@@ -200,8 +210,7 @@ public class FormUiManager {
             throw new ParseException(TissueType.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personTissueType, FormField.TISSUE_TYPE);
+        successFillingField(personTissueType, FormField.TISSUE_TYPE);
 
         if (formType.isPatient()) {
             getPersonField(new CommandBox(this::getPriority), PROMPT_PRIORITY);
@@ -214,8 +223,9 @@ public class FormUiManager {
 
     private CommandResult getPriority(String personPriority) throws ParseException {
         personPriority = personPriority.trim();
-        if (personPriority.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personPriority)) {
+            handleSpecialCommand(personPriority);
             return new CommandResult(personPriority);
         }
 
@@ -224,8 +234,7 @@ public class FormUiManager {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personPriority, FormField.PRIORITY);
+        successFillingField(personPriority, FormField.PRIORITY);
 
         if (formType.isPatient()) {
             getPersonField(new CommandBox(this::getDoctorIc), PROMPT_DOCTOR_IC);
@@ -236,8 +245,9 @@ public class FormUiManager {
 
     private CommandResult getDoctorIc(String personDoctorIc) throws ParseException {
         personDoctorIc = personDoctorIc.trim();
-        if (personDoctorIc.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personDoctorIc)) {
+            handleSpecialCommand(personDoctorIc);
             return new CommandResult(personDoctorIc);
         }
 
@@ -249,8 +259,7 @@ public class FormUiManager {
             throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personDoctorIc, FormField.DOCTOR_IC);
+        successFillingField(personDoctorIc, FormField.DOCTOR_IC);
 
         if (formType.isPatient()) {
             confirmPersonDetails();
@@ -261,8 +270,9 @@ public class FormUiManager {
 
     private CommandResult getOrganExpiryDate(String personOrganExpiryDate) throws ParseException {
         personOrganExpiryDate = personOrganExpiryDate.trim();
-        if (personOrganExpiryDate.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(personOrganExpiryDate)) {
+            handleSpecialCommand(personOrganExpiryDate);
             return new CommandResult(personOrganExpiryDate);
         }
 
@@ -271,8 +281,7 @@ public class FormUiManager {
             throw new ParseException(OrganExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
-        mainWindow.getForm().setProgress();
-        FormAnimation.typingAnimation(mainWindow, personOrganExpiryDate, FormField.ORGAN_EXPIRY_DATE);
+        successFillingField(personOrganExpiryDate, FormField.ORGAN_EXPIRY_DATE);
 
         if (formType.isDonor()) {
             confirmPersonDetails();
@@ -297,10 +306,11 @@ public class FormUiManager {
 
     private CommandResult setPersonDetails(String commandText) throws ParseException, CommandException {
         commandText = commandText.trim();
-        if (commandText.equals(COMMAND_EXIT)) {
-            handleAbort();
+
+        if (isSpecialCommand(commandText)) {
+            handleSpecialCommand(commandText);
             return new CommandResult(commandText);
-        } else if (commandText.equals(COMMAND_DONE)) {
+        }  else if (commandText.equals(COMMAND_DONE)) {
             ResultDisplay resultDisplay = mainWindow.getResultDisplay();
             CommandResult commandResult = null;
 
@@ -367,9 +377,113 @@ public class FormUiManager {
         return commandResult;
     }
 
+    private void successFillingField(String fieldValue, String formField) {
+        mainWindow.getForm().increaseProgress();
+        currentState++;
+        history.add(currentState, formField);
+        FormAnimation.typingAnimation(mainWindow, fieldValue, formField);
+
+    }
+
+    private boolean isSpecialCommand(String commandText) {
+        return commandText.equals(COMMAND_UNDO) || commandText.equals(COMMAND_EXIT);
+    }
+
+    private void handleSpecialCommand(String commandText) {
+        if (commandText.equals(COMMAND_EXIT)) {
+            handleAbort();
+        } else if (commandText.equals(COMMAND_UNDO)) {
+            handleUndo();
+        }
+    }
+
     private void handleAbort() {
         FormAnimation.fadingAnimation(mainWindow);
         mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_EXIT);
         mainWindow.resetInnerParts();
+    }
+
+    private void handleUndo() {
+        if (currentState == -1) {
+            mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_UNDO_ERROR);
+        } else {
+            Type formType = mainWindow.getForm().getType();
+            String currentField = history.get(currentState);
+            currentState --;
+            switch (currentField) {
+
+            case FormField.NAME:
+                mainWindow.getForm().setName("");
+                getPersonField(new CommandBox(this::getName), PROMPT_NAME);
+                break;
+
+            case FormField.NRIC:
+                mainWindow.getForm().getNric().setText("");
+                getPersonField(new CommandBox(this::getNric), PROMPT_NRIC);
+                break;
+
+            case FormField.PHONE:
+                mainWindow.getForm().getPhone().setText("");
+                getPersonField(new CommandBox(this::getPhone), PROMPT_PHONE);
+                break;
+
+            case FormField.AGE:
+                if (formType.isPatient()) {
+                    ((PatientForm)mainWindow.getForm()).getAge().setText("");
+                } else if (formType.isDonor()) {
+                    ((DonorForm)mainWindow.getForm()).getAge().setText("");
+                }
+                getPersonField(new CommandBox(this::getAge), PROMPT_AGE);
+                break;
+
+            case FormField.ORGAN:
+                if (formType.isPatient()) {
+                    ((PatientForm)mainWindow.getForm()).getOrgan().setText("");
+                } else if (formType.isDonor()) {
+                    ((DonorForm)mainWindow.getForm()).getOrgan().setText("");
+                }
+                getPersonField(new CommandBox(this::getOrgan), PROMPT_ORGAN);
+                break;
+
+            case FormField.BLOOD_TYPE:
+                if (formType.isPatient()) {
+                    ((PatientForm)mainWindow.getForm()).getBloodType().setText("");
+                } else if (formType.isDonor()) {
+                    ((DonorForm)mainWindow.getForm()).getBloodType().setText("");
+                }
+                getPersonField(new CommandBox(this::getBloodType), PROMPT_BLOOD_TYPE);
+                break;
+
+            case FormField.TISSUE_TYPE:
+                if (formType.isPatient()) {
+                    ((PatientForm)mainWindow.getForm()).getTissueType().setText("");
+                } else if (formType.isDonor()) {
+                    ((DonorForm)mainWindow.getForm()).getTissueType().setText("");
+                }
+                getPersonField(new CommandBox(this::getTissueType), PROMPT_TISSUE_TYPE);
+                break;
+
+            case FormField.PRIORITY:
+                ((PatientForm)mainWindow.getForm()).getPriority().setText("");
+                getPersonField(new CommandBox(this::getPriority), PROMPT_PRIORITY);
+                break;
+
+            case FormField.DOCTOR_IC:
+                ((PatientForm)mainWindow.getForm()).getDoctorIc().setText("");
+                getPersonField(new CommandBox(this::getPriority), FormField.DOCTOR_IC);
+                break;
+
+            case FormField.ORGAN_EXPIRY_DATE:
+                ((DonorForm)mainWindow.getForm()).getOrganExpiryDate().setText("");
+                getPersonField(new CommandBox(this::getOrganExpiryDate), FormField.ORGAN_EXPIRY_DATE);
+                break;
+
+            default:
+                break;
+            }
+
+            mainWindow.getForm().decreaseProgress();
+            mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_UNDO_SUCCESS);
+        }
     }
 }

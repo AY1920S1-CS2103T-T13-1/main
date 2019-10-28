@@ -91,8 +91,15 @@ public class DoctorForm extends UiPart<Region> implements Form {
     }
 
     @Override
-    public void setProgress() {
+    public void increaseProgress() {
         filledFields ++;
+        double currentProgress = (double)filledFields / numberOfFields;
+        FormAnimation.percentageChangeAnimation(currentProgress,
+            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+    }
+
+    public void decreaseProgress() {
+        filledFields --;
         double currentProgress = (double)filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
             String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);

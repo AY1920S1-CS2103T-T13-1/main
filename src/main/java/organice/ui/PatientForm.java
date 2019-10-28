@@ -143,13 +143,30 @@ public class PatientForm extends UiPart<Region> implements Form {
     }
 
     @Override
-    public void setProgress() {
+    public void increaseProgress() {
         filledFields ++;
 
         //Button is visible if all fields are filled
         if (filledFields == numberOfFields) {
             FormAnimation.showButtonAnimation(findMatch);
             findMatch.setVisible(true);
+        }
+
+        double currentProgress = (double)filledFields / numberOfFields;
+        FormAnimation.percentageChangeAnimation(currentProgress,
+            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+    }
+
+    @Override
+    public void decreaseProgress() {
+        filledFields --;
+
+        //Button is visible if all fields are filled
+        if (filledFields == numberOfFields) {
+            FormAnimation.showButtonAnimation(findMatch);
+            findMatch.setVisible(true);
+        } else {
+            findMatch.setVisible(false);
         }
 
         double currentProgress = (double)filledFields / numberOfFields;
