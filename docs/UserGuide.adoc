@@ -221,7 +221,7 @@ Here are some special commands that might be useful when you are in the process 
 
 Note that both `/abort` and `/undo` commands can be used at any point in times, while `/done` command can only be used once all the required attributes have been specified.
 
-That is all the important commands for this feature, now let's see an example on how the feature will look like.
+That's the important commands for this feature, now let's see an example on how the feature will look like.
 When you want to add a `Patient`, type `add t/patient` on the `Command Box` and a form will appear as below and the `Result Box` will prompt the user to enter the patient's name.
 
 image::addForm.png[width="790"]
