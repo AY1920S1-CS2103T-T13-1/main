@@ -243,9 +243,11 @@ In the example below, a user might have entered a wrong `Patient's` name and thu
 
 image::undoCommand.png[width="790"]
 
-After all of the attributes have been specified, you can type `/done` to add the person to the ORGANice list of persons,
-`/abort` if you decided not to add the person into the list, or click the `Find Match` button to directly add the person and
-find the potential donors at the same time.
+After all of the attributes have been specified, you can type in:
+
+* `/done` to add the person to the ORGANice list of persons
+* `/abort` if you decided not to add the person into the list
+* Click the `Find Match` button to directly add the person and find the potential donors at the same time.
 Note that the `Find Match` button will only appear on the `Patient` form.
 
 image::allFieldSpecified.png[width="790"]
