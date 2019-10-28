@@ -17,7 +17,6 @@ import java.util.function.Predicate;
 
 import organice.commons.util.StringUtil;
 import organice.logic.parser.ArgumentMultimap;
-import organice.logic.parser.ArgumentTokenizer;
 
 /**
  * Tests that a {@code Person}'s prefixes matches any of the prefix-keyword pairs given.
@@ -56,16 +55,25 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
                 && (nricKeywords.isEmpty() || check(nricKeywords, person.getNric().toString()))
                 && (phoneKeywords.isEmpty() || check(phoneKeywords, person.getPhone().toString()))
                 && (typeKeywords.isEmpty() || check(typeKeywords, person.getType().toString()))
-                && (ageKeywords.isEmpty() || (person.getType().isPatient() ? check(ageKeywords, ((Patient) person).getAge().toString())
+                && (ageKeywords.isEmpty() || (person.getType().isPatient()
+                    ? check(ageKeywords, ((Patient) person).getAge().toString())
                     : person.getType().isDonor() && check(ageKeywords, ((Donor) person).getAge().toString())))
-                && (priorityKeywords.isEmpty() || person.getType().isPatient() && check(priorityKeywords, ((Patient) person).getPriority().toString()))
-                && (bloodTypeKeywords.isEmpty() || (person.getType().isPatient() ? check(bloodTypeKeywords, ((Patient) person).getBloodType().toString())
-                    : person.getType().isDonor() && check(bloodTypeKeywords, ((Donor) person).getBloodType().toString())))
-                && (doctorInChargeKeywords.isEmpty() || person.getType().isPatient() && check(doctorInChargeKeywords, ((Patient) person).getDoctorInCharge().toString()))
-                && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient() ? check(tissueTypeKeywords, ((Patient) person).getTissueType().toString())
-                    : person.getType().isDonor() && check(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
-                && (organExpiryDateKeywords.isEmpty() || person.getType().isDonor() && check(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
-                && (organKeywords.isEmpty() || (person.getType().isPatient() ? check(organKeywords, ((Patient) person).getOrgan().toString())
+                && (priorityKeywords.isEmpty() || person.getType().isPatient()
+                    && check(priorityKeywords, ((Patient) person).getPriority().toString()))
+                && (bloodTypeKeywords.isEmpty() || (person.getType().isPatient()
+                    ? check(bloodTypeKeywords, ((Patient) person).getBloodType().toString())
+                    : person.getType().isDonor()
+                        && check(bloodTypeKeywords, ((Donor) person).getBloodType().toString())))
+                && (doctorInChargeKeywords.isEmpty() || person.getType().isPatient()
+                    && check(doctorInChargeKeywords, ((Patient) person).getDoctorInCharge().toString()))
+                && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient()
+                    ? check(tissueTypeKeywords, ((Patient) person).getTissueType().toString())
+                    : person.getType().isDonor()
+                        && check(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
+                && (organExpiryDateKeywords.isEmpty() || person.getType().isDonor()
+                    && check(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
+                && (organKeywords.isEmpty() || (person.getType().isPatient()
+                    ? check(organKeywords, ((Patient) person).getOrgan().toString())
                     : person.getType().isDonor() && check(organKeywords, ((Donor) person).getOrgan().toString())));
     }
 
