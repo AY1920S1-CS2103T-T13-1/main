@@ -25,7 +25,7 @@ public class PersonContainsPrefixesPredicateTest {
     @Test
     public void equals() {
         //TODO: Replace ArgumentTokenizer with stub
-        ArgumentMultimap firstPredicateKeywordList = ArgumentTokenizer.tokenize("n/Alice", PREFIX_NAME);
+        ArgumentMultimap firstPredicateKeywordList = ArgumentTokenizer.tokenize("find n/Alice", PREFIX_NAME);
         ArgumentMultimap secondPredicateKeywordList = ArgumentTokenizer
                 .tokenize("n/Alice Benson", PREFIX_NAME);
 
@@ -56,22 +56,22 @@ public class PersonContainsPrefixesPredicateTest {
     public void test_personContainsPrefixes_returnsTrue() {
         // One keyword
         PersonContainsPrefixesPredicate predicate =
-                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("n/Alice", PREFIX_NAME));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Alice", PREFIX_NAME));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
         predicate =
-                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("n/Alice Bob", PREFIX_NAME));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Alice Bob", PREFIX_NAME));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
         predicate =
-                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("n/Bob Carol", PREFIX_NAME));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/Bob Carol", PREFIX_NAME));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
         predicate =
-                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("n/aLIce bOB", PREFIX_NAME));
+                new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize("find n/aLIce bOB", PREFIX_NAME));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
