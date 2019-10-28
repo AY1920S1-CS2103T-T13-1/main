@@ -68,7 +68,8 @@ public class MatchCommandTest {
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
         ObservableList<Person> listOfDonors = modelStub.getMatchList();
 
-        assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(MatchCommand.MESSAGE_SUCCESS_MATCH_PATIENT, VALID_NRIC_PATIENT_IRENE);
+        assertEquals(String.format(expectedMessage, validNric), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(DONOR_IRENE_DONOR), listOfDonors);
     }
 
@@ -80,7 +81,8 @@ public class MatchCommandTest {
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
         ObservableList<Person> listOfDonors = modelStub.getMatchList();
 
-        assertEquals(String.format(MatchCommand.MESSAGE_SUCCESS, validNric), commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(MatchCommand.MESSAGE_NO_MATCHES, VALID_NRIC_PATIENT_IRENE);
+        assertEquals(String.format(expectedMessage, validNric), commandResult.getFeedbackToUser());
         assertEquals(listOfDonors.size(), 0); //assert that there is no donor
     }
 
@@ -287,6 +289,11 @@ public class MatchCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean haveMatches() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -438,6 +445,11 @@ public class MatchCommandTest {
         @Override
         public void removeMatches() {
             listOfMatches = observableArrayList();
+        }
+
+        @Override
+        public boolean haveMatches() {
+            return listOfMatches.size() > 0;
         }
     }
 }
