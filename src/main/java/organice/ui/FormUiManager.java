@@ -172,7 +172,7 @@ public class FormUiManager {
 
     private CommandResult getOrgan(String personOrgan) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isPatient()) {
+        if (formType.isPatient()) {
             assert !((PatientForm) mainWindow.getForm()).getAge().getText().equals("");
         } else if (formType.isDonor()) {
             assert !((DonorForm) mainWindow.getForm()).getAge().getText().equals("");
@@ -199,7 +199,7 @@ public class FormUiManager {
 
     private CommandResult getBloodType(String personBloodType) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isPatient()) {
+        if (formType.isPatient()) {
             assert !((PatientForm) mainWindow.getForm()).getOrgan().getText().equals("");
         } else if (formType.isDonor()) {
             assert !((DonorForm) mainWindow.getForm()).getOrgan().getText().equals("");
@@ -226,7 +226,7 @@ public class FormUiManager {
 
     private CommandResult getTissueType(String personTissueType) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isPatient()) {
+        if (formType.isPatient()) {
             assert !((PatientForm) mainWindow.getForm()).getBloodType().getText().equals("");
         } else if (formType.isDonor()) {
             assert !((DonorForm) mainWindow.getForm()).getBloodType().getText().equals("");
@@ -258,7 +258,7 @@ public class FormUiManager {
 
     private CommandResult getPriority(String personPriority) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isPatient()) {
+        if (formType.isPatient()) {
             assert !((PatientForm) mainWindow.getForm()).getTissueType().getText().equals("");
         }
 
@@ -286,7 +286,7 @@ public class FormUiManager {
 
     private CommandResult getDoctorIc(String personDoctorIc) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isPatient()) {
+        if (formType.isPatient()) {
             assert !((PatientForm) mainWindow.getForm()).getPriority().getText().equals("");
         }
 
@@ -318,7 +318,7 @@ public class FormUiManager {
 
     private CommandResult getOrganExpiryDate(String personOrganExpiryDate) throws ParseException {
         Type formType = mainWindow.getForm().getType();
-        if(formType.isDonor()) {
+        if (formType.isDonor()) {
             assert !((PatientForm) mainWindow.getForm()).getTissueType().getText().equals("");
         }
 
@@ -364,7 +364,7 @@ public class FormUiManager {
         if (isSpecialCommand(commandText)) {
             handleSpecialCommand(commandText);
             return new CommandResult(commandText);
-        }  else if (commandText.equals(COMMAND_DONE)) {
+        } else if (commandText.equals(COMMAND_DONE)) {
             ResultDisplay resultDisplay = mainWindow.getResultDisplay();
             CommandResult commandResult = null;
 
@@ -431,6 +431,13 @@ public class FormUiManager {
         return commandResult;
     }
 
+    /**
+     * Indicates that the user has successfully set a particular attribute with a value, it will set the user's input
+     * into the form automatically as well as increase the progress bar and move the current state of the process.
+     *
+     * @param fieldValue Value of the attribute entered by the user.
+     * @param formField A particular field in the form that the user specifed.
+     */
     private void successFillingField(String fieldValue, String formField) {
         mainWindow.getForm().increaseProgress();
         currentState++;
@@ -439,10 +446,20 @@ public class FormUiManager {
         logger.info(String.format("----------------[USER INPUT][%s: %s]", formField.toUpperCase(), fieldValue));
     }
 
+    /**
+     * Returns true if the command entered is a special command.
+     *
+     * @param commandText Command entered by the user.
+     */
     private boolean isSpecialCommand(String commandText) {
         return commandText.equals(COMMAND_UNDO) || commandText.equals(COMMAND_EXIT);
     }
 
+    /**
+     * Handles special command entered by the user.
+     *
+     * @param commandText Command entered by the user
+     */
     private void handleSpecialCommand(String commandText) {
         if (commandText.equals(COMMAND_EXIT)) {
             handleAbort();
@@ -457,6 +474,10 @@ public class FormUiManager {
         mainWindow.resetInnerParts();
     }
 
+    /**
+     * Handles undo feature of the process. It will move a pointer back to the previous state and delete the latest
+     * entry that the user specify.
+     */
     private void handleUndo() {
         if (currentState == -1) {
             mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_UNDO_ERROR);

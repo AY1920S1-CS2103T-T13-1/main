@@ -10,6 +10,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
 import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import organice.logic.commands.AddCommand;
-import organice.logic.commands.CommandResult;
 import organice.logic.commands.MatchCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
@@ -144,7 +144,7 @@ public class PatientForm extends UiPart<Region> implements Form {
 
     @Override
     public void increaseProgress() {
-        filledFields ++;
+        filledFields++;
 
         //Button is visible if all fields are filled
         if (filledFields == numberOfFields) {
@@ -152,14 +152,14 @@ public class PatientForm extends UiPart<Region> implements Form {
             findMatch.setVisible(true);
         }
 
-        double currentProgress = (double)filledFields / numberOfFields;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+            String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     @Override
     public void decreaseProgress() {
-        filledFields --;
+        filledFields--;
 
         //Button is visible if all fields are filled
         if (filledFields == numberOfFields) {
@@ -169,11 +169,14 @@ public class PatientForm extends UiPart<Region> implements Form {
             findMatch.setVisible(false);
         }
 
-        double currentProgress = (double)filledFields / numberOfFields;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+            String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
+    /**
+     * Handles the action when the 'Find Match' button in the Form UI is clicked. It will execute the match command.
+     */
     @FXML
     public void onHandleClick() throws ParseException, CommandException {
         String matchCommand = MatchCommand.COMMAND_WORD + " " + PREFIX_NRIC + nric.getText();

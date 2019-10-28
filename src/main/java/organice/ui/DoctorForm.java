@@ -84,6 +84,9 @@ public class DoctorForm extends UiPart<Region> implements Form {
                 String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
+    /**
+     * Decreases the progress bar display if the user undo his/her entry
+     */
     public void decreaseProgress() {
         filledFields--;
         double currentProgress = (double) filledFields / numberOfFields;
