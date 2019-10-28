@@ -32,8 +32,6 @@ public class EditCommand extends Command {
             + "by their NRIC in ORGANice. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NRIC (must be a valid NRIC in ORGANice) "
-            + "[" + PREFIX_TYPE + "PERSON TYPE] "
-            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "Example: " + COMMAND_WORD + " "
