@@ -18,11 +18,14 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import organice.commons.core.GuiSettings;
+import organice.logic.parser.ArgumentMultimap;
+import organice.logic.parser.ArgumentTokenizer;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
 import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Person;
 import organice.testutil.AddressBookBuilder;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 
 public class ModelManagerTest {
 
@@ -196,8 +199,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = DOCTOR_ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(Arrays.asList(keywords)));
+        ArgumentMultimap searchParams = ArgumentTokenizer.tokenize("/n" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
+
+        modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

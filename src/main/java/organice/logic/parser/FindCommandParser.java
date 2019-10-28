@@ -1,7 +1,5 @@
 package organice.logic.parser;
 
-import java.util.Arrays;
-
 import organice.logic.commands.FindCommand;
 import organice.logic.parser.exceptions.ParseException;
 import static organice.logic.parser.CliSyntax.PREFIX_AGE;
@@ -28,19 +26,9 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-//        String trimmedArgs = args.trim();
-//        if (trimmedArgs.isEmpty()) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-//        }
-//
-//        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        // Must include all prefixes in CliSyntax.java
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
                 PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
                 PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN);
-
 
         return new FindCommand(new PersonContainsPrefixesPredicate(argMultimap));
     }

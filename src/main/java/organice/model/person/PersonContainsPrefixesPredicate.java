@@ -1,6 +1,5 @@
 package organice.model.person;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -44,36 +43,36 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
         List<String> organKeywords = argMultimap.getAllValues(PREFIX_ORGAN);
 
         return (nameKeywords.isEmpty() || nameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)))
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getName().fullName, keyword)))
                 && (nricKeywords.isEmpty() || nricKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getNric().toString(), keyword)))
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getNric().toString(), keyword)))
                 && (phoneKeywords.isEmpty() || phoneKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().toString(), keyword)))
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getPhone().toString(), keyword)))
                 && (typeKeywords.isEmpty() || typeKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getType().toString(), keyword)))
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(person.getType().toString(), keyword)))
                 // Only Patient and Donor have age. So only test age for those two.
                 && (ageKeywords.isEmpty() || (person.getType().isPatient() ? ageKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getAge().toString(), keyword))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getAge().toString(), keyword))
                     : !person.getType().isDonor() || ageKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Donor) person).getAge().toString(), keyword))))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Donor) person).getAge().toString(), keyword))))
                 && (priorityKeywords.isEmpty() || !person.getType().isPatient() || priorityKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getPriority().toString(), keyword)))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getPriority().toString(), keyword)))
                 && (bloodTypeKeywords.isEmpty() || (person.getType().isPatient() ? bloodTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getBloodType().toString(), keyword))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getBloodType().toString(), keyword))
                     : !person.getType().isDonor() || bloodTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Donor) person).getBloodType().toString(), keyword))))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Donor) person).getBloodType().toString(), keyword))))
                 && (doctorInChargeKeywords.isEmpty() || !person.getType().isPatient() || doctorInChargeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getDoctorInCharge().toString(), keyword)))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getDoctorInCharge().toString(), keyword)))
                 && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient() ? tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getTissueType().toString(), keyword))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getTissueType().toString(), keyword))
                     : !person.getType().isDonor() || tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Donor) person).getTissueType().toString(), keyword))))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Donor) person).getTissueType().toString(), keyword))))
                 && (organExpiryDateKeywords.isEmpty() || !person.getType().isDonor() || organExpiryDateKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Donor) person).getOrganExpiryDate().toString(), keyword)))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Donor) person).getOrganExpiryDate().toString(), keyword)))
                 && (organKeywords.isEmpty() || (person.getType().isPatient() ? organKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Patient) person).getOrgan().toString(), keyword))
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Patient) person).getOrgan().toString(), keyword))
                     : !person.getType().isDonor() || tissueTypeKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(((Donor) person).getOrgan().toString(), keyword))));
+                    .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(((Donor) person).getOrgan().toString(), keyword))));
     }
 
     @Override
