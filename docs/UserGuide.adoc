@@ -38,8 +38,8 @@ Below is a list of things to do to use the application:
 1.  Ensure you have Java `11` or above installed in your computer. +
 If not, install it link:{javaURL}[here].
 2.  Download the latest `organice.jar` link:{repoURL}/releases[here].
-3.  Copy the jar file to the folder you want to use as the home folder for your application.
-4.  Double-click the file to start the application. The application should appear in a few seconds.
+3.  Copy the JAR file to the folder you want to use as the home folder for your application.
+4.  Double-click the JAR file to start the application. The application should appear in a few seconds.
 Figure 1 shows how the application looks like after starting it.
 
 .**How ORGANice looks upon starting up**
@@ -332,7 +332,7 @@ This section will explain how to run kidney matching tests on a specific patient
 To run a match of a specific patient, type in a command of the format `match ic/**NRIC**`.
 
 Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R". This is
-what to do:
+you can do:
 
 . Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
