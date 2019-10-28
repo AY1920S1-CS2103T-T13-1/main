@@ -332,7 +332,7 @@ This section will explain how to run kidney matching tests on a specific patient
 To run a match of a specific patient, type in a command of the format `match ic/**NRIC**`.
 
 Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R". This is
-you can do:
+what you can do:
 
 . Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
