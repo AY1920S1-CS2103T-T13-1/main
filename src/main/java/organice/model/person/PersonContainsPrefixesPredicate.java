@@ -65,7 +65,7 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
                     : person.getType().isDonor() && check(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
                 && (organExpiryDateKeywords.isEmpty() || person.getType().isDonor() && check(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
                 && (organKeywords.isEmpty() || (person.getType().isPatient() ? check(organKeywords, ((Patient) person).getOrgan().toString())
-                    : person.getType().isDonor() && check(tissueTypeKeywords, ((Donor) person).getOrgan().toString())));
+                    : person.getType().isDonor() && check(organKeywords, ((Donor) person).getOrgan().toString())));
     }
 
     private boolean check(List<String> prefixKeywords, String personAttribute) {
