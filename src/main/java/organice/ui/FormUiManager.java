@@ -13,8 +13,8 @@ import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.LinkedList;
-import javafx.scene.layout.StackPane;
-import jdk.jshell.PersistentSnippet;
+import java.util.logging.Logger;
+
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
@@ -22,7 +22,6 @@ import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
 import organice.model.person.Age;
 import organice.model.person.BloodType;
-import organice.model.person.Doctor;
 import organice.model.person.DoctorInCharge;
 import organice.model.person.FormField;
 import organice.model.person.Name;
@@ -63,16 +62,18 @@ public class FormUiManager {
     private MainWindow mainWindow;
     private Type formType;
     private Model model;
+    private Logger logger;
 
     // For undo feature purpose
     private LinkedList<String> history = new LinkedList<>();
     private int currentState = -1;
 
 
-    public FormUiManager(MainWindow mainWindow, Type formType, Model model) {
+    public FormUiManager(MainWindow mainWindow, Type formType, Model model, Logger logger) {
         this.mainWindow = mainWindow;
         this.formType = formType;
         this.model = model;
+        this.logger = logger;
     }
 
     private CommandResult getName(String personName) throws ParseException {
@@ -85,6 +86,7 @@ public class FormUiManager {
 
         if (!Name.isValidName(personName)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Name.MESSAGE_CONSTRAINTS);
+            logger.warning("Name entered is not valid");
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
@@ -95,6 +97,7 @@ public class FormUiManager {
     }
 
     private CommandResult getNric(String personNric) throws ParseException {
+        assert !mainWindow.getForm().getName().getText().equals("");
         personNric = personNric.trim();
 
         if (isSpecialCommand(personNric)) {
@@ -104,9 +107,11 @@ public class FormUiManager {
 
         if (!Nric.isValidNric(personNric)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Nric.MESSAGE_CONSTRAINTS);
+            logger.warning("NRIC entered is not valid");
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         } else if (model.hasPerson(new Nric(personNric))) {
             mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DUPLICATE_PERSON);
+            logger.warning("Person exists in ORGANice");
             throw new ParseException(AddCommand.MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -117,6 +122,8 @@ public class FormUiManager {
     }
 
     private CommandResult getPhone(String personPhone) throws ParseException {
+        assert !mainWindow.getForm().getNric().getText().equals("");
+
         personPhone = personPhone.trim();
 
         if (isSpecialCommand(personPhone)) {
@@ -126,6 +133,7 @@ public class FormUiManager {
 
         if (!Phone.isValidPhone(personPhone)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Phone.MESSAGE_CONSTRAINTS);
+            logger.warning("Phone entered is not valid");
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
 
@@ -141,6 +149,8 @@ public class FormUiManager {
     }
 
     private CommandResult getAge(String personAge) throws ParseException {
+        assert !mainWindow.getForm().getNric().getText().equals("");
+
         personAge = personAge.trim();
 
         if (isSpecialCommand(personAge)) {
@@ -150,6 +160,7 @@ public class FormUiManager {
 
         if (!Age.isValidAge(personAge)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Age.MESSAGE_CONSTRAINTS);
+            logger.warning("Age entered is not valid");
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
 
@@ -160,6 +171,13 @@ public class FormUiManager {
     }
 
     private CommandResult getOrgan(String personOrgan) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isPatient()) {
+            assert !((PatientForm) mainWindow.getForm()).getAge().getText().equals("");
+        } else if (formType.isDonor()) {
+            assert !((DonorForm) mainWindow.getForm()).getAge().getText().equals("");
+        }
+
         personOrgan = personOrgan.trim();
 
         if (isSpecialCommand(personOrgan)) {
@@ -169,6 +187,7 @@ public class FormUiManager {
 
         if (!Organ.isValidOrgan(personOrgan)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Organ.MESSAGE_CONSTRAINTS);
+            logger.warning("Organ entered is not valid");
             throw new ParseException(Organ.MESSAGE_CONSTRAINTS);
         }
 
@@ -179,6 +198,13 @@ public class FormUiManager {
     }
 
     private CommandResult getBloodType(String personBloodType) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isPatient()) {
+            assert !((PatientForm) mainWindow.getForm()).getOrgan().getText().equals("");
+        } else if (formType.isDonor()) {
+            assert !((DonorForm) mainWindow.getForm()).getOrgan().getText().equals("");
+        }
+
         personBloodType = personBloodType.trim();
 
         if (isSpecialCommand(personBloodType)) {
@@ -188,6 +214,7 @@ public class FormUiManager {
 
         if (!BloodType.isValidBloodType(personBloodType)) {
             mainWindow.getResultDisplay().setFeedbackToUser(BloodType.MESSAGE_CONSTRAINTS);
+            logger.warning("Blood Type entered is not valid");
             throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
         }
 
@@ -198,6 +225,13 @@ public class FormUiManager {
     }
 
     private CommandResult getTissueType(String personTissueType) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isPatient()) {
+            assert !((PatientForm) mainWindow.getForm()).getBloodType().getText().equals("");
+        } else if (formType.isDonor()) {
+            assert !((DonorForm) mainWindow.getForm()).getBloodType().getText().equals("");
+        }
+
         personTissueType = personTissueType.trim();
 
         if (isSpecialCommand(personTissueType)) {
@@ -207,6 +241,7 @@ public class FormUiManager {
 
         if (!TissueType.isValidTissueType(personTissueType)) {
             mainWindow.getResultDisplay().setFeedbackToUser(TissueType.MESSAGE_CONSTRAINTS);
+            logger.warning("Tissue Type entered is not valid");
             throw new ParseException(TissueType.MESSAGE_CONSTRAINTS);
         }
 
@@ -222,6 +257,11 @@ public class FormUiManager {
     }
 
     private CommandResult getPriority(String personPriority) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isPatient()) {
+            assert !((PatientForm) mainWindow.getForm()).getTissueType().getText().equals("");
+        }
+
         personPriority = personPriority.trim();
 
         if (isSpecialCommand(personPriority)) {
@@ -231,6 +271,7 @@ public class FormUiManager {
 
         if (!Priority.isValidPriority(personPriority)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Priority.MESSAGE_CONSTRAINTS);
+            logger.warning("Priority entered is not valid");
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
@@ -244,6 +285,11 @@ public class FormUiManager {
     }
 
     private CommandResult getDoctorIc(String personDoctorIc) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isPatient()) {
+            assert !((PatientForm) mainWindow.getForm()).getPriority().getText().equals("");
+        }
+
         personDoctorIc = personDoctorIc.trim();
 
         if (isSpecialCommand(personDoctorIc)) {
@@ -253,9 +299,11 @@ public class FormUiManager {
 
         if (!DoctorInCharge.isValidDoctorInCharge(personDoctorIc)) {
             mainWindow.getResultDisplay().setFeedbackToUser(DoctorInCharge.MESSAGE_CONSTRAINTS);
+            logger.warning("Doctor's NRIC entered is not valid");
             throw new ParseException(DoctorInCharge.MESSAGE_CONSTRAINTS);
         } else if (!model.hasDoctor(new Nric(personDoctorIc))) {
             mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
+            logger.warning("Doctor is not found in ORGANice");
             throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
         }
 
@@ -269,6 +317,11 @@ public class FormUiManager {
     }
 
     private CommandResult getOrganExpiryDate(String personOrganExpiryDate) throws ParseException {
+        Type formType = mainWindow.getForm().getType();
+        if(formType.isDonor()) {
+            assert !((PatientForm) mainWindow.getForm()).getTissueType().getText().equals("");
+        }
+
         personOrganExpiryDate = personOrganExpiryDate.trim();
 
         if (isSpecialCommand(personOrganExpiryDate)) {
@@ -278,6 +331,7 @@ public class FormUiManager {
 
         if (!OrganExpiryDate.isValidExpiryDate(personOrganExpiryDate)) {
             mainWindow.getResultDisplay().setFeedbackToUser(OrganExpiryDate.MESSAGE_CONSTRAINTS);
+            logger.warning("Organ Expiry Date entered is not valid");
             throw new ParseException(OrganExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
@@ -382,7 +436,7 @@ public class FormUiManager {
         currentState++;
         history.add(currentState, formField);
         FormAnimation.typingAnimation(mainWindow, fieldValue, formField);
-
+        logger.info(String.format("----------------[USER INPUT][%s: %s]", formField.toUpperCase(), fieldValue));
     }
 
     private boolean isSpecialCommand(String commandText) {
@@ -409,7 +463,7 @@ public class FormUiManager {
         } else {
             Type formType = mainWindow.getForm().getType();
             String currentField = history.get(currentState);
-            currentState --;
+            currentState--;
             switch (currentField) {
 
             case FormField.NAME:
@@ -429,52 +483,52 @@ public class FormUiManager {
 
             case FormField.AGE:
                 if (formType.isPatient()) {
-                    ((PatientForm)mainWindow.getForm()).getAge().setText("");
+                    ((PatientForm) mainWindow.getForm()).getAge().setText("");
                 } else if (formType.isDonor()) {
-                    ((DonorForm)mainWindow.getForm()).getAge().setText("");
+                    ((DonorForm) mainWindow.getForm()).getAge().setText("");
                 }
                 getPersonField(new CommandBox(this::getAge), PROMPT_AGE);
                 break;
 
             case FormField.ORGAN:
                 if (formType.isPatient()) {
-                    ((PatientForm)mainWindow.getForm()).getOrgan().setText("");
+                    ((PatientForm) mainWindow.getForm()).getOrgan().setText("");
                 } else if (formType.isDonor()) {
-                    ((DonorForm)mainWindow.getForm()).getOrgan().setText("");
+                    ((DonorForm) mainWindow.getForm()).getOrgan().setText("");
                 }
                 getPersonField(new CommandBox(this::getOrgan), PROMPT_ORGAN);
                 break;
 
             case FormField.BLOOD_TYPE:
                 if (formType.isPatient()) {
-                    ((PatientForm)mainWindow.getForm()).getBloodType().setText("");
+                    ((PatientForm) mainWindow.getForm()).getBloodType().setText("");
                 } else if (formType.isDonor()) {
-                    ((DonorForm)mainWindow.getForm()).getBloodType().setText("");
+                    ((DonorForm) mainWindow.getForm()).getBloodType().setText("");
                 }
                 getPersonField(new CommandBox(this::getBloodType), PROMPT_BLOOD_TYPE);
                 break;
 
             case FormField.TISSUE_TYPE:
                 if (formType.isPatient()) {
-                    ((PatientForm)mainWindow.getForm()).getTissueType().setText("");
+                    ((PatientForm) mainWindow.getForm()).getTissueType().setText("");
                 } else if (formType.isDonor()) {
-                    ((DonorForm)mainWindow.getForm()).getTissueType().setText("");
+                    ((DonorForm) mainWindow.getForm()).getTissueType().setText("");
                 }
                 getPersonField(new CommandBox(this::getTissueType), PROMPT_TISSUE_TYPE);
                 break;
 
             case FormField.PRIORITY:
-                ((PatientForm)mainWindow.getForm()).getPriority().setText("");
+                ((PatientForm) mainWindow.getForm()).getPriority().setText("");
                 getPersonField(new CommandBox(this::getPriority), PROMPT_PRIORITY);
                 break;
 
             case FormField.DOCTOR_IC:
-                ((PatientForm)mainWindow.getForm()).getDoctorIc().setText("");
+                ((PatientForm) mainWindow.getForm()).getDoctorIc().setText("");
                 getPersonField(new CommandBox(this::getDoctorIc), FormField.DOCTOR_IC);
                 break;
 
             case FormField.ORGAN_EXPIRY_DATE:
-                ((DonorForm)mainWindow.getForm()).getOrganExpiryDate().setText("");
+                ((DonorForm) mainWindow.getForm()).getOrganExpiryDate().setText("");
                 getPersonField(new CommandBox(this::getOrganExpiryDate), FormField.ORGAN_EXPIRY_DATE);
                 break;
 

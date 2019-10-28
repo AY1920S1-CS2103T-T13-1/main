@@ -1,24 +1,10 @@
 package organice.ui;
 
-import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
-import java.text.Normalizer;
-import org.w3c.dom.ls.LSProgressEvent;
-import com.sun.javafx.binding.StringFormatter;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import organice.logic.commands.MatchCommand;
-import organice.logic.commands.exceptions.CommandException;
-import organice.logic.parser.exceptions.ParseException;
-import organice.model.person.FormField;
 import organice.model.person.Type;
 
 /**
@@ -92,17 +78,17 @@ public class DoctorForm extends UiPart<Region> implements Form {
 
     @Override
     public void increaseProgress() {
-        filledFields ++;
-        double currentProgress = (double)filledFields / numberOfFields;
+        filledFields++;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+                String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     public void decreaseProgress() {
-        filledFields --;
-        double currentProgress = (double)filledFields / numberOfFields;
+        filledFields--;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+                String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     @Override

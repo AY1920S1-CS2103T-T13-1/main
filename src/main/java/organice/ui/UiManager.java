@@ -46,7 +46,7 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic, model);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            formUiManager = new FormUiManager(mainWindow, null, model);
+            formUiManager = new FormUiManager(mainWindow, null, model, logger);
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

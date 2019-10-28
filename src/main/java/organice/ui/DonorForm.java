@@ -1,7 +1,6 @@
 package organice.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
@@ -118,18 +117,18 @@ public class DonorForm extends UiPart<Region> implements Form {
 
     @Override
     public void increaseProgress() {
-        filledFields ++;
-        double currentProgress = (double)filledFields / numberOfFields;
+        filledFields++;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+                String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     @Override
     public void decreaseProgress() {
-        filledFields --;
-        double currentProgress = (double)filledFields / numberOfFields;
+        filledFields--;
+        double currentProgress = (double) filledFields / numberOfFields;
         FormAnimation.percentageChangeAnimation(currentProgress,
-            String.format("%.1f",currentProgress * 100), progressPercentage, progressBar);
+                String.format("%.1f", currentProgress * 100), progressPercentage, progressBar);
     }
 
     public void setAge(String age) {

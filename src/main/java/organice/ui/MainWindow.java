@@ -245,7 +245,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isForm()) {
                 FormAnimation.fadingAnimation(this);
                 Type formType = commandResult.getFormType();
-                FormUiManager formUiManager = new FormUiManager(this, formType, model);
+                FormUiManager formUiManager = new FormUiManager(this, formType, model, logger);
                 personListPanelPlaceholder.getChildren().clear();
                 if (formType.isDoctor()) {
                     form = new DoctorForm();
