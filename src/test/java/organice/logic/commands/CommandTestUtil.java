@@ -26,6 +26,7 @@ import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.person.NameContainsKeywordsPredicate;
 import organice.model.person.Person;
+import organice.model.person.Status;
 import organice.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -82,8 +83,8 @@ public class CommandTestUtil {
     public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_BOB = "S1111111A";
     public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_IRENE = "S1231231B";
 
-    public static final String VALID_STATUS_DONOR_JOHN = "not processing";
-    public static final String VALID_STATUS_PATIENT_IRENE = "not processing";
+    public static final String VALID_STATUS_DONOR_JOHN = Status.STATUS_NOT_PROCESSING;
+    public static final String VALID_STATUS_PATIENT_IRENE = Status.STATUS_NOT_PROCESSING;
 
     public static final String NAME_DESC_DOCTOR_AMY = " " + PREFIX_NAME + VALID_NAME_DOCTOR_AMY;
     public static final String NAME_DESC_DONOR_JOHN = " " + PREFIX_NAME + VALID_NAME_DONOR_JOHN;
