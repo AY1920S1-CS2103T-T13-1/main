@@ -45,9 +45,10 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
         List<String> organKeywords = argMultimap.getAllValues(PREFIX_ORGAN);
 
         // Early return if argMultimap is empty
-        if (argMultimap.equals(ArgumentTokenizer.tokenize("find", PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
-                PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
-                PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN))) {
+        if (nameKeywords.isEmpty() && nricKeywords.isEmpty() && phoneKeywords.isEmpty() && typeKeywords.isEmpty()
+                && ageKeywords.isEmpty() && priorityKeywords.isEmpty() && bloodTypeKeywords.isEmpty()
+                && doctorInChargeKeywords.isEmpty() && tissueTypeKeywords.isEmpty() && organExpiryDateKeywords.isEmpty()
+                && organKeywords.isEmpty()) {
             return false;
         }
 
