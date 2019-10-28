@@ -210,7 +210,7 @@ exp/23-Nov-2020 a/21`
 In this mode, instead of typing a long command, you can add a person's attributes one by one.
 After entering an attribute, the system will prompt you to input another attribute.
 
-Format: `add t/**TYPE**`
+To add a person in this mode, enter the following command of the format: `add t/**TYPE**`
 
 ORGANice will prompt you to type in each attribute, one by one until all the fields are filled.
 Here are some special commands that might be useful when you are in the process of filling up the form:
@@ -222,12 +222,18 @@ Here are some special commands that might be useful when you are in the process 
 Note that both `/abort` and `/undo` commands can be used at any point in times, while `/done` command can only be used once all the required attributes have been specified.
 
 That's the important commands for this feature, now let's see an example on how the feature will look like.
-When you want to add a `Patient`, type `add t/patient` on the `Command Box` and a form will appear as below and the `Result Box` will prompt the user to enter the patient's name.
+When you want to add a `Patient`, type `add t/patient` in the `Command Box`. Three changes will occur on your screen:
+
+* A form will appear in the space where the `Person List` used to occupy.
+* The Message Display Box will display a message that prompts you to enter the patient’s name.
+* There is a Progress Bar detailing how much of the form is filled.
+
+Refer to the figure below to see how the resulting screen will look like.
 
 image::addForm.png[width="790"]
 
-If you want to add a patient named "John Doe", type `John Doe` and then press enter.
-After entering the name, the patient's name will be displayed on the form as seen below and the progress bar will increase indicating the your progress in filling up the form.
+If you want to add a patient named "John Doe", type `John Doe` and then press kbd:[Enter].
+After entering the name, the patient's name will be displayed on the form as seen below and the progress bar will increase indicating your progress in filling up the form.
 
 image::nameFilled.png[width="790"]
 
