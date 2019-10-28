@@ -14,7 +14,6 @@ import organice.model.person.Organ;
 import organice.model.person.OrganExpiryDate;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
-import organice.model.person.Status;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
