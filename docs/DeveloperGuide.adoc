@@ -115,6 +115,7 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 === Model component
 
 .Structure of the Model Component
++
 image::ModelClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
@@ -135,6 +136,7 @@ image:BetterModelClassDiagram.png[]
 === Storage component
 
 .Structure of the Storage Component
++
 image::StorageClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
@@ -244,6 +246,7 @@ To facilitate the sorting, the following methods were added:
 Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort/rate)`
 
 .Structure of the Logic Component when executing `sort` command
++
 image::SortSequenceDiagram.png[width=790]
 
 ==== Design considerations
@@ -422,7 +425,7 @@ Given below is the Sequence Diagram for the interactions with the `Logic` compon
 +
 .Structure of the Logic Component when executing `sort` command
 +
-image::SortSequenceDiagram.png[width=790]
+image::SortSequenceDiagram.png[]
 
 *MSS*
 
@@ -449,6 +452,8 @@ Use case resumes at step 2.
 
 Given below is the activity diagram to illustrate what happens when user uses the list command.
 
+.Activity Diagram of a List Command
++
 image::ListActivityDiagram.png[]
 
 *MSS*
