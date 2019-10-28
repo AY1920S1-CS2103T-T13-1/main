@@ -225,8 +225,8 @@ That's the important commands for this feature, now let's see an example on how 
 When you want to add a `Patient`, type `add t/patient` in the `Command Box`. Three changes will occur on your screen:
 
 * A form will appear in the space where the `Person List` used to occupy.
-* The Message Display Box will display a message that prompts you to enter the patient’s name.
-* There is a Progress Bar detailing how much of the form is filled.
+* The `Message Display Box` will display a message that prompts you to enter the patient’s name.
+* There is a `Progress Bar` detailing how much of the form is filled.
 
 Refer to the figure below to see how the resulting screen will look like.
 
