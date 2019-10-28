@@ -231,6 +231,7 @@ This section will explain the reason for having some aspects.
 // end::formmode[]
 
 // tag::dataencryption[]
+
 === Sort feature
 This section describes how the sort feature is implemented.
 
@@ -243,7 +244,6 @@ To facilitate the sorting, the following methods were added:
 Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort/rate)`
 
 .Structure of the Logic Component when executing `sort` command
-
 image::SortSequenceDiagram.png[width=790]
 
 ==== Design considerations
@@ -376,7 +376,7 @@ _{More to be added}_
 3.  OGRANice prompts the User to type in the required attributes one at a time.
 4.  User inputs in the attribute of the person prompted by ORGANice.
 +
-[none]Steps 3-4 are repeated until the user has inputted all the required attributes for a specific type of person.
+Steps 3-4 are repeated until the user has inputted all the required attributes for a specific type of person.
 5.  ORGANice prompts the User to confirm the attributes of the person.
 6.  User confirms the attributes specified.
 7.  ORGANice adds the person to the list.
@@ -416,7 +416,7 @@ Use case ends.
 +
 Use case ends.
 
-=== Use case: Sort
+=== Use case: Sort list according to priority/rate/expiry
 
 Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort/rate)`
 +
@@ -444,8 +444,6 @@ Use case ends.
 Steps 1a1-1a2 are repeated until the data entered are correct.
 +
 Use case resumes at step 2.
-+
-[none]
 
 === Use case: List all patients/donors/doctors
 
