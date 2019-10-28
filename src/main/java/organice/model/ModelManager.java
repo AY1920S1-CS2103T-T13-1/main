@@ -289,4 +289,11 @@ public class ModelManager implements Model {
     public ObservableList<Person> getMatchList() {
         return listOfMatches;
     }
+
+    /**
+     * Returns true if there are any {@code MatchedDonors}, and false if there are no {@code MatchedDonors}.
+     */
+    public boolean haveMatches() {
+        return listOfMatches.size() > 0;
+    }
 }

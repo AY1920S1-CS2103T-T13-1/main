@@ -133,4 +133,9 @@ public interface Model {
      * Retrieves the match list.
      */
     ObservableList<Person> getMatchList();
+
+    /**
+     * Returns true if there are any {@code MatchedDonors}, and false if there are no {@code MatchedDonors}.
+     */
+    boolean haveMatches();
 }
