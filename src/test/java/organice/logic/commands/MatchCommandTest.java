@@ -370,6 +370,11 @@ public class MatchCommandTest {
         public void removeMatches() {
             listOfMatches = observableArrayList();
         }
+
+        @Override
+        public boolean haveMatches() {
+            return listOfMatches.size() > 0;
+        }
     }
 
     /**
