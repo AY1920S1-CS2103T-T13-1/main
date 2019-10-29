@@ -407,7 +407,8 @@ public class FormUiManager {
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.DONOR + " " + PREFIX_NAME
                 + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
                 + PREFIX_PHONE + form.getPhone().getText() + " " + PREFIX_AGE + form.getAge().getText() + " "
-                + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE + form.getBloodType().getText() + " "
+                + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE
+                + form.getBloodType().getText() + " "
                 + PREFIX_TISSUE_TYPE + form.getTissueType().getText() + " "
                 + PREFIX_ORGAN_EXPIRY_DATE + form.getOrganExpiryDate().getText();
 
@@ -423,9 +424,10 @@ public class FormUiManager {
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.PATIENT + " " + PREFIX_NAME
                 + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
                 + PREFIX_PHONE + form.getPhone().getText() + " " + PREFIX_AGE + form.getAge().getText() + " "
-                + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE + form.getBloodType().getText() + " "
-                + PREFIX_TISSUE_TYPE + form.getTissueType().getText() + " " + PREFIX_PRIORITY + form.getPriority().getText()
-                + " " + PREFIX_DOCTOR_IN_CHARGE + form.getDoctorIc().getText();
+                + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE
+                + form.getBloodType().getText() + " " + PREFIX_TISSUE_TYPE + form.getTissueType().getText()
+                + " " + PREFIX_PRIORITY + form.getPriority().getText() + " " + PREFIX_DOCTOR_IN_CHARGE
+                + form.getDoctorIc().getText();
 
         CommandResult commandResult = mainWindow.getLogic().execute(command);
         return commandResult;

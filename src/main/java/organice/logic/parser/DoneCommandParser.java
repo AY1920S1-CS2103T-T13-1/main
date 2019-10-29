@@ -34,5 +34,4 @@ public class DoneCommandParser implements Parser<DoneCommand> {
         }
         return new DoneCommand(firstNRIC, secondNRIC);
     }
-
 }

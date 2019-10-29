@@ -113,6 +113,11 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    public boolean hasPerson(Nric personNric) {
+        requireNonNull(personNric);
+        return addressBook.hasPerson(personNric);
+    }
+
     @Override
     public boolean hasDoctor(Nric doctor) {
         requireNonNull(doctor);
@@ -125,11 +130,7 @@ public class ModelManager implements Model {
         return addressBook.hasPatient(patient);
     }
 
-    @Override
-    public boolean hasPerson(Nric personNric) {
-        requireNonNull(personNric);
-        return addressBook.hasPerson(personNric);
-    }
+
 
     @Override
     public boolean hasDonor(Nric donor) {

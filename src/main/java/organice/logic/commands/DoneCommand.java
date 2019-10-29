@@ -3,15 +3,10 @@ package organice.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static organice.logic.commands.MatchCommand.match;
 
-import java.util.List;
-
-import organice.commons.core.Messages;
-import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
-import organice.model.person.Person;
 import organice.model.person.exceptions.PersonNotFoundException;
 
 public class DoneCommand extends Command {
@@ -33,8 +28,8 @@ public class DoneCommand extends Command {
     private Donor donor;
     private Patient patient;
 
-    private Nric patientNRIC;
-    private  Nric donorNRIC;
+    private Nric patientNric;
+    private Nric donorNric;
 
 
     public DoneCommand(String firstNricString, String secondNricString) {
@@ -45,19 +40,19 @@ public class DoneCommand extends Command {
 
     public boolean isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model) {
         if (model.hasDonor(firstNric)) {
-            donorNRIC = firstNric;
-            donor = model.getDonor(donorNRIC);
+            donorNric = firstNric;
+            donor = model.getDonor(donorNric);
 
-            patientNRIC = secondNric;
-            patient = model.getPatient(patientNRIC);
+            patientNric = secondNric;
+            patient = model.getPatient(patientNric);
         } else {
-            patientNRIC = firstNric;
-            patient = model.getPatient(patientNRIC);
+            patientNric = firstNric;
+            patient = model.getPatient(patientNric);
 
-            donorNRIC = secondNric;
-            donor = model.getDonor(donorNRIC);
+            donorNric = secondNric;
+            donor = model.getDonor(donorNric);
         }
-        if (model.hasPatient(patientNRIC) && model.hasDonor(donorNRIC)
+        if (model.hasPatient(patientNric) && model.hasDonor(donorNric)
                 && match(donor, patient))  {
             //todo check if tasklist isempty
             return true;
