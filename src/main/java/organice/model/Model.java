@@ -133,4 +133,19 @@ public interface Model {
      * Retrieves the match list.
      */
     ObservableList<Person> getMatchList();
+
+    /**
+     * Sorts list by priority level.
+     */
+    void sortByPriority();
+
+    /**
+     * Sorts list by rate of success.
+     */
+    void sortByRate();
+
+    /**
+     * Sorts list by organ expiry date.
+     */
+    void sortByExpiry();
 }

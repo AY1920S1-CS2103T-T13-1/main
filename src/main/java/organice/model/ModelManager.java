@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
@@ -33,6 +34,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Person> listOfMatches = FXCollections.observableArrayList();
+    private SortedList<Person> sortedPersons;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -288,5 +291,43 @@ public class ModelManager implements Model {
      */
     public ObservableList<Person> getMatchList() {
         return listOfMatches;
+    }
+
+    //=========== Sorted Person List Accessors =============================================================
+
+    /**
+     * Returns a sorted view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+
+    public SortedList<Person> getSortedList() {
+        return sortedPersons;
+    }
+
+    /**
+     * Sorts list by priority level.
+     */
+    @Override
+    public void sortByPriority() {
+        sortedPersons = new SortedList<>(listOfMatches);
+        sortedPersons.setComparator(new PriorityComparator());
+    }
+
+    /**
+     * Sorts list by rate of success.
+     */
+    @Override
+    public void sortByRate() {
+        sortedPersons = new SortedList<>(listOfMatches);
+        sortedPersons.setComparator(new RateComparator());
+    }
+
+    /**
+     * Sorts list by organ expiry date.
+     */
+    @Override
+    public void sortByExpiry() {
+        sortedPersons = new SortedList<>(listOfMatches);
+        sortedPersons.setComparator(new ExpiryComparator());
     }
 }
