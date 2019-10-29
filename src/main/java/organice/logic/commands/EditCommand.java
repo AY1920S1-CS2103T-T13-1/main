@@ -2,16 +2,13 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
-import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
-import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 import static organice.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import organice.commons.core.Messages;
 import organice.commons.util.CollectionUtil;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
@@ -63,7 +60,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToEdit = NricToPerson(nric, lastShownList);
+        Person personToEdit = nricToPerson(nric, lastShownList);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -75,7 +72,13 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
-    private Person NricToPerson(Nric nric, List<Person> lastShownList) throws CommandException {
+    /**
+     * Returns a person that has the same NRIC with the NRIC specified.
+     *
+     * @param nric NRIC of the person to be searched.
+     * @param lastShownList List of persons.
+     */
+    private Person nricToPerson(Nric nric, List<Person> lastShownList) {
         Iterator<Person> iterator = lastShownList.iterator();
         while (iterator.hasNext()) {
             Person person = iterator.next();

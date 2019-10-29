@@ -6,7 +6,6 @@ import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static organice.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,8 +58,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + NRIC_FIRST_PERSON + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(NRIC_FIRST_PERSON, descriptor), command);
+                + person.getNric().value + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(person.getNric(), descriptor), command);
     }
 
     @Test

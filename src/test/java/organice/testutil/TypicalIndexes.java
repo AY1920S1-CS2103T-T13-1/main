@@ -1,7 +1,6 @@
 package organice.testutil;
 
 import organice.commons.core.index.Index;
-import organice.model.person.Nric;
 
 /**
  * A utility class containing a list of {@code Index} objects to be used in tests.
