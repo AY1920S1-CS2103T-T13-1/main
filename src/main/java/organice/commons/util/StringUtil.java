@@ -28,12 +28,12 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(words);
 
-        words = words.replace("\n", " ");
+        words = words.replace("\n", " ").trim();
         String[] preppedWords = words.split("\\s+");
         checkArgument(preppedWords.length > 0, "Words parameter cannot be empty");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String preppedSentence = sentence.trim();
+        String[] wordsInPreppedSentence = preppedSentence.split(",+|\\s+");
 
         return Arrays.stream(preppedWords).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched
                 || Arrays.stream(wordsInPreppedSentence).anyMatch(word::equalsIgnoreCase), (

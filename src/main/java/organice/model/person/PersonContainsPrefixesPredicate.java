@@ -12,6 +12,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -43,6 +44,10 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
         List<String> organExpiryDateKeywords = argMultimap.getAllValues(PREFIX_ORGAN_EXPIRY_DATE);
         List<String> organKeywords = argMultimap.getAllValues(PREFIX_ORGAN);
 
+        // Separate all comma delimited tissue types
+        String tissues = tissueTypeKeywords.stream().reduce("", (prev, next) -> prev + " " + next);
+        tissueTypeKeywords = Arrays.asList(tissues.replaceAll(",", " ").trim().split("\\s+"));
+
         // Early return if argMultimap is empty
         if (nameKeywords.isEmpty() && nricKeywords.isEmpty() && phoneKeywords.isEmpty() && typeKeywords.isEmpty()
                 && ageKeywords.isEmpty() && priorityKeywords.isEmpty() && bloodTypeKeywords.isEmpty()
@@ -51,42 +56,47 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
             return false;
         }
 
-        return (nameKeywords.isEmpty() || check(nameKeywords, person.getName().toString()))
-                && (nricKeywords.isEmpty() || check(nricKeywords, person.getNric().toString()))
-                && (phoneKeywords.isEmpty() || check(phoneKeywords, person.getPhone().toString()))
-                && (typeKeywords.isEmpty() || check(typeKeywords, person.getType().toString()))
+        return (nameKeywords.isEmpty() || matchAny(nameKeywords, person.getName().toString()))
+                && (nricKeywords.isEmpty() || matchAny(nricKeywords, person.getNric().toString()))
+                && (phoneKeywords.isEmpty() || matchAny(phoneKeywords, person.getPhone().toString()))
+                && (typeKeywords.isEmpty() || matchAny(typeKeywords, person.getType().toString()))
                 && (ageKeywords.isEmpty() || (person.getType().isPatient()
-                    ? check(ageKeywords, ((Patient) person).getAge().toString())
-                    : person.getType().isDonor() && check(ageKeywords, ((Donor) person).getAge().toString())))
+                    ? matchAny(ageKeywords, ((Patient) person).getAge().toString())
+                    : person.getType().isDonor() && matchAny(ageKeywords, ((Donor) person).getAge().toString())))
                 && (priorityKeywords.isEmpty() || person.getType().isPatient()
-                    && check(priorityKeywords, ((Patient) person).getPriority().toString()))
+                    && matchAny(priorityKeywords, ((Patient) person).getPriority().toString()))
                 && (bloodTypeKeywords.isEmpty() || (person.getType().isPatient()
-                    ? check(bloodTypeKeywords, ((Patient) person).getBloodType().toString())
+                    ? matchAny(bloodTypeKeywords, ((Patient) person).getBloodType().toString())
                     : person.getType().isDonor()
-                        && check(bloodTypeKeywords, ((Donor) person).getBloodType().toString())))
+                        && matchAny(bloodTypeKeywords, ((Donor) person).getBloodType().toString())))
                 && (doctorInChargeKeywords.isEmpty() || person.getType().isPatient()
-                    && check(doctorInChargeKeywords, ((Patient) person).getDoctorInCharge().toString()))
+                    && matchAny(doctorInChargeKeywords, ((Patient) person).getDoctorInCharge().toString()))
                 && (tissueTypeKeywords.isEmpty() || (person.getType().isPatient()
-                    ? check(tissueTypeKeywords, ((Patient) person).getTissueType().toString())
+                    ? matchAll(tissueTypeKeywords, ((Patient) person).getTissueType().toString())
                     : person.getType().isDonor()
-                        && check(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
+                        && matchAll(tissueTypeKeywords, ((Donor) person).getTissueType().toString())))
                 && (organExpiryDateKeywords.isEmpty() || person.getType().isDonor()
-                    && check(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
+                    && matchAny(organExpiryDateKeywords, ((Donor) person).getOrganExpiryDate().toString()))
                 && (organKeywords.isEmpty() || (person.getType().isPatient()
-                    ? check(organKeywords, ((Patient) person).getOrgan().toString())
-                    : person.getType().isDonor() && check(organKeywords, ((Donor) person).getOrgan().toString())));
+                    ? matchAny(organKeywords, ((Patient) person).getOrgan().toString())
+                    : person.getType().isDonor() && matchAny(organKeywords, ((Donor) person).getOrgan().toString())));
     }
 
-    private boolean check(List<String> prefixKeywords, String personAttribute) {
+    private boolean matchAny(List<String> prefixKeywords, String personAttribute) {
         return prefixKeywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(personAttribute, keyword));
+    }
+
+    private boolean matchAll(List<String> prefixKeywords, String personAttribute) {
+        return prefixKeywords.stream()
+                .allMatch(keyword -> StringUtil.containsWordsIgnoreCase(personAttribute, keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PersonContainsPrefixesPredicate // instanceof handles nulls
-                && argMultimap.equals(((PersonContainsPrefixesPredicate) other).argMultimap)); // state check
+                && argMultimap.equals(((PersonContainsPrefixesPredicate) other).argMultimap)); // state matchAny
     }
 
 }
