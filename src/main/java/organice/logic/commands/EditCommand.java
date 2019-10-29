@@ -17,6 +17,7 @@ import organice.model.person.Nric;
 import organice.model.person.Person;
 import organice.model.person.Phone;
 import organice.model.person.Type;
+import organice.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Edits the details of an existing person in ORGANice.
@@ -38,6 +39,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "The person with Nric %1$s cannot be found in ORGANice!";
 
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -57,19 +59,23 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        try {
+            requireNonNull(model);
+            List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personToEdit = nricToPerson(nric, lastShownList);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+            Person personToEdit = nricToPerson(nric, lastShownList);
+            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        } catch (PersonNotFoundException e) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, nric));
         }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
@@ -78,7 +84,7 @@ public class EditCommand extends Command {
      * @param nric NRIC of the person to be searched.
      * @param lastShownList List of persons.
      */
-    private Person nricToPerson(Nric nric, List<Person> lastShownList) {
+    private Person nricToPerson(Nric nric, List<Person> lastShownList) throws PersonNotFoundException {
         Iterator<Person> iterator = lastShownList.iterator();
         while (iterator.hasNext()) {
             Person person = iterator.next();
@@ -86,7 +92,7 @@ public class EditCommand extends Command {
                 return person;
             }
         }
-        return null;
+        throw new PersonNotFoundException();
     }
 
     /**
