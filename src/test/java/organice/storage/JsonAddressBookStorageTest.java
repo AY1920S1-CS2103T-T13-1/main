@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
 import static organice.testutil.TypicalPersons.PATIENT_BOB;
-import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 import static organice.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -72,7 +71,6 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(PATIENT_IRENE);
         original.removePerson(DOCTOR_ALICE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();

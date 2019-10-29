@@ -110,7 +110,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, PATIENT_CARL, PATIENT_DANIEL, DONOR_ELLE,
-                DONOR_FIONA, DONOR_GEORGE));
+        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, PATIENT_CARL, PATIENT_DANIEL, PATIENT_IRENE, DONOR_ELLE,
+                DONOR_FIONA, DONOR_GEORGE, DONOR_IRENE_DONOR, DONOR_JOHN));
     }
 }
