@@ -52,11 +52,11 @@ public class FormUiManager {
     private static final String PROMPT_PRIORITY = "Enter priority:";
     private static final String PROMPT_DOCTOR_IC = "Enter doctor in charge's nric:";
     private static final String PROMPT_ORGAN_EXPIRY_DATE = "Enter organ expiry date:";
-    private static final String PROMPT_DONE = "Please check again the details."
-            + "\nType '/done' to confirm, '/abort' to cancel the addition";
+    private static final String PROMPT_DONE = "Please ensure you have typed in the correct details."
+            + "\nType '/done' to confirm OR '/abort to cancel the add command";
 
-    private static final String MESSAGE_EXIT = "Form is abandoned!";
-    private static final String MESSAGE_UNDO_SUCCESS = "Successfully undo the last entry!";
+    private static final String MESSAGE_EXIT = "Add command aborted!";
+    private static final String MESSAGE_UNDO_SUCCESS = "Successfully undo the previous entry!";
     private static final String MESSAGE_UNDO_ERROR = "You can't undo at this stage!";
 
     private MainWindow mainWindow;
@@ -86,7 +86,7 @@ public class FormUiManager {
 
         if (!Name.isValidName(personName)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Name.MESSAGE_CONSTRAINTS);
-            logger.warning("Name entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Name entered is not valid");
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
 
@@ -107,11 +107,11 @@ public class FormUiManager {
 
         if (!Nric.isValidNric(personNric)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Nric.MESSAGE_CONSTRAINTS);
-            logger.warning("NRIC entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] NRIC entered is not valid");
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         } else if (model.hasPerson(new Nric(personNric))) {
             mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DUPLICATE_PERSON);
-            logger.warning("Person exists in ORGANice");
+            logger.warning("[ADD COMMAND FORM MODE] Person exists in ORGANice");
             throw new ParseException(AddCommand.MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -133,7 +133,7 @@ public class FormUiManager {
 
         if (!Phone.isValidPhone(personPhone)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Phone.MESSAGE_CONSTRAINTS);
-            logger.warning("Phone entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Phone entered is not valid");
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
 
@@ -160,7 +160,7 @@ public class FormUiManager {
 
         if (!Age.isValidAge(personAge)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Age.MESSAGE_CONSTRAINTS);
-            logger.warning("Age entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Age entered is not valid");
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
 
@@ -187,7 +187,7 @@ public class FormUiManager {
 
         if (!Organ.isValidOrgan(personOrgan)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Organ.MESSAGE_CONSTRAINTS);
-            logger.warning("Organ entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Organ entered is not valid");
             throw new ParseException(Organ.MESSAGE_CONSTRAINTS);
         }
 
@@ -214,7 +214,7 @@ public class FormUiManager {
 
         if (!BloodType.isValidBloodType(personBloodType)) {
             mainWindow.getResultDisplay().setFeedbackToUser(BloodType.MESSAGE_CONSTRAINTS);
-            logger.warning("Blood Type entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Blood Type entered is not valid");
             throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
         }
 
@@ -241,7 +241,7 @@ public class FormUiManager {
 
         if (!TissueType.isValidTissueType(personTissueType)) {
             mainWindow.getResultDisplay().setFeedbackToUser(TissueType.MESSAGE_CONSTRAINTS);
-            logger.warning("Tissue Type entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Tissue Type entered is not valid");
             throw new ParseException(TissueType.MESSAGE_CONSTRAINTS);
         }
 
@@ -271,7 +271,7 @@ public class FormUiManager {
 
         if (!Priority.isValidPriority(personPriority)) {
             mainWindow.getResultDisplay().setFeedbackToUser(Priority.MESSAGE_CONSTRAINTS);
-            logger.warning("Priority entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Priority entered is not valid");
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
 
@@ -299,11 +299,11 @@ public class FormUiManager {
 
         if (!DoctorInCharge.isValidDoctorInCharge(personDoctorIc)) {
             mainWindow.getResultDisplay().setFeedbackToUser(DoctorInCharge.MESSAGE_CONSTRAINTS);
-            logger.warning("Doctor's NRIC entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Doctor's NRIC entered is not valid");
             throw new ParseException(DoctorInCharge.MESSAGE_CONSTRAINTS);
         } else if (!model.hasDoctor(new Nric(personDoctorIc))) {
             mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
-            logger.warning("Doctor is not found in ORGANice");
+            logger.warning("[ADD COMMAND FORM MODE] Doctor is not found in ORGANice");
             throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
         }
 
@@ -331,7 +331,7 @@ public class FormUiManager {
 
         if (!OrganExpiryDate.isValidExpiryDate(personOrganExpiryDate)) {
             mainWindow.getResultDisplay().setFeedbackToUser(OrganExpiryDate.MESSAGE_CONSTRAINTS);
-            logger.warning("Organ Expiry Date entered is not valid");
+            logger.warning("[ADD COMMAND FORM MODE] Organ Expiry Date entered is not valid");
             throw new ParseException(OrganExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
@@ -387,7 +387,7 @@ public class FormUiManager {
     }
 
     /**
-     * Adds {@code Doctor} to the ORGANice list.
+     * Adds the given {@code Doctor} to the ORGANice list.
      */
     private CommandResult addDoctorToList() throws ParseException, CommandException {
         DoctorForm form = (DoctorForm) mainWindow.getForm();
@@ -501,7 +501,7 @@ public class FormUiManager {
                 mainWindow.getForm().getPhone().setText("");
                 getPersonField(new CommandBox(this::getPhone), PROMPT_PHONE);
                 break;
-
+            //CHECKSTYLE.OFF: SeparatorWrap - Type casting causes checkstyle to ask for incorrect wrapping
             case FormField.AGE:
                 if (formType.isPatient()) {
                     ((PatientForm) mainWindow.getForm()).getAge().setText("");
@@ -556,6 +556,7 @@ public class FormUiManager {
             default:
                 break;
             }
+            //CHECKSTYLE.ON: SeparatorWrap
 
             mainWindow.getForm().decreaseProgress();
             mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_UNDO_SUCCESS);

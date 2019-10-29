@@ -91,7 +91,7 @@ public class FormAnimation {
                 case FormField.PHONE:
                     mainWindow.getForm().setPhone(commandText.substring(0, n));
                     break;
-
+                //CHECKSTYLE.OFF: SeparatorWrap - Type casting causes checkstyle to ask for incorrect wrapping
                 case FormField.AGE:
                     if (formType.isDonor()) {
                         ((DonorForm) mainWindow.getForm()).setAge(commandText.substring(0, n));
@@ -135,7 +135,7 @@ public class FormAnimation {
                 case FormField.ORGAN_EXPIRY_DATE:
                     ((DonorForm) mainWindow.getForm()).setOrganExpiryDate(commandText.substring(0, n));
                     break;
-
+                //CHECKSTYLE.ON: SeparatorWrap
                 default:
                     break;
                 }
