@@ -236,6 +236,10 @@ Step 6. The user confirms the details of the person and `FormUiManager#setPerson
 
 Step 7. `FormUiManager` calls the `AddressBookParser#parseCommand()` to add the person and save it in the `Storage` interface.
 
+The following activity diagram summarizes what happens when you executes the `add t/**TYPE**` command:
+
+image::Form.png[width="790"]
+
 ==== Design Considerations
 This section will explain the reason for having some aspects.
 
