@@ -16,6 +16,9 @@ import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
+import organice.model.Comparator.ExpiryDateComparator;
+import organice.model.Comparator.PriorityComparator;
+import organice.model.Comparator.SuccessRateComparator;
 import organice.model.person.Donor;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
@@ -34,7 +37,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Person> listOfMatches = FXCollections.observableArrayList();
-    private SortedList<Person> sortedPersons;
+    private SortedList<MatchedDonor> sortedMatchedDonors;
+    private SortedList<MatchedPatient> sortedMatchedPatients;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -296,21 +300,12 @@ public class ModelManager implements Model {
     //=========== Sorted Person List Accessors =============================================================
 
     /**
-     * Returns a sorted view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-
-    public SortedList<Person> getSortedList() {
-        return sortedPersons;
-    }
-
-    /**
      * Sorts list by priority level.
      */
     @Override
     public void sortByPriority() {
-        sortedPersons = new SortedList<>(listOfMatches);
-        sortedPersons.setComparator(new PriorityComparator());
+        sortedMatchedPatients = new SortedList<MatchedPatient>((ObservableList<? extends MatchedPatient>) listOfMatches);
+        sortedMatchedPatients.setComparator(new PriorityComparator());
     }
 
     /**
@@ -318,8 +313,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void sortByRate() {
-        sortedPersons = new SortedList<>(listOfMatches);
-        sortedPersons.setComparator(new RateComparator());
+        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) listOfMatches);
+        sortedMatchedDonors.setComparator(new SuccessRateComparator());
     }
 
     /**
@@ -327,7 +322,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void sortByExpiry() {
-        sortedPersons = new SortedList<>(listOfMatches);
-        sortedPersons.setComparator(new ExpiryComparator());
+        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) listOfMatches);
+        sortedMatchedDonors.setComparator(new ExpiryDateComparator());
     }
 }
