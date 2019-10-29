@@ -234,7 +234,7 @@ Refer to the `Figure 4` to see how the resulting screen will look like.
 image::addForm.png[width="790"]
 
 If you want to add a patient named "John Doe", type `John Doe` and then press kbd:[Enter].
-After entering the name, the patient's name will be displayed on the form as seen in `Figure 5` and the progress bar will increase indicating your progress in filling up the form.
+After entering the name, the patient's name will be displayed on the form and the progress bar will increase indicating your progress in filling up the form as seen in `Figure 5`.
 
 .Form layout after you have entered a valid name
 image::nameFilled.png[width="790"]
@@ -243,7 +243,7 @@ Each time you type an input, ORGANice will check if it is a valid input. If the 
 If not, ORGANice will display a warning message stating the criteria for a valid input of that attribute.
 
 Say you typed in "G999999999A" and pressed kbd:[Enter] when ORGANice prompts you to type in the NRIC of the patient.
-Three changes occur to ORGANice, which can be seen in the screenshot below:
+Three changes occur to ORGANice, which can be seen in the `Figure 6`:
 
 * Your input will remain in the `Command Box`, but the colour of the input text turns to red.
 * An error message is displayed in the `Message Display Box`. This error message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.
@@ -258,18 +258,18 @@ After all of the attributes have been specified, you can type in:
 * Click the `Find Match` button to directly add the person and find the potential donors at the same time.
 Note that the `Find Match` button will only appear on the `Patient` form.
 
-The figure below will show how the form will look like after you have entered all the required attributes.
+The `Figure 7` will show how the form will look like after you have entered all the required attributes.
 
 .Form layout after all the required attributes have been specified
 image::allFieldSpecified.png[width="790"]
 
-When you type in /done, the Person List will return to its original state of displaying people in ORGANice.
+When you type in `/done`, the Person List will return to its original state of displaying people in ORGANice.
 The Message Display Box will show a success message, indicating that you have successfully added a new person to the Person List as seen in `Figure 8`.
 
 .The UI changed back to it's original state and shows a success message
 image::addSuccess.png[width="790"]
 
-The `Find Match` button will appear when the list is fully filled. You can click this button to find a list of matching donors with this patient in ORGANice. Note that the Find Match button will only appear on the Patient form.
+The `Find Match` button will appear when the list is fully filled. You can click this button and you will be shown a list of potential donors as seen in `Figure 10`. Note that the Find Match button will only appear on the Patient form.
 Refer to `Figure 7` on where you can find the `Find Match` button
 
 .The UI displayed the potential donors for a patient that you have added
