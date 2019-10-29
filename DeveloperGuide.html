@@ -9,31 +9,32 @@
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#setting-up">1. Setting up</a></li>
-<li><a href="#design">2. Design</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#setting-up">2. Setting up</a></li>
+<li><a href="#design">3. Design</a>
 <ul class="sectlevel2">
-<li><a href="#Design-Architecture">2.1. Architecture</a></li>
-<li><a href="#Design-Ui">2.2. UI component</a></li>
-<li><a href="#Design-Logic">2.3. Logic component</a></li>
-<li><a href="#Design-Model">2.4. Model component</a></li>
-<li><a href="#Design-Storage">2.5. Storage component</a></li>
-<li><a href="#Design-Commons">2.6. Common classes</a></li>
+<li><a href="#Design-Architecture">3.1. Architecture</a></li>
+<li><a href="#Design-Ui">3.2. UI component</a></li>
+<li><a href="#Design-Logic">3.3. Logic component</a></li>
+<li><a href="#Design-Model">3.4. Model component</a></li>
+<li><a href="#Design-Storage">3.5. Storage component</a></li>
+<li><a href="#Design-Commons">3.6. Common classes</a></li>
 </ul>
 </li>
-<li><a href="#implementation">3. Implementation</a>
+<li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#matching-feature">3.1. Matching feature</a></li>
-<li><a href="#add-person-code-form-code-mode-feature">3.2. Add person <code>Form</code> mode feature</a></li>
-<li><a href="#sort-feature">3.3. Sort feature</a></li>
-<li><a href="#processing-feature">3.4. Processing feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#matching-feature">4.1. Matching feature</a></li>
+<li><a href="#add-person-code-form-code-mode-feature">4.2. Add person <code>Form</code> mode feature</a></li>
+<li><a href="#sort-feature">4.3. Sort feature</a></li>
+<li><a href="#processing-feature">4.4. Processing feature</a></li>
+<li><a href="#proposed-data-encryption">4.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">4.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.7. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#documentation">4. Documentation</a></li>
-<li><a href="#testing">5. Testing</a></li>
-<li><a href="#dev-ops">6. Dev Ops</a></li>
+<li><a href="#documentation">5. Documentation</a></li>
+<li><a href="#testing">6. Testing</a></li>
+<li><a href="#dev-ops">7. Dev Ops</a></li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
 <li><a href="#use-cases">Appendix C: Use Cases</a>
@@ -56,18 +57,57 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Refer to the guide <a href="SettingUp.html">here</a>.</p>
+<p>Welcome to ORGANice! This is an organ matching desktop application that is specifically designed for fast typing
+hospital administration staff. This developer guide is meant for developers who would like to understand the
+design and structure of ORGANice.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="design"><a class="link" href="#design">2. Design</a></h2>
+<h2 id="setting-up"><a class="link" href="#setting-up">2. Setting up</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>To set up the developer tools needed to develop ORGANice, refer to the guide <a href="SettingUp.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="design"><a class="link" href="#design">3. Design</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides a high-level overview of ORGANice&#8217;s codebase.
+It is divided into 6 subsections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Architecture</p>
+</li>
+<li>
+<p>UI component</p>
+</li>
+<li>
+<p>Logic component</p>
+</li>
+<li>
+<p>Model component</p>
+</li>
+<li>
+<p>Storage component</p>
+</li>
+<li>
+<p>Common classes</p>
+</li>
+</ul>
+</div>
 <div class="sect2">
-<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
+<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
+<div class="paragraph">
+<p>The Architecture section is meant to explain the high-level design of ORGANice.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ArchitectureDiagram.png" alt="ArchitectureDiagram">
@@ -75,7 +115,7 @@
 <div class="title">Figure 1. Architecture Diagram</div>
 </div>
 <div class="paragraph">
-<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
+<p>The <strong><em>Architecture Diagram</em></strong> given above depicts the high-level design of the App. Given below is a quick overview of each component.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -91,7 +131,8 @@ Refer to the <a href="UsingPlantUml.html">Using PlantUML guide</a> to learn how 
 </table>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/src/main/java/seedu/address/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p>The <code>main</code> folder contains two classes called <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/src/main/java/seedu/address/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>.
+It is responsible for performing the following tasks:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -157,7 +198,9 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p>This section explains the interactions amongst the different architecture components using an example.
+The <em>Sequence Diagram</em> below shows how the components interact with each other
+for the scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -170,7 +213,11 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI component</a></h3>
+<div class="paragraph">
+<p>This section explains the design of the UI component.<br>
+Figure 4 below depicts the classes in the UI component and their relationships with one another.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram">
@@ -201,7 +248,11 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
+<div class="paragraph">
+<p>This section explains the design of the Logic component.<br>
+Figure 5 below depicts the classes in the Logic component and their relationships with one  another.</p>
+</div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
@@ -254,7 +305,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
+<h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
@@ -298,7 +349,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
@@ -323,7 +374,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">3.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>organice.commons</code> package.</p>
 </div>
@@ -331,13 +382,13 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">4. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="matching-feature"><a class="link" href="#matching-feature">3.1. Matching feature</a></h3>
+<h3 id="matching-feature"><a class="link" href="#matching-feature">4.1. Matching feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the matching feature is implemented.</p>
 </div>
@@ -365,7 +416,7 @@ For each Donor that matches the patient, a <code>MatchedDonor</code> objected is
 method.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -389,9 +440,9 @@ identified.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">3.2. Add person <code>Form</code> mode feature</a></h3>
+<h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">4.2. Add person <code>Form</code> mode feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.2.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">4.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>Form</code> mode mechanism is facilitated by <code>FormUiManager</code>.
 It modifies the <code>CommandBox</code> as well as <code>PersonPanelListPlaceholder</code> each time a user input a specific attribute.
@@ -445,7 +496,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -485,7 +536,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-feature"><a class="link" href="#sort-feature">3.3. Sort feature</a></h3>
+<h3 id="sort-feature"><a class="link" href="#sort-feature">4.3. Sort feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the sort feature is implemented.</p>
 </div>
@@ -508,7 +559,7 @@ Additionally, it implements the following operations:</p>
 <div class="title">Figure 9. Structure of the Logic Component when executing <code>sort</code> command</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.1. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -519,7 +570,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="processing-feature"><a class="link" href="#processing-feature">3.4. Processing feature</a></h3>
+<h3 id="processing-feature"><a class="link" href="#processing-feature">4.4. Processing feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the processing feature is implemented.</p>
 </div>
@@ -533,7 +584,7 @@ Additionally, it implements the following operations:</p>
 <p>If the user made any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.1. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -573,20 +624,20 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -617,7 +668,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -625,7 +676,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">5. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Refer to the guide <a href="Documentation.html">here</a>.</p>
@@ -633,7 +684,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="testing"><a class="link" href="#testing">5. Testing</a></h2>
+<h2 id="testing"><a class="link" href="#testing">6. Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Refer to the guide <a href="Testing.html">here</a>.</p>
@@ -641,7 +692,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">7. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Refer to the guide <a href="DevOps.html">here</a>.</p>
@@ -1167,4 +1218,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 12:40:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 12:51:03 UTC</div></div></div></body></html>
