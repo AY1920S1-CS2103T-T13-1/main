@@ -1,5 +1,6 @@
 package organice.logic.commands;
 
+import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static organice.testutil.TypicalPersons.DONOR_IRENE_DONOR;
@@ -33,7 +34,8 @@ public class MatchCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MatchCommand.MESSAGE_SUCCESS_MATCH_PATIENT, VALID_NRIC_PATIENT_IRENE));
+                String.format(MatchCommand.MESSAGE_SUCCESS_MATCH_PATIENT, 1, VALID_NAME_PATIENT_IRENE,
+                        VALID_NRIC_PATIENT_IRENE));
         expectedCommandResult.setMatch(true);
 
         assertCommandSuccess(new MatchCommand(VALID_NRIC_PATIENT_IRENE), model, expectedCommandResult, expectedModel);
