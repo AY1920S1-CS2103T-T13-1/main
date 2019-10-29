@@ -53,14 +53,13 @@ The `main` folder contains two classes called link:{repoURL}/src/main/java/seedu
 It is responsible for performing the following tasks:
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components.
-The following class plays an important role at the architecture level:
+<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. For example,
+the `LogsCenter` class is in the `Commons` collection because it is used by many classes
+to write log messages to the ORGANice's log file.
 
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
-
-The rest of the App consists of four components.
+The rest of ORGANice consists of four components.
 
 * <<Design-Ui,*`UI`*>>: The UI of the App.
 * <<Design-Logic,*`Logic`*>>: The command executor.
@@ -80,11 +79,10 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-This section explains the interactions amongst the different architecture components using an example.
-The _Sequence Diagram_ below shows how the components interact with each other
-for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario when a user
+issues the command `edit ic/S5678908D n/Mr Lim`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `edit ic/S5678908D n/Mr Lim` command
 image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
@@ -125,12 +123,12 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit ic/S5678908D n/Mr Lim")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeleteSequenceDiagram.png[]
+.Interactions Inside the Logic Component for the `edit ic/S5678908D n/Mr Lim` Command
+image::EditSequenceDiagram.png[]
 
-NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [[Design-Model]]
 === Model component
@@ -146,10 +144,6 @@ The `Model`,
 * stores the Address Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
-image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
