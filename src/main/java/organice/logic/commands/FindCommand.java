@@ -23,6 +23,7 @@ public class FindCommand extends Command {
     private final PersonContainsPrefixesPredicate predicate;
 
     public FindCommand(PersonContainsPrefixesPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
