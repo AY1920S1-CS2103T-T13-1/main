@@ -246,6 +246,11 @@ public class MatchCommandTest {
         }
 
         @Override
+        public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
+            return null;
+        }
+
+        @Override
         public ObservableList<Person> getMatchList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -292,6 +297,11 @@ public class MatchCommandTest {
 
         @Override
         public boolean hasPerson(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDonor(Nric donor) {
             throw new AssertionError("This method should not be called.");
         }
 

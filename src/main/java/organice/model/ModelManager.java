@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+
 import organice.logic.commands.MatchCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.comparator.ExpiryDateComparator;
@@ -113,12 +114,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Nric personNric) {
-        requireNonNull(personNric);
-        return addressBook.hasPerson(personNric);
-    }
-
-    @Override
     public boolean hasDoctor(Nric doctor) {
         requireNonNull(doctor);
         return addressBook.hasDoctor(doctor);
@@ -128,6 +123,18 @@ public class ModelManager implements Model {
     public boolean hasPatient(Nric patient) {
         requireNonNull(patient);
         return addressBook.hasPatient(patient);
+    }
+
+    @Override
+    public boolean hasPerson(Nric personNric) {
+        requireNonNull(personNric);
+        return addressBook.hasPerson(personNric);
+    }
+
+    @Override
+    public boolean hasDonor(Nric donor) {
+        requireNonNull(donor);
+        return addressBook.hasDonor(donor);
     }
 
     @Override
@@ -142,17 +149,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+        requireNonNull(patientNric);
+        return addressBook.getPatient(patientNric);
+    }
+
+    @Override
+    public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
+        requireNonNull(donorNric);
+        return addressBook.getDonor(donorNric);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
-        requireNonNull(patientNric);
-
-        return addressBook.getPatient(patientNric);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -339,7 +351,7 @@ public class ModelManager implements Model {
     public void sortBySuccessRate() throws CommandException {
         try {
             sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                listOfMatches);
+                    listOfMatches);
             sortedMatchedDonors.setComparator(new SuccessRateComparator());
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by success rate "
@@ -354,7 +366,7 @@ public class ModelManager implements Model {
     public void sortByOrganExpiryDate() throws CommandException {
         try {
             sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                listOfMatches);
+                    listOfMatches);
             sortedMatchedDonors.setComparator(new ExpiryDateComparator());
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by organ expiry date "
