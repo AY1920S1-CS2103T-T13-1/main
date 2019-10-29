@@ -80,7 +80,7 @@ image::LogicClassDiagram.png[]
 [discrete]
 ==== How the architecture components interact with each other
 
-This section explains the interactions between the different architecture components through an example.
+This section explains the interactions amongst the different architecture components using an example.
 The _Sequence Diagram_ below shows how the components interact with each other
 for the scenario where the user issues the command `delete 1`.
 
@@ -92,8 +92,7 @@ The sections below give more details of each component.
 [[Design-Ui]]
 === UI component
 This section explains the design of the UI component. +
-Figure 4 below depicts the classes in the UI component and their relationships to each other.
-It will be referred to in our explanation of the UI component design.
+Figure 4 below depicts the classes in the UI component and their relationships with one another.
 
 .Structure of the UI Component
 image::UiClassDiagram.png[]
@@ -112,8 +111,7 @@ The `UI` component,
 [[Design-Logic]]
 === Logic component
 This section explains the design of the Logic component. +
-Figure 5 below depicts the classes in the Logic component and their relationships to each other.
-It will be referred to in our explanation of the Logic component design.
+Figure 5 below depicts the classes in the Logic component and their relationships with one  another.
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
 image::LogicClassDiagram.png[]
