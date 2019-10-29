@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import organice.model.person.Type;
+
 /**
  * Represents the result of a command execution.
  */
@@ -17,6 +19,10 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean form;
+
+    private final Type formType;
+
     /** This Command Result is marked as a Match Command */
     private boolean isMatch;
 
@@ -26,12 +32,28 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean form, Type formType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.form = form;
+        this.formType = formType;
         this.isMatch = false;
         this.isSort = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean form, Type formType) {
+        this(feedbackToUser, false, false, form, formType);
     }
 
     /**
@@ -39,11 +61,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Type getFormType() {
+        return formType;
     }
 
     public boolean isShowHelp() {
@@ -52,6 +78,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isForm() {
+        return form;
     }
 
     public void setMatch(boolean isMatch) {

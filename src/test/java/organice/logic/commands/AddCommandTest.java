@@ -35,7 +35,8 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        Person person = null;
+        assertThrows(NullPointerException.class, () -> new AddCommand(person));
     }
 
     @Test
@@ -213,6 +214,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Nric personNric) {
             throw new AssertionError("This method should not be called.");
         }
 
