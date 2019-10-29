@@ -17,8 +17,8 @@ endif::[]
 By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
-Welcome to ORGANice! This is an organ matching desktop application that is specifically designed with fast typing
-hospital administration staff in mind. This developer guide is meant for developers who would like to understand the
+Welcome to ORGANice! This is an organ matching desktop application that is specifically designed for fast typing
+hospital administration staff. This developer guide is meant for developers who would like to understand the
 design and structure of ORGANice.
 
 == Setting up
