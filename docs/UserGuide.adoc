@@ -263,14 +263,14 @@ The figure below will show how the form will look like after you have entered al
 .Form layout after all the required attributes have been specified
 image::allFieldSpecified.png[width="790"]
 
-When you typed in `/done` the UI will changed back to it's original state and shows a success message suggesting that
-you have successfully added a new person into the list as seen in `Figure 8`.
+When you type in /done, the Person List will return to its original state of displaying people in ORGANice.
+The Message Display Box will show a success message, indicating that you have successfully added a new person to the Person List as seen in `Figure 8`.
 
 .The UI changed back to it's original state and shows a success message
 image::addSuccess.png[width="790"]
 
-If you click the `Find Match` button instead, a list of potential donors will be reflected to you. This makes it convenient for you if you are facing an emergency situation
-and you need to find potential donors for a patient as seen in `Figure 9`.
+The `Find Match` button will appear when the list is fully filled. You can click this button to find a list of matching donors with this patient in ORGANice. Note that the Find Match button will only appear on the Patient form.
+Refer to `Figure 7` on where you can find the `Find Match` button
 
 .The UI displayed the potential donors for a patient that you have added
 image::findMatch.png[width="790"]
@@ -282,7 +282,7 @@ you have abandoned the form as seen in `Figure 10`.
 image::abandonForm.png[width="790"]
 
 Furthermore, if you made any mistake while you are filling up the form, you can type in `/undo` to remove the last entry you entered.
-In the `Figure 11`, a user might have entered a wrong `Patient's` name and thus typed in `/undo` and the name that is previously reflected on the form is removed.
+For example, if you enter the wrong name and want to undo the action, type `/undo` in the `Command Box` and press kbd:[Enter]. Your previous input for the name will be removed from the form ass seen in `Figure 11`
 
 .Form layout showing that the last entry is removed after you typed in `/undo`
 image::undoCommand.png[width="790"]
