@@ -16,6 +16,7 @@ import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
+import organice.model.comparator.ExpiryComparator;
 import organice.model.person.Donor;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
