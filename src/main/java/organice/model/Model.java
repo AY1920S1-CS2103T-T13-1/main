@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 
 import organice.logic.commands.exceptions.CommandException;
@@ -122,6 +123,12 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Overrides the current filtered person list with the given {@code inputList}.
+     * {@code inputList} must be non null.
+     */
+    void overrideFilteredPersonList(FilteredList<Person> inputList);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

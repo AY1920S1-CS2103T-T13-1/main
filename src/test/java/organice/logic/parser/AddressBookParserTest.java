@@ -22,7 +22,7 @@ import organice.logic.commands.HelpCommand;
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Person;
-import organice.model.person.PersonContainsPrefixesPredicate;
+import organice.model.person.PersonContainsExactPrefixesPredicate;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 import organice.testutil.PersonUtil;
@@ -65,7 +65,7 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + searchParams);
         //TODO: Replace ArgumentTokenizer with stub
-        assertEquals(new FindCommand(new PersonContainsPrefixesPredicate(ArgumentTokenizer
+        assertEquals(new FindCommand(new PersonContainsExactPrefixesPredicate(ArgumentTokenizer
                 .tokenize(FindCommand.COMMAND_WORD
                         + " n/Alice ic/S1111111A t/doctor", PREFIX_NAME, PREFIX_NRIC, PREFIX_TYPE))), command);
     }

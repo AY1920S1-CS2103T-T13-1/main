@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import organice.commons.core.Messages;
 import organice.model.Model;
-import organice.model.person.PersonContainsPrefixesPredicate;
+import organice.model.person.PersonContainsExactPrefixesPredicate;
 
 /**
  * Finds and lists all persons in address book whose prefixes match any of the argument prefix-keyword pairs.
@@ -20,9 +20,9 @@ public class FindCommand extends Command {
             + "Parameters: PREFIX/KEYWORD [MORE_PREFIX-KEYWORD_PAIRS]...\n"
             + "Example: " + COMMAND_WORD + " n/alice t/doctor";
 
-    private final PersonContainsPrefixesPredicate predicate;
+    private final PersonContainsExactPrefixesPredicate predicate;
 
-    public FindCommand(PersonContainsPrefixesPredicate predicate) {
+    public FindCommand(PersonContainsExactPrefixesPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
     }

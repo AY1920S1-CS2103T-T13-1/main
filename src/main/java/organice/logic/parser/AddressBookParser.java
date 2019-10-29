@@ -19,7 +19,6 @@ import organice.logic.commands.MatchCommand;
 import organice.logic.commands.ProcessingCommand;
 import organice.logic.commands.ProcessingMarkDoneCommand;
 import organice.logic.commands.SortCommand;
-
 import organice.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,6 +56,9 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case FuzzyFindCommand.COMMAND_WORD:
+            return new FuzzyFindCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

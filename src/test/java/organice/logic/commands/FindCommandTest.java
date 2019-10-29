@@ -30,7 +30,7 @@ import organice.logic.parser.ArgumentTokenizer;
 import organice.model.Model;
 import organice.model.ModelManager;
 import organice.model.UserPrefs;
-import organice.model.person.PersonContainsPrefixesPredicate;
+import organice.model.person.PersonContainsExactPrefixesPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -41,13 +41,12 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        PersonContainsPrefixesPredicate firstPredicate =
-                new PersonContainsPrefixesPredicate(
+        PersonContainsExactPrefixesPredicate firstPredicate =
+                new PersonContainsExactPrefixesPredicate(
                         ArgumentTokenizer.tokenize(FindCommand.COMMAND_WORD + " n/Alice", PREFIX_NAME));
-        PersonContainsPrefixesPredicate secondPredicate =
-                new PersonContainsPrefixesPredicate(
+        PersonContainsExactPrefixesPredicate secondPredicate =
+                new PersonContainsExactPrefixesPredicate(
                         ArgumentTokenizer.tokenize(FindCommand.COMMAND_WORD + " n/Benson", PREFIX_NAME));
-
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
@@ -71,7 +70,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonContainsPrefixesPredicate predicate = preparePredicate(FindCommand.COMMAND_WORD + " ");
+        PersonContainsExactPrefixesPredicate predicate = preparePredicate(FindCommand.COMMAND_WORD + " ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -92,9 +91,9 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private PersonContainsPrefixesPredicate preparePredicate(String userInput) {
+    private PersonContainsExactPrefixesPredicate preparePredicate(String userInput) {
         //TODO: Replace ArgumentTokenizer with stubs
-        return new PersonContainsPrefixesPredicate(ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_NRIC,
+        return new PersonContainsExactPrefixesPredicate(ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_NRIC,
                 PREFIX_PHONE, PREFIX_TYPE, PREFIX_AGE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
                 PREFIX_TISSUE_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN));
     }
