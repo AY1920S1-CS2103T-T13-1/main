@@ -24,11 +24,9 @@ public class MatchCommand extends Command {
             + "Parameters: ic/(NRIC) (to match a patient of specified NRIC)";
 
     public static final String MESSAGE_SUCCESS = "Matched all patients and donors";
-    public static final String MESSAGE_SUCCESS_MATCH_PATIENT = "Matched all donors with the patient with Nric:"
-            + " %1$s";
-    public static final String MESSAGE_NO_MATCHES = "There are no matching donors with the patient with Nric: "
-            + " %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "The patient with Nric %1$s cannot be found in ORGANice!";
+    public static final String MESSAGE_SUCCESS_MATCH_PATIENT = "Found %d matching donors for patient: %s(%s)";
+    public static final String MESSAGE_NO_MATCHES = "Found no matching donors for patient: %s(%s)";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No patients with NRIC: %s found in ORGANice";
 
     public static final Double SUCCESSFUL_PERCENTAGE = 60.0;
 
@@ -94,11 +92,13 @@ public class MatchCommand extends Command {
 
 
                 CommandResult commandResult;
-                if (model.haveMatches()) {
+                int numberOfMatches = model.numberOfMatches();
+                if (numberOfMatches > 0) {
                     commandResult = new CommandResult(String.format(MESSAGE_SUCCESS_MATCH_PATIENT,
-                            patientNric.toString()));
+                            numberOfMatches, patient.getName().toString(), patientNric.toString()));
                 } else {
-                    commandResult = new CommandResult(String.format(MESSAGE_NO_MATCHES, patientNric.toString()));
+                    commandResult = new CommandResult(String.format(MESSAGE_NO_MATCHES, patient.getName(),
+                            patientNric.toString()));
                 }
 
                 commandResult.setMatch(true);

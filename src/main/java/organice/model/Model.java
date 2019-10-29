@@ -135,7 +135,7 @@ public interface Model {
     ObservableList<Person> getMatchList();
 
     /**
-     * Returns true if there are any {@code MatchedDonors}, and false if there are no {@code MatchedDonors}.
+     * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
      */
-    boolean haveMatches();
+    int numberOfMatches();
 }

@@ -286,22 +286,25 @@ public class ModelManager implements Model {
     /**
      * Returns a copy of the match list.
      */
-    public ObservableList<Person> getMatchList() {
+    public ObservableList<Person> getMatchList() throws IllegalArgumentException {
         ObservableList<Person> listOfMatchesCopy = FXCollections.observableArrayList();
         for (Person person : listOfMatches) {
             if (person instanceof MatchedDonor) {
                 listOfMatchesCopy.add((MatchedDonor) person);
-            } else {
+            } else if (person instanceof MatchedPatient) {
                 listOfMatchesCopy.add((MatchedPatient) person);
+            } else {
+                throw new IllegalArgumentException("A Person not an instance of MatchedDonor or MatchedPatient is in"
+                        + " the match list");
             }
         }
         return listOfMatchesCopy;
     }
 
     /**
-     * Returns true if there are any {@code MatchedDonors}, and false if there are no {@code MatchedDonors}.
+     * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
      */
-    public boolean haveMatches() {
-        return listOfMatches.size() > 0;
+    public int numberOfMatches() {
+        return listOfMatches.size();
     }
 }
