@@ -12,10 +12,21 @@ import java.util.Optional;
 import organice.commons.util.CollectionUtil;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
+import organice.model.person.Age;
+import organice.model.person.BloodType;
+import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
+import organice.model.person.Donor;
 import organice.model.person.Name;
 import organice.model.person.Nric;
+import organice.model.person.Organ;
+import organice.model.person.OrganExpiryDate;
+import organice.model.person.Patient;
 import organice.model.person.Person;
 import organice.model.person.Phone;
+import organice.model.person.Priority;
+import organice.model.person.Status;
+import organice.model.person.TissueType;
 import organice.model.person.Type;
 import organice.model.person.exceptions.PersonNotFoundException;
 
@@ -106,6 +117,28 @@ public class EditCommand extends Command {
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        if (updatedType.isPatient()) {
+            Age updatedAge = ((Patient) personToEdit).getAge();
+            BloodType updatedBloodType = ((Patient) personToEdit).getBloodType();
+            TissueType updatedTissueType = ((Patient) personToEdit).getTissueType();
+            Organ updatedOrgan = ((Patient) personToEdit).getOrgan();
+            Priority updatedPriority = ((Patient) personToEdit).getPriority();
+            DoctorInCharge updatedDoctorInCharge = ((Patient) personToEdit).getDoctorInCharge();
+            Status updatedStatus = ((Patient) personToEdit).getStatus();
+            return new Patient(updatedType, updatedNric, updatedName, updatedPhone, updatedAge, updatedPriority,
+                    updatedBloodType, updatedTissueType, updatedOrgan, updatedDoctorInCharge, updatedStatus);
+        } else if (updatedType.isDonor()) {
+            Age updatedAge = ((Donor) personToEdit).getAge();
+            BloodType updatedBloodType = ((Donor) personToEdit).getBloodType();
+            TissueType updatedTissueType = ((Donor) personToEdit).getTissueType();
+            Organ updatedOrgan = ((Donor) personToEdit).getOrgan();
+            OrganExpiryDate updatedOrganExpiryDate = ((Donor) personToEdit).getOrganExpiryDate();
+            Status updatedStatus = ((Donor) personToEdit).getStatus();
+            return new Donor(updatedType, updatedNric, updatedName, updatedPhone, updatedAge,
+                updatedBloodType, updatedTissueType, updatedOrgan, updatedOrganExpiryDate, updatedStatus);
+        } else if (updatedType.isDoctor()) {
+            return new Doctor(updatedType, updatedNric, updatedName, updatedPhone);
+        }
 
         return new Person(updatedType, updatedNric, updatedName, updatedPhone);
     }

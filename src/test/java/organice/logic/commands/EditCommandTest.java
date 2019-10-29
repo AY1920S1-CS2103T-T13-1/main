@@ -5,11 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.logic.commands.CommandTestUtil.DESC_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.DESC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
+import static organice.logic.commands.CommandTestUtil.VALID_NRIC_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static organice.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static organice.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static organice.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static organice.testutil.TypicalNrics.NRIC_SECOND_PERSON;
+import static organice.testutil.TypicalNrics.NRIC_THIRD_PERSON;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
 import static organice.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,8 +24,10 @@ import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.ModelManager;
 import organice.model.UserPrefs;
+import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Person;
+import organice.testutil.DonorBuilder;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 
@@ -52,7 +58,7 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(intLastPerson);
         Nric nricLastPerson = lastPerson.getNric();
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        DonorBuilder personInList = new DonorBuilder((Donor) lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_PATIENT_BOB).withPhone(VALID_PHONE_PATIENT_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_PATIENT_BOB)
@@ -69,8 +75,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(NRIC_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getOneBased());
+        EditCommand editCommand = new EditCommand(NRIC_THIRD_PERSON, new EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getOneBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
