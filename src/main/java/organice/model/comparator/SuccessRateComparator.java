@@ -1,4 +1,4 @@
-package organice.model.Comparator;
+package organice.model.comparator;
 
 import java.util.Comparator;
 
