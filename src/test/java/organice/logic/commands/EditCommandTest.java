@@ -5,12 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.logic.commands.CommandTestUtil.DESC_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.DESC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_BOB;
-import static organice.logic.commands.CommandTestUtil.VALID_NRIC_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.VALID_PHONE_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static organice.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static organice.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static organice.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static organice.testutil.TypicalNrics.NRIC_SECOND_PERSON;
 import static organice.testutil.TypicalNrics.NRIC_THIRD_PERSON;
@@ -29,7 +26,6 @@ import organice.model.person.Nric;
 import organice.model.person.Person;
 import organice.testutil.DonorBuilder;
 import organice.testutil.EditPersonDescriptorBuilder;
-import organice.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
