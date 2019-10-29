@@ -476,63 +476,157 @@ exp/23-Nov-2020 a/21</code></p>
 <div class="sect3">
 <h4 id="add-with-system-prompting"><a class="link" href="#add-with-system-prompting">4.2.2. Add with system prompting</a></h4>
 <div class="paragraph">
-<p>In this mode, the user can add the person&#8217;s attributes one by one.
-After entering an attribute, the system will prompt the user input for another attribute.</p>
+<p>In this mode, instead of typing a long command at one go, you can add a person&#8217;s attributes one by one.
+After entering an attribute, the system will prompt you to input another attribute.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add t/<strong>TYPE</strong></code></p>
+<p>To add a person in this mode, enter the following command of the format: <code>add t/<strong>TYPE</strong></code></p>
 </div>
 <div class="paragraph">
-<p>When the user type in the command above, a form will be displayed. For example, if a user wants to add a patient,
-type <code>add t/patient</code> to the command box. The form will be as below:</p>
+<p>ORGANice will prompt you to type in each attribute, one by one until all the fields are filled.
+Here are some special commands that might be useful when you are in the process of filling up the form:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/abort</code> - The command to abandon the current form that you are currently filling.</p>
+</li>
+<li>
+<p><code>/undo</code> - The command to undo the last entry that you entered, which is useful when you want to undo any changes made.</p>
+</li>
+<li>
+<p><code>/done</code> - The command to indicate that you are done with filling all the required attributes and want to add the person into the application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that both <code>/abort</code> and <code>/undo</code> commands can be used at any point in time, while <code>/done</code> command can only be used once all the required attributes have been specified.</p>
+</div>
+<div class="paragraph">
+<p>These are the important commands for this feature, so now let&#8217;s take a look at an example of this how this feature can be used.
+When you want to add a <code>Patient</code>, type <code>add t/patient</code> in the <code>Command Box</code>. Three changes will occur on your screen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A form will appear in the space where the <code>Person List</code> used to occupy.</p>
+</li>
+<li>
+<p>The <code>Message Display Box</code> will display a message that prompts you to enter the patient’s name.</p>
+</li>
+<li>
+<p>There is a <code>Progress Bar</code> detailing how much of the form is filled.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Refer to the <code>Figure 4</code> to see how the resulting screen will look like.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/form.png" alt="form" width="790">
+<img src="images/addForm.png" alt="addForm" width="790">
 </div>
-</div>
-<div class="paragraph">
-<p>ORGANice will prompt the user to type in each attribute, one by one until all the fields are filled.</p>
+<div class="title">Figure 4. Screenshot of the screen after you have successfully entered the <code>Form</code> mode</div>
 </div>
 <div class="paragraph">
-<p>For example, when a user wants to add a patient, the display box will prompt the user to enter the patient&#8217;s name.
-For the user to add a patient that is named "John Doe", type <code>John Doe</code> and then press enter.
-After entering the name, the patient&#8217;s name will be displayed in the form, as shown below.</p>
+<p>If you want to add a patient named "John Doe", type <code>John Doe</code> and then press <kbd>Enter</kbd>.
+After entering the name, the patient&#8217;s name will be displayed on the form and the progress bar will increase indicating your progress in filling up the form as seen in <code>Figure 5</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/nameField.png" alt="nameField" width="790">
+<img src="images/nameFilled.png" alt="nameFilled" width="790">
 </div>
-</div>
-<div class="paragraph">
-<p>Inputs for each attribute will be checked, if it is a valid input then the user input will automatically reflected
-on the form, if it is not valid, ORGANice will show a warning to the user.</p>
+<div class="title">Figure 5. Form layout after you have entered a valid name</div>
 </div>
 <div class="paragraph">
-<p>The following screenshot shows the warning that ORGANice will give to the user if the input is not valid:</p>
+<p>Each time you type an input, ORGANice will check if it is a valid input. If the input is valid, it will be reflected on the form.
+If not, ORGANice will display a warning message stating the criteria for a valid input of that attribute.</p>
+</div>
+<div class="paragraph">
+<p>Say you typed in "G999999999A" and pressed <kbd>Enter</kbd> when ORGANice prompts you to type in the NRIC of the patient.
+Three changes occur to ORGANice, which can be seen in the <code>Figure 6</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Your input will remain in the <code>Command Box</code>, but the colour of the input text turns to red.</p>
+</li>
+<li>
+<p>An error message is displayed in the <code>Message Display Box</code>. This error message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.</p>
+</li>
+<li>
+<p>Your input will not be reflected in the form.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/wrongInput.png" alt="wrongInput" width="790">
+<img src="images/invalidInput.png" alt="invalidInput" width="790">
 </div>
+<div class="title">Figure 6. Form layout if you entered an invalid value</div>
 </div>
 <div class="paragraph">
-<p>After all of the attributes have been specified, the user can type <code>/done</code> to add the person to the ORGANice list of persons
-or <code>/abort</code> if the user decided not to add the person into the list.</p>
+<p>After all of the attributes have been specified, you can type in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/done</code> to add the person to the ORGANice list of persons</p>
+</li>
+<li>
+<p>Click the <code>Find Match</code> button to directly add the person and find the potential donors at the same time.
+Note that the <code>Find Match</code> button will only appear on the <code>Patient</code> form.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>Figure 7</code> will show how the form will look like after you have entered all the required attributes.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/allField.png" alt="allField" width="790">
+<img src="images/allFieldSpecified.png" alt="allFieldSpecified" width="790">
 </div>
+<div class="title">Figure 7. Form layout after all the required attributes have been specified</div>
 </div>
 <div class="paragraph">
-<p>When the user typed <code>/done</code> the UI will changed back to it&#8217;s original state and shows a success message suggesting that
-the user has successfully added a new person into the list.</p>
+<p>When you type in <code>/done</code>, the Person List will return to its original state of displaying people in ORGANice.
+The Message Display Box will show a success message, indicating that you have successfully added a new person to the Person List as seen in <code>Figure 8</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/addSuccess.png" alt="addSuccess" width="790">
 </div>
+<div class="title">Figure 8. The UI changed back to it&#8217;s original state and shows a success message</div>
+</div>
+<div class="paragraph">
+<p>The <code>Find Match</code> button will appear when the list is fully filled. You can click this button and you will be shown a list of potential donors as seen in <code>Figure 10</code>. Note that the Find Match button will only appear on the Patient form.
+Refer to <code>Figure 7</code> on where you can find the <code>Find Match</code> button</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findMatch.png" alt="findMatch" width="790">
+</div>
+<div class="title">Figure 9. The UI displayed the potential donors for a patient that you have added</div>
+</div>
+<div class="paragraph">
+<p>At any point in time, if you decided not to proceed with the addition and typed in <code>/abort</code>, you will be directed into the main page and notified that
+you have abandoned the form as seen in <code>Figure 10</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/abandonForm.png" alt="abandonForm" width="790">
+</div>
+<div class="title">Figure 10. The UI changed back to it&#8217;s original state and shows a message the form has been abandoned</div>
+</div>
+<div class="paragraph">
+<p>Furthermore, if you made any mistake while you are filling up the form, you can type in <code>/undo</code> to remove the last entry you entered.
+For example, if you enter the wrong name and want to undo the action, type <code>/undo</code> in the <code>Command Box</code> and press <kbd>Enter</kbd>. Your previous input for the name will be removed from the form as seen in <code>Figure 11</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/undoCommand.png" alt="undoCommand" width="790">
+</div>
+<div class="title">Figure 11. Form layout showing that the last entry is removed after you typed in <code>/undo</code></div>
 </div>
 </div>
 </div>
@@ -1111,4 +1205,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 10:27:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 11:04:58 UTC</div></div></div></body></html>
