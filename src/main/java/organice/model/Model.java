@@ -4,7 +4,9 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
+import organice.logic.commands.exceptions.CommandException;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -135,17 +137,22 @@ public interface Model {
     ObservableList<Person> getMatchList();
 
     /**
+     * Retrieves the sort list.
+     */
+    SortedList<Person> getSortList();
+
+    /**
      * Sorts list by priority level.
      */
-    void sortByPriority();
+    void sortByPriority() throws CommandException;
 
     /**
      * Sorts list by rate of success.
      */
-    void sortBySuccessRate();
+    void sortBySuccessRate() throws CommandException;
 
     /**
      * Sorts list by organ expiry date.
      */
-    void sortByOrganExpiryDate();
+    void sortByOrganExpiryDate() throws CommandException;
 }

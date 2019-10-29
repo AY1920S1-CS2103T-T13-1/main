@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import organice.model.person.Donor;
 
+/**
+ * This comparator is used to sort a list of matched donors according to the donated organ expiry date.
+ * Order: Earlier expiry date to later.
+ */
 public class ExpiryDateComparator implements Comparator<Donor> {
 
     @Override

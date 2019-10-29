@@ -16,8 +16,9 @@ public class SortCommand extends Command {
             + "success rate/expiry (for matched donors list)\n"
             + "or priority (for matched patients list)\n";
 
-    public static final String LIST_OF_SORTED_DONORS = "Sorted all matched donors";
-    public static final String LIST_OF_SORTED_PATIENTS = "Sorted all matched patients";
+    public static final String LIST_OF_SORTED_DONORS = "List of matched donors found.\n";
+    public static final String LIST_OF_SORTED_PATIENTS = "List of matched patients found.\n";
+    private static final String MESSAGE_SUCCESS = "Successfully sorted.\n";
 
     private String input;
 
@@ -27,7 +28,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         String resultMessage = "";
         requireNonNull(model);
         if (input.equalsIgnoreCase(SortCommandParser.ORGAN_EXPIRY_DATE)) {
@@ -40,7 +41,9 @@ public class SortCommand extends Command {
             model.sortBySuccessRate();
             resultMessage = LIST_OF_SORTED_DONORS;
         }
-        return new CommandResult(resultMessage);
+        CommandResult commandResult = new CommandResult(resultMessage + MESSAGE_SUCCESS);
+        commandResult.setSort(true);
+        return commandResult;
     }
 
     @Override

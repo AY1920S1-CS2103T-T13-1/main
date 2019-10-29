@@ -3,8 +3,6 @@ package organice.logic.parser;
 import organice.logic.commands.SortCommand;
 import organice.logic.parser.exceptions.ParseException;
 
-import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Parses input arguments and creates a new SortCommand object
  */
@@ -21,9 +19,10 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String userInput) throws ParseException {
+        userInput = userInput.trim();
         if (!(userInput.equalsIgnoreCase(ORGAN_EXPIRY_DATE)
                 || userInput.equalsIgnoreCase(PRIORITY)|| userInput.equalsIgnoreCase(SUCCESS_RATE))) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_INPUTS);
         }
         return new SortCommand(userInput);
     }

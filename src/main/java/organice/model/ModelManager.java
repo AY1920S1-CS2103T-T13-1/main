@@ -3,6 +3,8 @@ package organice.model;
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.annotation.Target;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import jdk.jshell.spi.ExecutionControl;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
+import organice.logic.commands.exceptions.CommandException;
 import organice.model.Comparator.ExpiryDateComparator;
 import organice.model.Comparator.PriorityComparator;
 import organice.model.Comparator.SuccessRateComparator;
@@ -300,32 +304,56 @@ public class ModelManager implements Model {
     //=========== Sorted Person List Accessors =============================================================
 
     /**
+     * Retrieves the sort list.
+     */
+    public SortedList<Person> getSortList() {
+        Person firstperson = listOfMatches.get(0);
+        if (firstperson instanceof MatchedPatient) {
+            return (SortedList<Person>) (SortedList<?>) sortedMatchedPatients;
+        } else {
+            return (SortedList<Person>) (SortedList<?>) sortedMatchedDonors;
+        }
+    }
+
+    /**
      * Sorts list by priority level.
      */
     @Override
-    public void sortByPriority() {
-        sortedMatchedPatients = new SortedList<MatchedPatient>((ObservableList<MatchedPatient>) (ObservableList<?>)
-                listOfMatches);
-        sortedMatchedPatients.setComparator(new PriorityComparator());
+    public void sortByPriority() throws CommandException {
+        try {
+            sortedMatchedPatients = new SortedList<>((ObservableList<MatchedPatient>) (ObservableList<?>)
+                    listOfMatches);
+            sortedMatchedPatients.setComparator(new PriorityComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by Priority only works after 'match ic/all'.");
+        }
     }
 
     /**
      * Sorts list by rate of success.
      */
     @Override
-    public void sortBySuccessRate() {
-        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
+    public void sortBySuccessRate() throws CommandException {
+        try {
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
                 listOfMatches);
-        sortedMatchedDonors.setComparator(new SuccessRateComparator());
+            sortedMatchedDonors.setComparator(new SuccessRateComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by success rate only works after executing 'match ic/[patient NRIC]'.");
+        }
     }
 
     /**
      * Sorts list by organ expiry date.
      */
     @Override
-    public void sortByOrganExpiryDate() {
-        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>)  (ObservableList<?>)
+    public void sortByOrganExpiryDate() throws CommandException {
+        try {
+            sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
                 listOfMatches);
-        sortedMatchedDonors.setComparator(new ExpiryDateComparator());
+            sortedMatchedDonors.setComparator(new ExpiryDateComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by organ expiry date only works after executing 'match ic/[patient NRIC]'.");
+        }
     }
 }

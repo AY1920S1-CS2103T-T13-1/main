@@ -143,11 +143,18 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Changes PersonListPanel to display normal persons.
      */
-    public void handleNonMatches() {
+    public void handleOtherCommands() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    /**
+     * Swaps the PersonListPanel if a sort command is executed.
+     */
+    public void handleSort() {
+        personListPanel = new PersonListPanel(logic.getSortList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -194,8 +201,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isMatch()) {
                 handleMatch();
+            } else if (commandResult.isSort()) {
+                handleSort();
             } else {
-                handleNonMatches();
+                handleOtherCommands();
             }
 
             if (commandResult.isShowHelp()) {
