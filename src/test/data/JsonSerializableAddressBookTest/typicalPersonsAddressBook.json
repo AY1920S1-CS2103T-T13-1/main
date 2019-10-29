@@ -1,16 +1,12 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "type": "doctor",
-    "nric": "S1532142A",
-    "name" : "Alice Pauline",
-    "phone" : "94351253"
-  }, {
-    "type": "doctor",
-    "nric": "T5231426Q",
-    "name" : "Benson Meier",
-    "phone" : "98765432"
-  }, {
+  "persons" : [
+    {
+      "type": "doctor",
+      "nric": "S1532142A",
+      "name": "Alice Pauline",
+      "phone": "94351253"
+    }, {
     "type": "patient",
     "nric": "G5642431P",
     "name" : "Carl Kurz",

@@ -47,8 +47,8 @@ public class TypicalPersons {
 
     public static final Doctor DOCTOR_ALICE = new DoctorBuilder().withNric("S1532142A")
             .withName("Alice Pauline").withPhone("94351253").build();
-    public static final Doctor DOCTOR_BENSON = new DoctorBuilder().withNric("T5231426Q")
-            .withName("Benson Meier").withPhone("98765432").build();
+    //public static final Doctor DOCTOR_BENSON = new DoctorBuilder().withNric("T5231426Q")
+    //        .withName("Benson Meier").withPhone("98765432").build();
     public static final Patient PATIENT_CARL = new PatientBuilder().withAge("22").withNric("G5642431P")
             .withName("Carl Kurz").withPhone("95352563").withPriority("high")
             .withBloodType("A").withTissueType("1,2,3,4,5,6").withOrgan("kidney")
@@ -117,7 +117,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, DOCTOR_BENSON, PATIENT_CARL, PATIENT_DANIEL, DONOR_ELLE,
+        return new ArrayList<>(Arrays.asList(DOCTOR_ALICE, PATIENT_CARL, PATIENT_DANIEL, DONOR_ELLE,
                 DONOR_FIONA, DONOR_GEORGE));
     }
 }
