@@ -1,11 +1,14 @@
 package organice.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.SortCommandParser;
 import organice.model.Model;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Sorts a list of matches in ORGANice.
+ */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";

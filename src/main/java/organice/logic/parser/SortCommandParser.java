@@ -21,7 +21,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String userInput) throws ParseException {
         userInput = userInput.trim();
         if (!(userInput.equalsIgnoreCase(ORGAN_EXPIRY_DATE)
-                || userInput.equalsIgnoreCase(PRIORITY)|| userInput.equalsIgnoreCase(SUCCESS_RATE))) {
+                || userInput.equalsIgnoreCase(PRIORITY) || userInput.equalsIgnoreCase(SUCCESS_RATE))) {
             throw new ParseException(MESSAGE_INVALID_INPUTS);
         }
         return new SortCommand(userInput);

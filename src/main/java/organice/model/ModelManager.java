@@ -3,8 +3,6 @@ package organice.model;
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.lang.annotation.Target;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import jdk.jshell.spi.ExecutionControl;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
@@ -339,7 +336,8 @@ public class ModelManager implements Model {
                 listOfMatches);
             sortedMatchedDonors.setComparator(new SuccessRateComparator());
         } catch (ClassCastException | IllegalArgumentException ex) {
-            throw new CommandException("Sorting by success rate only works after executing 'match ic/[patient NRIC]'.");
+            throw new CommandException("Sorting by success rate "
+                    + "only works after executing 'match ic/[patient NRIC]'.");
         }
     }
 
@@ -349,11 +347,12 @@ public class ModelManager implements Model {
     @Override
     public void sortByOrganExpiryDate() throws CommandException {
         try {
-            sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
                 listOfMatches);
             sortedMatchedDonors.setComparator(new ExpiryDateComparator());
         } catch (ClassCastException | IllegalArgumentException ex) {
-            throw new CommandException("Sorting by organ expiry date only works after executing 'match ic/[patient NRIC]'.");
+            throw new CommandException("Sorting by organ expiry date "
+                    + "only works after executing 'match ic/[patient NRIC]'.");
         }
     }
 }
