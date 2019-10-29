@@ -304,7 +304,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void sortByPriority() {
-        sortedMatchedPatients = new SortedList<MatchedPatient>((ObservableList<? extends MatchedPatient>) listOfMatches);
+        sortedMatchedPatients = new SortedList<MatchedPatient>((ObservableList<MatchedPatient>) (ObservableList<?>)
+                listOfMatches);
         sortedMatchedPatients.setComparator(new PriorityComparator());
     }
 
@@ -312,8 +313,9 @@ public class ModelManager implements Model {
      * Sorts list by rate of success.
      */
     @Override
-    public void sortByRate() {
-        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) listOfMatches);
+    public void sortBySuccessRate() {
+        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
+                listOfMatches);
         sortedMatchedDonors.setComparator(new SuccessRateComparator());
     }
 
@@ -321,8 +323,9 @@ public class ModelManager implements Model {
      * Sorts list by organ expiry date.
      */
     @Override
-    public void sortByExpiry() {
-        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>) listOfMatches);
+    public void sortByOrganExpiryDate() {
+        sortedMatchedDonors = new SortedList<MatchedDonor>((ObservableList<? extends MatchedDonor>)  (ObservableList<?>)
+                listOfMatches);
         sortedMatchedDonors.setComparator(new ExpiryDateComparator());
     }
 }

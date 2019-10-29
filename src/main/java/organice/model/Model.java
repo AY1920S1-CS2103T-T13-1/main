@@ -142,10 +142,10 @@ public interface Model {
     /**
      * Sorts list by rate of success.
      */
-    void sortByRate();
+    void sortBySuccessRate();
 
     /**
      * Sorts list by organ expiry date.
      */
-    void sortByExpiry();
+    void sortByOrganExpiryDate();
 }
