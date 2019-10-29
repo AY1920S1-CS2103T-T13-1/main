@@ -238,7 +238,7 @@ Step 7. `FormUiManager` calls the `AddressBookParser#parseCommand()` to add the 
 
 The following activity diagram summarizes what happens when you executes the `add t/**TYPE**` command:
 
-image::Form.png[width="790"]
+image::Form.png[width="300", height="300"]
 
 ==== Design Considerations
 This section will explain the reason for having some aspects.
