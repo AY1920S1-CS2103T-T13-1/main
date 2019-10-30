@@ -34,6 +34,8 @@ public class DoneCommand extends Command {
     private Nric patientNric;
     private Nric donorNric;
 
+    private String statusDone = "done";
+
     /**
      * creates a DoneCommand to remove the given patient and donor pair
      * @param firstNricString
@@ -84,8 +86,8 @@ public class DoneCommand extends Command {
             if (isValidDonorPatientPair(firstNric, secondNric, model)) {
                 model.getFilteredPersonList();
 
-                donor.setStatus("done");
-                patient.setStatus("done");
+                donor.setStatus(statusDone);
+                patient.setStatus(statusDone);
 
                 model.deletePerson(donor);
                 model.deletePerson(patient);

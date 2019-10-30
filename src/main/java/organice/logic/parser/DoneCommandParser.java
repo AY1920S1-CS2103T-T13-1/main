@@ -14,8 +14,8 @@ import organice.logic.parser.exceptions.ParseException;
 public class DoneCommandParser implements Parser<DoneCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ProcessingCommand
-     * and returns a ProcessingCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DoneCommand
+     * and returns a DoneCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DoneCommand parse(String args) throws ParseException {
