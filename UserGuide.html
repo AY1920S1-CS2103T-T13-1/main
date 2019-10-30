@@ -790,12 +790,14 @@ what you can do:</p>
 <p>Type <code>match ic/S1234568R</code> in the Command Box and press <kbd>Enter</kbd>.</p>
 </li>
 <li>
-<p>The list of donors and their success rate are displayed as shown in the screenshot below. The success rate is a number
-which indicates the degree of compatibility between the patient and donor.<br></p>
+<p>The list of donors and their success rate are displayed as shown in the screenshot below.<br></p>
 <div class="imageblock">
 <div class="content">
 <img src="images/MatchingDonorsDisplayed.png" alt="MatchingDonorsDisplayed" width="790">
 </div>
+</div>
+<div class="paragraph">
+<p>For more information on success rate, you may refer to <a href="#faq">Section 6, &#8220;FAQ&#8221;</a>.</p>
 </div>
 </li>
 </ol>
@@ -820,6 +822,12 @@ To match all the patients in ORGANice, do the following:</p>
 <img src="images/Patient%20Matches%20Displayed.png" alt="Patient Matches Displayed" width="790">
 </div>
 </div>
+<div class="paragraph">
+<p>Following this, you can sort the matches based on different categories to deduce which patient to prioritize.</p>
+</div>
+<div class="paragraph">
+<p>Refer to refer to <a href="#sorting-matches-code-sort-code">Section 4.8, &#8220;Sorting matches: <code>sort</code>&#8221;</a> for more information.</p>
+</div>
 </li>
 </ol>
 </div>
@@ -828,46 +836,79 @@ To match all the patients in ORGANice, do the following:</p>
 <div class="sect2">
 <h3 id="sorting-matches-code-sort-code"><a class="link" href="#sorting-matches-code-sort-code">4.8. Sorting matches: <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Users can specify how they want the patient-donor pairs to be sorted.<br>
-Sorting is done by passing in optional parameters to the <code>match</code> command.<br></p>
+<p>After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.</p>
 </div>
 <div class="paragraph">
-<p>Matches can be sorted according to three categories:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Success rate of match</p>
-</li>
-<li>
-<p>Priority of patient</p>
-</li>
-<li>
-<p>Date of expiry of donors' organs</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>To return a sorted list of patient-donor pairs, include the <code>sort/</code> flag in the command.<br>
-Format:
-<code>match ic/<strong>NRIC</strong> sort/[rate/priority/expiry]</code></p>
-</div>
-<div class="paragraph">
-<p>Typing this command causes the application to display a list of matches sorted
-according to the specified criteria. More than one sorting criteria can be included.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+<p><strong>The sort command can only be used after a match command</strong> to sort the resulting list of patient-donor pairs generated.
+There are three categories by which you can sort the matches, namely:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>match ic/S7778983D sort/rate</code></p>
+<p>Sorting based on donor&#8217;s organ expiry date</p>
 </li>
 <li>
-<p><code>match ic/S7778983D sort/rate, priority, expiry</code></p>
+<p>Sorting based on priority</p>
+</li>
+<li>
+<p>Sorting based on success rate of match</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>These categories are further elaborated below. Note that <strong>only one category can be used in one sort command</strong>.</p>
+</div>
+<div class="sect3">
+<h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">4.8.1. Sorting based on donor&#8217;s organ expiry date</a></h4>
+<div class="paragraph">
+<p>This category sorts a list of matched donors belonging to a particular patient based on the donated organ&#8217;s expiry date (from the earliest to the latest expiry date).</p>
+</div>
+<div class="paragraph">
+<p>This allows you to determine which organs are expiring soon so that you can prioritize them for organ transplant.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort expiry</code></p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+After running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get the list of donors that are compatible with said patient.
+You can then run <code>sort expiry</code> to obtain the list of donors with the earliest organ expiration date at the top of the list.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">4.8.2. Sorting based on priority</a></h4>
+<div class="paragraph">
+<p>This category sorts a list of matched patients based on their priority (from highest to lowest). You may refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on priority.</p>
+</div>
+<div class="paragraph">
+<p>This allows you to determine which patient to prioritize for organ transplant.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort priority</code></p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+After running <code>match ic/all</code>, you will obtain a list of patients.<br>
+You can then run <code>sort priority</code> to obtain a list with high priority patients at the top of the list.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sorting-based-on-success-rate-of-match"><a class="link" href="#sorting-based-on-success-rate-of-match">4.8.3. Sorting based on success rate of match</a></h4>
+<div class="paragraph">
+<p>This category sorts the list of matched donors belonging to a particular patient based on the success rate of the match (from highest to lowest).
+(Refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on success rate.)</p>
+</div>
+<div class="paragraph">
+<p>This allows you to determine which patient-donor pair has the highest compatibility and are safe to proceed for organ transplant.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort rate</code></p>
+</div>
+<div class="paragraph">
+<p>Example:<br>
+After running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get the list of donors that are compatible with said patient.
+You can then run <code>sort rate</code> to obtain the list of donors with the highest success rate at the top of the list. <br></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1099,6 +1140,10 @@ that contains the data of your previous ORGANice folder.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p><strong>Q</strong>: What is the success rate and how is it computed?<br>
+<strong>A</strong>: The success rate measures the tissue compatibility between a donor and a patient. It is computed via this formula: (number of common tissue types between donor and patient) / 6 * 100%</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1216,7 +1261,13 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 <li>
 <p>duplicate: refers to two persons of the same type which have the same NRIC</p>
 </li>
+<li>
+<p>success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.</p>
+</li>
+<li>
+<p>priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.</p>
+</li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 15:13:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 15:23:46 UTC</div></div></div></body></html>
