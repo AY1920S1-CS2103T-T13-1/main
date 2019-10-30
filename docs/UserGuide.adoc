@@ -409,11 +409,11 @@ After matching patients and donors, you can sort the list of matches to determin
 **The sort command can only be used after a match command** to sort the resulting list of patient-donor pairs generated.
 There are three categories by which you can sort the matches, namely:
 
-1. Sorting based on donor's organ expiry date
+* Sorting based on donor's organ expiry date
 +
-2. Sorting based on priority
+* Sorting based on priority
 +
-3. Sorting based on success rate of match
+* Sorting based on success rate of match
 +
 
 
