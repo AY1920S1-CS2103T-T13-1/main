@@ -228,5 +228,4 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertEquals(1, model.getFilteredPersonList().size());
     }
-
 }
