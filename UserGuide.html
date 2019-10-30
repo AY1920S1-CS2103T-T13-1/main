@@ -18,7 +18,7 @@
 <li><a href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></li>
 <li><a href="#listing-persons-code-list-code">4.3. Listing persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">4.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">4.5. Locating persons by name: <code>find</code></a></li>
+<li><a href="#finding-persons-by-attributes-code-find-code">4.5. Finding persons by attributes: <code>find</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></li>
 <li><a href="#detecting-matches-code-match-code">4.7. Detecting matches: <code>match</code></a></li>
 <li><a href="#sorting-matches-code-sort-code">4.8. Sorting matches: <code>sort</code></a></li>
@@ -692,44 +692,58 @@ Edits the name and blood type of the specified donor to be <code>Betsy Crower</c
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">4.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="finding-persons-by-attributes-code-find-code"><a class="link" href="#finding-persons-by-attributes-code-find-code">4.5. Finding persons by attributes: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose attributes contain any of the given keywords.
-A list of patient/donor/doctor&#8217;s information whose attributes partially match the keywords
-will be displayed.<br></p>
+<p>You can use the <code>find</code> command to search for persons whose attributes match your input keywords. Matching persons will
+be displayed in a list.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>find</code></p>
+<p>Format: <code>find <em>PREFIX</em>/<em>KEYWORD</em></code></p>
 </div>
 <div class="paragraph">
-<p>Optional parameters: any parameter from <a href="#List of Attributes">[List of Attributes]</a></p>
+<p>Optional parameters: Multiple <code>keywords</code> per <code>prefix</code>, multiple <code>prefixes</code> in the same find command.</p>
 </div>
-<div class="sidebarblock">
+<div class="paragraph">
+<p>The find command performs case insensitive <code>OR</code> matching within a prefix and <code>AND</code> matching between prefixes. The
+following example illustrates this concept:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one attribute will be returned.<br>
-e.g. <code>a/28 n/Hans Bo</code> will return people whose attributes are <code>n/Hans Gruber</code>, <code>n/Bo Yang</code>,
-<code>a/28 n/Jane</code></p>
-</li>
-</ul>
+<img src="images/findByPrefix.png" alt="findByPrefix" width="790">
 </div>
-</div>
+<div class="title">Figure 12. Find command with multiple prefixes and multiple keywords per prefix.</div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>As seen from Figure 12, <code>find n/Alice Carl Elle t/doctor donor</code> displays both <code>Alice Pauline</code> and <code>Elle Meyer</code>.
+This is due to the fact that Alice&#8217;s name matches either of 'Alice' <code>OR</code> 'Carl', <code>AND</code> she is also either a 'doctor'
+<code>OR</code> 'donor'. The same is true for Elle.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find t/patient n/Lim</code><br>
-Returns any patient whose name contains 'Lim'</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>You may wish to reference the following section: <a href="#List of Attributes">[List of Attributes]</a>; to view the list of available prefixes to
+search by.</p>
+</div>
+<div class="paragraph">
+<p>Here are some examples and pointers showcasing the use of <code>find</code>:</p>
+</div>
+<div class="paragraph">
+<p><em>Use case with single prefix and keyword</em><br>
+* <code>find n/Alice</code><br>
+Displays all persons whose name contains 'Alice'</p>
+</div>
+<div class="paragraph">
+<p><em>Use case demonstrating keyword case insensitivity</em><br>
+* <code>find n/aLiCe</code><br>
+Displays the same result as the preceding example.</p>
+</div>
+<div class="paragraph">
+<p><em>Use case with multiple keywords per prefix</em><br>
+* <code>find n/Alice Benson b/A B O</code><br>
+Displays all persons whose name contains either 'Alice' or 'Benson' and whose blood type is either 'A', 'B' or 'O'.</p>
+</div>
+<div class="paragraph">
+<p><em>Use case demonstrating prefix order insensitivity</em><br>
+* <code>find b/A B O n/Alice Benson</code><br>
+Displays the same result as the preceding example.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1205,4 +1219,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:24:37 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:36:05 UTC</div></div></div></body></html>
