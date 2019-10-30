@@ -308,8 +308,7 @@ public class ModelManager implements Model {
             } else if (person instanceof MatchedPatient) {
                 listOfMatchesCopy.add((MatchedPatient) person);
             } else {
-                throw new AssertionError("A Person not an instance of MatchedDonor or MatchedPatient is in"
-                        + " the match list");
+                assert true : "A Person not an instance of MatchedDonor or MatchedPatient is in the match list";
             }
         }
         return listOfMatchesCopy;
