@@ -70,12 +70,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        String searchParams = "find n/Alice ic/S1111111A t/doctor";
+        String searchParams = FindCommand.COMMAND_WORD + " n/Alice ic/S1111111A t/doctor";
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + searchParams);
         //TODO: Replace ArgumentTokenizer with stub
         assertEquals(new FindCommand(new PersonContainsPrefixesPredicate(ArgumentTokenizer
-                .tokenize("find n/Alice ic/S1111111A t/doctor", PREFIX_NAME, PREFIX_NRIC, PREFIX_TYPE))), command);
+                .tokenize(FindCommand.COMMAND_WORD
+                        + " n/Alice ic/S1111111A t/doctor", PREFIX_NAME, PREFIX_NRIC, PREFIX_TYPE))), command);
     }
 
     @Test
@@ -98,6 +99,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(
+                ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }
