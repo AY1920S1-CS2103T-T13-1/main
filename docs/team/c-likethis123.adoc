@@ -1,19 +1,23 @@
-= John Doe - Project Portfolio
+= Chow Jia Ying - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 3
+== PROJECT: ORGANice
 
 ---
 
 == Overview
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+This document is written to document my role and contributions to ORGANice.
+ORGANice is an organ matching desktop application designed for hospital administration staff who prefer typing.
+It is morphed from Address Book 3, which is used for teaching Software Engineering principles.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 k lines of code (LoC).
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
+* *Major enhancement*: added *the ability to match patients and donors*
 ** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
@@ -49,10 +53,12 @@ _{you can add/remove categories in the list above}_
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+{Start of extract from User Guide}
+
+include::../UserGuide.adoc[tag=intro]
 
 include::../UserGuide.adoc[tag=match]
-
-include::../UserGuide.adoc[tag=match]
+{End of extract from User Guide}
 
 == Contributions to the Developer Guide
 
@@ -60,10 +66,7 @@ include::../UserGuide.adoc[tag=match]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
+include::../DeveloperGuide.adoc[tag=matching]
 
 == PROJECT: PowerPointLabs
 

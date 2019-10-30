@@ -167,6 +167,10 @@ Classes used by multiple components are in the `organice.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+// tag::matching[]
+
+
 === Matching feature
 This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
 explained, followed by an explanation of design considerations.
@@ -271,6 +275,9 @@ A scenario in which this would be important is if a user matches a patient, edit
 then runs the matching again. The matching would be based on the latest patient data.
 {Include a diagram here}
 
+
+// end::matching[]
+
 // tag::formmode[]
 === Add person `Form` mode feature
 This section explains the implementation of the adding person in `Form` mode feature.
@@ -319,7 +326,6 @@ This section will explain the reason for having some aspects.
 
 // end::formmode[]
 
-// tag::dataencryption[]
 
 === Sort feature
 This section describes how the sort feature is implemented.

@@ -17,6 +17,8 @@ endif::[]
 
 By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
+
+// tag::intro[]
 == Introduction
 
 This user guide explains how to use ORGANice to manage organ transplants.
@@ -163,6 +165,8 @@ ORGANice. To access the user guide of ORGANice, you can do the following:
 .**Help Window**
 
 image::HelpWindow.png[width="790"]
+
+// end::intro[]
 
 === Adding a person: `add`
 
@@ -379,6 +383,8 @@ Deletes a person with the NRIC S98654322D in ORGANice.
 
 
 // end::delete[]
+
+// tag::match[]
 === Detecting matches: `match`
 
 This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
@@ -417,6 +423,7 @@ image::Patient Matches Displayed.png[width=790]
 +
 
 
+// end::match[]
 === Sorting matches: `sort`
 Users can specify how they want the patient-donor pairs to be sorted. +
 Sorting is done by passing in optional parameters to the `match` command. +
