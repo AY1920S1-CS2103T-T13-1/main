@@ -145,6 +145,25 @@ public interface Model {
      */
     void removeMatches();
 
+    /**
+     * Match Donors to a specified Patient.
+     */
+    void matchDonors(Patient patient);
+
+    /**
+     * Retrieves the match list.
+     */
+    ObservableList<Person> getMatchList();
+
+    /**
+
+     * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
+     */
+    int numberOfMatches();
+
+    /**
+     * Retrieves the sort list.
+     */
     SortedList<Person> getSortList();
 
     void sortByPriority() throws CommandException;
