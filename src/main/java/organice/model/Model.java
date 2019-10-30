@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
+
 import organice.logic.commands.exceptions.CommandException;
+
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
@@ -73,12 +75,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with the specified Nric exists in ORGANice.
+     * Returns true if a person with the same nric as {@code personNric} exists in the address book.
      */
     boolean hasPerson(Nric personNric);
 
     /**
-     * Returns true if a doctor in charge with the same NRIC as {@code doctorInCharge} exists in the address book.
+     * Returns true if a doctor in charge with the same nric as {@code doctorInCharge} exists in the address book.
      */
     boolean hasDoctor(Nric doctor);
 
@@ -86,8 +88,6 @@ public interface Model {
      * Returns true if a patient with the specified Nric exists in ORGANice.
      */
     boolean hasPatient(Nric patient);
-
-
 
     /**
      * Returns true if a donor in charge with the same NRIC as {@code donor} exists in the address book.
@@ -166,19 +166,18 @@ public interface Model {
      */
     SortedList<Person> getSortList();
 
+    /**
+     * Sorts list by priority level.
+     */
     void sortByPriority() throws CommandException;
 
+    /**
+     * Sorts list by rate of success.
+     */
     void sortBySuccessRate() throws CommandException;
 
+    /**
+     * Sorts list by organ expiry date.
+     */
     void sortByOrganExpiryDate() throws CommandException;
-
-    /**
-     * Match Donors to a specified Patient.
-     */
-    void matchDonors(Patient patient);
-
-    /**
-     * Retrieves the match list.
-     */
-    ObservableList<Person> getMatchList();
 }
