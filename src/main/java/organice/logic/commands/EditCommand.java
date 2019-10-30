@@ -111,7 +111,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException{
+            throws CommandException {
 
         assert personToEdit != null;
 
