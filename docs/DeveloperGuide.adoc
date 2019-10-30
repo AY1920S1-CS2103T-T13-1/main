@@ -18,8 +18,13 @@ By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
 Welcome to ORGANice! This is an organ matching desktop application that is specifically designed for fast typing
-hospital administration staff. This developer guide is meant for developers who would like to understand the
-design and structure of ORGANice.
+hospital administration staff.
+
+=== Purpose
+This document is written to document the software design and and decisions made in the implementation of ORGANice.
+
+=== Intended audience
+This developer guide is meant for developers who would like to further develop ORGANice.
 
 == Setting up
 
@@ -231,6 +236,36 @@ shows the if-else block:
 `handleMatch()` and `handleNonMatches()` are in the `MainWindow` class. The `handleMatch()` method
 selects the `listOfMatches` list to display, while the `handleNonMatches()` method selects the
 `filteredPersons` list to display.
+
+All lists are displayed in a `PersonListPanel`. This is a custom UI component that inherits the `UiPart<Region>` class.
+The constructor of `PersonListPanel` takes in an `ObservableList<Person>` object and creates
+ a list of `PersonListViewCell` objects to be displayed.
+
+The `updateItem(Person person, boolean empty)` method displays the `MatchedDonor` and
+`MatchedPatient` objects available in the `ObservableList<Person>` object. The code for the method is as follows:
+```
+protected void updateItem(Person person, boolean empty) {
+    super.updateItem(person, empty);
+    if (empty || person == null) {
+        setGraphic(null);
+        setText(null);
+    } else {
+        if (person instanceof Doctor) {
+            setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof MatchedDonor) {
+            setGraphic(new MatchCard((Donor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof Donor) {
+            setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof MatchedPatient) {
+            setGraphic(new NumberOfMatches((MatchedPatient) person, getIndex() + 1).getRoot());
+        } else if (person instanceof Patient) {
+            setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
+        } else {
+            setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+        }
+    }
+}
+```
 
 ==== Model of Matching
 This section will discuss aspects of the match feature that interacts with the `Model` component.
