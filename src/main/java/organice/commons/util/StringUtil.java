@@ -30,7 +30,7 @@ public class StringUtil {
 
         words = words.replace("\n", " ").trim();
         String[] preppedWords = words.split("\\s+");
-        checkArgument(preppedWords.length > 0, "Words parameter cannot be empty");
+        checkArgument(!words.isEmpty() && preppedWords.length > 0, "Words parameter cannot be empty");
 
         String preppedSentence = sentence.trim();
         String[] wordsInPreppedSentence = preppedSentence.split(",+|\\s+");

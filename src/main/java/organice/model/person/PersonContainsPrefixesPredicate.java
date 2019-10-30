@@ -12,6 +12,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -45,8 +46,9 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
         List<String> organKeywords = argMultimap.getAllValues(PREFIX_ORGAN);
 
         // Separate all comma delimited tissue types
-        String tissues = tissueTypeKeywords.stream().reduce("", (prev, next) -> prev + " " + next);
-        tissueTypeKeywords = Arrays.asList(tissues.replaceAll(",", " ").trim().split("\\s+"));
+        String tissues = tissueTypeKeywords.stream().reduce("", (prev, next) -> prev + " " + next)
+                .replaceAll(",", " ").trim();
+        tissueTypeKeywords = tissues.isEmpty() ? new ArrayList<>() : Arrays.asList(tissues.split("\\s+"));
 
         // Early return if argMultimap is empty
         if (nameKeywords.isEmpty() && nricKeywords.isEmpty() && phoneKeywords.isEmpty() && typeKeywords.isEmpty()
