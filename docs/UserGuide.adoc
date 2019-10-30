@@ -326,7 +326,8 @@ Edits the name and blood type of the specified donor to be `Betsy Crower` and `A
 // tag::find[]
 === Finding persons by attributes: `find`
 
-You can use the `find` command to search for persons whose attributes match your input keywords. +
+You can use the `find` command to search for persons whose attributes match your input keywords. Matching persons will
+be displayed in a list. +
 
 Format: `find __PREFIX__/__KEYWORD__`
 
@@ -338,7 +339,7 @@ following example illustrates this concept:
 .Find command with multiple prefixes and multiple keywords per prefix.
 image::findByPrefix.png[width="790"]
 
-As seen from Figure 12, `find n/Alice Carl Ellie t/doctor donor` displays both `Alice Pauline` and `Elle Meyer`.
+As seen from Figure 12, `find n/Alice Carl Elle t/doctor donor` displays both `Alice Pauline` and `Elle Meyer`.
 This is due to the fact that Alice's name matches either of 'Alice' `OR` 'Carl', `AND` she is also either a 'doctor'
 `OR` 'donor'. The same is true for Elle.
 
