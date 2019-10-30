@@ -1,6 +1,7 @@
 package organice.logic.parser;
 
 import org.junit.jupiter.api.Test;
+
 import organice.model.person.Type;
 
 class DoneCommandParserTest {
