@@ -140,23 +140,17 @@ It is responsible for performing the following tasks:</p>
 <p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
 </li>
 <li>
-<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+<p>At shut down: Shuts down the components and invokes cleanup methods where necessary.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components.
-The following class plays an important role at the architecture level:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
-</li>
-</ul>
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. For example,
+the <code>LogsCenter</code> class is in the <code>Commons</code> collection because it is used by many classes
+to write log messages to the ORGANice&#8217;s log file.</p>
 </div>
 <div class="paragraph">
-<p>The rest of the App consists of four components.</p>
+<p>The rest of ORGANice consists of four components.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -198,15 +192,14 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
-<p>This section explains the interactions amongst the different architecture components using an example.
-The <em>Sequence Diagram</em> below shows how the components interact with each other
-for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario when a user
+issues the command <code>edit S5678908D n/Mr Lim</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ArchitectureSequenceDiagram.png" alt="ArchitectureSequenceDiagram">
 </div>
-<div class="title">Figure 3. Component interactions for <code>delete 1</code> command</div>
+<div class="title">Figure 3. Component interactions for <code>edit S5678908D n/Mr Lim</code> command</div>
 </div>
 <div class="paragraph">
 <p>The sections below give more details of each component.</p>
@@ -283,13 +276,13 @@ Figure 5 below depicts the classes in the Logic component and their relationship
 </ol>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API call.</p>
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("edit ic/S5678908D n/Mr Lim")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram">
+<img src="images/EditSequenceDiagram.png" alt="EditSequenceDiagram">
 </div>
-<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
+<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>edit S5678908D n/Mr Lim</code> Command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -298,7 +291,7 @@ Figure 5 below depicts the classes in the Logic component and their relationship
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for <code>EditCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </td>
 </tr>
 </table>
@@ -333,19 +326,6 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -390,33 +370,111 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="matching-feature"><a class="link" href="#matching-feature">4.1. Matching feature</a></h3>
 <div class="paragraph">
-<p>This section describes how the matching feature is implemented.</p>
+<p>This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
+explained, followed by an explanation of design considerations.</p>
+</div>
+<div class="sect3">
+<h4 id="logic-of-matching"><a class="link" href="#logic-of-matching">4.1.1. Logic of Matching</a></h4>
+<div class="paragraph">
+<p>This section explains the logic of matching.</p>
 </div>
 <div class="paragraph">
-<p>Matching is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>, then creating
-<code>MatchedPatient</code> and <code>MatchedDonor</code> objects to store the match results. The <code>MatchedPatient</code> and <code>MatchedDonor</code> objects
-are stored in a separate <code>listOfMatches</code> list.</p>
+<p>Matching is done by implementing the <code>MatchCommand#match(Person donor, Patient patient)</code> method. It takes in a Donor
+object and a Patient object, which represents a donor and a patient respectively. The method returns true if the patient
+and donor are a match, and false otherwise. The code for the <code>match</code> method is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>public static boolean match(Person donor, Patient patient) {
+    if (!(donor instanceof Donor)) {
+        return false;
+    }
+
+    BloodType donorBloodType = ((Donor) donor).getBloodType();
+    BloodType patientBloodType = patient.getBloodType();
+
+    TissueType donorTissueType = ((Donor) donor).getTissueType();
+    TissueType patientTissueType = patient.getTissueType();
+
+    Double successRate = donorTissueType.getPercentageMatch(patientTissueType);
+
+    if (patientBloodType.isBloodTypeMatch(donorBloodType) &amp;&amp; successRate &gt;= SUCCESSFUL_PERCENTAGE) {
+        Donor donorToSet = (Donor) donor;
+        donorToSet.addMatchResult(patient.getNric(), successRate);
+        donorToSet.setSuccessRate(patient.getNric());
+        return true;
+    } else {
+        return false;
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>To facilitate the matching, the following methods were added to <code>ModelManager</code>:</p>
+<p>This <code>match</code> method is used in <code>ModelManager</code> to find matches. The following methods
+in <code>ModelManager</code> accesses the <code>match</code> method:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGANice with the specified Patient.
-For each Donor that matches the patient, a <code>MatchedDonor</code> objected is created and stored.</p>
+<p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGANice with the specified patient.
+For each donor that matches the patient, a <code>MatchedDonor</code> object is created and stored.</p>
 </li>
 <li>
-<p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients.</p>
+<p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients. For every patient in ORGANice,
+a <code>MatchedPatient</code> object is created to store the number of donors that matches that patient.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>After matching the patients and donors, the <code>MainWindow</code> decides which list to display via the <code>CommandResult#isMatch</code>
-method.</p>
+<p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects are stored in an <code>ObservableList</code> called
+<code>listOfMatches</code>. This <code>ObservableList</code> can be accessed by <code>Logic</code> and displayed by the <code>UI</code>
+component.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design considerations</a></h4>
+<h4 id="ui-of-matching"><a class="link" href="#ui-of-matching">4.1.2. UI of Matching</a></h4>
+<div class="paragraph">
+<p>This section explains the UI design of the matching feature.</p>
+</div>
+<div class="paragraph">
+<p>After the match command is invoked, a <code>CommandResult</code> object is returned.
+The <code>MainWindow</code> decides which list to display via an if-else block. The code snippet below
+shows the if-else block:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>    if (commandResult.isMatch()) {
+        handleMatch();
+    } else {
+        handleNonMatches();
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>handleMatch()</code> and <code>handleNonMatches()</code> are in the <code>MainWindow</code> class. The <code>handleMatch()</code> method
+selects the <code>listOfMatches</code> list to display, while the <code>handleNonMatches()</code> method selects the
+<code>filteredPersons</code> list to display.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="model-of-matching"><a class="link" href="#model-of-matching">4.1.3. Model of Matching</a></h4>
+<div class="paragraph">
+<p>This section will discuss aspects of the match feature that interacts with the <code>Model</code> component.</p>
+</div>
+<div class="paragraph">
+<p>As explained earlier, <code>MatchedDonor</code> and <code>MatchedPatient</code> objects store
+match results for a specific donor and patient respectively. Each time
+the match command is invoked, previous <code>MatchedDonor</code> and <code>MatchedPatient</code> objects
+will be removed from the list.</p>
+</div>
+<div class="paragraph">
+<p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects only exist in-memory and will not be saved to the hard disk.
+This means that data stored in <code>MatchedDonor</code> and <code>MatchedPatient</code> objects will not be assessible
+in the next app launch.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.4. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -434,13 +492,33 @@ evaluates to <code>true</code>.</p>
 </div>
 <div class="paragraph">
 <p>It was discovered that there were many bugs introduced via this approach. The root cause of the bugs could not be
-identified.</p>
+identified. {Link to bug report}</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-non-persistence-of-match-results"><a class="link" href="#aspect-non-persistence-of-match-results">Aspect: Non-persistence of match results</a></h5>
+<div class="paragraph">
+<p>This section explains why the match results are not stored.</p>
+</div>
+<div class="paragraph">
+<p>One reason is to ensure that all objects in the <code>listOfMatches</code> ObservableList are different after
+executing a match command. This ensures that the <code>updateCell()</code> method would be called to
+update the <code>PersonListPanel</code> display.</p>
+</div>
+<div class="paragraph">
+<p>Another reason is to override previous match results with new results from the latest match command.
+A scenario in which this would be important is if a user matches a patient, edits the patient information,
+then runs the matching again. The matching would be based on the latest patient data.
+{Include a diagram here}</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">4.2. Add person <code>Form</code> mode feature</a></h3>
+<div class="paragraph">
+<p>This section explains the implementation of the adding person in <code>Form</code> mode feature.</p>
+</div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">4.2.1. Implementation</a></h4>
 <div class="paragraph">
@@ -1218,4 +1296,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 06:09:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 06:59:12 UTC</div></div></div></body></html>
