@@ -110,13 +110,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException{
+
         assert personToEdit != null;
 
         Type updatedType = editPersonDescriptor.getType().orElse(personToEdit.getType());
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+
+        assert Type.isValidType(updatedType.toString());
         if (updatedType.isPatient()) {
             Age updatedAge = ((Patient) personToEdit).getAge();
             BloodType updatedBloodType = ((Patient) personToEdit).getBloodType();
@@ -139,8 +143,7 @@ public class EditCommand extends Command {
         } else if (updatedType.isDoctor()) {
             return new Doctor(updatedType, updatedNric, updatedName, updatedPhone);
         }
-
-        return new Person(updatedType, updatedNric, updatedName, updatedPhone);
+        throw new CommandException(EditCommand.MESSAGE_USAGE);
     }
 
     @Override
