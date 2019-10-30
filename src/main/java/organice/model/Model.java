@@ -147,6 +147,7 @@ public interface Model {
      */
     int numberOfMatches();
 
+    /**
      * Retrieves the sort list.
      */
     SortedList<Person> getSortList();

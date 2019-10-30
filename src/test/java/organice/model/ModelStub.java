@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
@@ -80,6 +81,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasPerson(Nric personNric) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
     public void deletePerson(Person target) {
         throw new AssertionError("This method should not be called.");
     }
@@ -122,5 +128,25 @@ public class ModelStub implements Model {
     @Override
     public int numberOfMatches() {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void sortByOrganExpiryDate() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public void sortBySuccessRate() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public void sortByPriority() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
+    public SortedList<Person> getSortList() {
+        throw new AssertionError("This method should not be called");
     }
 }
