@@ -300,7 +300,7 @@ public class ModelManager implements Model {
     /**
      * Returns a copy of the match list.
      */
-    public ObservableList<Person> getMatchList() throws IllegalArgumentException {
+    public ObservableList<Person> getMatchList() throws AssertionError {
         ObservableList<Person> listOfMatchesCopy = FXCollections.observableArrayList();
         for (Person person : listOfMatches) {
             if (person instanceof MatchedDonor) {
@@ -308,7 +308,7 @@ public class ModelManager implements Model {
             } else if (person instanceof MatchedPatient) {
                 listOfMatchesCopy.add((MatchedPatient) person);
             } else {
-                throw new IllegalArgumentException("A Person not an instance of MatchedDonor or MatchedPatient is in"
+                throw new AssertionError("A Person not an instance of MatchedDonor or MatchedPatient is in"
                         + " the match list");
             }
         }
