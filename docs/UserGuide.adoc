@@ -366,7 +366,7 @@ Deletes a person with the NRIC S98654322D in ORGANice.
 === Detecting matches: `match`
 
 This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
-Refer to <<Glossary>> for a better understanding of the procedure for kidney matching.
+Refer to <<FAQ>> for a better understanding of the procedure for kidney matching.
 
 You can either run a kidney matching test on all patients and donors or find matching donors for a specific patient.
 To learn how to run kidney matching tests on all patients, refer to <<Matching all patients>>. To learn how to run
@@ -404,12 +404,20 @@ Following this, you can sort the matches based on different categories to deduce
 Refer to refer to <<Sorting matches: `sort`>> for more information.
 
 === Sorting matches: `sort`
-This section specifies how a list of matches can be sorted to determine which patient to prioritize for organ transplant.
+After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
 
 **The sort command can only be used after a match command** to sort the resulting list of patient-donor pairs generated.
-The following specifies three categories by which you can sort the matches.
+There are three categories by which you can sort the matches, namely:
 
-Note that **only one sorting category can be used in one sort command**.
+1. Sorting based on donor's organ expiry date
++
+2. Sorting based on priority
++
+3. Sorting based on success rate of match
++
+
+
+These categories are further elaborated below. Note that **only one category can be used in one sort command**.
 
 ==== Sorting based on donor's organ expiry date
 This category sorts a list of matched donors belonging to a particular patient based on the donated organ's expiry date (from the earliest to the latest expiry date).
@@ -584,7 +592,7 @@ that contains the data of your previous ORGANice folder.
 3. Do a cross match, which is a trial transfusion.
 
 *Q*: What is the success rate and how is it computed? +
-*A*:
+*A*: The success rate measures the tissue compatibility between a donor and a patient. It is computed via this formula: (number of common tissue types between donor and patient) / 6 * 100%
 
 == Command Summary
 
@@ -635,3 +643,5 @@ for harmful interactions between patient and donor's blood
 * duplicate: refers to two persons of the same type which have the same NRIC
 
 * success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
+
+* priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.
