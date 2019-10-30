@@ -80,9 +80,9 @@ image::LogicClassDiagram.png[]
 ==== How the architecture components interact with each other
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario when a user
-issues the command `edit ic/S5678908D n/Mr Lim`.
+issues the command `edit S5678908D n/Mr Lim`.
 
-.Component interactions for `edit ic/S5678908D n/Mr Lim` command
+.Component interactions for `edit S5678908D n/Mr Lim` command
 image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
@@ -125,7 +125,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("edit ic/S5678908D n/Mr Lim")` API call.
 
-.Interactions Inside the Logic Component for the `edit ic/S5678908D n/Mr Lim` Command
+.Interactions Inside the Logic Component for the `edit S5678908D n/Mr Lim` Command
 image::EditSequenceDiagram.png[]
 
 NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -257,10 +257,24 @@ or if the `Patient` and `Donor` attributes should be displayed. The match result
 evaluates to `true`.
 
 It was discovered that there were many bugs introduced via this approach. The root cause of the bugs could not be
-identified.
+identified. {Link to bug report}
+
+===== Aspect: Non-persistence of match results
+This section explains why the match results are not stored.
+
+One reason is to ensure that all objects in the `listOfMatches` ObservableList are different after
+executing a match command. This ensures that the `updateCell()` method would be called to
+update the `PersonListPanel` display.
+
+Another reason is to override previous match results with new results from the latest match command.
+A scenario in which this would be important is if a user matches a patient, edits the patient information,
+then runs the matching again. The matching would be based on the latest patient data.
+{Include a diagram here}
 
 // tag::formmode[]
 === Add person `Form` mode feature
+This section explains the implementation of the adding person in `Form` mode feature.
+
 ==== Implementation
 
 The `Form` mode mechanism is facilitated by `FormUiManager`.
