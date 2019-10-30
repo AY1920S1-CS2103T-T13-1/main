@@ -168,20 +168,81 @@ Classes used by multiple components are in the `organice.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 === Matching feature
-This section describes how the matching feature is implemented.
+This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
+explained, followed by an explanation of design considerations.
 
-Matching is done by accessing `Patient` and `Donor` in `ModelManager`, then creating
-`MatchedPatient` and `MatchedDonor` objects to store the match results. The `MatchedPatient` and `MatchedDonor` objects
-are stored in a separate `listOfMatches` list.
+==== Logic of Matching
+This section explains the logic of matching.
 
-To facilitate the matching, the following methods were added to `ModelManager`:
+Matching is done by implementing the `MatchCommand#match(Person donor, Patient patient)` method. It takes in a Donor
+object and a Patient object, which represents a donor and a patient respectively. The method returns true if the patient
+and donor are a match, and false otherwise. The code for the `match` method is shown below:
+```
+public static boolean match(Person donor, Patient patient) {
+    if (!(donor instanceof Donor)) {
+        return false;
+    }
 
-* `ModelManager#matchDonors(Patient patient)` -- Matches all donors in ORGANice with the specified Patient.
-For each Donor that matches the patient, a `MatchedDonor` objected is created and stored.
-* `ModelManager#matchPatients()` -- Matches all donors with all patients.
+    BloodType donorBloodType = ((Donor) donor).getBloodType();
+    BloodType patientBloodType = patient.getBloodType();
 
-After matching the patients and donors, the `MainWindow` decides which list to display via the `CommandResult#isMatch`
-method.
+    TissueType donorTissueType = ((Donor) donor).getTissueType();
+    TissueType patientTissueType = patient.getTissueType();
+
+    Double successRate = donorTissueType.getPercentageMatch(patientTissueType);
+
+    if (patientBloodType.isBloodTypeMatch(donorBloodType) && successRate >= SUCCESSFUL_PERCENTAGE) {
+        Donor donorToSet = (Donor) donor;
+        donorToSet.addMatchResult(patient.getNric(), successRate);
+        donorToSet.setSuccessRate(patient.getNric());
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+
+This `match` method is used in `ModelManager` to find matches. The following methods
+in `ModelManager` accesses the `match` method:
+
+* `ModelManager#matchDonors(Patient patient)` -- Matches all donors in ORGANice with the specified patient.
+For each donor that matches the patient, a `MatchedDonor` object is created and stored.
+* `ModelManager#matchPatients()` -- Matches all donors with all patients. For every patient in ORGANice,
+a `MatchedPatient` object is created to store the number of donors that matches that patient.
+
+`MatchedDonor` and `MatchedPatient` objects are stored in an `ObservableList` called
+`listOfMatches`. This `ObservableList` can be accessed by `Logic` and displayed by the `UI`
+component.
+
+==== UI of Matching
+This section explains the UI design of the matching feature.
+
+After the match command is invoked, a `CommandResult` object is returned.
+The `MainWindow` decides which list to display via an if-else block. The code snippet below
+shows the if-else block:
+```
+    if (commandResult.isMatch()) {
+        handleMatch();
+    } else {
+        handleNonMatches();
+    }
+```
+
+`handleMatch()` and `handleNonMatches()` are in the `MainWindow` class. The `handleMatch()` method
+selects the `listOfMatches` list to display, while the `handleNonMatches()` method selects the
+`filteredPersons` list to display.
+
+==== Model of Matching
+This section will discuss aspects of the match feature that interacts with the `Model` component.
+
+As explained earlier, `MatchedDonor` and `MatchedPatient` objects store
+match results for a specific donor and patient respectively. Each time
+the match command is invoked, previous `MatchedDonor` and `MatchedPatient` objects
+will be removed from the list.
+
+`MatchedDonor` and `MatchedPatient` objects only exist in-memory and will not be saved to the hard disk.
+This means that data stored in `MatchedDonor` and `MatchedPatient` objects will not be assessible
+in the next app launch.
 
 ==== Design considerations
 This section will explain the reason for having some aspects.
