@@ -9,7 +9,12 @@
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#purpose">1.1. Purpose</a></li>
+<li><a href="#intended-audience">1.2. Intended audience</a></li>
+</ul>
+</li>
 <li><a href="#setting-up">2. Setting up</a></li>
 <li><a href="#design">3. Design</a>
 <ul class="sectlevel2">
@@ -60,9 +65,21 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to ORGANice! This is an organ matching desktop application that is specifically designed for fast typing
-hospital administration staff. This developer guide is meant for developers who would like to understand the
-design and structure of ORGANice.</p>
+<p>Welcome to ORGANice! ORGANice is an organ transplant manager desktop application
+specifically designed for hospital administration staff who prefer typing.</p>
+</div>
+<div class="sect2">
+<h3 id="purpose"><a class="link" href="#purpose">1.1. Purpose</a></h3>
+<div class="paragraph">
+<p>This guide documents the software design and considerations
+made during the development of ORGANice.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="intended-audience"><a class="link" href="#intended-audience">1.2. Intended audience</a></h3>
+<div class="paragraph">
+<p>This guide is meant for developers who would like to further develop ORGANice.</p>
+</div>
 </div>
 </div>
 </div>
@@ -455,6 +472,41 @@ shows the if-else block:</p>
 selects the <code>listOfMatches</code> list to display, while the <code>handleNonMatches()</code> method selects the
 <code>filteredPersons</code> list to display.</p>
 </div>
+<div class="paragraph">
+<p>All lists are displayed in a <code>PersonListPanel</code>. This is a custom UI component that inherits the <code>UiPart&lt;Region&gt;</code> class.
+The constructor of <code>PersonListPanel</code> takes in an <code>ObservableList&lt;Person&gt;</code> object and creates
+ a list of <code>PersonListViewCell</code> objects to be displayed.</p>
+</div>
+<div class="paragraph">
+<p>The <code>updateItem(Person person, boolean empty)</code> method displays the <code>MatchedDonor</code> and
+<code>MatchedPatient</code> objects available in the <code>ObservableList&lt;Person&gt;</code> object. The following is the code snippet for
+<code>#updateItem()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>protected void updateItem(Person person, boolean empty) {
+    super.updateItem(person, empty);
+    if (empty || person == null) {
+        setGraphic(null);
+        setText(null);
+    } else {
+        if (person instanceof Doctor) {
+            setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof MatchedDonor) {
+            setGraphic(new MatchCard((Donor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof Donor) {
+            setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
+        } else if (person instanceof MatchedPatient) {
+            setGraphic(new NumberOfMatches((MatchedPatient) person, getIndex() + 1).getRoot());
+        } else if (person instanceof Patient) {
+            setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
+        } else {
+            setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+        }
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="model-of-matching"><a class="link" href="#model-of-matching">4.1.3. Model of Matching</a></h4>
@@ -469,7 +521,7 @@ will be removed from the list.</p>
 </div>
 <div class="paragraph">
 <p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects only exist in-memory and will not be saved to the hard disk.
-This means that data stored in <code>MatchedDonor</code> and <code>MatchedPatient</code> objects will not be assessible
+This means that data stored in <code>MatchedDonor</code> and <code>MatchedPatient</code> objects will not be accessible
 in the next app launch.</p>
 </div>
 </div>
@@ -502,7 +554,7 @@ identified. {Link to bug report}</p>
 </div>
 <div class="paragraph">
 <p>One reason is to ensure that all objects in the <code>listOfMatches</code> ObservableList are different after
-executing a match command. This ensures that the <code>updateCell()</code> method would be called to
+executing a match command. This ensures that the <code>updateItem()</code> method would be called to
 update the <code>PersonListPanel</code> display.</p>
 </div>
 <div class="paragraph">
@@ -1296,4 +1348,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 14:36:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 15:13:46 UTC</div></div></div></body></html>
