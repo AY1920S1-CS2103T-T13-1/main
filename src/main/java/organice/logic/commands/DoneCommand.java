@@ -9,6 +9,9 @@ import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * Set the status of a donor and patient to Done and remove the pair from the model
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
@@ -31,13 +34,25 @@ public class DoneCommand extends Command {
     private Nric patientNric;
     private Nric donorNric;
 
-
+    /**
+     * creates a DoneCommand to remove the given patient and donor pair
+     * @param firstNricString
+     * @param secondNricString
+     */
     public DoneCommand(String firstNricString, String secondNricString) {
         requireNonNull(firstNricString, secondNricString);
         firstNric = new Nric(firstNricString);
         secondNric = new Nric(secondNricString);
     }
 
+    /**
+     * check if the two Nric given are valid.
+     * It needs to contain one patient and one donor and both of them must be matched in order to be valid
+     * @param firstNric the first Nric given
+     * @param secondNric the second Nric given
+     * @param model
+     * @return a boolean true false stating whether the inputs are valid
+     */
     public boolean isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model) {
         if (model.hasDonor(firstNric)) {
             donorNric = firstNric;
@@ -53,7 +68,7 @@ public class DoneCommand extends Command {
             donor = model.getDonor(donorNric);
         }
         if (model.hasPatient(patientNric) && model.hasDonor(donorNric)
-                && match(donor, patient))  {
+                && match(donor, patient)) {
             //todo check if tasklist isempty
             return true;
         } else {

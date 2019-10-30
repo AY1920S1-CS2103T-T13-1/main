@@ -113,6 +113,11 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * To check if the model have a person with the given Nric.
+     * @param personNric
+     * @return a boolean true or false if the person exist.
+     */
     public boolean hasPerson(Nric personNric) {
         requireNonNull(personNric);
         return addressBook.hasPerson(personNric);
