@@ -25,6 +25,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
+import javafx.collections.transformation.SortedList;
+import organice.commons.core.GuiSettings;
+import organice.logic.commands.exceptions.CommandException;
+
 import organice.model.AddressBook;
 import organice.model.ModelStub;
 import organice.model.person.Donor;
