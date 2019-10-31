@@ -459,9 +459,8 @@ You can then run `sort priority` to obtain a list with high priority patients at
 
 Note:
 
-* In cases where patients have the **same priority**, they will be **further sorted in descending number of matched donors they have**. +
-
-* If they have the **same priority and number of matched donors**, they will be **further sorted based on their names in alphabetical order**.
+* In cases where patients have the **same priority**, those with more matched donors will be displayed first.
+If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.
 
 ==== Sorting based on success rate of match
 This category sorts the list of matched donors belonging to a particular patient based on the success rate of the match (from highest to lowest).
