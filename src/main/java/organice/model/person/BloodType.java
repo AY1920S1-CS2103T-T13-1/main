@@ -25,8 +25,7 @@ public class BloodType {
     public static final HashMap<BloodType, HashSet<BloodType>> BLOOD_TYPES_MATCHES = BloodType.getBloodTypeMatches();
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Blood type should only have A, B, O or AB."
-                    + "Positive blood types will have a '+' behind, it should not be blank";
+            "Blood type should only have A, B, O or AB. Inputs should not be blank";
 
 
 
