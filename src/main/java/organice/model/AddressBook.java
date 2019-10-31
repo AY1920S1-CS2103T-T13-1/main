@@ -71,7 +71,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same nric as {@code personNric} exists in the address book.
+     * Returns true if a person with the same nric as {@code personNric} exists in ORGANice.
      */
     public boolean hasPerson(Nric personNric) {
         requireNonNull(personNric);
@@ -79,7 +79,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a doctor with the same NRIC as {@code doctorInCharge} exists in the address book.
+     * Returns true if a doctor with the same nric as {@code doctor} exists in ORGANice.
      */
     public boolean hasDoctor(Nric doctor) {
         requireNonNull(doctor);
@@ -170,4 +170,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }
