@@ -1,5 +1,10 @@
 package organice.model.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+
 import organice.model.AddressBook;
 import organice.model.ReadOnlyAddressBook;
 import organice.model.person.Age;
@@ -19,23 +24,20 @@ import organice.model.person.Status;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
-import java.util.*;
-import java.util.stream.Stream;
-
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 
 public class SampleDataUtil {
     private static final Name[] NAMES_FIRST = Arrays.stream(
-            new String[]{"Alice", "Antiope", "Benson", "Betty", "Carol", "Casey", "Duncan", "Dexter", "Elliot", "Elle",
-            "Darion", "Delilah", "Elle", "Eden", "Frank", "Felicia", "Gary", "George", "Helen", "Halimah", "Issac",
-            "Irene", "James", "Janet", "Kelly", "Karen", "Lionel", "Leonard", "Mary", "Marisha", "Neo", "Navin",
-            "Oscar", "Olivia", "Penelope", "Pauline"})
+            new String[] {"Alice", "Antiope", "Benson", "Betty", "Carol", "Casey", "Duncan", "Dexter", "Elliot", "Elle",
+                "Darion", "Delilah", "Elle", "Eden", "Frank", "Felicia", "Gary", "George", "Helen", "Halimah",
+                "Issac", "Irene", "James", "Janet", "Kelly", "Karen", "Lionel", "Leonard", "Mary", "Marisha", "Neo",
+                "Navin", "Oscar", "Olivia", "Penelope", "Pauline"})
             .map(Name::new).toArray(Name[]::new);
     private static final Name[] NAMES_LAST = Arrays.stream(
             new String[]{"Smith", "Lim", "Tan", "Lee", "Chua", "Yacob", "Chow", "Doe", "Richards", "Walker", "Ross",
-            "Martinez", "Brady", "Weiss", "Belladonna", "Rose", "Tennant", "Perry", "Davidson"})
+                "Martinez", "Brady", "Weiss", "Belladonna", "Rose", "Tennant", "Perry", "Davidson"})
             .map(Name::new).toArray(Name[]::new);
     private static final char[] NRIC_LETTERS = "STFG".toCharArray();
     private static final char[] NRIC_CHECKSUMS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -51,44 +53,46 @@ public class SampleDataUtil {
             .map(Status::new).toArray(Status[]::new);
 
     public static Person[] getSamplePersons() {
-        final int NUM_DOCTORS = 10;
-        final int NUM_PATIENTS = 20;
-        final int NUM_DONORS = 20;
-        final int NUM_TOTAL = NUM_DOCTORS + NUM_DONORS + NUM_PATIENTS;
-        final int NRIC_MIN = 1000000;
-        final int NRIC_MAX = 9999999;
-        final int NRIC_INCREMENT_MAX = (NRIC_MAX - NRIC_MIN) / NUM_TOTAL;
+        int numDoctors = 10;
+        int numPatients = 20;
+        int numDonors = 20;
+        int numPersons = numDoctors + numDonors + numPatients;
+        int nricMin = 1000000;
+        int nricMax = 9999999;
+        int nricIncrementMax = (nricMax - nricMin) / numPersons;
 
         // To cycle back, % array.length
         int iterator = 0;
-        int nric_body = NRIC_MIN;
+        int nricBody = nricMin;
 
         ArrayList<Doctor> doctorList = new ArrayList<>();
         // Create Doctors
-        for (; iterator < NUM_DOCTORS; iterator++, nric_body += Math.random() * (NRIC_INCREMENT_MAX  + 1)) {
+        for (; iterator < numDoctors; iterator++, nricBody += Math.random() * (nricIncrementMax + 1)) {
             Doctor newDoctor = new Doctor(
                     new Type("doctor"),
                     new Nric(NRIC_LETTERS[iterator % NRIC_LETTERS.length]
-                            + String.valueOf(nric_body) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
+                            + String.valueOf(nricBody) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
                     new Name(NAMES_FIRST[iterator % NAMES_FIRST.length]
                             + " " + NAMES_LAST[iterator % NAMES_LAST.length]),
-                    new Phone((String.valueOf((int)(Math.random() * ((99999999 - 80000000) + 1) + 80000000))))
+                    new Phone((String.valueOf((int) (Math.random() * ((99999999 - 80000000) + 1) + 80000000))))
             );
             doctorList.add(newDoctor);
         }
 
         // Create Patients
         ArrayList<Patient> patientList = new ArrayList<>();
-        for (; iterator < NUM_DOCTORS + NUM_PATIENTS; iterator++, nric_body += Math.random() * (NRIC_INCREMENT_MAX  + 1)) {
+        for (; iterator < numDoctors + numPatients;
+             iterator++, nricBody += Math.random() * (nricIncrementMax + 1)) {
             // NOTE TissueType not random.
             Patient newPatient = new Patient(
                     new Type("patient"),
                     new Nric(NRIC_LETTERS[iterator % NRIC_LETTERS.length]
-                            + String.valueOf(nric_body) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
+                            + String.valueOf(nricBody) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
                     new Name(NAMES_FIRST[iterator % NAMES_FIRST.length]
                             + " " + NAMES_LAST[iterator % NAMES_LAST.length]),
-                    new Phone((String.valueOf((int)(Math.random() * ((99999999 - 80000000) + 1) + 80000000)))),
-                    new Age(String.valueOf((int)((Math.random() * (((Age.AGE_MAX -1) - (Age.AGE_MIN + 1)) + 1)) + Age.AGE_MIN))),
+                    new Phone((String.valueOf((int) (Math.random() * ((99999999 - 80000000) + 1) + 80000000)))),
+                    new Age(String.valueOf(
+                            (int) ((Math.random() * (((Age.AGE_MAX - 1) - (Age.AGE_MIN + 1)) + 1)) + Age.AGE_MIN))),
                     new Priority(PRIORITIES[iterator % PRIORITIES.length].toString()),
                     new BloodType(BLOODTYPES[iterator % BLOODTYPES.length].toString()),
                     new TissueType(
@@ -108,15 +112,16 @@ public class SampleDataUtil {
 
         // Create Donors
         ArrayList<Donor> donorList = new ArrayList<>();
-        for (; iterator < NUM_TOTAL; iterator++, nric_body += Math.random() * (NRIC_INCREMENT_MAX  + 1)) {
+        for (; iterator < numPersons; iterator++, nricBody += Math.random() * (nricIncrementMax + 1)) {
             Donor newDonor = new Donor(
                     new Type("donor"),
                     new Nric(NRIC_LETTERS[iterator % NRIC_LETTERS.length]
-                            + String.valueOf(nric_body) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
+                            + String.valueOf(nricBody) + NRIC_CHECKSUMS[iterator % NRIC_CHECKSUMS.length]),
                     new Name(NAMES_FIRST[iterator % NAMES_FIRST.length]
                             + " " + NAMES_LAST[iterator % NAMES_LAST.length]),
-                    new Phone((String.valueOf((int)(Math.random() * ((99999999 - 80000000) + 1) + 80000000)))),
-                    new Age(String.valueOf((int)((Math.random() * (((Age.AGE_MAX -1) - (Age.AGE_MIN + 1)) + 1)) + Age.AGE_MIN))),
+                    new Phone((String.valueOf((int) (Math.random() * ((99999999 - 80000000) + 1) + 80000000)))),
+                    new Age(String.valueOf(
+                            (int) ((Math.random() * (((Age.AGE_MAX - 1) - (Age.AGE_MIN + 1)) + 1)) + Age.AGE_MIN))),
                     new BloodType(BLOODTYPES[iterator % BLOODTYPES.length].toString()),
                     new TissueType(
                             TISSUETYPE_VALUES[iterator % TISSUETYPE_VALUES.length] + ","
