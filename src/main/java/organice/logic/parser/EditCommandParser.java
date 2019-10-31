@@ -75,11 +75,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DOCTOR_IN_CHARGE).isPresent()) {
-            editPersonDescriptor.setDoctorInCharge(ParserUtil.parseDoctorInCharge(argMultimap.getValue(PREFIX_DOCTOR_IN_CHARGE).get()));
+            editPersonDescriptor.setDoctorInCharge(ParserUtil.parseDoctorInCharge(argMultimap.getValue(
+                    PREFIX_DOCTOR_IN_CHARGE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).isPresent()) {
-            editPersonDescriptor.setOrganExpiryDate(ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get()));
+            editPersonDescriptor.setOrganExpiryDate(ParserUtil.parseOrganExpiryDate(argMultimap.getValue(
+                    PREFIX_ORGAN_EXPIRY_DATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ORGAN).isPresent()) {
@@ -87,7 +89,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TISSUE_TYPE).isPresent()) {
-            editPersonDescriptor.setTissueType(ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get()));
+            editPersonDescriptor.setTissueType(ParserUtil.parseTissueType(argMultimap.getValue(
+                    PREFIX_TISSUE_TYPE).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
