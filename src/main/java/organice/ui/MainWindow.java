@@ -28,6 +28,8 @@ import organice.model.person.Type;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String STYLE = "-fx-background-radius: 4; -fx-border-radius: 4; -fx-font-family: Segoe UI;"
+            + "-fx-font-size: 13px; -fx-text-fill: white;";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -188,11 +190,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     public static String getColourOfStatus(Status status) {
         if (status.isNotProcessing()) {
-            return "-fx-background-radius: 4; -fx-border-radius: 4; -fx-font-family: Segoe UI;" +
-                    "-fx-font-size: 13px; -fx-text-fill: white; -fx-background-color: #213896;";
+            return STYLE + "-fx-background-color: #213896;";
         } else {
-            return "-fx-background-radius: 4; -fx-border-radius: 4; -fx-font-family: Segoe UI; -fx-font-size: 13px; "
-                    + " -fx-text-fill: white; -fx-background-color: #5476ff;";
+            return STYLE + "-fx-background-color: #5476ff;";
         }
     }
 
@@ -200,14 +200,13 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the colour of the 'Priority' tag according to the status.
      */
     public static String getColourOfPriority(Priority priority) {
-        String style = "-fx-background-radius: 4; -fx-border-radius: 4; -fx-font-family: Segoe UI;" +
-                "-fx-font-size: 13px; -fx-text-fill: white;";
+
         if (priority.isHighPriority()) {
-            return style + "-fx-background-color: #cc3232;";
+            return STYLE + "-fx-background-color: #cc3232;";
         } else if (priority.isMediumPriority()) {
-            return style + "-fx-background-color: #db7b2b;";
+            return STYLE + "-fx-background-color: #db7b2b;";
         } else {
-            return style + "-fx-background-color: #5cb54c";
+            return STYLE + "-fx-background-color: #5cb54c";
         }
     }
     /**
