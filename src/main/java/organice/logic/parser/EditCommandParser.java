@@ -86,10 +86,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setOrgan(ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-
         if (argMultimap.getValue(PREFIX_TISSUE_TYPE).isPresent()) {
             editPersonDescriptor.setTissueType(ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get()));
         }
