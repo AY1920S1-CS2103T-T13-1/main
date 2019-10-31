@@ -123,10 +123,13 @@ public class EditCommand extends Command {
         assert Type.isValidType(updatedType.toString());
         if (updatedType.isPatient()) {
             Age updatedAge = editPersonDescriptor.getAge().orElse(((Patient) personToEdit).getAge());
-            BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(((Patient) personToEdit).getBloodType());
-            TissueType updatedTissueType = editPersonDescriptor.getTissueType().orElse(((Patient) personToEdit).getTissueType());
+            BloodType updatedBloodType =
+                    editPersonDescriptor.getBloodType().orElse(((Patient) personToEdit).getBloodType());
+            TissueType updatedTissueType =
+                    editPersonDescriptor.getTissueType().orElse(((Patient) personToEdit).getTissueType());
             Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Patient) personToEdit).getOrgan());
-            Priority updatedPriority = editPersonDescriptor.getPriority().orElse(((Patient) personToEdit).getPriority());
+            Priority updatedPriority =
+                    editPersonDescriptor.getPriority().orElse(((Patient) personToEdit).getPriority());
             DoctorInCharge updatedDoctorInCharge =
                     editPersonDescriptor.getDoctorInCharge().orElse(((Patient) personToEdit).getDoctorInCharge());
             Status updatedStatus = ((Patient) personToEdit).getStatus();
@@ -134,8 +137,10 @@ public class EditCommand extends Command {
                     updatedBloodType, updatedTissueType, updatedOrgan, updatedDoctorInCharge, updatedStatus);
         } else if (updatedType.isDonor()) {
             Age updatedAge = editPersonDescriptor.getAge().orElse(((Donor) personToEdit).getAge());
-            BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(((Donor) personToEdit).getBloodType());
-            TissueType updatedTissueType = editPersonDescriptor.getTissueType().orElse(((Donor) personToEdit).getTissueType());
+            BloodType updatedBloodType =
+                    editPersonDescriptor.getBloodType().orElse(((Donor) personToEdit).getBloodType());
+            TissueType updatedTissueType =
+                    editPersonDescriptor.getTissueType().orElse(((Donor) personToEdit).getTissueType());
             Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Donor) personToEdit).getOrgan());
             OrganExpiryDate updatedOrganExpiryDate =
                     editPersonDescriptor.getOrganExpiryDate().orElse(((Donor) personToEdit).getOrganExpiryDate());
