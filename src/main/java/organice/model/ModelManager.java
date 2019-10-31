@@ -135,14 +135,6 @@ public class ModelManager implements Model {
         return addressBook.hasPatient(patient);
     }
 
-
-
-    @Override
-    public boolean hasDonor(Nric donor) {
-        requireNonNull(donor);
-        return addressBook.hasDonor(donor);
-    }
-
     @Override
     public boolean hasDonor(Nric donor) {
         requireNonNull(donor);
