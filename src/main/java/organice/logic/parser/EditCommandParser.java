@@ -2,9 +2,11 @@ package organice.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static organice.logic.parser.CliSyntax.PREFIX_AGE;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
+import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import organice.logic.commands.EditCommand;
@@ -25,7 +27,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE
+                        , PREFIX_AGE, PREFIX_BLOO PREFIX_PRIORITY);
 
         Nric nric;
 
