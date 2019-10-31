@@ -21,7 +21,7 @@ public class SortCommand extends Command {
 
     public static final String LIST_OF_SORTED_DONORS = "List of matched donors found.\n";
     public static final String LIST_OF_SORTED_PATIENTS = "List of matched patients found.\n";
-    private static final String MESSAGE_SUCCESS = "Successfully sorted.\n";
+    public static final String MESSAGE_SUCCESS = "Successfully sorted.\n";
 
     private String input;
 
