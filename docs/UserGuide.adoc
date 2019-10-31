@@ -310,7 +310,7 @@ It is up to the user to specify which attributes should be updated. +
 
 Format: `edit **NRIC**`
 
-Currently in this version, you can only edit the `Phone` and `Name` attributes.lew
+Currently in this version, you can only edit the `Phone` and `Name` attributes.
 
 Examples:
 
