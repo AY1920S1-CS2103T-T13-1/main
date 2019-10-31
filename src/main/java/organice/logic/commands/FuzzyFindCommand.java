@@ -12,10 +12,7 @@ import organice.model.Model;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Finds and lists all persons in address book whose prefixes match any of the argument prefix-keyword pairs.
@@ -38,7 +35,7 @@ public class FuzzyFindCommand extends Command {
         this.argMultimap = argMultimap;
     }
 
-    private FilteredList<Person> fuzzyMatch(ArgumentMultimap argMultimap, FilteredList<Person> inputList) {
+    private FilteredList<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
         // Take math_min of Levenshtein Distance within one prefix, and accumulate them.
 
         // Calculate LD for each pair of keyword, attribute within one prefix. Take math_min of all.
@@ -72,6 +69,7 @@ public class FuzzyFindCommand extends Command {
                     : findMinLevenshteinDistance(typeKeywords, currentPerson.getType().toString());
 
             distanceArr[i] = combinedLevenshteinDistance;
+            System.out.println("This is LD: " + combinedLevenshteinDistance);
         }
 
         ArrayList<Person> sortedPersons = new ArrayList<>(inputList);
@@ -80,8 +78,9 @@ public class FuzzyFindCommand extends Command {
         return new FilteredList<>(FXCollections.observableArrayList(sortedPersons));
     }
 
+    // Almost correct, now just need to break up the personAttribute if is name
     private int findMinLevenshteinDistance(List<String> prefixKeywords, String personAttribute) {
-        return prefixKeywords.stream().reduce(0, (minDistance, nextKeyword) -> Integer.min(
+        return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) -> Integer.min(
                 minDistance, calculateLevenshteinDistance(nextKeyword.toLowerCase(), personAttribute.toLowerCase())),
                 Integer::min);
     }
@@ -92,8 +91,9 @@ public class FuzzyFindCommand extends Command {
         int prefixKeywordLength = prefixKeyword.length();
         int personAttributeLength = personAttribute.length();
 
-        if (prefixKeywordLength == 0 || prefixKeywordLength == 0) {
+        if (prefixKeywordLength == 0 || personAttributeLength == 0) {
             // Placeholder, should not occur.
+            System.out.println("THE ZERO THING INSIDE LD IS CALLED");
             return 0;
         }
 
@@ -140,13 +140,13 @@ public class FuzzyFindCommand extends Command {
         // Replace FilteredPersonList with searchResults
 
 
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        List<Person> allPersons = Arrays.asList(model.getFilteredPersonList().toArray(Person[]::new));
 
-        FilteredList<Person> exactMatches = new FilteredList<>(allPersons);
+        FilteredList<Person> exactMatches = new FilteredList<>(FXCollections.observableList(allPersons));
         exactMatches.setPredicate(new PersonContainsPrefixesPredicate(argMultimap));
 
-        FilteredList<Person> allExceptExactMatches = new FilteredList<>(allPersons);
-        allExceptExactMatches.removeAll(exactMatches);
+        List<Person> allExceptExactMatches = new ArrayList<>(allPersons);
+        allExceptExactMatches.removeAll(Arrays.asList(exactMatches.toArray(Person[]::new)));
         allExceptExactMatches = fuzzyMatch(argMultimap, allExceptExactMatches);
 
         ArrayList<Person> finalArrayList = new ArrayList<>(exactMatches);

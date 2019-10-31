@@ -13,6 +13,7 @@ import organice.logic.commands.DoneCommand;
 import organice.logic.commands.EditCommand;
 import organice.logic.commands.ExitCommand;
 import organice.logic.commands.FindCommand;
+import organice.logic.commands.FuzzyFindCommand;
 import organice.logic.commands.HelpCommand;
 import organice.logic.commands.ListCommand;
 import organice.logic.commands.MatchCommand;
