@@ -242,12 +242,52 @@ public class EditCommand extends Command {
             return Optional.ofNullable(age);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setPriority(Priority priority) {
+            this.priority = priority;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
+
+        public void setBloodType(BloodType bloodType) {
+            this.bloodType = bloodType;
+        }
+
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
+        public void setDoctorInCharge(DoctorInCharge doctorInCharge) {
+            this.doctorInCharge = doctorInCharge;
+        }
+
+        public Optional<DoctorInCharge> getDoctorInCharge() {
+            return Optional.ofNullable(doctorInCharge);
+        }
+
+        public void setOrganExpiryDate(OrganExpiryDate organExpiryDate) {
+            this.organExpiryDate = organExpiryDate;
+        }
+
+        public Optional<OrganExpiryDate> getOrganExpiryDate() {
+            return Optional.ofNullable(organExpiryDate);
+        }
+
+        public void setOrgan(Organ organ) {
+            this.organ = organ;
+        }
+
+        public Optional<Organ> getOrgan() {
+            return Optional.ofNullable(organ);
+        }
+
+        public void setTissueType(TissueType tissueType) {
+            this.tissueType = tissueType;
+        }
+
+        public Optional<TissueType> getTissueType() {
+            return Optional.ofNullable(tissueType);
         }
 
         @Override
