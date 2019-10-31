@@ -193,6 +193,12 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setAge(toCopy.age);
+            setPriority(toCopy.priority);
+            setBloodType(toCopy.bloodType);
+            setDoctorInCharge(toCopy.doctorInCharge);
+            setOrganExpiryDate(toCopy.organExpiryDate);
+            setOrgan(toCopy.organ);
+            setTissueType(toCopy.tissueType);
         }
 
         /**
