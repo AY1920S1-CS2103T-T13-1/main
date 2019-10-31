@@ -442,6 +442,26 @@ This implementation was the result of using `String` to represent the different 
 Therefore, they are converted into `Integer` for easier comparison. An alternative solution would be to make use of
 `Enum` class to define each priority so that this `compareTo` method implementation can be simplified.
 
+==== Design considerations
+This section will explain the reason for having some aspects.
+
+===== Aspect: Method of storing sorted result
+* **Alternative 1 (current choice):** Use `SortedList`.
+** Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
+with current implementations (able to wrap `ObservableList` and sort the content).
+** Cons: It is not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.
+* **Alternative 2:** Use `ArrayList`.
+** Pros: Fast index-based access and works on any `Collection` class.
+** Cons: Iterating through the list to display the result takes O(n) time, which is slower than using `SortedList`.
+
+===== Aspect: Method of sorting
+* **Alternative 1 (current choice):** Use `Comparator` and `Comparable`.
+** Pros: Simpler implementation as able to make use of existing methods in ORGANice such as `setComparator`.
+** Cons: More coding involved.
+* **Alternative 2:** Use `Collections.sort()`.
+** Pros: Time complexity is O(n*log(n)) which is relatively fast.
+** Cons: Cannot make use of existing methods in ORGANice that work for Comparator.
+
 === Processing feature
 This section describes how the processing feature is implemented.
 
