@@ -161,10 +161,14 @@ The `Storage` component,
 Classes used by multiple components are in the `organice.commons` package.
 
 == Implementation
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how features in ORGANice are implemented.
 
 === List feature
-Given below is the activity diagram to illustrate what happens when user uses the list command.
+This section describes how the list feature is implemented.
+
+The list feature is done by using the `ListCommand#`
+
+Below is an activity diagram to illustrate what happens when a user uses the list command.
 
 .Activity Diagram of a List Command
 image::ListActivityDiagram.png[]
@@ -358,10 +362,11 @@ This section will explain the reason for having some aspects.
 === Sort feature
 This section describes how the sort feature is implemented.
 
-Sorting is done by using `Comparators` in the `Logic` component and makes use of the `SortCommand#sort(String input)` method.
-This method only works after a `MatchCommand` is called by the user, because it takes in `listOfMatches` returned
+Sorting is done by using `Comparators` in the `Logic` component and makes use of the `SortCommand`.
+This command only works after a `MatchCommand` is called by the user, because it takes in `listOfMatches` returned
 from calling a `MatchCommand`. Importantly, this `listOfMatches` is an `ObservableList`, which cannot be modified.
-Therefore, it is first converted into a `SortedList` so that the list can be modified by sorting.
+Therefore, it makes use of `SortedList` to wrap around the `ObservableList` so that the list can be modified by sorting.
+The `boolean` in `CommandResult#setSort(boolean isSort)` will be set to `true` for a list that has been sorted.
 Thus far, the sort command can only take in one `String` parameter, but more methods can be added in the future for more sorting options.
 
 Three methods of sorting are implemented to sort based on the following categories:
