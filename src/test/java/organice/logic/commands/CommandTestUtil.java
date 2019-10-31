@@ -26,7 +26,7 @@ import organice.logic.parser.MatchCommandParser;
 import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.person.Person;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.model.person.Status;
 import organice.testutil.EditPersonDescriptorBuilder;
 
@@ -225,7 +225,7 @@ public class CommandTestUtil {
         final ArgumentMultimap searchParams = ArgumentTokenizer
                 .tokenize(FindCommand.COMMAND_WORD + " n/" + person.getName().fullName, PREFIX_NAME);
 
-        model.updateFilteredPersonList(new PersonContainsExactPrefixesPredicate(searchParams));
+        model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertEquals(1, model.getFilteredPersonList().size());
     }
 }

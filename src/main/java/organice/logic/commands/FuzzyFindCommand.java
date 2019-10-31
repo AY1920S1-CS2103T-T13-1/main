@@ -10,13 +10,12 @@ import organice.commons.core.Messages;
 import organice.logic.parser.ArgumentMultimap;
 import organice.model.Model;
 import organice.model.person.Person;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Filter;
 
 /**
  * Finds and lists all persons in address book whose prefixes match any of the argument prefix-keyword pairs.
@@ -144,7 +143,7 @@ public class FuzzyFindCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
         FilteredList<Person> exactMatches = new FilteredList<>(allPersons);
-        exactMatches.setPredicate(new PersonContainsExactPrefixesPredicate(argMultimap));
+        exactMatches.setPredicate(new PersonContainsPrefixesPredicate(argMultimap));
 
         FilteredList<Person> allExceptExactMatches = new FilteredList<>(allPersons);
         allExceptExactMatches.removeAll(exactMatches);

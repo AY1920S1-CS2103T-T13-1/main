@@ -15,7 +15,6 @@ import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import organice.logic.commands.FuzzyFindCommand;
 import organice.logic.parser.exceptions.ParseException;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

@@ -23,10 +23,10 @@ import organice.logic.parser.ArgumentMultimap;
 /**
  * Tests that a {@code Person}'s prefixes matches any of the prefix-keyword pairs given.
  */
-public class PersonContainsExactPrefixesPredicate implements Predicate<Person> {
+public class PersonContainsPrefixesPredicate implements Predicate<Person> {
     private final ArgumentMultimap argMultimap;
 
-    public PersonContainsExactPrefixesPredicate(ArgumentMultimap argMultimap) {
+    public PersonContainsPrefixesPredicate(ArgumentMultimap argMultimap) {
         this.argMultimap = argMultimap;
     }
 
@@ -97,8 +97,8 @@ public class PersonContainsExactPrefixesPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonContainsExactPrefixesPredicate // instanceof handles nulls
-                && argMultimap.equals(((PersonContainsExactPrefixesPredicate) other).argMultimap)); // state check
+                || (other instanceof PersonContainsPrefixesPredicate // instanceof handles nulls
+                && argMultimap.equals(((PersonContainsPrefixesPredicate) other).argMultimap)); // state check
     }
 
 }

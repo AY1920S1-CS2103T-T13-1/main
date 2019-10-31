@@ -15,7 +15,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import organice.logic.commands.FindCommand;
 import organice.logic.parser.exceptions.ParseException;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return new FindCommand(new PersonContainsExactPrefixesPredicate(argMultimap));
+        return new FindCommand(new PersonContainsPrefixesPredicate(argMultimap));
     }
 
 }

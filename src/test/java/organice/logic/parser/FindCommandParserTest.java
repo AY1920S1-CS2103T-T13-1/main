@@ -8,7 +8,7 @@ import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import organice.logic.commands.FindCommand;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 
 public class FindCommandParserTest {
 
@@ -22,7 +22,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new PersonContainsExactPrefixesPredicate(
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsPrefixesPredicate(
                 ArgumentTokenizer.tokenize("   find n/Alice Bob      ", PREFIX_NAME)));
         assertParseSuccess(parser, FindCommand.COMMAND_WORD + " n/Alice Bob", expectedFindCommand);
     }

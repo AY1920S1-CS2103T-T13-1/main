@@ -23,7 +23,7 @@ import organice.logic.parser.ArgumentTokenizer;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
 import organice.model.person.Person;
-import organice.model.person.PersonContainsExactPrefixesPredicate;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -201,7 +201,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         ArgumentMultimap searchParams = ArgumentTokenizer
                 .tokenize(FindCommand.COMMAND_WORD + " n/" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
-        modelManager.updateFilteredPersonList(new PersonContainsExactPrefixesPredicate(searchParams));
+        modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
