@@ -2,7 +2,6 @@ package organice.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static organice.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static organice.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static organice.logic.commands.CommandTestUtil.NAME_DESC_DOCTOR_AMY;
 import static organice.logic.commands.CommandTestUtil.NRIC_DESC_DOCTOR_AMY;
