@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class BloodType {
 
     public static final HashSet<String> BLOOD_TYPES =
-            new HashSet<>(Arrays.asList("A", "B", "AB", "O", "A+", "AB+", "B+", "O+"));
+            new HashSet<>(Arrays.asList("A", "B", "AB", "O"));
 
     public static final BloodType BLOODTYPE_A = new BloodType("A");
     public static final BloodType BLOODTYPE_B = new BloodType("B");
