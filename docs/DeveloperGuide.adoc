@@ -358,22 +358,89 @@ This section will explain the reason for having some aspects.
 === Sort feature
 This section describes how the sort feature is implemented.
 
-Sorting is done by using `Comparators` in the `Logic` component.
+Sorting is done by using `Comparators` in the `Logic` component and makes use of the `SortCommand#sort(String input)` method.
+This method only works after a `MatchCommand` is called by the user, because it takes in `listOfMatches` returned
+from calling a `MatchCommand`. Importantly, this `listOfMatches` is an `ObservableList`, which cannot be modified.
+Therefore, it is first converted into a `SortedList` so that the list can be modified by sorting.
+Thus far, the sort command can only take in one `String` parameter, but more methods can be added in the future for more sorting options.
 
-To facilitate the sorting, the following methods were added:
+Three methods of sorting are implemented to sort based on the following categories:
 
-* `sort expiry`
-* `sort rate`
-* `sort priority`
+* Sorting based on donor's organ expiry date with `sort expiry`
++
+* Sorting based on priority with `sort priority`
++
+* Sorting based on success rate of match with `sort rate`
+
+These three methods' implementation will be further elaborated upon below.
 
 ==== Sort by Expiry
-==== Sort by Success Rate
-==== Sort by Priority
+Sorting by Expiry sorts a list of `MatchedDonor` using the `ModelManager#sortByOrganExpiryDate()` method.
 
-Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort rate)`.
+In this method, the `ExpiryComparator` is used to compare two matched donors' organ expiry date, and this requires
+the `OrganExpiryDate` of the donors to be parsed into a date format that can be compared.
+
+==== Sort by Success Rate
+Sorting by Success Rate sorts a list of `MatchedPatient` using the `ModelManager#sortBySuccessRate()` method.
+
+The `SuccessRateComparator` is created to compare two matched patients' rate of success for the match.
+
+Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort rate)`,
+assuming the user has entered a `match ic/**NRIC**` command before this.
 
 .Structure of the Logic Component when executing `sort rate` command
 image::SortSequenceDiagram.png[width=790]
+
+After the command is given by the user, it would be parsed by the `AddressBookParser`.
+The `SortCommandParser` then parses the parameter `rate` and a `SortCommand` is created.
+The `LogicManager` will then execute the command and call the `sortBySuccessRate()` method from the `ModelManager`.
+The list of `MatchedPatient` will then be sorted based on their match's success rate.
+
+==== Sort by Priority
+Sorting by Expiry sorts a list of `MatchedPatient` using the `ModelManager#sortByPriority()` method.
+
+In this method, there are two other comparators created in addition to the `Priority Comparator`,
+namely the `NameComparator` and the `NumOfMatchesComparator`. These two comparators serve as tie-breakers in cases where
+patients have the same priority. In other words, for patients of the same priority, those with more matched donors will be displayed first.
+If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.
+
+Under the `sortByPriority()` method, the order of applying the comparators to the list of patients
+is, firstly, the 'NameComparator', followed by `NumOfMatchesComparator`, and lastly, the `PriorityComparator`.
+This means that the patients are first sorted by names in alphabetical order, followed by the number of matched donors they have
+in descending order (highest to lowest), and then their priority level in descending order (from high, to medium, to low).
+
+All three comparators makes use of the `compareTo` method under the `Comparable` class, which can sort in lexical order for String,
+and numeric order for Sorting integers.
+In particular, the `PriorityComparator` makes use of the `compareTo` method implemented in the `Priority` class.
+A code snippet of this method is shown below.
+
+```
+@Override
+public int compareTo(Priority priority) {
+Integer thisPriorityNumber = 0;
+Integer otherPriorityNumber = 0;
+
+        if (this.isHighPriority()) {
+            thisPriorityNumber = 3;
+        } else if (this.isMediumPriority()) {
+            thisPriorityNumber = 2;
+        } else if (this.isLowPriority()) {
+            thisPriorityNumber = 1;
+        }
+        if (priority.isHighPriority()) {
+            otherPriorityNumber = 3;
+        } else if (priority.isMediumPriority()) {
+            otherPriorityNumber = 2;
+        } else if (priority.isLowPriority()) {
+            otherPriorityNumber = 1;
+        }
+        return thisPriorityNumber.compareTo(otherPriorityNumber);
+    }
+```
+
+This implementation was the result of using `String` to represent the different priorities in the `Priority` class.
+Therefore, they are converted into `Integer` for easier comparison. An alternative solution would be to make use of
+`Enum` class to define each priority so that this `compareTo` method implementation can be simplified.
 
 === Processing feature
 This section describes how the processing feature is implemented.
