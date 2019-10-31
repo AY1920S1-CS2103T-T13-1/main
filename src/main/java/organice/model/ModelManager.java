@@ -5,6 +5,8 @@ import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -18,6 +20,8 @@ import organice.commons.core.LogsCenter;
 import organice.logic.commands.MatchCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.comparator.ExpiryDateComparator;
+import organice.model.comparator.NameComparator;
+import organice.model.comparator.NumOfMatchesComparator;
 import organice.model.comparator.PriorityComparator;
 import organice.model.comparator.SuccessRateComparator;
 import organice.model.person.Donor;
@@ -343,6 +347,8 @@ public class ModelManager implements Model {
         try {
             sortedMatchedPatients = new SortedList<>((ObservableList<MatchedPatient>) (ObservableList<?>)
                     listOfMatches);
+            sortedMatchedPatients.setComparator(new NameComparator());
+            sortedMatchedPatients.setComparator(new NumOfMatchesComparator());
             sortedMatchedPatients.setComparator(new PriorityComparator());
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by Priority only works after 'match ic/all'.");
