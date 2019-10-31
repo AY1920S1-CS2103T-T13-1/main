@@ -466,7 +466,7 @@ public class FormUiManager {
      *
      * @param commandText Command entered by the user
      */
-    private void handleSpecialCommand(String commandText) throws ParseException{
+    private void handleSpecialCommand(String commandText) throws ParseException {
         try {
             if (commandText.equals(COMMAND_ABORT)) {
                 handleAbort();
