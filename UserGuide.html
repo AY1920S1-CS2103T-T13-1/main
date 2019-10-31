@@ -19,14 +19,13 @@
 <li><a href="#listing-persons-code-list-code">4.3. Listing persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">4.4. Editing a person : <code>edit</code></a></li>
 <li><a href="#finding-persons-by-attributes-code-find-code">4.5. Finding persons by attributes: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#detecting-matches-code-match-code">4.7. Detecting matches: <code>match</code></a></li>
-<li><a href="#sorting-matches-code-sort-code">4.8. Sorting matches: <code>sort</code></a></li>
-<li><a href="#processing-potential-matches-code-processing-code">4.9. Processing potential matches: <code>processing</code></a></li>
-<li><a href="#mark-as-done-code-done-code">4.10. Mark as done : <code>done</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.11. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.12. Saving the data</a></li>
-<li><a href="#detecting-duplicates">4.13. Detecting duplicates</a></li>
+<li><a href="#detecting-matches-code-match-code">4.6. Detecting matches: <code>match</code></a></li>
+<li><a href="#sorting-matches-code-sort-code">4.7. Sorting matches: <code>sort</code></a></li>
+<li><a href="#processing-potential-matches-code-processing-code">4.8. Processing potential matches: <code>processing</code></a></li>
+<li><a href="#mark-as-done-code-done-code">4.9. Mark as done : <code>done</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.10. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.11. Saving the data</a></li>
+<li><a href="#detecting-duplicates">4.12. Detecting duplicates</a></li>
 </ul>
 </li>
 <li><a href="#future-improvements">5. Future improvements</a>
@@ -665,15 +664,10 @@ Lists all patients only.</p>
 It is up to the user to specify which attributes should be updated.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit ic/<strong>NRIC</strong></code></p>
+<p>Format: <code>edit <strong>NRIC</strong></code></p>
 </div>
 <div class="paragraph">
-<p>Optional parameters: any parameter from the <a href="#List of Attributes">[List of Attributes]</a></p>
-</div>
-<div class="paragraph">
-<p>After editing, ORGANice will display a form to show what information will be stored about
-the person after confirming the changes. The user is free to edit the fields before
-changes are confirmed.</p>
+<p>Currently in this version, you can only edit the <code>Phone</code> and <code>Name</code> attributes.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -681,12 +675,12 @@ changes are confirmed.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit ic/S8732457G p/91234567</code><br>
+<p><code>edit S8732457G p/91234567</code><br>
 Edits the phone number of the specified patient to be <code>91234567</code>.</p>
 </li>
 <li>
-<p><code>edit ic/S8732457G n/Betsy Crower b/A</code><br>
-Edits the name and blood type of the specified donor to be <code>Betsy Crower</code> and <code>A</code> respectively.</p>
+<p><code>edit S8732457G n/Betsy Crower p/91234567</code><br>
+Edits the name and phone number of the specified donor to be <code>Betsy Crower</code> and <code>91234567</code> respectively.</p>
 </li>
 </ul>
 </div>
@@ -747,35 +741,18 @@ Displays the same result as the preceding example.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified person from ORGANice.
-Match history of a deleted patient or donor with other patients/donors will be removed.<br>
-Format: <code>delete ic/<strong>NRIC</strong></code></p>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="paragraph">
-<p><code>delete ic/S98654322D</code><br></p>
-</div>
-<div class="paragraph">
-<p>Deletes a person with the NRIC S98654322D in ORGANice.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="detecting-matches-code-match-code"><a class="link" href="#detecting-matches-code-match-code">4.7. Detecting matches: <code>match</code></a></h3>
+<h3 id="detecting-matches-code-match-code"><a class="link" href="#detecting-matches-code-match-code">4.6. Detecting matches: <code>match</code></a></h3>
 <div class="paragraph">
 <p>This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
 Refer to <a href="#faq">Section 6, &#8220;FAQ&#8221;</a> for a better understanding of the procedure for kidney matching.</p>
 </div>
 <div class="paragraph">
 <p>You can either run a kidney matching test on all patients and donors or find matching donors for a specific patient.
-To learn how to run kidney matching tests on all patients, refer to <a href="#matching-all-patients">Section 4.7.2, &#8220;Matching all patients&#8221;</a>. To learn how to run
-kidney matching tests on a specific patient, refer to <a href="#matching-a-specific-patient">Section 4.7.1, &#8220;Matching a specific patient&#8221;</a>.</p>
+To learn how to run kidney matching tests on all patients, refer to <a href="#matching-all-patients">Section 4.6.2, &#8220;Matching all patients&#8221;</a>. To learn how to run
+kidney matching tests on a specific patient, refer to <a href="#matching-a-specific-patient">Section 4.6.1, &#8220;Matching a specific patient&#8221;</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="matching-a-specific-patient"><a class="link" href="#matching-a-specific-patient">4.7.1. Matching a specific patient</a></h4>
+<h4 id="matching-a-specific-patient"><a class="link" href="#matching-a-specific-patient">4.6.1. Matching a specific patient</a></h4>
 <div class="paragraph">
 <p>This section will explain how to run kidney matching tests on a specific patient and run you through an example.
 To run a match of a specific patient, type in a command of the format <code>match ic/<strong>NRIC</strong></code>.</p>
@@ -804,7 +781,7 @@ what you can do:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="matching-all-patients"><a class="link" href="#matching-all-patients">4.7.2. Matching all patients</a></h4>
+<h4 id="matching-all-patients"><a class="link" href="#matching-all-patients">4.6.2. Matching all patients</a></h4>
 <div class="paragraph">
 <p>This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
 through an example.
@@ -826,7 +803,7 @@ To match all the patients in ORGANice, do the following:</p>
 <p>Following this, you can sort the matches based on different categories to deduce which patient to prioritize.</p>
 </div>
 <div class="paragraph">
-<p>Refer to refer to <a href="#sorting-matches-code-sort-code">Section 4.8, &#8220;Sorting matches: <code>sort</code>&#8221;</a> for more information.</p>
+<p>Refer to refer to <a href="#sorting-matches-code-sort-code">Section 4.7, &#8220;Sorting matches: <code>sort</code>&#8221;</a> for more information.</p>
 </div>
 </li>
 </ol>
@@ -834,7 +811,7 @@ To match all the patients in ORGANice, do the following:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-matches-code-sort-code"><a class="link" href="#sorting-matches-code-sort-code">4.8. Sorting matches: <code>sort</code></a></h3>
+<h3 id="sorting-matches-code-sort-code"><a class="link" href="#sorting-matches-code-sort-code">4.7. Sorting matches: <code>sort</code></a></h3>
 <div class="paragraph">
 <p>After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.</p>
 </div>
@@ -859,7 +836,7 @@ There are three categories by which you can sort the matches, namely:</p>
 <p>These categories are further elaborated below. Note that <strong>only one category can be used in one sort command</strong>.</p>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">4.8.1. Sorting based on donor&#8217;s organ expiry date</a></h4>
+<h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">4.7.1. Sorting based on donor&#8217;s organ expiry date</a></h4>
 <div class="paragraph">
 <p>This category sorts a list of matched donors belonging to a particular patient based on the donated organ&#8217;s expiry date (from the earliest to the latest expiry date).</p>
 </div>
@@ -876,7 +853,7 @@ You can then run <code>sort expiry</code> to obtain the list of donors with the 
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">4.8.2. Sorting based on priority</a></h4>
+<h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">4.7.2. Sorting based on priority</a></h4>
 <div class="paragraph">
 <p>This category sorts a list of matched patients based on their priority (from highest to lowest). You may refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on priority.</p>
 </div>
@@ -893,7 +870,7 @@ You can then run <code>sort priority</code> to obtain a list with high priority 
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-success-rate-of-match"><a class="link" href="#sorting-based-on-success-rate-of-match">4.8.3. Sorting based on success rate of match</a></h4>
+<h4 id="sorting-based-on-success-rate-of-match"><a class="link" href="#sorting-based-on-success-rate-of-match">4.7.3. Sorting based on success rate of match</a></h4>
 <div class="paragraph">
 <p>This category sorts the list of matched donors belonging to a particular patient based on the success rate of the match (from highest to lowest).
 (Refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on success rate.)</p>
@@ -912,7 +889,7 @@ You can then run <code>sort rate</code> to obtain the list of donors with the hi
 </div>
 </div>
 <div class="sect2">
-<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">4.9. Processing potential matches: <code>processing</code></a></h3>
+<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">4.8. Processing potential matches: <code>processing</code></a></h3>
 <div class="paragraph">
 <p>After finding a list of matches, the hospital is free to schedule a cross-matching test between
 a specific donor and patient.<br></p>
@@ -946,7 +923,7 @@ The order of the NRICs does not matter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">4.10. Mark as done : <code>done</code></a></h3>
+<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">4.9. Mark as done : <code>done</code></a></h3>
 <div class="paragraph">
 <p>After the hospital has the results of the cross matching test, they can
 update the results in ORGANice. Cross matching tests have two possible results: pass or fail.</p>
@@ -1011,21 +988,21 @@ match detection with other patients and donors.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.11. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.10. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.12. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.11. Saving the data</a></h3>
 <div class="paragraph">
 <p>Data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="detecting-duplicates"><a class="link" href="#detecting-duplicates">4.13. Detecting duplicates</a></h3>
+<h3 id="detecting-duplicates"><a class="link" href="#detecting-duplicates">4.12. Detecting duplicates</a></h3>
 <div class="paragraph">
 <p>When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
 A duplicate is defined as: Two persons of the same type who have the same NRIC.</p>
@@ -1176,10 +1153,7 @@ p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/
 <p><strong>Add (System Prompt Mode)</strong>: <code>add t/<strong>TYPE</strong></code></p>
 </li>
 <li>
-<p><strong>Delete</strong> : <code>delete ic/<strong>NRIC</strong></code><br></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit ic/<strong>NRIC</strong></code></p>
+<p><strong>Edit</strong> : <code>edit <strong>NRIC</strong></code></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1270,4 +1244,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 11:09:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 12:02:50 UTC</div></div></div></body></html>
