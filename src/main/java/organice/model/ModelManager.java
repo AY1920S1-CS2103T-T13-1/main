@@ -18,8 +18,11 @@ import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 
 import organice.logic.commands.MatchCommand;
+import organice.logic.commands.SortCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.comparator.ExpiryDateComparator;
+import organice.model.comparator.NameComparator;
+import organice.model.comparator.NumOfMatchesComparator;
 import organice.model.comparator.PriorityComparator;
 import organice.model.comparator.SuccessRateComparator;
 import organice.model.person.Donor;
@@ -349,6 +352,8 @@ public class ModelManager implements Model {
         try {
             sortedMatchedPatients = new SortedList<>((ObservableList<MatchedPatient>) (ObservableList<?>)
                     listOfMatches);
+            sortedMatchedPatients.setComparator(new NameComparator());
+            sortedMatchedPatients.setComparator(new NumOfMatchesComparator());
             sortedMatchedPatients.setComparator(new PriorityComparator());
             setDisplayedPersonList(Arrays.asList(sortedMatchedPatients.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
