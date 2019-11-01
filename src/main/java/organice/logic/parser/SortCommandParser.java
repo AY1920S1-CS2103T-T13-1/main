@@ -11,8 +11,10 @@ public class SortCommandParser implements Parser<SortCommand> {
     public static final String ORGAN_EXPIRY_DATE = "expiry";
     public static final String PRIORITY = "priority";
     public static final String SUCCESS_RATE = "rate";
-    public static final String MESSAGE_INVALID_INPUTS = "Sort command can only take in one parameter after a match command.\n"
-            + "Parameters 'expiry', 'rate' works after 'match ic/NRIC' and 'priority' works after 'match ic/all' command\n";
+    public static final String MESSAGE_INVALID_INPUTS =
+            "Sort command can only take in one parameter after a match command.\n"
+            + "Parameters 'expiry', 'rate' works after 'match ic/NRIC' "
+            + "and 'priority' works after 'match ic/all' command\n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
