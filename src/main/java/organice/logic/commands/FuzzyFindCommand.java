@@ -1,12 +1,11 @@
 package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static organice.commons.util.AppUtil.checkArgument;
 import static organice.logic.parser.CliSyntax.*;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import organice.commons.core.Messages;
 import organice.logic.parser.ArgumentMultimap;
 import organice.model.Model;
 import organice.model.person.Name;
@@ -40,25 +39,17 @@ public class FuzzyFindCommand extends Command {
         this.argMultimap = argMultimap;
     }
 
-    private ObservableList<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
-        // Take math_min of Levenshtein Distance within one prefix, and accumulate them.
-
-        // Calculate LD for each pair of keyword, attribute within one prefix. Take math_min of all.
-        // sum all LD. That is the LD of the Person
-        // Sort the inputlist according to the LDs
-        // Over to you #execute
-
-        // Fuzzy Match does not take into account the following prefixes due to these reasons:
-        // Age, Priority, BloodType, TissueType:
-        // Typos in these fields have a very small Levenshtein Distance (LD) as field length is very small
-        // Current Implementation of fuzzy search only supports the main 4 person attributes
+    private List<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
+        // Fuzzy Match by Levenshtein Distance is not implemented for following prefixes:
+        // Age, Priority, BloodType, TissueType
+        // Typos in these fields have a very small Levenshtein Distance (LD) as typical field length is very small
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         List<String> nricKeywords = argMultimap.getAllValues(PREFIX_NRIC);
         List<String> phoneKeywords = argMultimap.getAllValues(PREFIX_PHONE);
         List<String> typeKeywords = argMultimap.getAllValues(PREFIX_TYPE);
 
-        // Array containing combined Levenshtein Distance of persons in inputList
+        // List containing combined Levenshtein Distance of persons in inputList
         ArrayList<Integer> distanceList = new ArrayList<>();
 
         for (int i = 0; i < inputList.size(); i++) {
@@ -80,22 +71,18 @@ public class FuzzyFindCommand extends Command {
         ArrayList<Integer> distancesOfTolerablePersons = new ArrayList<>();
         ArrayList<Person> tolerablePersons = new ArrayList<>(inputList.size());
         for (int i = 0; i < inputList.size(); i++) {
-            int j = 0;
             int levenshteinDistance = distanceList.get(i);
-            String DEBUG_PERSON_NAME = inputList.get(i).getName().toString();
-            String[] DEBUG_ARR = nameKeywords.toArray(String[]::new);
             if (levenshteinDistance <= FUZZY_THRESHOLD) {
-                distancesOfTolerablePersons.add(j, levenshteinDistance);
-                tolerablePersons.add(j, inputList.get(i));
-                j++;
+                distancesOfTolerablePersons.add(levenshteinDistance);
+                tolerablePersons.add(inputList.get(i));
             }
         }
 
         ArrayList<Person> sortedPersons = new ArrayList<>(tolerablePersons);
-        Collections.sort(sortedPersons, Comparator.comparingInt(
+        sortedPersons.sort(Comparator.comparingInt(
                 left -> distancesOfTolerablePersons.get(tolerablePersons.indexOf(left))));
 
-        return FXCollections.observableArrayList(sortedPersons);
+        return sortedPersons;
     }
 
     private int findMinLevenshteinDistance(List<String> prefixKeywords, String personAttribute) {
@@ -104,11 +91,10 @@ public class FuzzyFindCommand extends Command {
                 Integer::min);
     }
 
-    //BUG: Seems like the previous minimum is deleted in favour of the next.
     // Split name by spaces
     private int findMinLevenshteinDistance(List<String> prefixKeywords, Name personName) {
-        // if keyword is one word long, split the personName
-        // else just do as we are normally doing in original finalMinLD
+        // If keyword is one word long, split the personName and find minLD.
+        // Else just do as we are normally doing in original finalMinLD
 
         BiFunction<String, String, Integer> findDistanceSplitIfMultiWord = (prefixKeyword, pName) ->
                 prefixKeyword.split(" ").length == 1 ? Arrays.stream(pName.split(" "))
@@ -125,14 +111,13 @@ public class FuzzyFindCommand extends Command {
     // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
     // Java code is original work.
     private int calculateLevenshteinDistance(String prefixKeyword, String personAttribute) {
+        requireNonNull(prefixKeyword);
+        requireNonNull(personAttribute);
+
         int prefixKeywordLength = prefixKeyword.length();
         int personAttributeLength = personAttribute.length();
 
-        if (prefixKeywordLength == 0 || personAttributeLength == 0) {
-            // Placeholder, should not occur.
-            System.out.println("THE ZERO THING INSIDE LD IS CALLED");
-            return 0;
-        }
+        checkArgument(prefixKeywordLength != 0 && personAttributeLength != 0);
 
         char[] pkChars = prefixKeyword.toCharArray();
         char[] paChars = personAttribute.toCharArray();
@@ -169,13 +154,6 @@ public class FuzzyFindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        // Find exact matches - A
-        // Find all except exact matches - B
-        // Perform fuzzy matching on B, to sort it
-        // Append B to A - searchResults
-        // Replace FilteredPersonList with searchResults
-
 
         List<Person> allPersons = Arrays.asList(model.getFilteredPersonList().toArray(Person[]::new));
 
