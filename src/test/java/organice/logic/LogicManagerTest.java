@@ -91,11 +91,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
-    }
-
-    @Test
     public void getMatchList_matchDonors_allContentsAreMatches() {
         model.addPerson(DONOR_IRENE_DONOR);
         model.addPerson(PATIENT_IRENE);

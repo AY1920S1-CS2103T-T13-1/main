@@ -31,18 +31,10 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
-
     /**
-     * Returns a list of MatchedDonors
+     * Returns a list of persons to be displayed
      */
-    ObservableList<Person> getMatchList();
-
-    /**
-     * Retrieves the sort list.
-     */
-    SortedList<Person> getSortList();
+    ObservableList<Person> getDisplayedPersonList();
 
     /**
      * Returns the user prefs' address book file path.
