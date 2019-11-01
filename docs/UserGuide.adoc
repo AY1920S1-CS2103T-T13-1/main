@@ -149,6 +149,7 @@ a person and the criteria for valid inputs:
 * exp/**EXPIRY** - expiry date of a donor's organ
 ** Applicable to: donors
 ** Valid input: a valid date in DD-MMM-YYYY format
+
 ====
 
 
@@ -452,21 +453,32 @@ After running a match command on a specific patient with `match ic/**NRIC**`, yo
 You can then run `sort rate` to obtain the list of donors with the highest success rate at the top of the list.  +
 
 === Processing potential matches: `processing`
-//TODO: change to shorter term that captures the meaning
 
 After finding a list of matches, the hospital is free to schedule a cross-matching test between
-a specific donor and patient. +
+a specific donor and patient. This command serves to allow you to keep track of the necessary tasks needed to do for the patient and donor pair before the cross-matching test. +
 
-After typing this command, the following changes occur:
+The `Status` of patient and donor can be either `Not Processing`, `Processing` or `Done`. +
+All the patients and donors should be `Not Processing` initially. +
+When the command is used for the first time for the patient and donor pair, the `Status` of the patient and donor will change from `Not Processing` to `Processing`. +
+If the patient and donor is being processed, their `Status` will remain `Processing`.
+
+Currently you can:
+
+* Generate a default list automatically for newly processed patient and donor
+* View the list which belongs to the patient and donor pair who are currently being processed.
+* Mark a task as done in the list generated from the patient and donor pair using another command `processingMarkDone ic/**PATIENT NRIC** ic/**DONOR NRIC** **TASK NUMBER**`
+
+Some things to note for this command:
 
 * A list will be generated to show the necessary tasks the hospital need to do for the respective donor and patient.
 * The list will be unique to the specific donor and patient pair
-* The list can be updated using `done** TASK NUMBER**` +
+* The list can be updated using another command,`processingMarkDone ic/**PATIENT NRIC** ic/**DONOR NRIC** **TASK NUMBER**` +
+* The list will be saved automatically.
+* A screenshot of the list generated can be shown below:
 
-The list will be saved after the command `exit` is executed. The page will then stop displaying the list.
 
 Format: `processing ic/**PATIENT NRIC** ic/**DONOR NRIC**` +
-The order of the NRICs does not matter.
+The order of the NRICs does not matter. However, the NRICs must belong to a valid patient and donor. +
 
 Example:
 `processing ic/S6764235G ic/S1234567D`
@@ -477,36 +489,35 @@ Example:
 After the hospital has the results of the cross matching test, they can
 update the results in ORGANice. Cross matching tests have two possible results: pass or fail.
 
-Format: `done icP/**NRIC OF PATIENT** icD/**NRIC OF DONOR** res/[pass/fail]`
+Format: `done ic/**PATIENT NRIC** ic/**DONOR NRIC**`
+The order of the NRIC does not matter. However, the NRICs must belong to a valid patient and donor.
 
-`icP/**NRIC OF PATIENT**` refers to the NRIC of the patient, while `icD/**NRIC OF DONOR**`
-refers to the NRIC of the donor.
+After typing this command, the patient and donor pair will be removed from ORGANice and will not be considered a potential match in future match detection.
 
-The following section outlines what happens based on the two results: +
-
-If the result of the cross matching is a 'pass':
-
-. It is up to the hospital staff to schedule an organ transplant surgery
-between the patient and donor.
-. Mark the patient and donor as 'done', based on the command format.
-. After running the command, the system removes the patient and donor from the matching pool.
-The patient and donor statuses will be marked to 'done'.
-
-
-If the result of the cross matching is a 'fail': +
-
-. Run the command based on the given format
-
-. The patient and donor will be added back to the matching pool for
-match detection with other patients and donors.
-
-. The patient-donor pair will not be considered a potential match in future match detection.
-
+//The following section outlines what happens based on the two results: +
+//
+//If the result of the cross matching is a 'pass':
+//
+//. It is up to the hospital staff to schedule an organ transplant surgery
+//between the patient and donor.
+//. Mark the patient and donor as 'done', based on the command format.
+//. After running the command, the system removes the patient and donor from the matching pool.
+//The patient and donor statuses will be marked to 'done'.
+//
+//
+//If the result of the cross matching is a 'fail': +
+//
+//. Run the command based on the given format
+//
+//. The patient and donor will be added back to the matching pool for
+//match detection with other patients and donors.
+//
+//. The patient-donor pair will not be considered a potential match in future match detection.
+//
 
 Example:
 
-* `done icP/S7896432A icD/S4578902G res/pass`
-* `done icP/S7896432A icD/S4578902G res/fail`
+* `done ic/S7896432A ic/S4578902G`
 
 
 === Exiting the program : `exit`
@@ -562,12 +573,12 @@ When a duplicate is detected, it prompts the user to change the data in the text
 
 ==== Supporting more types of transplants
 
-Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for +
+Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for
 more types of organs.
 
 ==== Processing a match: `process`
 
-Emails the doctor in charge of a patient when an organ match for the patient is found.
+An extension to our current `processing` command. Future versions may be able to email the doctor in charge of a patient when an organ match for the patient is found.
 
 Format: `process **NRIC**`
 
