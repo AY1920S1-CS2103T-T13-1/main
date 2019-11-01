@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static organice.logic.parser.CliSyntax.*;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import organice.commons.core.Messages;
 import organice.logic.parser.ArgumentMultimap;
@@ -31,7 +32,7 @@ public class FuzzyFindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/alice t/doctor";
 
     // Maximum Levenshtein Distance tolerated for a fuzzy match
-    private static final int FUZZY_THRESHOLD = 3;
+    private static final int FUZZY_THRESHOLD = 5;
 
     private final ArgumentMultimap argMultimap;
 
@@ -39,7 +40,7 @@ public class FuzzyFindCommand extends Command {
         this.argMultimap = argMultimap;
     }
 
-    private FilteredList<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
+    private ObservableList<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
         // Take math_min of Levenshtein Distance within one prefix, and accumulate them.
 
         // Calculate LD for each pair of keyword, attribute within one prefix. Take math_min of all.
@@ -77,14 +78,16 @@ public class FuzzyFindCommand extends Command {
 
         // Keep Persons whose Levenshtein Distance is within tolerable range
         ArrayList<Integer> distancesOfTolerablePersons = new ArrayList<>();
-        ArrayList<Person> tolerablePersons = new ArrayList<>();
+        ArrayList<Person> tolerablePersons = new ArrayList<>(inputList.size());
         for (int i = 0; i < inputList.size(); i++) {
+            int j = 0;
             int levenshteinDistance = distanceList.get(i);
             String DEBUG_PERSON_NAME = inputList.get(i).getName().toString();
             String[] DEBUG_ARR = nameKeywords.toArray(String[]::new);
             if (levenshteinDistance <= FUZZY_THRESHOLD) {
-                distancesOfTolerablePersons.add(i, levenshteinDistance);
-                tolerablePersons.add(i, inputList.get(i));
+                distancesOfTolerablePersons.add(j, levenshteinDistance);
+                tolerablePersons.add(j, inputList.get(i));
+                j++;
             }
         }
 
@@ -92,7 +95,7 @@ public class FuzzyFindCommand extends Command {
         Collections.sort(sortedPersons, Comparator.comparingInt(
                 left -> distancesOfTolerablePersons.get(tolerablePersons.indexOf(left))));
 
-        return new FilteredList<>(FXCollections.observableArrayList(sortedPersons));
+        return FXCollections.observableArrayList(sortedPersons);
     }
 
     private int findMinLevenshteinDistance(List<String> prefixKeywords, String personAttribute) {
@@ -185,11 +188,9 @@ public class FuzzyFindCommand extends Command {
         ArrayList<Person> finalArrayList = new ArrayList<>(exactMatches);
         finalArrayList.addAll(allExceptExactMatches);
 
-        FilteredList<Person> searchResults = new FilteredList<>(FXCollections.observableArrayList(finalArrayList));
-
-        model.overrideFilteredPersonList(searchResults);
+        model.setDisplayedPersonList(finalArrayList);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getDisplayedPersonList().size()));
     }
 
     @Override

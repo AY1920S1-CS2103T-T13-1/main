@@ -125,12 +125,6 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Overrides the current filtered person list with the given {@code inputList}.
-     * {@code inputList} must be non null.
-     */
-    void overrideFilteredPersonList(FilteredList<Person> inputList);
-
-    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
