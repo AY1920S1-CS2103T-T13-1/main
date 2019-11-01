@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
@@ -136,13 +135,6 @@ public class ModelStub implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public void overrideFilteredPersonList(FilteredList<Person> inputList) {
-        //TODO: Implement this method
-        // This method exists in this state to prevent compile-time errors and facilitate development
-        throw new AssertionError("THIS METHOD IS NOT YET IMPLEMENTED");
     }
 
     @Override

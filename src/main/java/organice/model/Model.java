@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import organice.commons.core.GuiSettings;
 
 import organice.logic.commands.exceptions.CommandException;

@@ -2,18 +2,26 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.AppUtil.checkArgument;
-import static organice.logic.parser.CliSyntax.*;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
+import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
+import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.BiFunction;
 
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
+
 import organice.logic.parser.ArgumentMultimap;
 import organice.model.Model;
 import organice.model.person.Name;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
-import java.util.*;
-import java.util.function.BiFunction;
 
 /**
  * Finds and lists all persons in address book whose prefixes match any of the argument prefix-keyword pairs.
@@ -39,6 +47,10 @@ public class FuzzyFindCommand extends Command {
         this.argMultimap = argMultimap;
     }
 
+    /**
+     * Returns a copy of the {@code inputList} which is filtered according to maximum tolerable Levenshtein Distance
+     * (edit distance) then sorted according to ascending level of distance.
+     */
     private List<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
         // Fuzzy Match by Levenshtein Distance is not implemented for following prefixes:
         // Age, Priority, BloodType, TissueType
@@ -79,8 +91,8 @@ public class FuzzyFindCommand extends Command {
         }
 
         ArrayList<Person> sortedPersons = new ArrayList<>(tolerablePersons);
-        sortedPersons.sort(Comparator.comparingInt(
-                left -> distancesOfTolerablePersons.get(tolerablePersons.indexOf(left))));
+        sortedPersons.sort(Comparator.comparingInt(left ->
+                distancesOfTolerablePersons.get(tolerablePersons.indexOf(left))));
 
         return sortedPersons;
     }
@@ -91,7 +103,11 @@ public class FuzzyFindCommand extends Command {
                 Integer::min);
     }
 
-    // Split name by spaces
+    /**
+     * Returns the minimum Levenshtein Distance of every {@code prefixKeyword} and {@code personName} pair. If
+     * {@code prefixKeyword} is a single-word string, {@code personName} is split according to spaces (if possible) and
+     * the minimum distance is calculated between every possible pair.
+     */
     private int findMinLevenshteinDistance(List<String> prefixKeywords, Name personName) {
         // If keyword is one word long, split the personName and find minLD.
         // Else just do as we are normally doing in original finalMinLD
@@ -110,6 +126,12 @@ public class FuzzyFindCommand extends Command {
 
     // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
     // Java code is original work.
+
+    /**
+     * Calculates the Levenshtein Distance (edit distance) between the given {@code String prefixKeyword} and
+     * {@code String personAttribute}. Levenshtein Distance is the (number of character edits required to morph one
+     * string into another.
+     */
     private int calculateLevenshteinDistance(String prefixKeyword, String personAttribute) {
         requireNonNull(prefixKeyword);
         requireNonNull(personAttribute);
