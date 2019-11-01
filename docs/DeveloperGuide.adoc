@@ -166,14 +166,39 @@ This section describes some noteworthy details on how features in ORGANice are i
 === List feature
 This section describes how the list feature is implemented.
 
-The list feature is implemented using the `ListCommand(Type type)`. The method
-`ModelManager#updateFilteredPersonList(Predicate<Person> predicate)` is used on a `filteredPersons` list.
+The list feature is implemented using the `ListCommand(Type type)`. When the list command is executed,
+the method `ModelManager#updateFilteredPersonList(Predicate<Person> predicate)` takes in a predicate
+to decide what type of `Person` to show on the `filteredPersons` list.
 
-Below is an activity diagram to illustrate what happens when a user uses the list command.
+Therefore, in addition to the existing `PREDICATE_SHOW_ALL_PERSONS` predicate, three others predicates are introduced
+in the `Model` interface to update the list.
+The code snippet below shows what these predicates are:
+
+```
+/** {@code Predicate} that always evaluate to true */
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true if person is a doctor */
+    Predicate<Person> PREDICATE_SHOW_ALL_DOCTORS = person -> person.getType().isDoctor();
+
+    /** {@code Predicate} that always evaluate to true  if person is a donor */
+    Predicate<Person> PREDICATE_SHOW_ALL_DONORS = person -> person.getType().isDonor();
+
+    /** {@code Predicate} that always evaluate to true if person is a patient */
+    Predicate<Person> PREDICATE_SHOW_ALL_PATIENTS = person -> person.getType().isPatient();
+
+```
+
+
+The activity diagram below illustrates what happens when a user uses the list command.
 
 .Activity Diagram of a List Command
 image::ListActivityDiagram.png[]
 
+When the user enters a list command, the result differs depending on the parameter of the command.
+If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
+If there is a parameter, ORGANice will check the `TYPE` input and display the respective list of doctors, patients
+or donors that corresponds to the input.
 
 === Matching feature
 This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
@@ -449,7 +474,7 @@ Therefore, they are converted into `Integer` for easier comparison. An alternati
 `Enum` class to define each priority so that this `compareTo` method implementation can be simplified.
 
 ==== Design considerations
-This section will explain the reason for having some aspects.
+This section will explain two aspects considered in designing the sort feature.
 
 ===== Aspect: Method of storing sorted result
 * **Alternative 1 (current choice):** Use `SortedList`.
