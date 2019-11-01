@@ -18,7 +18,6 @@ import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
 
 import organice.logic.commands.MatchCommand;
-import organice.logic.commands.SortCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.comparator.ExpiryDateComparator;
 import organice.model.comparator.NameComparator;

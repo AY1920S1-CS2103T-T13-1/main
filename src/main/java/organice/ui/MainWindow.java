@@ -290,7 +290,6 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult.isExit()) {
                 handleExit();
             } else {
-                // test if this method call is required. Technically Ui should auto update, given that it is reading displayedPersons list.
                 updateDisplayedList();
             }
             return commandResult;
