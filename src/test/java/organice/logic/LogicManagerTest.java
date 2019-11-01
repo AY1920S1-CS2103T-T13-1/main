@@ -98,7 +98,7 @@ public class LogicManagerTest {
         model.addPerson(DONOR_FIONA);
 
         model.matchDonors(PATIENT_IRENE);
-        ObservableList<Person> listOfMatches = model.getMatchList();
+        ObservableList<Person> listOfMatches = model.getDisplayedPersonList();
         boolean isAllMatchedDonor = listOfMatches.stream().allMatch(match -> match instanceof MatchedDonor);
 
         assertTrue(isAllMatchedDonor);
@@ -113,7 +113,7 @@ public class LogicManagerTest {
         model.addPerson(DONOR_FIONA);
 
         model.matchAllPatients();
-        ObservableList<Person> listOfMatches = model.getMatchList();
+        ObservableList<Person> listOfMatches = model.getDisplayedPersonList();
         boolean isAllMatchedPatient = listOfMatches.stream().allMatch(match -> match instanceof MatchedPatient);
 
         assertTrue(isAllMatchedPatient);
