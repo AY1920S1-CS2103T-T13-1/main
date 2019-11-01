@@ -80,8 +80,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).isPresent()) {
-            editPersonDescriptor.setOrganExpiryDate(ParserUtil.parseOrganExpiryDate(argMultimap.getValue(
-                    PREFIX_ORGAN_EXPIRY_DATE).get()));
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ORGAN).isPresent()) {
