@@ -23,7 +23,8 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand = new FindCommand(new PersonContainsPrefixesPredicate(
-                ArgumentTokenizer.tokenize("   find n/Alice Bob      ", PREFIX_NAME)));
+                ArgumentTokenizer.tokenize("   " + FindCommand.COMMAND_WORD + " n/Alice Bob      ",
+                        PREFIX_NAME)));
         assertParseSuccess(parser, FindCommand.COMMAND_WORD + " n/Alice Bob", expectedFindCommand);
     }
 

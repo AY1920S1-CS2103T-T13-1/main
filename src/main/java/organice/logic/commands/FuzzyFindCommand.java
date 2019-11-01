@@ -30,7 +30,7 @@ import organice.model.person.PersonContainsPrefixesPredicate;
  */
 public class FuzzyFindCommand extends Command {
 
-    public static final String COMMAND_WORD = "fuzfind";
+    public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose prefixes are similar to any of"
             + " the specified prefix-keywords pairs (case-insensitive) and displays them as a list with index numbers."
