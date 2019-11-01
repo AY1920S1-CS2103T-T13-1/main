@@ -13,6 +13,7 @@ import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Finds and lists all persons in address book whose prefixes match any of the argument prefix-keyword pairs.
@@ -102,6 +103,22 @@ public class FuzzyFindCommand extends Command {
 
     // Split name by spaces
     private int findMinLevenshteinDistance(List<String> prefixKeywords, Name personName) {
+        // if keyword is one word long, split the personName
+        // else just do as we are normally doing in original finalMinLD
+        String name = personName.toString();
+
+        BiFunction<String, String, Integer> findDistanceSplitIfMultiWord = (prefixKeyword, pName) ->
+                (prefixKeyword.split(" ").length == 1 ? Arrays.stream(pName.split(" "))
+                        .reduce(Integer.MAX_VALUE, (minDistance, nextNameWord) -> Integer.min(minDistance,
+                                calculateLevenshteinDistance(prefixKeyword, nextNameWord)), Integer::min)
+                : ;
+
+        return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) ->
+                findDistanceSplitIfMultiWord.apply(nextKeyword, personName.toString()),
+                Integer::min);
+
+
+
         return Arrays.stream(personName.toString().split(" ")).reduce(Integer.MAX_VALUE,
                 (minDistance, nextNameWord) -> Integer.min(
                         minDistance, findMinLevenshteinDistance(prefixKeywords, nextNameWord)), Integer::min);
