@@ -28,14 +28,15 @@
 </li>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#matching-feature">4.1. Matching feature</a></li>
-<li><a href="#add-person-code-form-code-mode-feature">4.2. Add person <code>Form</code> mode feature</a></li>
-<li><a href="#sort-feature">4.3. Sort feature</a></li>
-<li><a href="#processing-feature">4.4. Processing feature</a></li>
-<li><a href="#finding-feature">4.5. Finding feature</a></li>
-<li><a href="#proposed-data-encryption">4.6. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">4.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.8. Configuration</a></li>
+<li><a href="#list-feature">4.1. List feature</a></li>
+<li><a href="#matching-feature">4.2. Matching feature</a></li>
+<li><a href="#add-person-code-form-code-mode-feature">4.3. Add person <code>Form</code> mode feature</a></li>
+<li><a href="#sort-feature">4.4. Sort feature</a></li>
+<li><a href="#processing-feature">4.5. Processing feature</a></li>
+<li><a href="#finding-feature">4.6. Finding feature</a></li>
+<li><a href="#proposed-data-encryption">4.7. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">4.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a></li>
@@ -370,16 +371,62 @@ The lifeline for <code>EditCommandParser</code> should end at the destroy marker
 <h2 id="implementation"><a class="link" href="#implementation">4. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes some noteworthy details on how certain features are implemented.</p>
+<p>This section describes some noteworthy details on how features in ORGANice are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="matching-feature"><a class="link" href="#matching-feature">4.1. Matching feature</a></h3>
+<h3 id="list-feature"><a class="link" href="#list-feature">4.1. List feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the list feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>The list feature is implemented using the <code>ListCommand(Type type)</code>. When the list command is executed,
+the method <code>ModelManager#updateFilteredPersonList(Predicate&lt;Person&gt; predicate)</code> takes in a predicate
+to decide what type of <code>Person</code> to show on the <code>filteredPersons</code> list.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, in addition to the existing <code>PREDICATE_SHOW_ALL_PERSONS</code> predicate, three others predicates are introduced
+in the <code>Model</code> interface to update the list.
+The code snippet below shows what these predicates are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>/** {@code Predicate} that always evaluate to true */
+    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_PERSONS = unused -&gt; true;
+
+    /** {@code Predicate} that always evaluate to true if person is a doctor */
+    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_DOCTORS = person -&gt; person.getType().isDoctor();
+
+    /** {@code Predicate} that always evaluate to true  if person is a donor */
+    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_DONORS = person -&gt; person.getType().isDonor();
+
+    /** {@code Predicate} that always evaluate to true if person is a patient */
+    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_PATIENTS = person -&gt; person.getType().isPatient();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The activity diagram below illustrates what happens when a user uses the list command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram">
+</div>
+<div class="title">Figure 9. Activity Diagram of a List Command</div>
+</div>
+<div class="paragraph">
+<p>When the user enters a list command, the result differs depending on the parameter of the command.
+If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
+If there is a parameter, ORGANice will check the <code>TYPE</code> input and display the respective list of doctors, patients
+or donors that corresponds to the input.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="matching-feature"><a class="link" href="#matching-feature">4.2. Matching feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
 explained, followed by an explanation of design considerations.</p>
 </div>
 <div class="sect3">
-<h4 id="logic-of-matching"><a class="link" href="#logic-of-matching">4.1.1. Logic of Matching</a></h4>
+<h4 id="logic-of-matching"><a class="link" href="#logic-of-matching">4.2.1. Logic of Matching</a></h4>
 <div class="paragraph">
 <p>This section explains the logic of matching.</p>
 </div>
@@ -437,7 +484,7 @@ component.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="ui-of-matching"><a class="link" href="#ui-of-matching">4.1.2. UI of Matching</a></h4>
+<h4 id="ui-of-matching"><a class="link" href="#ui-of-matching">4.2.2. UI of Matching</a></h4>
 <div class="paragraph">
 <p>This section explains the UI design of the matching feature.</p>
 </div>
@@ -497,7 +544,7 @@ The constructor of <code>PersonListPanel</code> takes in an <code>ObservableList
 </div>
 </div>
 <div class="sect3">
-<h4 id="model-of-matching"><a class="link" href="#model-of-matching">4.1.3. Model of Matching</a></h4>
+<h4 id="model-of-matching"><a class="link" href="#model-of-matching">4.2.3. Model of Matching</a></h4>
 <div class="paragraph">
 <p>This section will discuss aspects of the match feature that interacts with the <code>Model</code> component.</p>
 </div>
@@ -514,7 +561,7 @@ in the next app launch.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.4. Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.4. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -555,12 +602,12 @@ then runs the matching again. The matching would be based on the latest patient 
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">4.2. Add person <code>Form</code> mode feature</a></h3>
+<h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">4.3. Add person <code>Form</code> mode feature</a></h3>
 <div class="paragraph">
 <p>This section explains the implementation of the adding person in <code>Form</code> mode feature.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">4.2.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">4.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>Form</code> mode mechanism is facilitated by <code>FormUiManager</code>.
 It modifies the <code>CommandBox</code> as well as <code>PersonPanelListPlaceholder</code> each time a user input a specific attribute.
@@ -614,7 +661,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -654,41 +701,202 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-feature"><a class="link" href="#sort-feature">4.3. Sort feature</a></h3>
+<h3 id="sort-feature"><a class="link" href="#sort-feature">4.4. Sort feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the sort feature is implemented.</p>
 </div>
 <div class="paragraph">
-<p>Sorting is done by using <code>Comparators</code> in the <code>Logic</code> component.</p>
+<p>Sorting is done by using <code>Comparators</code> in the <code>Logic</code> component and makes use of the <code>SortCommand</code>.
+This command only works after a <code>MatchCommand</code> is called by the user, because it takes in <code>listOfMatches</code> returned
+from calling a <code>MatchCommand</code>. Importantly, this <code>listOfMatches</code> is an <code>ObservableList</code>, which cannot be modified.
+Therefore, it makes use of <code>SortedList</code> to wrap around the <code>ObservableList</code> so that the list can be modified by sorting.
+The <code>boolean</code> in <code>CommandResult#setSort(boolean isSort)</code> will be set to <code>true</code> for a list that has been sorted.
+Thus far, the sort command can only take in one <code>String</code> parameter, but more methods can be added in the future for more sorting options.</p>
 </div>
 <div class="paragraph">
-<p>To facilitate the sorting, the following methods were added:</p>
+<p>Three methods of sorting are implemented to sort based on the following categories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sorting based on donor&#8217;s organ expiry date with <code>sort expiry</code></p>
+</li>
+<li>
+<p>Sorting based on priority with <code>sort priority</code></p>
+</li>
+<li>
+<p>Sorting based on success rate of match with <code>sort rate</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>{More to be added}</p>
+<p>These three methods' implementation will be further elaborated upon below.</p>
+</div>
+<div class="sect3">
+<h4 id="sort-by-expiry"><a class="link" href="#sort-by-expiry">4.4.1. Sort by Expiry</a></h4>
+<div class="paragraph">
+<p>Sorting by Expiry sorts a list of <code>MatchedDonor</code> using the <code>ModelManager#sortByOrganExpiryDate()</code> method.</p>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for the interactions with the <code>Logic</code> component for the <code>execute(sort/rate)</code></p>
+<p>In this method, the <code>ExpiryComparator</code> is used to compare two matched donors' organ expiry date, and this requires
+the <code>OrganExpiryDate</code> of the donors to be parsed into a date format that can be compared.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sort-by-success-rate"><a class="link" href="#sort-by-success-rate">4.4.2. Sort by Success Rate</a></h4>
+<div class="paragraph">
+<p>Sorting by Success Rate sorts a list of <code>MatchedPatient</code> using the <code>ModelManager#sortBySuccessRate()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>The <code>SuccessRateComparator</code> is created to compare two matched patients' rate of success for the match.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for the interactions with the <code>Logic</code> component for the <code>execute(sort rate)</code>,
+assuming the user has entered a <code>match ic/<strong>NRIC</strong></code> command before this.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 9. Structure of the Logic Component when executing <code>sort</code> command</div>
+<div class="title">Figure 10. Structure of the Logic Component when executing <code>sort rate</code> command</div>
+</div>
+<div class="paragraph">
+<p>After the command is given by the user, it would be parsed by the <code>AddressBookParser</code>.
+The <code>SortCommandParser</code> then parses the parameter <code>rate</code> and a <code>SortCommand</code> is created.
+The <code>LogicManager</code> will then execute the command and call the <code>sortBySuccessRate()</code> method from the <code>ModelManager</code>.
+The list of <code>MatchedPatient</code> will then be sorted based on their match&#8217;s success rate.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.1. Design considerations</a></h4>
+<h4 id="sort-by-priority"><a class="link" href="#sort-by-priority">4.4.3. Sort by Priority</a></h4>
 <div class="paragraph">
-<p>This section will explain the reason for having some aspects.</p>
+<p>Sorting by Expiry sorts a list of <code>MatchedPatient</code> using the <code>ModelManager#sortByPriority()</code> method.</p>
+</div>
+<div class="paragraph">
+<p>In this method, there are two other comparators created in addition to the <code>Priority Comparator</code>,
+namely the <code>NameComparator</code> and the <code>NumOfMatchesComparator</code>. These two comparators serve as tie-breakers in cases where
+patients have the same priority. In other words, for patients of the same priority, those with more matched donors will be displayed first.
+If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.</p>
+</div>
+<div class="paragraph">
+<p>Under the <code>sortByPriority()</code> method, the order of applying the comparators to the list of patients
+is, firstly, the 'NameComparator', followed by <code>NumOfMatchesComparator</code>, and lastly, the <code>PriorityComparator</code>.
+This means that the patients are first sorted by names in alphabetical order, followed by the number of matched donors they have
+in descending order (highest to lowest), and then their priority level in descending order (from high, to medium, to low).</p>
+</div>
+<div class="paragraph">
+<p>All three comparators makes use of the <code>compareTo</code> method under the <code>Comparable</code> class, which can sort in lexical order for String,
+and numeric order for Sorting integers.
+In particular, the <code>PriorityComparator</code> makes use of the <code>compareTo</code> method implemented in the <code>Priority</code> class.
+A code snippet of this method is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>@Override
+public int compareTo(Priority priority) {
+Integer thisPriorityNumber = 0;
+Integer otherPriorityNumber = 0;
+
+        if (this.isHighPriority()) {
+            thisPriorityNumber = 3;
+        } else if (this.isMediumPriority()) {
+            thisPriorityNumber = 2;
+        } else if (this.isLowPriority()) {
+            thisPriorityNumber = 1;
+        }
+        if (priority.isHighPriority()) {
+            otherPriorityNumber = 3;
+        } else if (priority.isMediumPriority()) {
+            otherPriorityNumber = 2;
+        } else if (priority.isLowPriority()) {
+            otherPriorityNumber = 1;
+        }
+        return thisPriorityNumber.compareTo(otherPriorityNumber);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This implementation was the result of using <code>String</code> to represent the different priorities in the <code>Priority</code> class.
+Therefore, they are converted into <code>Integer</code> for easier comparison. An alternative solution would be to make use of
+<code>Enum</code> class to define each priority so that this <code>compareTo</code> method implementation can be simplified.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.4. Design considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain two aspects considered in designing the sort feature.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect"><a class="link" href="#aspect">Aspect:</a></h5>
-
+<h5 id="aspect-method-of-storing-sorted-result"><a class="link" href="#aspect-method-of-storing-sorted-result">Aspect: Method of storing sorted result</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>SortedList</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
+with current implementations (able to wrap <code>ObservableList</code> and sort the content).</p>
+</li>
+<li>
+<p>Cons: It is not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>ArrayList</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fast index-based access and works on any <code>Collection</code> class.</p>
+</li>
+<li>
+<p>Cons: Iterating through the list to display the result takes O(n) time, which is slower than using <code>SortedList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-method-of-sorting"><a class="link" href="#aspect-method-of-sorting">Aspect: Method of sorting</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>Comparator</code> and <code>Comparable</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simpler implementation as able to make use of existing methods in ORGANice such as <code>setComparator</code>.</p>
+</li>
+<li>
+<p>Cons: More coding involved.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>Collections.sort()</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Time complexity is O(n*log(n)) which is relatively fast.</p>
+</li>
+<li>
+<p>Cons: Cannot make use of existing methods in ORGANice that work for Comparator.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="processing-feature"><a class="link" href="#processing-feature">4.4. Processing feature</a></h3>
+<h3 id="processing-feature"><a class="link" href="#processing-feature">4.5. Processing feature</a></h3>
 <div class="paragraph">
 <p>This section describes how the processing feature is implemented.</p>
 </div>
@@ -702,7 +910,7 @@ Additionally, it implements the following operations:</p>
 <p>If the user made any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.1. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
@@ -742,12 +950,12 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-feature"><a class="link" href="#finding-feature">4.5. Finding feature</a></h3>
+<h3 id="finding-feature"><a class="link" href="#finding-feature">4.6. Finding feature</a></h3>
 <div class="paragraph">
 <p>This section explains the implementation of the find persons by attributes feature.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">4.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The find feature is facilitated by <code>FindCommand</code> and <code>PersonContainsPrefixesPredicate</code>.<br></p>
 </div>
@@ -800,25 +1008,25 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design Considerations</a></h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.6. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.7. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -849,7 +1057,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1134,15 +1342,6 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="sect2">
 <h3 id="use-case-sort-list-according-to-priority-rate-expiry"><a class="link" href="#use-case-sort-list-according-to-priority-rate-expiry">C.2. Use case: Sort list according to priority/rate/expiry</a></h3>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for the interactions with the <code>Logic</code> component for the <code>execute(sort rate)</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram">
-</div>
-<div class="title">Figure 10. Structure of the Logic Component when executing <code>sort</code> command</div>
-</div>
-<div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
@@ -1187,15 +1386,6 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 <div class="sect2">
 <h3 id="use-case-list-all-patients-donors-doctors"><a class="link" href="#use-case-list-all-patients-donors-doctors">C.3. Use case: List all patients/donors/doctors</a></h3>
-<div class="paragraph">
-<p>Given below is the activity diagram to illustrate what happens when user uses the list command.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram">
-</div>
-<div class="title">Figure 11. Activity Diagram of a List Command</div>
-</div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1400,4 +1590,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 13:43:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 01:26:19 UTC</div></div></div></body></html>
