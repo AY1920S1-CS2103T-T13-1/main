@@ -166,7 +166,8 @@ This section describes some noteworthy details on how features in ORGANice are i
 === List feature
 This section describes how the list feature is implemented.
 
-The list feature is done by using the `ListCommand#`
+The list feature is implemented using the `ListCommand(Type type)`. The method
+`ModelManager#updateFilteredPersonList(Predicate<Person> predicate)` is used on a `filteredPersons` list.
 
 Below is an activity diagram to illustrate what happens when a user uses the list command.
 
