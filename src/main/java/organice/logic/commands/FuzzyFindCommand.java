@@ -2,6 +2,7 @@ package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.AppUtil.checkArgument;
+import static organice.commons.util.StringUtil.calculateLevenshteinDistance;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -122,55 +123,6 @@ public class FuzzyFindCommand extends Command {
         return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) ->
                 Integer.min(minDistance, findDistanceSplitIfMultiWord.apply(nextKeyword, personName.toString())),
                 Integer::min);
-    }
-
-    // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
-    // Java code is original work.
-
-    /**
-     * Calculates the Levenshtein Distance (edit distance) between the given {@code String prefixKeyword} and
-     * {@code String personAttribute}. Levenshtein Distance is the (number of character edits required to morph one
-     * string into another.
-     */
-    private int calculateLevenshteinDistance(String prefixKeyword, String personAttribute) {
-        requireNonNull(prefixKeyword);
-        requireNonNull(personAttribute);
-
-        int prefixKeywordLength = prefixKeyword.length();
-        int personAttributeLength = personAttribute.length();
-
-        checkArgument(prefixKeywordLength != 0 && personAttributeLength != 0);
-
-        char[] pkChars = prefixKeyword.toCharArray();
-        char[] paChars = personAttribute.toCharArray();
-
-        int[][] costMatrix = new int[prefixKeywordLength][personAttributeLength];
-        for (int i = 0; i < prefixKeywordLength; i++) {
-            for (int j = 0; j < personAttributeLength; j++) {
-                costMatrix[i][j] = pkChars[i] == paChars[j] ? 0 : 1;
-            }
-        }
-
-        int[][] levenshteinMatrix = new int [prefixKeywordLength + 1][personAttributeLength + 1];
-        // Initialise first row and col to be in range 0..length
-        for (int r = 0; r < prefixKeywordLength + 1; r++) {
-            levenshteinMatrix[r][0] = r;
-        }
-        for (int c = 0; c < personAttributeLength + 1; c++) {
-            levenshteinMatrix[0][c] = c;
-        }
-
-        // Setting the distance
-        for (int r = 1; r < prefixKeywordLength + 1; r++) {
-            for (int c = 1; c < personAttributeLength + 1; c++) {
-                int cellAbovePlusOne = levenshteinMatrix[r - 1][c] + 1;
-                int cellLeftPlusOne = levenshteinMatrix[r][c - 1] + 1;
-                int cellLeftDiagPlusCost = levenshteinMatrix[r - 1][c - 1] + costMatrix[r - 1][c - 1];
-                levenshteinMatrix[r][c] =
-                        Integer.min(cellAbovePlusOne, Integer.min(cellLeftPlusOne, cellLeftDiagPlusCost));
-            }
-        }
-        return levenshteinMatrix[prefixKeywordLength][personAttributeLength];
     }
 
     @Override
