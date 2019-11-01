@@ -104,20 +104,21 @@ public class FuzzyFindCommand extends Command {
                 Integer::min);
     }
 
+    //BUG: Seems like the previous minimum is deleted in favour of the next.
     // Split name by spaces
     private int findMinLevenshteinDistance(List<String> prefixKeywords, Name personName) {
         // if keyword is one word long, split the personName
         // else just do as we are normally doing in original finalMinLD
-        String name = personName.toString();
 
         BiFunction<String, String, Integer> findDistanceSplitIfMultiWord = (prefixKeyword, pName) ->
                 prefixKeyword.split(" ").length == 1 ? Arrays.stream(pName.split(" "))
                         .reduce(Integer.MAX_VALUE, (minDistance, nextNameWord) -> Integer.min(minDistance,
-                                calculateLevenshteinDistance(prefixKeyword, nextNameWord)), Integer::min)
-                : calculateLevenshteinDistance(prefixKeyword, pName);
+                                calculateLevenshteinDistance(prefixKeyword.toLowerCase(), nextNameWord.toLowerCase())),
+                                Integer::min)
+                : calculateLevenshteinDistance(prefixKeyword.toLowerCase(), pName.toLowerCase());
 
         return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) ->
-                findDistanceSplitIfMultiWord.apply(nextKeyword, personName.toString()),
+                Integer.min(minDistance, findDistanceSplitIfMultiWord.apply(nextKeyword, personName.toString())),
                 Integer::min);
     }
 
@@ -189,8 +190,8 @@ public class FuzzyFindCommand extends Command {
         finalArrayList.addAll(allExceptExactMatches);
 
         model.setDisplayedPersonList(finalArrayList);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getDisplayedPersonList().size()));
+        return new CommandResult("Found " + exactMatches.size() + " exact matches and "
+                + allExceptExactMatches.size() + " possible matches!");
     }
 
     @Override
