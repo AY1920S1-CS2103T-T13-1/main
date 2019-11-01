@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static organice.logic.parser.CliSyntax.*;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import organice.commons.core.Messages;
 import organice.logic.parser.ArgumentMultimap;
 import organice.model.Model;
+import organice.model.person.Name;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
@@ -28,6 +28,9 @@ public class FuzzyFindCommand extends Command {
             + "\nList of Prefixes: n/, ic/, p/, a/, t/, pr/, b/, d/, tt/, exp/, o/"
             + "Parameters: PREFIX/KEYWORD [MORE_PREFIX-KEYWORD_PAIRS]...\n"
             + "Example: " + COMMAND_WORD + " n/alice t/doctor";
+
+    // Maximum Levenshtein Distance tolerated for a fuzzy match
+    private static final int FUZZY_THRESHOLD = 3;
 
     private final ArgumentMultimap argMultimap;
 
@@ -54,13 +57,13 @@ public class FuzzyFindCommand extends Command {
         List<String> typeKeywords = argMultimap.getAllValues(PREFIX_TYPE);
 
         // Array containing combined Levenshtein Distance of persons in inputList
-        int[] distanceArr = new int[inputList.size()];
+        ArrayList<Integer> distanceList = new ArrayList<>();
 
         for (int i = 0; i < inputList.size(); i++) {
             Person currentPerson = inputList.get(i);
             int combinedLevenshteinDistance = 0;
             combinedLevenshteinDistance += nameKeywords.isEmpty() ? 0
-                    : findMinLevenshteinDistance(nameKeywords, currentPerson.getName().toString());
+                    : findMinLevenshteinDistance(nameKeywords, currentPerson.getName());
             combinedLevenshteinDistance += nricKeywords.isEmpty() ? 0
                     : findMinLevenshteinDistance(nricKeywords, currentPerson.getNric().toString());
             combinedLevenshteinDistance += phoneKeywords.isEmpty() ? 0
@@ -68,21 +71,40 @@ public class FuzzyFindCommand extends Command {
             combinedLevenshteinDistance += typeKeywords.isEmpty() ? 0
                     : findMinLevenshteinDistance(typeKeywords, currentPerson.getType().toString());
 
-            distanceArr[i] = combinedLevenshteinDistance;
-            System.out.println("This is LD: " + combinedLevenshteinDistance);
+            distanceList.add(i, combinedLevenshteinDistance);
         }
 
-        ArrayList<Person> sortedPersons = new ArrayList<>(inputList);
-        Collections.sort(sortedPersons, Comparator.comparingInt(left -> distanceArr[inputList.indexOf(left)]));
+        // Keep Persons whose Levenshtein Distance is within tolerable range
+        ArrayList<Integer> distancesOfTolerablePersons = new ArrayList<>();
+        ArrayList<Person> tolerablePersons = new ArrayList<>();
+        for (int i = 0; i < inputList.size(); i++) {
+            int levenshteinDistance = distanceList.get(i);
+            String DEBUG_PERSON_NAME = inputList.get(i).getName().toString();
+            String[] DEBUG_ARR = nameKeywords.toArray(String[]::new);
+            if (levenshteinDistance <= FUZZY_THRESHOLD) {
+                distancesOfTolerablePersons.add(i, levenshteinDistance);
+                tolerablePersons.add(i, inputList.get(i));
+            }
+        }
+
+        ArrayList<Person> sortedPersons = new ArrayList<>(tolerablePersons);
+        Collections.sort(sortedPersons, Comparator.comparingInt(
+                left -> distancesOfTolerablePersons.get(tolerablePersons.indexOf(left))));
 
         return new FilteredList<>(FXCollections.observableArrayList(sortedPersons));
     }
 
-    // Almost correct, now just need to break up the personAttribute if is name
     private int findMinLevenshteinDistance(List<String> prefixKeywords, String personAttribute) {
         return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) -> Integer.min(
                 minDistance, calculateLevenshteinDistance(nextKeyword.toLowerCase(), personAttribute.toLowerCase())),
                 Integer::min);
+    }
+
+    // Split name by spaces
+    private int findMinLevenshteinDistance(List<String> prefixKeywords, Name personName) {
+        return Arrays.stream(personName.toString().split(" ")).reduce(Integer.MAX_VALUE,
+                (minDistance, nextNameWord) -> Integer.min(
+                        minDistance, findMinLevenshteinDistance(prefixKeywords, nextNameWord)), Integer::min);
     }
 
     // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
