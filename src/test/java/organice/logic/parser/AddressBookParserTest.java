@@ -4,18 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static organice.testutil.Assert.assertThrows;
-import static organice.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
+import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import static organice.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.ClearCommand;
-import organice.logic.commands.DeleteCommand;
 import organice.logic.commands.EditCommand;
 import organice.logic.commands.EditCommand.EditPersonDescriptor;
 import organice.logic.commands.ExitCommand;
@@ -23,8 +21,8 @@ import organice.logic.commands.FindCommand;
 import organice.logic.commands.HelpCommand;
 import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
-import organice.model.person.NameContainsKeywordsPredicate;
 import organice.model.person.Person;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 import organice.testutil.PersonUtil;
@@ -47,19 +45,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + person.getNric().value + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(person.getNric(), descriptor), command);
     }
 
     @Test
@@ -70,10 +61,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String searchParams = FindCommand.COMMAND_WORD + " n/Alice ic/S1111111A t/doctor";
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " " + searchParams);
+        //TODO: Replace ArgumentTokenizer with stub
+        assertEquals(new FindCommand(new PersonContainsPrefixesPredicate(ArgumentTokenizer
+                .tokenize(FindCommand.COMMAND_WORD
+                        + " n/Alice ic/S1111111A t/doctor", PREFIX_NAME, PREFIX_NRIC, PREFIX_TYPE))), command);
     }
 
     @Test
@@ -96,6 +90,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(
+                ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

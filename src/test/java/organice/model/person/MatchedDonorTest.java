@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import organice.testutil.DonorBuilder;
 
 public class MatchedDonorTest {
-    private static MatchedDonor MATCHED_DONOR_IRENE_DONOR = new MatchedDonor(DONOR_IRENE_DONOR);
+    private static final MatchedDonor MATCHED_DONOR_IRENE_DONOR = new MatchedDonor(DONOR_IRENE_DONOR);
 
     @Test
     public void alternativeConstructor_success() {
@@ -108,7 +108,8 @@ public class MatchedDonorTest {
     public void toStringTest() {
         assertEquals("Irene Donor Person Type: donor Nric: S9876543G Phone: 85355255 "
                 + "Age: 21 Blood Type: O Tissue Type: 1,4,7,10,11,12 "
-                + "Organ: kidney Organ Expiry Date: 20-Jan-2020", MATCHED_DONOR_IRENE_DONOR.toString());
+                + "Organ: kidney Organ Expiry Date: 20-Jan-2020 "
+                + "Status: not processing", MATCHED_DONOR_IRENE_DONOR.toString());
     }
 
     @Test

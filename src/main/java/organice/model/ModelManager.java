@@ -12,9 +12,15 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+
 import organice.logic.commands.MatchCommand;
+import organice.logic.commands.exceptions.CommandException;
+import organice.model.comparator.ExpiryDateComparator;
+import organice.model.comparator.PriorityComparator;
+import organice.model.comparator.SuccessRateComparator;
 import organice.model.person.Donor;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
@@ -33,6 +39,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Person> listOfMatches = FXCollections.observableArrayList();
+    private SortedList<MatchedDonor> sortedMatchedDonors;
+    private SortedList<MatchedPatient> sortedMatchedPatients;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -104,6 +113,16 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * To check if the model have a person with the given Nric.
+     * @param personNric
+     * @return a boolean true or false if the person exist.
+     */
+    public boolean hasPerson(Nric personNric) {
+        requireNonNull(personNric);
+        return addressBook.hasPerson(personNric);
+    }
+
     @Override
     public boolean hasDoctor(Nric doctor) {
         requireNonNull(doctor);
@@ -114,6 +133,12 @@ public class ModelManager implements Model {
     public boolean hasPatient(Nric patient) {
         requireNonNull(patient);
         return addressBook.hasPatient(patient);
+    }
+
+    @Override
+    public boolean hasDonor(Nric donor) {
+        requireNonNull(donor);
+        return addressBook.hasDonor(donor);
     }
 
     @Override
@@ -128,17 +153,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+        requireNonNull(patientNric);
+        return addressBook.getPatient(patientNric);
+    }
+
+    @Override
+    public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
+        requireNonNull(donorNric);
+        return addressBook.getDonor(donorNric);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-    }
-
-    @Override
-    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
-        requireNonNull(patientNric);
-
-        return addressBook.getPatient(patientNric);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -284,9 +314,84 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Retrieves the Match List
+     * Returns a copy of the match list.
      */
-    public ObservableList<Person> getMatchList() {
-        return listOfMatches;
+    public ObservableList<Person> getMatchList() throws AssertionError {
+        ObservableList<Person> listOfMatchesCopy = FXCollections.observableArrayList();
+        for (Person person : listOfMatches) {
+            if (person instanceof MatchedDonor) {
+                listOfMatchesCopy.add((MatchedDonor) person);
+            } else if (person instanceof MatchedPatient) {
+                listOfMatchesCopy.add((MatchedPatient) person);
+            } else {
+                assert true : "A Person not an instance of MatchedDonor or MatchedPatient is in the match list";
+            }
+        }
+        return listOfMatchesCopy;
+    }
+
+    /**
+     * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
+     */
+    public int numberOfMatches() {
+        return listOfMatches.size();
+    }
+
+    //=========== Sorted Person List Accessors =============================================================
+
+    /**
+     * Retrieves the sort list.
+     */
+    public SortedList<Person> getSortList() {
+        Person firstperson = listOfMatches.get(0);
+        if (firstperson instanceof MatchedPatient) {
+            return (SortedList<Person>) (SortedList<?>) sortedMatchedPatients;
+        } else {
+            return (SortedList<Person>) (SortedList<?>) sortedMatchedDonors;
+        }
+    }
+
+    /**
+     * Sorts list by priority level.
+     */
+    @Override
+    public void sortByPriority() throws CommandException {
+        try {
+            sortedMatchedPatients = new SortedList<>((ObservableList<MatchedPatient>) (ObservableList<?>)
+                    listOfMatches);
+            sortedMatchedPatients.setComparator(new PriorityComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by Priority only works after 'match ic/all'.");
+        }
+    }
+
+    /**
+     * Sorts list by rate of success.
+     */
+    @Override
+    public void sortBySuccessRate() throws CommandException {
+        try {
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
+                    listOfMatches);
+            sortedMatchedDonors.setComparator(new SuccessRateComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by success rate "
+                    + "only works after executing 'match ic/[patient NRIC]'.");
+        }
+    }
+
+    /**
+     * Sorts list by organ expiry date.
+     */
+    @Override
+    public void sortByOrganExpiryDate() throws CommandException {
+        try {
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
+                    listOfMatches);
+            sortedMatchedDonors.setComparator(new ExpiryDateComparator());
+        } catch (ClassCastException | IllegalArgumentException ex) {
+            throw new CommandException("Sorting by organ expiry date "
+                    + "only works after executing 'match ic/[patient NRIC]'.");
+        }
     }
 }

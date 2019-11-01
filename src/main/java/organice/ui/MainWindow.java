@@ -16,6 +16,10 @@ import organice.logic.Logic;
 import organice.logic.commands.CommandResult;
 import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.Model;
+import organice.model.person.Priority;
+import organice.model.person.Status;
+import organice.model.person.Type;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,16 +28,22 @@ import organice.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String STYLE = "-fx-background-radius: 4; -fx-border-radius: 4; -fx-font-family: Segoe UI;"
+            + "-fx-font-size: 13px; -fx-text-fill: white;";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
+    private Model model;
     private Logic logic;
 
+    private CommandBox commandBox;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private Form form;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,12 +60,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, Model model) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.model = model;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -63,10 +74,46 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        form = null;
+
+        commandBox = new CommandBox(this::executeCommand);
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public StackPane getCommandBoxPlaceholder() {
+        return commandBoxPlaceholder;
+    }
+
+    public StackPane getPersonListPanelPlaceholder() {
+        return personListPanelPlaceholder;
+    }
+
+    public StackPane getResultDisplayPlaceholder() {
+        return resultDisplayPlaceholder;
+    }
+
+    public CommandBox getCommandBox() {
+        return commandBox;
+    }
+
+    public Form getForm() {
+        return form;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
+    }
+
+    public Logic getLogic() {
+        return logic;
+    }
+
+    public Model getModel() {
+        return model;
     }
 
     private void setAccelerators() {
@@ -116,8 +163,20 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Reset the UI to the initial state of the window
+     */
+    void resetInnerParts() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        resultDisplayPlaceholder.setMinHeight(200);
     }
 
     /**
@@ -133,6 +192,30 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets the colour of the 'Status' tag according to the status.
+     */
+    public static String getColourOfStatus(Status status) {
+        if (status.isNotProcessing()) {
+            return STYLE + "-fx-background-color: #213896;";
+        } else {
+            return STYLE + "-fx-background-color: #5476ff;";
+        }
+    }
+
+    /**
+     * Sets the colour of the 'Priority' tag according to the status.
+     */
+    public static String getColourOfPriority(Priority priority) {
+
+        if (priority.isHighPriority()) {
+            return STYLE + "-fx-background-color: #cc3232;";
+        } else if (priority.isMediumPriority()) {
+            return STYLE + "-fx-background-color: #db7b2b;";
+        } else {
+            return STYLE + "-fx-background-color: #5cb54c";
+        }
+    }
+    /**
      * Swaps the PersonListPanel if a match command is executed.
      */
     public void handleMatch() {
@@ -143,11 +226,18 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Changes PersonListPanel to display normal persons.
      */
-    public void handleNonMatches() {
+    public void handleOtherCommands() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
+    /**
+     * Swaps the PersonListPanel if a sort command is executed.
+     */
+    public void handleSort() {
+        personListPanel = new PersonListPanel(logic.getSortList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -186,16 +276,39 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see organice.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isForm()) {
+                resultDisplayPlaceholder.setMinHeight(100);
+                FormAnimation.fadingAnimation(this);
+                Type formType = commandResult.getFormType();
+                FormUiManager formUiManager = new FormUiManager(this, formType, model, logger);
+                personListPanelPlaceholder.getChildren().clear();
+                if (formType.isDoctor()) {
+                    form = new DoctorForm();
+                    personListPanelPlaceholder.getChildren().add(((DoctorForm) form).getRoot());
+                } else if (formType.isDonor()) {
+                    form = new DonorForm();
+                    personListPanelPlaceholder.getChildren().add(((DonorForm) form).getRoot());
+                } else if (formType.isPatient()) {
+                    form = new PatientForm(this);
+                    personListPanelPlaceholder.getChildren().add(((PatientForm) form).getRoot());
+                }
+
+                formUiManager.getPersonDetails();
+                return commandResult;
+            }
+
             if (commandResult.isMatch()) {
                 handleMatch();
+            } else if (commandResult.isSort()) {
+                handleSort();
             } else {
-                handleNonMatches();
+                handleOtherCommands();
             }
 
             if (commandResult.isShowHelp()) {
