@@ -108,20 +108,14 @@ public class FuzzyFindCommand extends Command {
         String name = personName.toString();
 
         BiFunction<String, String, Integer> findDistanceSplitIfMultiWord = (prefixKeyword, pName) ->
-                (prefixKeyword.split(" ").length == 1 ? Arrays.stream(pName.split(" "))
+                prefixKeyword.split(" ").length == 1 ? Arrays.stream(pName.split(" "))
                         .reduce(Integer.MAX_VALUE, (minDistance, nextNameWord) -> Integer.min(minDistance,
                                 calculateLevenshteinDistance(prefixKeyword, nextNameWord)), Integer::min)
-                : ;
+                : calculateLevenshteinDistance(prefixKeyword, pName);
 
         return prefixKeywords.stream().reduce(Integer.MAX_VALUE, (minDistance, nextKeyword) ->
                 findDistanceSplitIfMultiWord.apply(nextKeyword, personName.toString()),
                 Integer::min);
-
-
-
-        return Arrays.stream(personName.toString().split(" ")).reduce(Integer.MAX_VALUE,
-                (minDistance, nextNameWord) -> Integer.min(
-                        minDistance, findMinLevenshteinDistance(prefixKeywords, nextNameWord)), Integer::min);
     }
 
     // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
