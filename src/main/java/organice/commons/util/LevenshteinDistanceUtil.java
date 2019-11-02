@@ -1,11 +1,11 @@
 package organice.commons.util;
 
+import static java.util.Objects.requireNonNull;
+import static organice.commons.util.AppUtil.checkArgument;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
-
-import static java.util.Objects.requireNonNull;
-import static organice.commons.util.AppUtil.checkArgument;
 
 /**
  * Helper functions for calculating Levenshtein Distance (edit distance). Edit distance is the minimum number of
