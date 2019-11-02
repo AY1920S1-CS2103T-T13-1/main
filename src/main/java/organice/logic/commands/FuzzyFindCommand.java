@@ -1,7 +1,6 @@
 package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static organice.commons.util.AppUtil.checkArgument;
 import static organice.commons.util.StringUtil.calculateLevenshteinDistance;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
