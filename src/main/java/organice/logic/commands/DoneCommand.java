@@ -1,10 +1,8 @@
 package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.commands.MatchCommand.match;
 
-import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
@@ -22,8 +20,8 @@ public class DoneCommand extends Command {
             + "Example: " + COMMAND_WORD + " ic/s4512345A ic/s7711123C res/pass";
 
     public static final String MESSAGE_SUCCESS = "Done processing the patient and donor";
-    public static final String MESSAGE_NOT_PROCESSED = "Donor or patient NRIC must be valid," +
-            " result of cross-matching can only be pass or fail.";
+    public static final String MESSAGE_NOT_PROCESSED = "Donor or patient NRIC must be valid,"
+            + " result of cross-matching can only be pass or fail.";
 
     private Nric firstNric;
     private Nric secondNric;
@@ -85,6 +83,11 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * A boolean to determine the value of the String, result
+     * @param result a String from the user input
+     * @return true if the result shows a pass, false if the result shows a fail.
+     */
     public boolean isPass(String result) {
         if (result.toLowerCase().equals("pass")) {
             return true;
