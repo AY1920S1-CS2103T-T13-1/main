@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
+import static organice.logic.parser.CliSyntax.PREFIX_RESULT;
 
 import organice.logic.commands.DoneCommand;
 import organice.logic.parser.exceptions.ParseException;
@@ -22,18 +23,27 @@ public class DoneCommandParser implements Parser<DoneCommand> {
         requireNonNull(args);
         String trimmedArgs = args.trim();
         String prefixNricString = PREFIX_NRIC.toString();
+        String preficResString = PREFIX_RESULT.toString();
 
         String firstNric;
         String secondNric;
+        String result;
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        if (nameKeywords[0].startsWith(prefixNricString) && nameKeywords[1].startsWith(prefixNricString)) {
-            firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
-            secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
-        } else {
+        try {
+            if (nameKeywords[0].startsWith(prefixNricString) && nameKeywords[1].startsWith(prefixNricString)) {
+                firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
+                secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
+                result = nameKeywords[2].replaceFirst(preficResString, "");
+
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            }
+            return new DoneCommand(firstNric, secondNric, result);
+        } catch (NullPointerException npe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
-        return new DoneCommand(firstNric, secondNric);
     }
 }
