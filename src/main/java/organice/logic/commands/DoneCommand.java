@@ -85,14 +85,13 @@ public class DoneCommand extends Command {
         }
     }
 
-    public boolean isPass(String result) throws Exception {
+    public boolean isPass(String result) {
         if (result.toLowerCase().equals("pass")) {
             return true;
         } else if (result.toLowerCase().equals("fail")) {
             return false;
         } else {
-            throw new Exception(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            return false;
         }
     }
 
@@ -104,7 +103,7 @@ public class DoneCommand extends Command {
      * @return CommandResult object.
      */
     @Override
-    public CommandResult execute(Model model) throws Exception {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         try {
             if (isValidDonorPatientPair(firstNric, secondNric, model) && isPass(result)) {
@@ -141,3 +140,4 @@ public class DoneCommand extends Command {
                 || (secondNric.equals(((DoneCommand) other).secondNric))); // state check
     }
 }
+

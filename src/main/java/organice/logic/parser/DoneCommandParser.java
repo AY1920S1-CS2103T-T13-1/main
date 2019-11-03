@@ -35,7 +35,10 @@ public class DoneCommandParser implements Parser<DoneCommand> {
                 firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
                 secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
                 result = nameKeywords[2].replaceFirst(preficResString, "");
-
+                if (result.trim().isEmpty()) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+                }
             } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
