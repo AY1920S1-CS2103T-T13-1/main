@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finish the processing of patients and donors"
+
             + "Parameters: ic/PATIENT NRIC ic/DONOR NRIC res/[PASS/FAIL] \n"
             + "Example: " + COMMAND_WORD + " ic/s4512345A ic/s7711123C res/pass";
 
@@ -105,11 +106,13 @@ public class DoneCommand extends Command {
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult object.
      */
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         try {
             if (isValidDonorPatientPair(firstNric, secondNric, model) && isPass(result)) {
+
                 model.getFilteredPersonList();
 
                 donor.setStatus(statusDone);
@@ -143,4 +146,3 @@ public class DoneCommand extends Command {
                 || (secondNric.equals(((DoneCommand) other).secondNric))); // state check
     }
 }
-

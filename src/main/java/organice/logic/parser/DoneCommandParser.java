@@ -22,11 +22,13 @@ public class DoneCommandParser implements Parser<DoneCommand> {
     public DoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
+      
         String prefixNricString = PREFIX_NRIC.toString();
         String preficResString = PREFIX_RESULT.toString();
 
         String firstNric;
         String secondNric;
+      
         String result;
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
