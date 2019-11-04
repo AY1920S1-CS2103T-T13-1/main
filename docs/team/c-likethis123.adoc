@@ -6,11 +6,16 @@
 == PROJECT: ORGANice
 
 == Overview
-This document is written to document my role and contributions to ORGANice.
+This document is written to document my role and contributions to ORGANice. It is a team project developed
+for the module CS2103T, the introductory Software Engineering module in NUS.
+
+=== About the team
+We are a group of 5 Year 2 Computer Science undergraduates.
 
 === About ORGANice
-ORGANice is an organ matching desktop application designed for hospital administration staff who prefer typing.
-It is morphed from Address Book 3, which is used for teaching Software Engineering principles.
+ORGANice is an organ matching desktop application designed for hospital administration staff who prefer typing. +
+
+It is morphed from Address Book 3, which is a desktop application used for teaching Software Engineering principles.
 The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX.
 It is written in Java, and has about 10,000 lines of code (LoC).
 
@@ -20,13 +25,11 @@ Words highlighted in grey refers to technical terms in this application.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to match patients and donors*
+* *Major enhancement*: added the ability to match patients and donors
 //this portion will be changed
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+** What it does: This feature identifies a list of potential matches between patients and organ donors.
+** Justification: This feature allows users to find matches efficiently.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 
 * *Minor enhancement*: refactored Person class to the Patient class.
 
@@ -37,15 +40,17 @@ Words highlighted in grey refers to technical terms in this application.
 ** Project management:
 *** Created issues to keep track of work to be done.
 ** Enhancements to existing features:
-//this to be changed
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Refactored code to improve code quality
+*** Implemented logging features
+*** Fixed bugs
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Authored the 'Introduction', 'Quick Start', 'Components of ORGANice',
+'Detecting matches' and 'Viewing help' sub-sections in the 'Features' section
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 
 == Contributions to the User Guide
 This section documents my contributions to the User Guide. I authored the following sections:
