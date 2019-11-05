@@ -34,11 +34,24 @@ public class BloodTypeTest {
         assertFalse(BloodType.isValidBloodType("C+C")); // + within alphabets
         assertFalse(BloodType.isValidBloodType("A B")); // spaces within alphabets
 
-        // valid blood type
-        assertTrue(BloodType.isValidBloodType("A"));
-        assertTrue(BloodType.isValidBloodType("B"));
-        assertTrue(BloodType.isValidBloodType("O"));
-        assertTrue(BloodType.isValidBloodType("AB"));
+        //invalid blood type -- without signs
+        assertFalse(BloodType.isValidBloodType("A"));
+        assertFalse(BloodType.isValidBloodType("B"));
+        assertFalse(BloodType.isValidBloodType("O"));
+        assertFalse(BloodType.isValidBloodType("AB"));
+
+        // valid blood type -- positive
+        assertTrue(BloodType.isValidBloodType("A+"));
+        assertTrue(BloodType.isValidBloodType("B+"));
+        assertTrue(BloodType.isValidBloodType("O+"));
+        assertTrue(BloodType.isValidBloodType("AB+"));
+
+        //valid blood type -- negative
+        assertTrue(BloodType.isValidBloodType("A-"));
+        assertTrue(BloodType.isValidBloodType("B-"));
+        assertTrue(BloodType.isValidBloodType("O-"));
+        assertTrue(BloodType.isValidBloodType("AB-"));
+
         assertTrue(BloodType.isValidBloodType("Ab")); //case insensitive - AB blood type
         assertTrue(BloodType.isValidBloodType("o")); //case insensitive - O blood type
         assertTrue(BloodType.isValidBloodType("b")); //case insensitive - B blood type

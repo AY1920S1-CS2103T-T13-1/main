@@ -85,10 +85,10 @@ public class BloodType {
     /**
      * Returns true if a {@code BloodType} matches this blood type.
      */
-    public boolean isBloodTypeMatch(BloodType match) {
+    public boolean isBloodTypeMatch(BloodType donorBloodType) {
         HashSet<BloodType> matchingBloodTypes = BLOOD_TYPES_MATCHES.get(this);
 
-        if (matchingBloodTypes.contains(match)) {
+        if (matchingBloodTypes.contains(donorBloodType)) {
             return true;
         } else {
             return false;
