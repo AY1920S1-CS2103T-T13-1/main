@@ -52,33 +52,33 @@ public class BloodTypeTest {
         assertTrue(BloodType.isValidBloodType("O-"));
         assertTrue(BloodType.isValidBloodType("AB-"));
 
-        assertTrue(BloodType.isValidBloodType("Ab")); //case insensitive - AB blood type
-        assertTrue(BloodType.isValidBloodType("o")); //case insensitive - O blood type
-        assertTrue(BloodType.isValidBloodType("b")); //case insensitive - B blood type
-        assertTrue(BloodType.isValidBloodType("a")); //case insensitive - A blood type
+        assertTrue(BloodType.isValidBloodType("Ab+")); //case insensitive - AB blood type
+        assertTrue(BloodType.isValidBloodType("o-")); //case insensitive - O blood type
+        assertTrue(BloodType.isValidBloodType("b+")); //case insensitive - B blood type
+        assertTrue(BloodType.isValidBloodType("a-")); //case insensitive - A blood type
     }
 
     @Test
     public void toStringTest() {
-        assertEquals(new BloodType("Ab").toString(), "AB");
-        assertEquals(new BloodType("ab").toString(), "AB");
+        assertEquals(new BloodType("Ab+").toString(), "AB+");
+        assertEquals(new BloodType("ab-").toString(), "AB-");
     }
 
     @Test
     public void equals() {
-        BloodType bloodType = new BloodType("AB");
+        BloodType bloodType = new BloodType("AB+");
 
         assertFalse(bloodType.equals(null));
-        assertFalse(bloodType.equals(new BloodType("A")));
+        assertFalse(bloodType.equals(new BloodType("A-")));
         assertTrue(bloodType.equals(bloodType));
-        assertTrue(bloodType.equals(new BloodType("AB")));
+        assertTrue(bloodType.equals(new BloodType("AB+")));
     }
 
     @Test
     public void hashCodeTest() {
-        BloodType bloodType = new BloodType("AB");
+        BloodType bloodType = new BloodType("O-");
 
-        assertEquals(bloodType.hashCode(), new BloodType("Ab").hashCode());
-        assertNotEquals(bloodType.hashCode(), new BloodType("A").hashCode());
+        assertEquals(bloodType.hashCode(), new BloodType("O-").hashCode());
+        assertNotEquals(bloodType.hashCode(), new BloodType("A-").hashCode());
     }
 }

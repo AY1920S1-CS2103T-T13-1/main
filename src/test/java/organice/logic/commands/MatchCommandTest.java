@@ -165,14 +165,14 @@ public class MatchCommandTest {
     public void match_isNotSuccessfulMatch() throws Exception {
         MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
 
-        Donor differentBloodType = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType("B").build();
+        Donor differentBloodType = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType("B+").build();
         boolean matchResult = matchCommand.match(differentBloodType, PATIENT_IRENE);
         assertFalse(matchResult); //100% tissue match and different blood type
 
         //donor with 4/6 matching tissues and different blood type.
         //Hardcoded because there is no way to change tissue types in a more elegant manner
         Donor someMatchingTissues = new DonorBuilder(DONOR_IRENE_DONOR).withTissueType(COMPATIBLE_TISSUE_TYPE_IRENE)
-                .withBloodType("B").build();
+                .withBloodType("B+").build();
         matchResult = matchCommand.match(someMatchingTissues, PATIENT_IRENE);
         assertFalse(matchResult);
 
