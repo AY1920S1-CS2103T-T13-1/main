@@ -53,6 +53,7 @@ public class MatchCommand extends Command {
         }
 
         ArrayList patientsNotForMatching = ((Donor) donor).getPatientMatchedBefore();
+
         if (patientsNotForMatching.contains(patient.getNric())) {
             return false;
         }
