@@ -13,6 +13,9 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
@@ -39,6 +42,13 @@ import organice.model.person.Type;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private static List<Prefix> PREFIXES_DOCTORS = new ArrayList<>(Arrays.asList(PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME,
+            PREFIX_PHONE));
+    private static List<Prefix> PREFIXES_PATIENT = new ArrayList<>(Arrays.asList(PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME,
+            PREFIX_AGE, PREFIX_PHONE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
+            PREFIX_ORGAN, PREFIX_TISSUE_TYPE));
+    private static List<Prefix> PREFIXES_DONORS = new ArrayList<>(Arrays.asList(PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME,
+            PREFIX_AGE, PREFIX_PHONE, PREFIX_BLOOD_TYPE, PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN, PREFIX_TISSUE_TYPE));
 
     /**
      * Returns the {@code Type} of person in the given {@code ArgumentMultimap}
@@ -82,22 +92,26 @@ public class AddCommandParser implements Parser<AddCommand> {
                 return new AddCommand(type);
             }
 
-            arePrefixesPresentDonor(argMultimap);
+            if (areNumberOfPrefixesCorrectDonor(argMultimap)) {
+                //arePrefixesPresentDonor(argMultimap);
 
-            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-            BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
-            TissueType tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
-            Organ organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
-            OrganExpiryDate organExpiryDate =
-                    ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get());
-            Status status = new Status(Status.STATUS_NOT_PROCESSING);
-            TaskList taskList = new TaskList("");
-            Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate,
-                    status);
-            return new AddCommand(donor);
+                Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+                Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+                Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+                BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
+                TissueType tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
+                Organ organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
+                OrganExpiryDate organExpiryDate =
+                        ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get());
+                Status status = new Status(Status.STATUS_NOT_PROCESSING);
+                TaskList taskList = new TaskList("");
+                Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate,
+                        status);
+                return new AddCommand(donor);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
         } else if (type.isPatient()) {
             if (arePrefixesNotPresentPatient(argMultimap)) {
                 return new AddCommand(type);
@@ -204,6 +218,36 @@ public class AddCommandParser implements Parser<AddCommand> {
             PREFIX_ORGAN_EXPIRY_DATE, PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN)
             || !argMultimap.getPreamble().isEmpty()) {
             return false;
+        }
+        return true;
+    }
+
+    private static boolean areNumberOfPrefixesCorrectDoctor(ArgumentMultimap argumentMultimap) {
+        for (Prefix prefix : PREFIXES_DOCTORS) {
+            List<String> allInputsOfAPrefix = argumentMultimap.getAllValues(prefix);
+            if (allInputsOfAPrefix.size() != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean areNumberOfPrefixesCorrectDonor(ArgumentMultimap argumentMultimap) {
+        for (Prefix prefix : PREFIXES_DONORS) {
+            List<String> allInputsOfAPrefix = argumentMultimap.getAllValues(prefix);
+            if (allInputsOfAPrefix.size() != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean areNumberOfPrefixesCorrectPatient(ArgumentMultimap argumentMultimap) {
+        for (Prefix prefix : PREFIXES_PATIENT) {
+            List<String> allInputsOfAPrefix = argumentMultimap.getAllValues(prefix);
+            if (allInputsOfAPrefix.size() != 1) {
+                return false;
+            }
         }
         return true;
     }
