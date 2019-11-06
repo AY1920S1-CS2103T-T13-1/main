@@ -26,7 +26,7 @@ public class ListCommand extends Command {
     public static final String LIST_OF_PATIENTS = "Listed all patients";
     public static final String LIST_OF_PERSONS = "Listed all persons";
 
-    private static Type type;
+    private Type type;
 
     public ListCommand(Type type) {
         this.type = type;
@@ -35,23 +35,20 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         String resultMessage = "";
-        try {
-            if (type.isPatient()) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
-                resultMessage = LIST_OF_PATIENTS;
-            } else if (type.isDonor()) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
-                resultMessage = LIST_OF_DONORS;
-            } else if (type.isDoctor()) {
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
-                resultMessage = LIST_OF_DOCTORS;
-            }
-        } catch (NullPointerException e) { // if no type specified return list of all persons
+        if (type == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             resultMessage = LIST_OF_PERSONS;
-        } finally {
-            return new CommandResult(resultMessage);
+        } else if (type.isPatient()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PATIENTS);
+            resultMessage = LIST_OF_PATIENTS;
+        } else if (type.isDonor()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DONORS);
+            resultMessage = LIST_OF_DONORS;
+        } else if (type.isDoctor()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
+            resultMessage = LIST_OF_DOCTORS;
         }
+            return new CommandResult(resultMessage);
     }
 
     @Override
