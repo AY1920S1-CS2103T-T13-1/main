@@ -47,6 +47,8 @@ public class ListCommand extends Command {
         } else if (type.isDoctor()) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
             resultMessage = LIST_OF_DOCTORS;
+        } else {
+            assert false: "Should not reach this block";
         }
             return new CommandResult(resultMessage);
     }
