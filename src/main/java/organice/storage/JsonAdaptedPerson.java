@@ -18,6 +18,7 @@ import organice.model.person.Person;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
 import organice.model.person.Status;
+import organice.model.person.Task;
 import organice.model.person.TaskList;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
@@ -242,6 +243,8 @@ class JsonAdaptedPerson {
             Donor modelDonor = new Donor(modelType, modelNric, modelName, modelPhone,
                     modelAge, modelBloodType, modelTissueType,
                     modelOrgan, modelOrganExpiryDate, modelStatus);
+
+            final TaskList modelTaskList = new TaskList("");
 
             modelDonor.setProcessingList(processingTaskList);
 
