@@ -2,6 +2,7 @@ package organice.model.person;
 
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class Donor extends Person {
     private HashMap<Nric, Double> successRateMap;
     private String successRate;
     private Nric patientNric;
+    private ArrayList<Nric> patientsMatchedBefore;
 
     /**
      * Every field must be present and not null.
@@ -39,6 +41,7 @@ public class Donor extends Person {
         this.processingTodoList = processingTodoList;
         this.status = status;
         successRateMap = new HashMap<>();
+        patientsMatchedBefore = new ArrayList<>();
 
 
     }
@@ -73,6 +76,10 @@ public class Donor extends Person {
 
     public Status getStatus() {
         return status;
+    }
+
+    public ArrayList getPatientMatchedBefore() {
+        return patientsMatchedBefore;
     }
 
     /**

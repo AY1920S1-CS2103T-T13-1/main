@@ -132,6 +132,9 @@ public class DoneCommand extends Command {
 
                 donor.setProcessingList("");
                 //TODO remove the patient from the list too to be done after processing command is merged
+
+                donor.getPatientMatchedBefore().add(patientNric);
+
             } else {
                 return new CommandResult(MESSAGE_NOT_PROCESSED);
             }
