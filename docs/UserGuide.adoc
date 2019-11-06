@@ -369,7 +369,9 @@ Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any o
 
 === Detecting matches: `match`
 
-This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
+This command runs a kidney matching test on patients and donors in ORGANice and displays potential matches.
+A patient-donor pair is considered a potential match if they pass the blood type and
+tissue compatibility tests.
 Refer to <<FAQ>> for a better understanding of the procedure for kidney matching.
 
 You can either run a kidney matching test on a specific patient or on all patients in ORGANice.
@@ -379,15 +381,15 @@ To learn how to run kidney matching tests on all patients,
 refer to <<Matching all patients>>.
 
 ==== Matching a specific patient
-This section will explain how to run kidney matching tests on a specific patient and run you through an example.
-To find all matching donors of a specific patient,
+This section will explain how to run kidney matching tests on a specific patient and give you an example.
+To get a list of potential donors for a patient,
 type in a command of the format `match ic/**PATIENT NRIC**`.
 
-Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R".
+Here is an example. Suppose you want to find potential donors for a patient called "John Doe" and his NRIC is "S1234568R".
 You will have to type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
-You will see a list of matching donors with John Doe along with the success
-rate of matching, similar to Figure 13.
+You will see a list of potential donors for John Doe along with the success
+rate of each donor, similar to Figure 13.
 
 //TODO need to change this to another screenshot
 .List of Donors that match John Doe
@@ -402,14 +404,18 @@ To match all the patients in ORGANice,
 type `match ic/all` in the Command Box and press kbd:[Enter].
 
 You will see a list of all the patients in ORGANice along with the number of
-matching donors for each patient has.
+potential donors for each patient.
 
 //TODO change the Figure name as more diagrams are added.
-An example is shown in Figure 13 below, with the following explanation: +
 For example, you have three patients named 'Someone edited',
-'Gary Tennant' and 'Elle Brady' respectively stored in ORGANice. Some donors are also stored in ORGANice.
-If you type `match ic/all` in the Command Box and press kbd:[Enter], you will see 'Someone edited', 'Gary Tennant'
-and 'Elle Brady' along with the number of matching donors each patient has.
+'Gary Tennant' and 'Elle Brady' respectively stored in ORGANice.
+Some donors are also stored in ORGANice.
+If you type `match ic/all` in the Command Box and press kbd:[Enter],
+you will see 'Someone edited', 'Gary Tennant'
+and 'Elle Brady' along with the number of matching donors each patient has. +
+
+Referring to Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
+This means that 'Someone edited' has 3 potential donors.
 
 .List of Persons with number of matching donors
 image::PatientMatchResults.png[width=790]
