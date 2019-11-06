@@ -530,10 +530,6 @@ To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own
 Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Detecting duplicates
-
-
-
 == Future improvements
 
 This section describes features that can be added or improved in version 2.0.
