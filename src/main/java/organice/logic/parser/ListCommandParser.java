@@ -32,7 +32,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (isTypePresent(argMultimap)) {
             type = parseType(argMultimap);
             return new ListCommand(type);
-        } else if (!args.trim().isEmpty()){
+        } else if (!args.trim().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
