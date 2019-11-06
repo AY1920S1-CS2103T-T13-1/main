@@ -34,12 +34,13 @@ public class ListCommandParser implements Parser<ListCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
 
         Type type = null;
-        if (isTypePresent(argMultimap)) {
-            type = parseType(argMultimap);
-            return new ListCommand(type);
-        } else if (!args.trim().isEmpty()) {
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        } else if (isTypePresent(argMultimap)) {
+            type = parseType(argMultimap);
+            return new ListCommand(type);
         }
         return new ListCommand(type); // if no type specified return list of all persons
     }

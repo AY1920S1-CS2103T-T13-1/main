@@ -81,13 +81,11 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         Type type = new Type(Type.PATIENT);
-        ListCommand command = (ListCommand) parser.parseCommand(Type.PATIENT);
+        ListCommand command = (ListCommand) parser.parseCommand(ListCommand.COMMAND_WORD + " t/patient");
         assertEquals(new ListCommand(type), command);
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(" unknownParameter"));
-        assertThrows(IllegalArgumentException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ListCommand.MESSAGE_USAGE), () -> parser.parseCommand(" unknownParameter"));
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " unknownParameter"));
     }
 
     @Test
