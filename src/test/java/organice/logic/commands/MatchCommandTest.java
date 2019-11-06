@@ -134,31 +134,30 @@ public class MatchCommandTest {
 
     @Test
     public void match_isSuccessfulMatch() throws Exception {
-        MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
-
-        boolean matchResult = matchCommand.match(DONOR_IRENE_DONOR, PATIENT_IRENE);
-        assertTrue(matchResult); //100% match and same blood type
-
-        //donor with 4/6 matching tissues and same blood type.
-        matchResult = matchCommand.match(DONOR_SIMILAR_TISSUE, PATIENT_IRENE);
+        //100% match and same blood type
+        boolean matchResult = MatchCommand.match(DONOR_IRENE_DONOR, PATIENT_IRENE);
         assertTrue(matchResult);
 
-        //donor with blood type A matches patient with blood type A and AB
-        assertTrue(matchCommand.match(DONOR_A_PLUS, PATIENT_A_PLUS));
-        assertTrue(matchCommand.match(DONOR_A_MINUS, PATIENT_AB_PLUS));
+        //donor with 4/6 matching tissues and same blood type.
+        matchResult = MatchCommand.match(DONOR_SIMILAR_TISSUE, PATIENT_IRENE);
+        assertTrue(matchResult);
+
+        //donor with blood type A+ can donate to patients of blood types A+ and AB+
+        assertTrue(MatchCommand.match(DONOR_A_PLUS, PATIENT_A_PLUS));
+        assertTrue(MatchCommand.match(DONOR_A_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type B matches patient with blood type B and AB
-        assertTrue(matchCommand.match(DONOR_B_MINUS, PATIENT_B_MINUS));
-        assertTrue(matchCommand.match(DONOR_B_MINUS, PATIENT_AB_PLUS));
+        assertTrue(MatchCommand.match(DONOR_B_MINUS, PATIENT_B_MINUS));
+        assertTrue(MatchCommand.match(DONOR_B_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type AB matches patient with blood type AB
-        assertTrue(matchCommand.match(DONOR_AB_MINUS, PATIENT_AB_PLUS));
+        assertTrue(MatchCommand.match(DONOR_AB_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type O matches patient with blood type A, B, AB and O
-        assertTrue(matchCommand.match(DONOR_O_MINUS, PATIENT_A_PLUS));
-        assertTrue(matchCommand.match(DONOR_O_MINUS, PATIENT_B_MINUS));
-        assertTrue(matchCommand.match(DONOR_O_PLUS, PATIENT_AB_PLUS));
-        assertTrue(matchCommand.match(DONOR_O_PLUS, PATIENT_O_PLUS));
+        assertTrue(MatchCommand.match(DONOR_O_MINUS, PATIENT_A_PLUS));
+        assertTrue(MatchCommand.match(DONOR_O_MINUS, PATIENT_B_MINUS));
+        assertTrue(MatchCommand.match(DONOR_O_PLUS, PATIENT_AB_PLUS));
+        assertTrue(MatchCommand.match(DONOR_O_PLUS, PATIENT_O_PLUS));
     }
 
     @Test
@@ -181,7 +180,7 @@ public class MatchCommandTest {
         assertFalse(matchCommand.match(DONOR_A_PLUS, PATIENT_O_MINUS));
         assertFalse(matchCommand.match(DONOR_A_PLUS, PATIENT_A_MINUS));
 
-        //donor with blood type B do not match patients with blood type A and P
+        //donor with blood type B do not match patients with blood type A and O
         assertFalse(matchCommand.match(DONOR_B_MINUS, PATIENT_A_MINUS));
         assertFalse(matchCommand.match(DONOR_B_MINUS, PATIENT_O_MINUS));
 

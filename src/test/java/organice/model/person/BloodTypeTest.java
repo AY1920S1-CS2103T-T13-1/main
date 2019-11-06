@@ -4,11 +4,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static organice.model.person.BloodType.BLOODTYPE_AB_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_AB_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_A_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_A_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_B_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_B_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_O_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_O_PLUS;
 import static organice.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 public class BloodTypeTest {
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_APLUS =
+            new ArrayList<>(Arrays.asList(BLOODTYPE_A_PLUS, BLOODTYPE_A_MINUS, BLOODTYPE_O_PLUS, BLOODTYPE_O_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_AMINUS =
+            new ArrayList<>(Arrays.asList(BLOODTYPE_A_MINUS, BLOODTYPE_O_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_BPLUS = new ArrayList<>(Arrays.asList(
+            BLOODTYPE_B_PLUS, BLOODTYPE_O_PLUS, BLOODTYPE_B_MINUS, BLOODTYPE_O_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_BMINUS = new ArrayList<>(Arrays.asList(
+            BLOODTYPE_B_MINUS, BLOODTYPE_O_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_ABPLUS = new ArrayList<>(Arrays.asList(
+            BLOODTYPE_A_PLUS, BLOODTYPE_A_MINUS, BLOODTYPE_B_PLUS, BLOODTYPE_B_MINUS, BLOODTYPE_O_PLUS,
+            BLOODTYPE_O_MINUS, BLOODTYPE_AB_PLUS, BLOODTYPE_AB_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_ABMINUS = new ArrayList<>(Arrays.asList(
+            BLOODTYPE_A_MINUS, BLOODTYPE_B_MINUS, BLOODTYPE_O_MINUS, BLOODTYPE_AB_MINUS));
+
+    public static final ArrayList<BloodType> VALID_DONOR_BLOODTYPES_TYPE_OPLUS = new ArrayList<>(Arrays.asList(
+            BLOODTYPE_O_PLUS, BLOODTYPE_O_MINUS));
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -56,6 +88,40 @@ public class BloodTypeTest {
         assertTrue(BloodType.isValidBloodType("o-")); //case insensitive - O blood type
         assertTrue(BloodType.isValidBloodType("b+")); //case insensitive - B blood type
         assertTrue(BloodType.isValidBloodType("a-")); //case insensitive - A blood type
+    }
+
+    @Test
+    public void isBloodTypeMatch_bloodTypesMatch_success() {
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_APLUS) {
+            assertTrue(BLOODTYPE_A_PLUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_AMINUS) {
+            assertTrue(BLOODTYPE_A_MINUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_BPLUS) {
+            assertTrue(BLOODTYPE_B_PLUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_BMINUS) {
+            assertTrue(BLOODTYPE_B_MINUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_ABPLUS) {
+            assertTrue(BLOODTYPE_AB_PLUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_ABMINUS) {
+            assertTrue(BLOODTYPE_AB_MINUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_OPLUS) {
+            assertTrue(BLOODTYPE_O_PLUS.isBloodTypeMatch(donorBloodType));
+        }
+
+        //Patients of blood type O- can only receive O- blood.
+        assertTrue(BLOODTYPE_O_MINUS.isBloodTypeMatch(BLOODTYPE_O_MINUS));
     }
 
     @Test

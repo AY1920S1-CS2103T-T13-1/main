@@ -83,7 +83,11 @@ public class BloodType {
     }
 
     /**
-     * Returns true if a {@code BloodType} matches this blood type.
+     * Checks if the blood of a {@code Donor} can be donated to a {@code Patient}.
+     * This article explains what blood types can patients receive:
+     * https://www.kidney.org/transplantation/livingdonors/what-blood-types-match
+     * @param donorBloodType BloodType of a {@code Donor}
+     * @return true if donorBloodType can be donated to the patient.
      */
     public boolean isBloodTypeMatch(BloodType donorBloodType) {
         HashSet<BloodType> matchingBloodTypes = BLOOD_TYPES_MATCHES.get(this);
