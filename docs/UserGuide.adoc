@@ -287,35 +287,39 @@ For example, if you enter the wrong name and want to undo the action, type `/und
 .Form layout showing that the last entry is removed after you typed in `/undo`
 image::undoCommand.png[width="790"]
 
+// tag::list[]
 === Listing persons : `list`
+This list command can show you the list of persons in ORGANice.
 
-Shows a list of all doctors, donors, or patients in ORGANice, depending on the type of person specified. Shows all
-persons in ORGANice if no type is specified.
+==== Listing all persons
+Simply use `list` and ORGANice will show you all patients, doctors and donors present in the system.
 
 Format: `list`
 
-Optional parameters: Type parameter - `t/TYPE`
+==== Listing persons of a certain type
+If you wish to see a certain type of persons only, you can provide the type parameter in the list command.
 
-Examples:
+Optional parameter: Type - `t/TYPE`
 
-* `list` +
-Lists all patients, doctors and donors in the records.
-* `list t/patient` +
-Lists all patients only.
+For instance, if you only want to see all doctors, you can enter the list command in the following format:
+`list t/doctor`. Likewise, you can change the type parameter in the same manner to see only patients or donors.
 
-=== Editing a person : `edit`
+// tag::edit[]
+=== Editing a person's attribute : `edit`
+If you want to make any changes to a person's attribute, you can edit the information using an edit command.
+If there are multiple attributes to change, you can do so in the same edit command.
 
-Edits the information of the person with the specified NRIC to the attributes specified.
-It is up to the user to specify which attributes should be updated. +
+The format is that after the `edit` keyword, provide the person's NRIC, followed by the attribute(s) that you want to change in the edit command.
 
-Format: `edit **NRIC**`
+Format: `edit **NRIC**` followed by attributes to update
 
-Examples:
+For instance, if you want to change a patient's phone number to 91234567, you can provide his or her NRIC followed by the new phone number
+like this: `edit S8732457G p/91234567`.
 
-* `edit S8732457G p/91234567` +
-Edits the phone number of the specified patient to be `91234567`.
-* `edit S8732457G n/Betsy Crower p/91234567` +
-Edits the name and phone number of the specified donor to be `Betsy Crower` and `91234567` respectively.
+
+Note that **you can only make changes to the attribute only if the person has that attribute**.
+For example, you cannot change a doctor's age because a person of type doctor does not have that attribute in ORGANice.
+You may refer to <<List of Attributes>> to see what attributes are applicable to each type of person in ORGANice.
 
 // tag::find[]
 === Finding persons by attributes: `find`
@@ -407,6 +411,7 @@ Following this, you can sort the matches based on different categories to deduce
 +
 Refer to refer to <<Sorting matches: `sort`>> for more information.
 
+// tag::sort[]
 === Sorting matches: `sort`
 After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
 
@@ -421,7 +426,9 @@ There are three categories by which you can sort the matches, namely:
 +
 
 
-These categories are further elaborated below. Note that **only one category can be used in one sort command**.
+These categories will be further explained below.
+
+Note that **only one category can be used in one sort command**.
 
 ==== Sorting based on donor's organ expiry date
 This category sorts a list of matched donors belonging to a particular patient based on the donated organ's expiry date (from the earliest to the latest expiry date).
@@ -445,9 +452,7 @@ Example: +
 After running `match ic/all`, you will obtain a list of patients.
 You can then run `sort priority` to obtain a list with high priority patients at the top of the list.
 
-Note:
-
-* In cases where patients have the **same priority**, those with more matched donors will be displayed first.
+Note that in the case where patients have the **same priority**, those with more matched donors will be displayed first.
 If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.
 
 ==== Sorting based on success rate of match
@@ -462,6 +467,7 @@ Example: +
 After running a match command on a specific patient with `match ic/**NRIC**`, you will get the list of donors that are compatible with said patient.
 You can then run `sort rate` to obtain the list of donors with the highest success rate at the top of the list.  +
 
+// tag::process[]
 === Processing potential matches: `processing`
 //TODO: change to shorter term that captures the meaning
 
@@ -482,7 +488,7 @@ The order of the NRICs does not matter.
 Example:
 `processing ic/S6764235G ic/S1234567D`
 
-
+// tag::mark[]
 === Mark as done : `done`
 
 After the hospital has the results of the cross matching test, they can
@@ -519,7 +525,7 @@ Example:
 * `done icP/S7896432A icD/S4578902G res/pass`
 * `done icP/S7896432A icD/S4578902G res/fail`
 
-
+// tag::exit[]
 === Exiting the program : `exit`
 
 To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own.
