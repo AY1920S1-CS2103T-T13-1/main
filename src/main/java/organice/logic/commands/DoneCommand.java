@@ -90,13 +90,14 @@ public class DoneCommand extends Command {
      * @param result a String from the user input
      * @return true if the result shows a pass, false if the result shows a fail.
      */
-    public boolean isPass(String result) throws IllegalArgumentException{
+    public boolean isPass(String result) throws IllegalArgumentException {
         if (result.equalsIgnoreCase("pass")) {
             return true;
         } else if (result.equalsIgnoreCase("fail")) {
             return false;
         } else {
-            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            throw new IllegalArgumentException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
     }
 
