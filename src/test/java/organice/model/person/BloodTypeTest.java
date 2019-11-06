@@ -91,37 +91,37 @@ public class BloodTypeTest {
     }
 
     @Test
-    public void isBloodTypeMatch_bloodTypesMatch_success() {
+    public void isCompatibleBloodType_bloodTypesMatch_success() {
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_APLUS) {
-            assertTrue(BLOODTYPE_A_PLUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_A_PLUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_AMINUS) {
-            assertTrue(BLOODTYPE_A_MINUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_A_MINUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_BPLUS) {
-            assertTrue(BLOODTYPE_B_PLUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_B_PLUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_BMINUS) {
-            assertTrue(BLOODTYPE_B_MINUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_B_MINUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_ABPLUS) {
-            assertTrue(BLOODTYPE_AB_PLUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_AB_PLUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_ABMINUS) {
-            assertTrue(BLOODTYPE_AB_MINUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_AB_MINUS.isCompatibleBloodType(donorBloodType));
         }
 
         for (BloodType donorBloodType : VALID_DONOR_BLOODTYPES_TYPE_OPLUS) {
-            assertTrue(BLOODTYPE_O_PLUS.isBloodTypeMatch(donorBloodType));
+            assertTrue(BLOODTYPE_O_PLUS.isCompatibleBloodType(donorBloodType));
         }
 
         //Patients of blood type O- can only receive O- blood.
-        assertTrue(BLOODTYPE_O_MINUS.isBloodTypeMatch(BLOODTYPE_O_MINUS));
+        assertTrue(BLOODTYPE_O_MINUS.isCompatibleBloodType(BLOODTYPE_O_MINUS));
     }
 
     @Test

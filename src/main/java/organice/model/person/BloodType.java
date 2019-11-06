@@ -89,7 +89,7 @@ public class BloodType {
      * @param donorBloodType BloodType of a {@code Donor}
      * @return true if donorBloodType can be donated to the patient.
      */
-    public boolean isBloodTypeMatch(BloodType donorBloodType) {
+    public boolean isCompatibleBloodType(BloodType donorBloodType) {
         HashSet<BloodType> matchingBloodTypes = BLOOD_TYPES_MATCHES.get(this);
 
         if (matchingBloodTypes.contains(donorBloodType)) {
