@@ -40,7 +40,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         } else if (!args.trim().isEmpty()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-    }
+        }
         return new ListCommand(type); // if no type specified return list of all persons
     }
 

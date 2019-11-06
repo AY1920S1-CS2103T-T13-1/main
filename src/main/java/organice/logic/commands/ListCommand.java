@@ -16,7 +16,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Returns a list of all persons or persons of the input type.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Returns a list of all persons or persons of the input type.\n"
             + "Valid Parameter:\n"
             + PREFIX_TYPE + "PERSON TYPE ";
 
