@@ -1,5 +1,6 @@
 package organice.logic.parser;
 
+import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import organice.logic.commands.ListCommand;
@@ -31,6 +32,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (isTypePresent(argMultimap)) {
             type = parseType(argMultimap);
             return new ListCommand(type);
+        } else if (!args.trim().isEmpty()){
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         return new ListCommand(type); // if no type specified return list of all persons
     }
