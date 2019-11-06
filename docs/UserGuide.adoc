@@ -124,7 +124,8 @@ a person and the criteria for valid inputs:
 * tt/**TISSUE TYPE** - the type of tissues
 ** Applicable to: patients and donors
 ** Valid input: a string of 6 unique numbers (from 1 - 12), separated by commas. Note that the order of the tissue types
-does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are both acceptable inputs.
+does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are treated as the same input because they contain the
+same 6 unique numbers.
 
 * exp/**EXPIRY** - expiry date of a donor's organ
 ** Applicable to: donors
