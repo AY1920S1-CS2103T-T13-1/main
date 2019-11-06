@@ -86,8 +86,8 @@ public class AddressBookParserTest {
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(" unknownParameter"));
-        assertThrows(IllegalArgumentException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(" unknownParameter"));
+        assertThrows(IllegalArgumentException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListCommand.MESSAGE_USAGE), () -> parser.parseCommand(" unknownParameter"));
     }
 
     @Test
