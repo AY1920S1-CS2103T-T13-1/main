@@ -48,9 +48,9 @@ public class ListCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_DOCTORS);
             resultMessage = LIST_OF_DOCTORS;
         } else {
-            assert false: "Should not reach this block";
+            assert false : "Should not reach this block";
         }
-            return new CommandResult(resultMessage);
+        return new CommandResult(resultMessage);
     }
 
     @Override
