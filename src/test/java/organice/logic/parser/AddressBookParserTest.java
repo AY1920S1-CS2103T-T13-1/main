@@ -12,14 +12,9 @@ import static organice.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import organice.logic.commands.AddCommand;
-import organice.logic.commands.ClearCommand;
-import organice.logic.commands.EditCommand;
+import organice.logic.commands.*;
 import organice.logic.commands.EditCommand.EditPersonDescriptor;
-import organice.logic.commands.ExitCommand;
-import organice.logic.commands.FindCommand;
-import organice.logic.commands.HelpCommand;
-import organice.logic.commands.ListCommand;
+import organice.logic.commands.ExactFindCommand;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
@@ -61,12 +56,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        String searchParams = FindCommand.COMMAND_WORD + " n/Alice ic/S1111111A t/doctor";
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + searchParams);
+        String searchParams = ExactFindCommand.COMMAND_WORD + " n/Alice ic/S1111111A t/doctor";
+        ExactFindCommand command = (ExactFindCommand) parser.parseCommand(
+                ExactFindCommand.COMMAND_WORD + " " + searchParams);
         //TODO: Replace ArgumentTokenizer with stub
-        assertEquals(new FindCommand(new PersonContainsPrefixesPredicate(ArgumentTokenizer
-                .tokenize(FindCommand.COMMAND_WORD
+        assertEquals(new ExactFindCommand(new PersonContainsPrefixesPredicate(ArgumentTokenizer
+                .tokenize(ExactFindCommand.COMMAND_WORD
                         + " n/Alice ic/S1111111A t/doctor", PREFIX_NAME, PREFIX_NRIC, PREFIX_TYPE))), command);
     }
 

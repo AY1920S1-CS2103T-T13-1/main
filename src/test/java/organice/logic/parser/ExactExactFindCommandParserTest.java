@@ -7,25 +7,25 @@ import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import organice.logic.commands.FindCommand;
+import organice.logic.commands.ExactFindCommand;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
-public class FindCommandParserTest {
+public class ExactExactFindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private ExactFindCommandParser parser = new ExactFindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExactFindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand = new FindCommand(new PersonContainsPrefixesPredicate(
-                ArgumentTokenizer.tokenize("   " + FindCommand.COMMAND_WORD + " n/Alice Bob      ",
+        ExactFindCommand expectedExactFindCommand = new ExactFindCommand(new PersonContainsPrefixesPredicate(
+                ArgumentTokenizer.tokenize("   " + ExactFindCommand.COMMAND_WORD + " n/Alice Bob      ",
                         PREFIX_NAME)));
-        assertParseSuccess(parser, FindCommand.COMMAND_WORD + " n/Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, ExactFindCommand.COMMAND_WORD + " n/Alice Bob", expectedExactFindCommand);
     }
 
 }
