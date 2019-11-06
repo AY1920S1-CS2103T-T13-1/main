@@ -372,40 +372,51 @@ Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any o
 This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
 Refer to <<FAQ>> for a better understanding of the procedure for kidney matching.
 
-You can either run a kidney matching test on all patients and donors or find matching donors for a specific patient.
-To learn how to run kidney matching tests on all patients, refer to <<Matching all patients>>. To learn how to run
-kidney matching tests on a specific patient, refer to <<Matching a specific patient>>.
+You can either run a kidney matching test on a specific patient or on all patients in ORGANice.
+To learn how to run kidney matching tests on a specific patient,
+refer to <<Matching a specific patient>>.
+To learn how to run kidney matching tests on all patients,
+refer to <<Matching all patients>>.
 
 ==== Matching a specific patient
 This section will explain how to run kidney matching tests on a specific patient and run you through an example.
-To run a match of a specific patient, type in a command of the format `match ic/**NRIC**`.
+To find all matching donors of a specific patient,
+type in a command of the format `match ic/**PATIENT NRIC**`.
 
-Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R". This is
-what you can do:
+Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R".
+You will have to type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
-. Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
+You will see a list of matching donors with John Doe along with the success
+rate of matching, similar to Figure 13.
 
-. The list of donors and their success rate are displayed as shown in the screenshot below. +
-+
+//TODO need to change this to another screenshot
+.List of Donors that match John Doe
 image::MatchingDonorsDisplayed.png[width=790]
-+
+
 For more information on the success rate, you may refer to <<FAQ>>.
 
 ==== Matching all patients
 This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
 through an example.
-To match all the patients in ORGANice, do the following:
+To match all the patients in ORGANice,
+type `match ic/all` in the Command Box and press kbd:[Enter].
 
-. Type `match ic/all` in the command box and press kbd:[Enter].
+You will see a list of all the patients in ORGANice along with the number of
+matching donors for each patient has.
 
-. The list of patients and the number of matching donors each patient have are displayed in the screenshot below.
-+
+//TODO change the Figure name as more diagrams are added.
+An example is shown in Figure 13 below, with the following explanation: +
+For example, you have three patients named 'Someone edited',
+'Gary Tennant' and 'Elle Brady' respectively stored in ORGANice. Some donors are also stored in ORGANice.
+If you type `match ic/all` in the Command Box and press kbd:[Enter], you will see 'Someone edited', 'Gary Tennant'
+and 'Elle Brady' along with the number of matching donors each patient has.
+
+.List of Persons with number of matching donors
 image::PatientMatchResults.png[width=790]
-+
+
 
 Following this, you can sort the matches based on different categories to deduce which patient to prioritize.
-+
-Refer to refer to <<Sorting matches: `sort`>> for more information.
+Refer to <<Sorting matches: `sort`>> for more information.
 
 === Sorting matches: `sort`
 After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
