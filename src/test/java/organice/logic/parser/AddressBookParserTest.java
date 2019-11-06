@@ -12,9 +12,14 @@ import static organice.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import organice.logic.commands.*;
+import organice.logic.commands.AddCommand;
+import organice.logic.commands.ClearCommand;
+import organice.logic.commands.EditCommand;
 import organice.logic.commands.EditCommand.EditPersonDescriptor;
 import organice.logic.commands.ExactFindCommand;
+import organice.logic.commands.ExitCommand;
+import organice.logic.commands.HelpCommand;
+import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;

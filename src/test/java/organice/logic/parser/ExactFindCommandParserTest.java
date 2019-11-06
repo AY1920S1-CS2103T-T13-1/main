@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 import organice.logic.commands.ExactFindCommand;
 import organice.model.person.PersonContainsPrefixesPredicate;
 
-public class ExactExactFindCommandParserTest {
+public class ExactFindCommandParserTest {
 
     private ExactFindCommandParser parser = new ExactFindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExactFindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExactFindCommand.MESSAGE_USAGE));
     }
 
     @Test
