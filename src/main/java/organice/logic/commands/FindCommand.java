@@ -128,7 +128,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        List<Person> allPersons = Arrays.asList(model.getFilteredPersonList().toArray(Person[]::new));
+        List<Person> allPersons = Arrays.asList(model.getFullPersonList().toArray(Person[]::new));
 
         FilteredList<Person> exactMatches = new FilteredList<>(FXCollections.observableList(allPersons));
         exactMatches.setPredicate(new PersonContainsPrefixesPredicate(argMultimap));
