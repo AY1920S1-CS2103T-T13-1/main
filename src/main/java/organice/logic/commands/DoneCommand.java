@@ -1,6 +1,7 @@
 package organice.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.commands.MatchCommand.match;
 
 import organice.model.Model;
@@ -17,7 +18,7 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finish the processing of patients and donors"
 
-            + "Parameters: ic/PATIENT NRIC ic/DONOR NRIC res/[PASS/FAIL] \n"
+            + "Parameters: ic/PATIENT NRIC ic/DONOR NRIC res/[pass/fail] \n"
             + "Example: " + COMMAND_WORD + " ic/s4512345A ic/s7711123C res/pass";
 
     public static final String MESSAGE_SUCCESS = "Done processing the patient and donor";
@@ -89,13 +90,13 @@ public class DoneCommand extends Command {
      * @param result a String from the user input
      * @return true if the result shows a pass, false if the result shows a fail.
      */
-    public boolean isPass(String result) {
-        if (result.toLowerCase().equals("pass")) {
+    public boolean isPass(String result) throws IllegalArgumentException{
+        if (result.equalsIgnoreCase("pass")) {
             return true;
-        } else if (result.toLowerCase().equals("fail")) {
+        } else if (result.equalsIgnoreCase("fail")) {
             return false;
         } else {
-            return false;
+            throw new IllegalArgumentException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
     }
 
@@ -103,6 +104,8 @@ public class DoneCommand extends Command {
      * Set the status of the patient and donor to done if the result of the cross-matching is pass.
      * Set the status of the patient and donor to not processing if the result of the cross-matching
      * fail. Then it will be taken into consideration when MatchCommand is called.
+     * Currently, if the status of patient and donor is done, we will remove it from ORGANice.
+     * However, in future development, we hope to archive it for data analysis.
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult object.
      */
@@ -132,7 +135,7 @@ public class DoneCommand extends Command {
                 return new CommandResult(MESSAGE_NOT_PROCESSED);
             }
             return new CommandResult(MESSAGE_SUCCESS);
-        } catch (PersonNotFoundException pne) {
+        } catch (PersonNotFoundException | IllegalArgumentException e) {
             return new CommandResult(MESSAGE_NOT_PROCESSED);
         }
 
