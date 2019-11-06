@@ -23,6 +23,7 @@ import organice.logic.commands.ListCommand;
 import organice.logic.parser.exceptions.ParseException;
 import organice.model.person.Person;
 import organice.model.person.PersonContainsPrefixesPredicate;
+import organice.model.person.Type;
 import organice.testutil.EditPersonDescriptorBuilder;
 import organice.testutil.PersonBuilder;
 import organice.testutil.PersonUtil;
@@ -79,8 +80,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        Type type = new Type(Type.PATIENT);
+        ListCommand command = (ListCommand) parser.parseCommand(Type.PATIENT);
+        assertEquals(new ListCommand(type), command);
+
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(" unknownParameter"));
+        assertThrows(IllegalArgumentException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(" unknownParameter"));
     }
 
     @Test
