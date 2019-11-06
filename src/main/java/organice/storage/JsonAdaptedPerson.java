@@ -2,7 +2,6 @@ package organice.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import organice.commons.exceptions.IllegalValueException;
 import organice.model.person.Age;
 import organice.model.person.BloodType;
@@ -18,7 +17,6 @@ import organice.model.person.Person;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
 import organice.model.person.Status;
-import organice.model.person.Task;
 import organice.model.person.TaskList;
 import organice.model.person.TissueType;
 import organice.model.person.Type;

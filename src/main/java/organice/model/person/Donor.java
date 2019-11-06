@@ -155,7 +155,7 @@ public class Donor extends Person {
     }
 
     public void setPatientsMatchedBefore(String newList) {
-        newList = newList.replaceAll("\\[", "").replaceAll("\\]","");
+        newList = newList.replaceAll("\\[", "").replaceAll("\\]", "");
         ArrayList<Nric> updatedList = new ArrayList<>();
         if (newList == null || newList.equals("") || newList.equals("[]")) {
             this.patientsMatchedBefore = updatedList;
