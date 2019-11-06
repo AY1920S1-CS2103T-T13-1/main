@@ -42,8 +42,6 @@ public class Donor extends Person {
         this.status = status;
         successRateMap = new HashMap<>();
         patientsMatchedBefore = new ArrayList<>();
-
-
     }
 
     public Age getAge() {
