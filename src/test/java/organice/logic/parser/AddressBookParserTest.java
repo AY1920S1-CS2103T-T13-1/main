@@ -80,7 +80,7 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-        -> parser.parseCommand(" unknownParameter"));
+            -> parser.parseCommand(" unknownParameter"));
     }
 
     @Test
