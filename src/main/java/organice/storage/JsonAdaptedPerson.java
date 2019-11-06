@@ -43,19 +43,26 @@ class JsonAdaptedPerson {
     protected final String organExpiryDate;
     protected final String status;
     protected final String processingTaskList;
+    protected final String patientsMatchedBeforeList;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("nric") String nric,
-                             @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("age") String age, @JsonProperty("priority") String priority,
-                             @JsonProperty("bloodType") String bloodType, @JsonProperty("tissueType") String tissueType,
-                             @JsonProperty("organ") String organ, @JsonProperty("doctorInCharge") String doctorInCharge,
+    public JsonAdaptedPerson(@JsonProperty("type") String type,
+                             @JsonProperty("nric") String nric,
+                             @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("age") String age,
+                             @JsonProperty("priority") String priority,
+                             @JsonProperty("bloodType") String bloodType,
+                             @JsonProperty("tissueType") String tissueType,
+                             @JsonProperty("organ") String organ,
+                             @JsonProperty("doctorInCharge") String doctorInCharge,
                              @JsonProperty("organExpiryDate") String organExpiryDate,
                              @JsonProperty("status") String status,
-                             @JsonProperty("processingTaskList") String processingTaskList) {
+                             @JsonProperty("processingTaskList") String processingTaskList,
+                             @JsonProperty("patientsMatchedBeforeList") String patientsMatchedBeforeList) {
 
         this.type = type;
         this.nric = nric;
@@ -70,6 +77,7 @@ class JsonAdaptedPerson {
         this.organExpiryDate = organExpiryDate;
         this.status = status;
         this.processingTaskList = processingTaskList;
+        this.patientsMatchedBeforeList = patientsMatchedBeforeList;
     }
 
     /**
@@ -91,6 +99,7 @@ class JsonAdaptedPerson {
             organExpiryDate = "";
             status = ((Patient) source).getStatus().value;
             processingTaskList = "";
+            patientsMatchedBeforeList = "";
         } else if (source instanceof Donor) {
             age = ((Donor) source).getAge().value;
             priority = "";
@@ -102,6 +111,7 @@ class JsonAdaptedPerson {
             status = ((Donor) source).getStatus().value;
             Nric patientNric = ((Donor) source).getPatientNric();
             processingTaskList = ((Donor) source).getProcessingList(patientNric).toString();
+            patientsMatchedBeforeList = ((Donor) source).getPatientMatchedBefore().toString();
         } else if (source instanceof Doctor) {
             age = "";
             priority = "";
@@ -112,6 +122,7 @@ class JsonAdaptedPerson {
             organExpiryDate = "";
             status = "";
             processingTaskList = "";
+            patientsMatchedBeforeList = "";
         } else {
             age = "";
             priority = "";
@@ -122,6 +133,7 @@ class JsonAdaptedPerson {
             organExpiryDate = "";
             status = "";
             processingTaskList = "";
+            patientsMatchedBeforeList = "";
         }
     }
 
@@ -231,9 +243,9 @@ class JsonAdaptedPerson {
                     modelAge, modelBloodType, modelTissueType,
                     modelOrgan, modelOrganExpiryDate, modelStatus);
 
-            final TaskList modelTaskList = new TaskList("");
-
             modelDonor.setProcessingList(processingTaskList);
+
+            modelDonor.setPatientsMatchedBefore(patientsMatchedBeforeList);
 
             return modelDonor;
 

@@ -33,7 +33,9 @@ public class DoneCommandParser implements Parser<DoneCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         try {
-            if (nameKeywords[0].startsWith(prefixNricString) && nameKeywords[1].startsWith(prefixNricString)) {
+            if (nameKeywords[0].startsWith(prefixNricString)
+                    && nameKeywords[1].startsWith(prefixNricString)
+                    && nameKeywords[2].startsWith(preficResString)) {
                 firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
                 secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
                 result = nameKeywords[2].replaceFirst(preficResString, "");

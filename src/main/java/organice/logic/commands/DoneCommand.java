@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.commands.MatchCommand.match;
 
+import java.util.ArrayList;
+
 import organice.model.Model;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
@@ -127,13 +129,14 @@ public class DoneCommand extends Command {
             } else if (isValidDonorPatientPair(firstNric, secondNric, model) && !isPass(result)) {
                 model.getFilteredPersonList();
 
+                ArrayList<Nric> patientsMatchedBefore = donor.getPatientMatchedBefore();
+                patientsMatchedBefore.add(patientNric);
+                donor.setPatientsMatchedBefore(patientsMatchedBefore.toString());
+
                 donor.setStatus(statusNotProcessing);
                 patient.setStatus(statusNotProcessing);
 
                 donor.setProcessingList("");
-                //TODO remove the patient from the list too to be done after processing command is merged
-
-                donor.getPatientMatchedBefore().add(patientNric);
 
             } else {
                 return new CommandResult(MESSAGE_NOT_PROCESSED);
