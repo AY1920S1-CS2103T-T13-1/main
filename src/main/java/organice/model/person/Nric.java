@@ -1,5 +1,8 @@
 package organice.model.person;
 
+import java.util.AbstractMap;
+import java.util.Map;
+
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.AppUtil.checkArgument;
 
@@ -9,16 +12,40 @@ import static organice.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "Nric must start with a letter 'S/T/F/G', 7 numbers afterward "
-            + "and its must end with a letter";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
+    public static final String MESSAGE_CONSTRAINTS = "Nric must be a valid Singaporean Nric that starts with any of " +
+            "'S/T/F/G', has 7 numbers afterward and ends with a valid checksum letter.";
 
     public final String value;
+
+    public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
+
+    //  If the IC starts with S or T: 0=J, 1=Z, 2=I, 3=H, 4=G, 5=F, 6=E, 7=D, 8=C, 9=B, 10=A
+    private static final Map<Integer, Character> CHECKSUM_FOR_NRIC_BEGINS_WITH_S_OR_T = Map.ofEntries(
+            new AbstractMap.SimpleEntry<>(0, 'J'),
+            new AbstractMap.SimpleEntry<>(1, 'Z'),
+            new AbstractMap.SimpleEntry<>(2, 'I'),
+            new AbstractMap.SimpleEntry<>(3, 'H'),
+            new AbstractMap.SimpleEntry<>(4, 'G'),
+            new AbstractMap.SimpleEntry<>(5, 'F'),
+            new AbstractMap.SimpleEntry<>(6, 'E'),
+            new AbstractMap.SimpleEntry<>(7, 'D'),
+            new AbstractMap.SimpleEntry<>(8, 'C'),
+            new AbstractMap.SimpleEntry<>(9, 'B'),
+            new AbstractMap.SimpleEntry<>(10, 'A'));
+
+    //  If the IC starts with F or G: 0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K
+    private static final Map<Integer, Character> CHECKSUM_FOR_NRIC_BEGINS_WITH_F_OR_G = Map.ofEntries(
+            new AbstractMap.SimpleEntry<>(0, 'X'),
+            new AbstractMap.SimpleEntry<>(1, 'W'),
+            new AbstractMap.SimpleEntry<>(2, 'U'),
+            new AbstractMap.SimpleEntry<>(3, 'T'),
+            new AbstractMap.SimpleEntry<>(4, 'R'),
+            new AbstractMap.SimpleEntry<>(5, 'Q'),
+            new AbstractMap.SimpleEntry<>(6, 'P'),
+            new AbstractMap.SimpleEntry<>(7, 'N'),
+            new AbstractMap.SimpleEntry<>(8, 'M'),
+            new AbstractMap.SimpleEntry<>(9, 'L'),
+            new AbstractMap.SimpleEntry<>(10, 'K'));
 
     /**
      * Constructs a {@code Nric}.
@@ -31,11 +58,39 @@ public class Nric {
         value = nric.toUpperCase();
     }
 
+    // Nric checksum calculation referenced from:
+    // https://ayumilovemaple.wordpress.com/2008/09/24/validation-singapore-nric-number-verification/
     /**
-     * Returns true if a given string is a valid nric.
+     * Returns true if a given string is a valid Nric
      */
     public static boolean isValidNric(String test) {
-        return test.toUpperCase().matches(VALIDATION_REGEX);
+        if (!test.toUpperCase().matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        return test.charAt(test.length() - 1) == calculateChecksumLetter(test);
+    }
+
+    public static char calculateChecksumLetter(String nric) {
+        char[] nricChars = nric.toCharArray();
+
+        char firstLetter = nricChars[0];
+        int firstDigit = Integer.parseInt(String.valueOf(nricChars[1]));
+        int secondDigit = Integer.parseInt(String.valueOf(nricChars[2]));
+        int thirdDigit = Integer.parseInt(String.valueOf(nricChars[3]));
+        int fourthDigit = Integer.parseInt(String.valueOf(nricChars[4]));
+        int fifthDigit = Integer.parseInt(String.valueOf(nricChars[5]));
+        int sixthDigit = Integer.parseInt(String.valueOf(nricChars[6]));
+        int seventhDigit = Integer.parseInt(String.valueOf(nricChars[7]));
+
+        int checksumValue = (firstDigit * 2 + secondDigit * 7 + thirdDigit * 6 + fourthDigit * 5 + fifthDigit * 4
+                + sixthDigit * 3 + seventhDigit * 2 + (firstLetter == 'T' || firstLetter == 'G' ? 4 : 0)) % 11;
+
+        char validChecksumLetter = firstLetter == 'S' || firstLetter == 'T'
+                ? CHECKSUM_FOR_NRIC_BEGINS_WITH_S_OR_T.get(checksumValue)
+                : CHECKSUM_FOR_NRIC_BEGINS_WITH_F_OR_G.get(checksumValue);
+
+        return validChecksumLetter;
     }
 
     @Override
