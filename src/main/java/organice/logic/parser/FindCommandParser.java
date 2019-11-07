@@ -40,9 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        // Preamble length > FindCommand.COMMAND_WORD.length() indicates initial command is not
-        // `FindCommand.COMMAND_WORD.length() PREFIX/KEYWORD`
-        if (trimmedArgs.isEmpty() || argMultimap.getPreamble().length() > FindCommand.COMMAND_WORD.length()) {
+        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

@@ -41,9 +41,7 @@ public class ExactFindCommandParser implements Parser<ExactFindCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        // Preamble length > ExactFindCommand.COMMAND_WORD.length indicates initial command is not
-        // `ExactFindCommand.COMMAND_WORD PREFIX/KEYWORD`
-        if (trimmedArgs.isEmpty() || argMultimap.getPreamble().length() > ExactFindCommand.COMMAND_WORD.length()) {
+        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExactFindCommand.MESSAGE_USAGE));
         }
