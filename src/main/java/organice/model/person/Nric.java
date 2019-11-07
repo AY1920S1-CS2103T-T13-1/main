@@ -64,6 +64,7 @@ public class Nric {
      * Returns true if a given string is a valid Nric
      */
     public static boolean isValidNric(String test) {
+        requireNonNull(test);
         if (!test.toUpperCase().matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -72,6 +73,9 @@ public class Nric {
     }
 
     public static char calculateChecksumLetter(String nric) {
+        requireNonNull(nric);
+        checkArgument(nric.toUpperCase().matches(VALIDATION_REGEX));
+
         char[] nricChars = nric.toCharArray();
 
         char firstLetter = nricChars[0];
