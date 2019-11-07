@@ -63,15 +63,21 @@ public class FindCommand extends Command {
         ArrayList<Integer> distanceList = new ArrayList<>();
 
         for (int i = 0; i < inputList.size(); i++) {
-            Person currentPerson = inputList.get(i);
             int combinedLevenshteinDistance = 0;
-            combinedLevenshteinDistance += nameKeywords.isEmpty() ? 0
-                    : findMinLevenshteinDistance(nameKeywords, currentPerson.getName());
-            combinedLevenshteinDistance += nricKeywords.isEmpty() ? 0
-                    : findMinLevenshteinDistance(nricKeywords, currentPerson.getNric().toString());
-            combinedLevenshteinDistance += phoneKeywords.isEmpty() ? 0
-                    : findMinLevenshteinDistance(phoneKeywords, currentPerson.getPhone().toString());
+            Person currentPerson = inputList.get(i);
 
+            // If all 3 fuzzy search parameters are empty, set all non-exact matches to be beyond threshold
+            // i.e. none of them will appear
+            if (nameKeywords.isEmpty() && nricKeywords.isEmpty() && phoneKeywords.isEmpty()) {
+                combinedLevenshteinDistance = FUZZY_THRESHOLD + 1;
+            } else {
+                combinedLevenshteinDistance += nameKeywords.isEmpty() ? 0
+                        : findMinLevenshteinDistance(nameKeywords, currentPerson.getName());
+                combinedLevenshteinDistance += nricKeywords.isEmpty() ? 0
+                        : findMinLevenshteinDistance(nricKeywords, currentPerson.getNric().toString());
+                combinedLevenshteinDistance += phoneKeywords.isEmpty() ? 0
+                        : findMinLevenshteinDistance(phoneKeywords, currentPerson.getPhone().toString());
+            }
             distanceList.add(i, combinedLevenshteinDistance);
         }
 

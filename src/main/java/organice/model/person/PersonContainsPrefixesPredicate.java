@@ -28,7 +28,6 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
     private final ArgumentMultimap argMultimap;
 
     public PersonContainsPrefixesPredicate(ArgumentMultimap argMultimap) {
-        checkValidityAttributes(argMultimap);
         this.argMultimap = argMultimap;
     }
 
