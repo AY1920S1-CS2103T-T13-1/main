@@ -1,5 +1,6 @@
 package organice.model.person;
 
+import static organice.commons.util.PersonAttributeCheckUtil.checkValidityAttributes;
 import static organice.logic.parser.CliSyntax.PREFIX_AGE;
 import static organice.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_DOCTOR_IN_CHARGE;
@@ -27,6 +28,7 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
     private final ArgumentMultimap argMultimap;
 
     public PersonContainsPrefixesPredicate(ArgumentMultimap argMultimap) {
+        checkValidityAttributes(argMultimap);
         this.argMultimap = argMultimap;
     }
 
