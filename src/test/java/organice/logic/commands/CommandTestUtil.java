@@ -23,6 +23,7 @@ import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.ArgumentMultimap;
 import organice.logic.parser.ArgumentTokenizer;
 import organice.logic.parser.MatchCommandParser;
+import organice.logic.parser.exceptions.ParseException;
 import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.person.Person;
@@ -63,9 +64,9 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_PATIENT_IRENE = "high";
     public static final String VALID_PRIORITY_PATIENT_BOB = "medium";
 
-    public static final String VALID_BLOOD_TYPE_DONOR_JOHN = "A";
-    public static final String VALID_BLOOD_TYPE_PATIENT_BOB = "B";
-    public static final String VALID_BLOOD_TYPE_PATIENT_IRENE = "O";
+    public static final String VALID_BLOOD_TYPE_DONOR_JOHN = "A+";
+    public static final String VALID_BLOOD_TYPE_PATIENT_BOB = "B-";
+    public static final String VALID_BLOOD_TYPE_PATIENT_IRENE = "O+";
 
     public static final String VALID_TISSUE_TYPE_DONOR_JOHN = "1,2,3,4,5,6";
     public static final String VALID_TISSUE_TYPE_PATIENT_BOB = "7,8,9,10,11,12";
@@ -183,7 +184,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(actualModel, expectedModel);
-        } catch (CommandException ce) {
+        } catch (CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -223,7 +224,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final ArgumentMultimap searchParams = ArgumentTokenizer
-                .tokenize(FindCommand.COMMAND_WORD + " n/" + person.getName().fullName, PREFIX_NAME);
+                .tokenize(ExactFindCommand.COMMAND_WORD + " n/" + person.getName().fullName, PREFIX_NAME);
 
         model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertEquals(1, model.getFilteredPersonList().size());

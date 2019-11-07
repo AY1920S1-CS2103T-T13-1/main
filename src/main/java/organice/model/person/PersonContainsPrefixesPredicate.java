@@ -86,19 +86,19 @@ public class PersonContainsPrefixesPredicate implements Predicate<Person> {
 
     private boolean matchAny(List<String> prefixKeywords, String personAttribute) {
         return prefixKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCase(personAttribute, keyword));
+                .anyMatch(keyword -> StringUtil.containsPhraseIgnoreCase(personAttribute, keyword));
     }
 
     private boolean matchAll(List<String> prefixKeywords, String personAttribute) {
         return prefixKeywords.stream()
-                .allMatch(keyword -> StringUtil.containsWordsIgnoreCase(personAttribute, keyword));
+                .allMatch(keyword -> StringUtil.containsPhraseIgnoreCase(personAttribute, keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PersonContainsPrefixesPredicate // instanceof handles nulls
-                && argMultimap.equals(((PersonContainsPrefixesPredicate) other).argMultimap)); // state matchAny
+                && argMultimap.equals(((PersonContainsPrefixesPredicate) other).argMultimap)); // state check
     }
 
 }

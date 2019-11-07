@@ -70,7 +70,67 @@ you have succeeded or failed in executing a command.
 more people in this application.
 
 
-Now that you know the components of ORGANice, let's move on to <<Features>> to learn how to use the features in ORGANice.
+Now that you know the components of ORGANice, let's move on to <<List of Attributes>> to understand
+what kind of information can be stored in ORGANice.
+
+== List of Attributes
+In ORGANice, a person's data is represented by attributes. Attributes
+refer to personal particulars such as name, type of person and blood type. +
+
+The following list shows the list of attributes that can be specified for
+a person and the criteria for valid inputs:
+
+*List of Attributes*:
+
+* n/**NAME**: the name of the person
+** Applicable to: patients, doctors, donors
+** Valid input: alphabets
+
+* t/**TYPE**: the type of person
+** Applicable to: patients, doctors, donors
+** Valid input: patient/donor/doctor
+
+* o/**ORGAN**: the type of organs
+** Applicable to: patients, donors
+** Valid input: kidney
+
+* b/**BLOODTYPE** - the blood type of the person
+** Applicable to: patients and donors
+** Valid input: A+/B+/AB+/O+/A-/B-/AB-/O-
+
+* p/**PHONE** - contact number of a person
+** Applicable to: patients, doctors, donors
+** Valid input: 8 digit number sequence, starting with 6, 8 or 9
+
+* ic/**NRIC** - NRIC number of a person
+** Applicable to: patients, doctors and donors
+** Valid input: any sequence of alphabets and numbers that fulfill these criteria:
+*** starts with a capital S, F, T, or G
+*** followed by a 7 digit number sequence
+*** ends with a capital letter
+
+* pr/**PRIORITY** - priority of the patient, the value of which is determined by a doctor
+** Applicable to: patients
+** Valid input: high/medium/low
+
+* a/**AGE** - age of a person
+** Applicable to: patients and donors
+** Valid input: a number from 0 (inclusive) to 150 (inclusive)
+
+* d/**DOCTOR** - doctor in charge of a patient
+** Applicable to: patients
+** Valid input: NRIC of the doctor
+
+* tt/**TISSUE TYPE** - the type of tissues
+** Applicable to: patients and donors
+** Valid input: a string of 6 unique numbers (from 1 - 12), separated by commas. Note that the order of the tissue types
+does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are treated as the same input because they contain the
+same 6 unique numbers.
+
+* exp/**EXPIRY** - expiry date of a donor's organ
+** Applicable to: donors
+** Valid input: a valid date in DD-MMM-YYYY format
+
 
 [[Features]]
 == Features
@@ -92,65 +152,6 @@ e.g. in `add **n/NAME**`, `**NAME**` is a parameter which can be used as `add n/
 e.g. if the command specifies `n/**NAME** p/**PHONE**`, `p/**PHONE** n/**NAME**`
 is also acceptable.
 ====
-
-
-In ORGANice, a person's data is represented by attributes. Attributes
-refer to personal particulars such as name, type of person and blood type. +
-
-The following list shows the list of attributes that can be specified for
-a person and the criteria for valid inputs:
-
-====
-*List of Attributes*:
-
-* n/**NAME**: the name of the person
-** Applicable to: patients, doctors, donors
-** Valid input: alphabets
-
-* t/**TYPE**: the type of person
-** Applicable to: patients, doctors, donors
-** Valid input: patient/donor/doctor
-
-* o/**ORGAN**: the type of organs
-** Applicable to: patients, donors
-** Valid input: kidney
-
-* b/**BLOODTYPE** - the blood type of the person
-** Applicable to: patients and donors
-** Valid input: A/B/AB/O
-
-* p/**PHONE** - contact number of a person
-** Applicable to: patients, doctors, donors
-** Valid input: 8 digit number sequence, starting with 6, 8 or 9
-
-* ic/**NRIC** - NRIC number of a person
-** Applicable to: patients, doctors and donors
-** Valid input: any sequence of alphabets and numbers that fulfill these criteria:
-*** starts with a capital S, F, T, or G
-*** followed by a 7 digit number sequence
-*** ends with a capital letter
-
-* pr/**PRIORITY** - priority of the patient, the value of which is determined by a doctor
-** Applicable to: patients
-** Valid input: high/medium/low
-
-* a/**AGE** - age of a person
-** Applicable to: patients and donors
-** Valid input: a number
-
-* d/**DOCTOR** - doctor in charge of a patient
-** Applicable to: patients
-** Valid input: NRIC of the doctor
-
-* tt/**TISSUE TYPE** - the type of tissues
-** Applicable to: patients and donors
-** Valid input: a string of 6 numbers (from 1 - 12), separated by commas
-
-* exp/**EXPIRY** - expiry date of a donor's organ
-** Applicable to: donors
-** Valid input: a valid date in DD-MMM-YYYY format
-====
-
 
 === Viewing help : `help`
 There may be times where you do not understand how ORGANice works, or you need a simple reminder on how to use
@@ -174,14 +175,18 @@ There are two methods to add a person:
 * Method 1: Normal Add
 * Method 2: Add with system prompting
 
-To understand how to add a person via the 'Normal Add' method, go to <<Normal Add>>.
-To understand how to add a person via the 'Add with system prompting' method, go to <<Add with system prompting>>.
+To understand how to add a person via the 'Normal Add' method, go to <<Adding as per normal>>.
+To understand how to add a person via the 'Add with system prompting' method, go to <<Adding with system prompting>>.
 
+Note that when you add a person, ORGANice will detect if the person you are trying to add
+has the same NRIC as another person in ORGANice. When this happens, ORGANice will not allow you to
+add that person. An error message will be displayed, prompting you to change the NRIC of the person you are trying to
+add.
 
-==== Normal Add
+==== Adding as per normal
 
-Normal add refers to specifying all the attributes in the command. To add, type in the following
-commands to add a person:
+This method of adding refers to specifying all the attributes in the command. To add, type in the
+commands of the following format to add a person:
 
 Format for adding patients: `add t/patient n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
 p/**PHONE** pr/**PRIORITY** ic/**NRIC** d/**DOCTOR** a/**AGE**` +
@@ -191,21 +196,18 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
 
 Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE**`
 
-After adding a person, ORGANice will display a form which contains the attributes of the person. Press
-kbd:[Enter] to confirm the details.
-
 [TIP]
-View the List of Attributes in the beginning of <<Features>> to find out what each attribute mean.
+View the List of Attributes in the beginning of <<Features>> to find out the meaning of each parameter.
 
 Examples:
 
-* `add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+* `add t/patient n/John Doe o/kidney b/A+ tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
 d/S2235456D a/29`
-* `add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+* `add t/donor n/Betsy Kim o/kidney b/AB- tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
 exp/23-Nov-2020 a/21`
 * `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
 
-==== Add with system prompting
+==== Adding with system prompting
 
 In this mode, instead of typing a long command at one go, you can add a person's attributes one by one.
 After entering an attribute, the system will prompt you to input another attribute.
@@ -218,8 +220,9 @@ Here are some special commands that might be useful when you are in the process 
 * `/abort` - The command to abandon the current form that you are currently filling.
 * `/undo` - The command to undo the last entry that you entered, which is useful when you want to undo any changes made.
 * `/done` - The command to indicate that you are done with filling all the required attributes and want to add the person into the application.
+* `/exit` - The command to exit the application.
 
-Note that both `/abort` and `/undo` commands can be used at any point in time, while `/done` command can only be used once all the required attributes have been specified.
+Note that `/exit`, `/abort`, and `/undo` commands can be used at any point in time, while `/done` command can only be used once all the required attributes have been specified.
 
 These are the important commands for this feature, so now let's take a look at an example of this how this feature can be used.
 When you want to add a `Patient`, type `add t/patient` in the `Command Box`. Three changes will occur on your screen:
@@ -308,77 +311,62 @@ Lists all patients only.
 Edits the information of the person with the specified NRIC to the attributes specified.
 It is up to the user to specify which attributes should be updated. +
 
-Format: `edit ic/**NRIC**`
-
-Optional parameters: any parameter from the <<List of Attributes>>
-
-After editing, ORGANice will display a form to show what information will be stored about
-the person after confirming the changes. The user is free to edit the fields before
-changes are confirmed.
+Format: `edit **NRIC**`
 
 Examples:
 
-* `edit ic/S8732457G p/91234567` +
+* `edit S8732457G p/91234567` +
 Edits the phone number of the specified patient to be `91234567`.
-* `edit ic/S8732457G n/Betsy Crower b/A` +
-Edits the name and blood type of the specified donor to be `Betsy Crower` and `A` respectively.
+* `edit S8732457G n/Betsy Crower p/91234567` +
+Edits the name and phone number of the specified donor to be `Betsy Crower` and `91234567` respectively.
 
-// tag::find[]
 === Finding persons by attributes: `find`
 
-You can use the `find` command to search for persons whose attributes match your input keywords. Matching persons will
-be displayed in a list. +
+You can use the `find` command to search for persons whose attributes match your input keywords. A list of matching
+persons along with the number of exact and possible matches will be displayed. +
 
-Format: `find __PREFIX__/__KEYWORD__`
+Format: `find __PREFIX__/__KEYWORD__ (__PREFIX__/__KEYWORD__...)`
 
-Optional parameters: Multiple `keywords` per `prefix`, multiple `prefixes` in the same find command.
+Optional parameters: Multiple __keyword__s per __prefix__, multiple __prefixe__s in the same find command.
 
-The find command performs case insensitive `OR` matching within a prefix and `AND` matching between prefixes. The
-following example illustrates this concept:
+[TIP]
+You may wish to reference <<List of Attributes>>, to view the list of available prefixes to search by.
+
+The find command is **case insensitive** and performs **OR** matching within a prefix and **AND** matching between
+prefixes. It also matches similar looking words to account for possible typos in your keywords. The following example illustrates
+these concepts:
 
 .Find command with multiple prefixes and multiple keywords per prefix.
 image::findByPrefix.png[width="790"]
 
-As seen from Figure 12, `find n/Alice Carl Elle t/doctor donor` displays both `Alice Pauline` and `Elle Meyer`.
-This is due to the fact that Alice's name matches either of 'Alice' `OR` 'Carl', `AND` she is also either a 'doctor'
-`OR` 'donor'. The same is true for Elle.
+In Figure 12, you can see that `find n/Duncan n/Loinel n/Helen t/patient t/donor` shows a list of 44 matches. The two
+exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
+keywords. 'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan's name matches
+either of 'Duncan' **OR** 'Loinel' **OR** 'Helen' **AND** he is also either a 'patient' **OR** 'donor'. The same is true
+for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
+picked up on that typo or we'd have missed Lionel!
 
-You may wish to reference the following section: <<List of Attributes>>; to view the list of available prefixes to
-search by.
+NOTE: The only exception to this rule is tissue type matching, which uses `AND` matching within the prefix.
 
-Here are some examples and pointers showcasing the use of `find`:
-
-__Use case with single prefix and keyword__ +
-* `find n/Alice` +
-Displays all persons whose name contains 'Alice'
-
-__Use case demonstrating keyword case insensitivity__ +
-* `find n/aLiCe` +
-Displays the same result as the preceding example.
+Lets take a look at some examples and pointers showcasing the use of `find`:
 
 __Use case with multiple keywords per prefix__ +
-* `find n/Alice Benson b/A B O` +
-Displays all persons whose name contains either 'Alice' or 'Benson' and whose blood type is either 'A', 'B' or 'O'.
+* `find n/Laura n/Marisha Ray b/A b/B b/O` +
+Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.
 
 __Use case demonstrating prefix order insensitivity__ +
-* `find b/A B O n/Alice Benson` +
+* `find b/A n/Benson Carter b/O n/Alice b/B` +
 Displays the same result as the preceding example.
 
-// tag::delete[]
-=== Deleting a person : `delete`
+__Use case demonstrating tissue type finding__ +
+* `find tt/4,1,2,3` +
+Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.
 
-Deletes the specified person from ORGANice.
-Match history of a deleted patient or donor with other patients/donors will be removed. +
-Format: `delete ic/**NRIC**`
+[TIP]
+Looking for exact matches? No problem! Just replace `find` with `exactFind`!
 
-Example:
+That's it for this section. Congratulations, you now know how to use the `find` command!
 
-`delete ic/S98654322D` +
-
-Deletes a person with the NRIC S98654322D in ORGANice.
-
-
-// end::delete[]
 === Detecting matches: `match`
 
 This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
@@ -397,12 +385,11 @@ what you can do:
 
 . Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
-. The list of donors and their success rate are displayed as shown in the screenshot below. The success rate is a number
-which indicates the degree of compatibility between the patient and donor. +
+. The list of donors and their success rate are displayed as shown in the screenshot below. +
 +
 image::MatchingDonorsDisplayed.png[width=790]
 +
-
+For more information on the success rate, you may refer to <<FAQ>>.
 
 ==== Matching all patients
 This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
@@ -413,32 +400,67 @@ To match all the patients in ORGANice, do the following:
 
 . The list of patients and the number of matching donors each patient have are displayed in the screenshot below.
 +
-image::Patient Matches Displayed.png[width=790]
+image::PatientMatchResults.png[width=790]
++
+
+Following this, you can sort the matches based on different categories to deduce which patient to prioritize.
++
+Refer to refer to <<Sorting matches: `sort`>> for more information.
+
+=== Sorting matches: `sort`
+After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
+
+**The sort command can only be used after a match command** to sort the resulting list of patient-donor pairs generated.
+There are three categories by which you can sort the matches, namely:
+
+* Sorting based on donor's organ expiry date
++
+* Sorting based on priority
++
+* Sorting based on success rate of match
 +
 
 
-=== Sorting matches: `sort`
-Users can specify how they want the patient-donor pairs to be sorted. +
-Sorting is done by passing in optional parameters to the `match` command. +
+These categories are further elaborated below. Note that **only one category can be used in one sort command**.
 
-Matches can be sorted according to three categories:
+==== Sorting based on donor's organ expiry date
+This category sorts a list of matched donors belonging to a particular patient based on the donated organ's expiry date (from the earliest to the latest expiry date).
 
-1. Success rate of match
-2. Priority of patient
-3. Date of expiry of donors' organs
+This allows you to determine which organs are expiring soon so that you can prioritize them for organ transplant.
 
-To return a sorted list of patient-donor pairs, include the `sort/` flag in the command. +
-Format:
-`match ic/**NRIC** sort/[rate/priority/expiry]`
+Format: `sort expiry`
 
-Typing this command causes the application to display a list of matches sorted
-according to the specified criteria. More than one sorting criteria can be included.
+Example: +
+After running a match command on a specific patient with `match ic/**NRIC**`, you will get the list of donors that are compatible with said patient.
+You can then run `sort expiry` to obtain the list of donors with the earliest organ expiration date at the top of the list.
 
-Examples:
+==== Sorting based on priority
+This category sorts a list of matched patients based on their priority (from highest to lowest). You may refer to <<Glossary>> for more information on priority.
 
-* `match ic/S7778983D sort/rate`
-* `match ic/S7778983D sort/rate, priority, expiry`
+This allows you to determine which patient to prioritize for organ transplant.
 
+Format: `sort priority`
+
+Example: +
+After running `match ic/all`, you will obtain a list of patients.
+You can then run `sort priority` to obtain a list with high priority patients at the top of the list.
+
+Note:
+
+* In cases where patients have the **same priority**, those with more matched donors will be displayed first.
+If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.
+
+==== Sorting based on success rate of match
+This category sorts the list of matched donors belonging to a particular patient based on the success rate of the match (from highest to lowest).
+(Refer to <<Glossary>> for more information on success rate.)
+
+This allows you to determine which patient-donor pair has the highest compatibility and are safe to proceed for organ transplant.
+
+Format: `sort rate`
+
+Example: +
+After running a match command on a specific patient with `match ic/**NRIC**`, you will get the list of donors that are compatible with said patient.
+You can then run `sort rate` to obtain the list of donors with the highest success rate at the top of the list.  +
 
 === Processing potential matches: `processing`
 //TODO: change to shorter term that captures the meaning
@@ -500,21 +522,12 @@ Example:
 
 === Exiting the program : `exit`
 
-Exits the program. +
-Format: `exit`
+To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own.
 
 === Saving the data
 
 Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-=== Detecting duplicates
-
-When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
-A duplicate is defined as: Two persons of the same type who have the same NRIC.
-
-When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
-should be changed.
 
 == Future improvements
 
@@ -578,6 +591,9 @@ that contains the data of your previous ORGANice folder.
 2. Do a tissue typing test to determine the HLA antigens of the patient and the donor.
 3. Do a cross match, which is a trial transfusion.
 
+*Q*: What is the success rate and how is it computed? +
+*A*: The success rate measures the tissue compatibility between a donor and a patient. It is computed via this formula: (number of common tissue types between donor and patient) / 6 * 100%
+
 == Command Summary
 
 This section summarises the commands to use this application. The following list
@@ -591,8 +607,7 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
 
 * *Add (System Prompt Mode)*: `add t/**TYPE**`
 
-* *Delete* : `delete ic/**NRIC**` +
-* *Edit* : `edit ic/**NRIC**`
+* *Edit* : `edit **NRIC**`
 ** Optional parameters: any parameter from <<List of Attributes>>
 * *Find* : `find`
 ** Optional parameters: any parameter from <<List of Attributes>>
@@ -625,3 +640,7 @@ for harmful interactions between patient and donor's blood
 * match: refers to a donor-patient pair whose organs pass all three matching tests
 
 * duplicate: refers to two persons of the same type which have the same NRIC
+
+* success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
+
+* priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.

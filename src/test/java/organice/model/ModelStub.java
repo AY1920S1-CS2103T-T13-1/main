@@ -1,14 +1,18 @@
 package organice.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
+import organice.model.person.Doctor;
+import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
+import organice.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A default model stub that have all of the methods failing. This class is created on its own
@@ -71,7 +75,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasDonor(Nric donor) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Patient getPatient(Nric patientNric) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ArrayList<Doctor> getListOfDoctors() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -96,11 +115,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Person> getMatchList() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public void matchDonors(Patient patient) {
         throw new AssertionError("This method should not be called.");
     }
@@ -116,9 +130,25 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Person> getDisplayedPersonList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setDisplayedPersonList(List<Person> personList) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
@@ -142,11 +172,6 @@ public class ModelStub implements Model {
 
     @Override
     public void sortByPriority() {
-        throw new AssertionError("This method should not be called");
-    }
-
-    @Override
-    public SortedList<Person> getSortList() {
         throw new AssertionError("This method should not be called");
     }
 }

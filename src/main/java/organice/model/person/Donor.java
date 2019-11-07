@@ -2,6 +2,7 @@ package organice.model.person;
 
 import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -16,9 +17,12 @@ public class Donor extends Person {
     private final TissueType tissueType;
     private final Organ organ;
     private final OrganExpiryDate organExpiryDate;
+    private TaskList processingTodoList;
     private Status status;
     private HashMap<Nric, Double> successRateMap;
     private String successRate;
+    private Nric patientNric;
+    private ArrayList<Nric> patientsMatchedBefore;
 
     /**
      * Every field must be present and not null.
@@ -33,8 +37,11 @@ public class Donor extends Person {
         this.tissueType = tissueType;
         this.organ = organ;
         this.organExpiryDate = organExpiryDate;
+        processingTodoList = new TaskList("");
+        this.processingTodoList = processingTodoList;
         this.status = status;
         successRateMap = new HashMap<>();
+        patientsMatchedBefore = new ArrayList<>();
     }
 
     public Age getAge() {
@@ -55,6 +62,14 @@ public class Donor extends Person {
 
     public OrganExpiryDate getOrganExpiryDate() {
         return organExpiryDate;
+    }
+
+    public TaskList getProcessingList(Nric patientNric) {
+        return processingTodoList;
+    }
+
+    public Nric getPatientNric() {
+        return patientNric;
     }
 
     public Status getStatus() {
@@ -92,6 +107,72 @@ public class Donor extends Person {
     public void setStatus(String newStatus) {
         Status updatedStatus = new Status(newStatus);
         this.status = updatedStatus;
+    }
+
+    public void setEmptyList() {
+        TaskList updatedProcessingList = new TaskList("");
+        this.processingTodoList = updatedProcessingList;
+    }
+
+    public void setProcessingList(String newProcessingList) {
+        TaskList updatedProcessingList = new TaskList("");
+        if (newProcessingList == null || newProcessingList.equals("")) {
+            this.processingTodoList = updatedProcessingList;
+        } else {
+            String[] taskString = newProcessingList.split("\n");
+            for (int i = 0; i < taskString.length; i++) {
+                String currentTaskString = taskString[i];
+                if (!currentTaskString.isEmpty()) {
+                    String[] taskDes = currentTaskString.split("]");
+                    Task toBeAddedTask = new Task(taskDes[1]);
+                    if (taskDes[0].equals("[\u2713")) {
+                        toBeAddedTask.markAsDone(toBeAddedTask);
+                    }
+                    updatedProcessingList.add(toBeAddedTask);
+                }
+                this.processingTodoList = updatedProcessingList;
+            }
+        }
+    }
+
+    /**
+     * Mark the task given as done
+     * @param taskNumber of the task needed to mark as done in the list
+     */
+    public void markTaskAsDone(int taskNumber) {
+        TaskList updatedTaskList = getProcessingList(patientNric);
+        updatedTaskList.get(taskNumber - 1).markAsDone(updatedTaskList.get(taskNumber - 1));
+        this.processingTodoList = updatedTaskList;
+    }
+
+    /**
+     * Get the ArrayList containing all the Nrics of the patients who have done a matching with this donor
+     * before but failed in the end.
+     * @return ArrayList of Nrics
+     */
+    public ArrayList getPatientMatchedBefore() {
+        return new ArrayList<>(patientsMatchedBefore);
+    }
+
+    public void setPatientsMatchedBefore(String newList) {
+        newList = newList.replaceAll("\\[", "").replaceAll("\\]", "");
+        ArrayList<Nric> updatedList = new ArrayList<>();
+        if (newList == null || newList.equals("") || newList.equals("[]")) {
+            this.patientsMatchedBefore = updatedList;
+        } else if (newList.lastIndexOf(",") == -1) {
+            //newList = newList.substring(1,newList.length() - 1);
+            updatedList.add(new Nric(newList));
+            this.patientsMatchedBefore = updatedList;
+        } else {
+            String[] patientNricString = newList.split(",");
+            for (int i = 0; i < patientNricString.length; i++) {
+                String currentPatientNric = patientNricString[i];
+                if (!currentPatientNric.trim().isEmpty()) {
+                    updatedList.add(new Nric(currentPatientNric.trim()));
+                }
+                this.patientsMatchedBefore = updatedList;
+            }
+        }
     }
 
     /**

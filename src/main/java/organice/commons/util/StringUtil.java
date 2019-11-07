@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains any word in {@code words}.
+     * Returns true if the {@code sentence} contains the phrase in {@code phrase}.
      *   Ignores case, but a full word match is required.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
@@ -22,22 +22,24 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
      * @param sentence cannot be null
-     * @param words cannot be null, cannot be empty, can be a multi-word string
+     * @param phrase cannot be null, cannot be empty, can be a multi-word string
      */
-    public static boolean containsWordsIgnoreCase(String sentence, String words) {
+    public static boolean containsPhraseIgnoreCase(String sentence, String phrase) {
         requireNonNull(sentence);
-        requireNonNull(words);
+        requireNonNull(phrase);
 
-        words = words.replace("\n", " ").trim();
-        String[] preppedWords = words.split("\\s+");
-        checkArgument(!words.isEmpty() && preppedWords.length > 0, "Words parameter cannot be empty");
+        phrase = phrase.replace("\n", " ").trim();
+        String[] wordsInPhrase = phrase.split("\\s+");
+        checkArgument(!phrase.isEmpty() && wordsInPhrase.length > 0,
+                "Words parameter cannot be empty");
 
         String preppedSentence = sentence.trim();
         String[] wordsInPreppedSentence = preppedSentence.split(",+|\\s+");
 
-        return Arrays.stream(preppedWords).reduce(false, (isAnyWordsMatched, word) -> isAnyWordsMatched
-                || Arrays.stream(wordsInPreppedSentence).anyMatch(word::equalsIgnoreCase), (
-                        isAnyWordsMatched, isNextWordHaveMatch) -> isAnyWordsMatched || isNextWordHaveMatch);
+        return Arrays.stream(wordsInPhrase).reduce(true, (
+                arePreviousWordsMatched, phraseWord) -> arePreviousWordsMatched && Arrays
+                .stream(wordsInPreppedSentence).anyMatch(phraseWord::equalsIgnoreCase), (
+                        arePrevWordsMatched, isNextWordHaveMatch) -> arePrevWordsMatched || isNextWordHaveMatch);
     }
 
     /**
@@ -54,7 +56,7 @@ public class StringUtil {
     public static boolean containsWordIgnoreCase(String sentence, String word) {
         checkArgument(word.trim()
                 .split("\\s+").length == 1, "Word parameter should be a single word");
-        return containsWordsIgnoreCase(sentence, word);
+        return containsPhraseIgnoreCase(sentence, word);
     }
 
     /**
@@ -83,5 +85,53 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    // Algorithm taken from https://semanti.ca/blog/?an-introduction-into-approximate-string-matching.
+    // Java code is original work.
+    /**
+     * Calculates the Levenshtein Distance (edit distance) between the given {@code String firstString} and
+     * {@code String secondString}. Levenshtein Distance is the number of character edits required to morph one
+     * string into another.
+     */
+    public static int calculateLevenshteinDistance(String firstString, String secondString) {
+        requireNonNull(firstString);
+        requireNonNull(secondString);
+
+        int firstStringLength = firstString.length();
+        int secondStringLength = secondString.length();
+
+        checkArgument(firstStringLength != 0 && secondStringLength != 0);
+
+        char[] pkChars = firstString.toCharArray();
+        char[] paChars = secondString.toCharArray();
+
+        int[][] costMatrix = new int[firstStringLength][secondStringLength];
+        for (int i = 0; i < firstStringLength; i++) {
+            for (int j = 0; j < secondStringLength; j++) {
+                costMatrix[i][j] = pkChars[i] == paChars[j] ? 0 : 1;
+            }
+        }
+
+        int[][] levenshteinMatrix = new int [firstStringLength + 1][secondStringLength + 1];
+        // Initialise first row and col to be in range 0..length
+        for (int r = 0; r < firstStringLength + 1; r++) {
+            levenshteinMatrix[r][0] = r;
+        }
+        for (int c = 0; c < secondStringLength + 1; c++) {
+            levenshteinMatrix[0][c] = c;
+        }
+
+        // Setting the distance
+        for (int r = 1; r < firstStringLength + 1; r++) {
+            for (int c = 1; c < secondStringLength + 1; c++) {
+                int cellAbovePlusOne = levenshteinMatrix[r - 1][c] + 1;
+                int cellLeftPlusOne = levenshteinMatrix[r][c - 1] + 1;
+                int cellLeftDiagPlusCost = levenshteinMatrix[r - 1][c - 1] + costMatrix[r - 1][c - 1];
+                levenshteinMatrix[r][c] =
+                        Integer.min(cellAbovePlusOne, Integer.min(cellLeftPlusOne, cellLeftDiagPlusCost));
+            }
+        }
+        return levenshteinMatrix[firstStringLength][secondStringLength];
     }
 }
