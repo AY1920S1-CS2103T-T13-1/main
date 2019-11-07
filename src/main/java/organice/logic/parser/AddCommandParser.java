@@ -16,8 +16,6 @@ import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 import organice.logic.commands.AddCommand;
 import organice.logic.parser.exceptions.ParseException;
@@ -34,7 +32,6 @@ import organice.model.person.Patient;
 import organice.model.person.Phone;
 import organice.model.person.Priority;
 import organice.model.person.Status;
-import organice.model.person.TaskList;
 import organice.model.person.TissueType;
 import organice.model.person.Type;
 
@@ -55,12 +52,113 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the type is not specified correctly in the input arguments
      */
     private static Type parseType(ArgumentMultimap argumentMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
-        } catch (NoSuchElementException ex) {
+        List<String> allTypeInputs = argumentMultimap.getAllValues(PREFIX_TYPE);
+        if (allTypeInputs.size() == 1) {
+            return ParserUtil.parseType(allTypeInputs.get(0));
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
+
+    /**
+     * Checks if the input argument has any prefixes.
+     * If there are any prefixes besides PREFIX_TYPE, the add via form method will not be launched.
+     * @return true if all prefixes besides PREFIX_TYPE are not in the input
+     */
+    private static boolean canLaunchForm(ArgumentMultimap argMultimap) {
+        List<Prefix> allPrefixesExceptType = new ArrayList<>(Arrays.asList(PREFIX_NRIC, PREFIX_NAME,
+                PREFIX_AGE, PREFIX_PHONE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
+                PREFIX_ORGAN, PREFIX_TISSUE_TYPE));
+        for (Prefix prefix : allPrefixesExceptType) {
+            List<String> allInputs = argMultimap.getAllValues(prefix);
+            if (allInputs.size() != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Creates a {@code Doctor} from arguments in the {@code ArgumentMultimap}.
+     */
+    private static Doctor createDoctor(Type type, ArgumentMultimap argMultimap) throws ParseException {
+        Nric nric;
+        Name name;
+        Phone phone;
+        if (areNumberOfPrefixesCorrectDoctor(argMultimap)) {
+            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        return new Doctor(type, nric, name, phone);
+    }
+
+    /**
+     * Creates a {@code Donor} from arguments in the {@code ArgumentMultimap}.
+     */
+    private static Donor createDonor(Type type, ArgumentMultimap argMultimap) throws ParseException {
+        Nric nric;
+        Name name;
+        Phone phone;
+        Age age;
+        BloodType bloodType;
+        TissueType tissueType;
+        Organ organ;
+        OrganExpiryDate organExpiryDate;
+        Status status;
+
+        if (areNumberOfPrefixesCorrectDonor(argMultimap)) {
+            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+            bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
+            tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
+            organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
+            organExpiryDate = ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get());
+            status = new Status(Status.STATUS_NOT_PROCESSING);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        return new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate,
+                status);
+    }
+
+    /**
+     * Creates a {@code Donor} from arguments in the {@code ArgumentMultimap}.
+     */
+    private static Patient createPatient(Type type, ArgumentMultimap argMultimap) throws ParseException {
+        Nric nric;
+        Name name;
+        Phone phone;
+        Age age;
+        Priority priority;
+        BloodType bloodType;
+        TissueType tissueType;
+        Organ organ;
+        DoctorInCharge doctorInCharge;
+        Status status;
+
+        if (areNumberOfPrefixesCorrectPatient(argMultimap)) {
+            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+            priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+            bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
+            tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
+            organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
+            doctorInCharge = ParserUtil.parseDoctorInCharge(argMultimap.getValue(PREFIX_DOCTOR_IN_CHARGE).get());
+            status = new Status(Status.STATUS_NOT_PROCESSING);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        return new Patient(type, nric, name, phone, age, priority,
+                bloodType, tissueType, organ, doctorInCharge, status);
+    }
+
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -73,153 +171,39 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_AGE, PREFIX_PHONE, PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_DOCTOR_IN_CHARGE,
                         PREFIX_ORGAN_EXPIRY_DATE, PREFIX_ORGAN, PREFIX_TISSUE_TYPE);
 
+        //checks if preamble is empty. Acts as the first round of validation
+        isPreambleEmpty(argMultimap);
+
+        // common prefixes between all three types of persons. parseType also validates if PREFIX_TYPE is there.
         Type type = parseType(argMultimap);
 
-        if (type.isDoctor()) {
-            if (arePrefixesNotPresentDoctor(argMultimap)) {
-                return new AddCommand(type);
-            }
+        // form mode is launched when only the type prefix is specified
+        if (canLaunchForm(argMultimap)) {
+            return new AddCommand(type);
+        }
 
-            arePrefixesPresentDoctor(argMultimap);
-            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-
-            Doctor doctor = new Doctor(type, nric, name, phone);
+        if (type.isDoctor() && areNumberOfPrefixesCorrectDoctor(argMultimap)) {
+            Doctor doctor = createDoctor(type, argMultimap);
             return new AddCommand(doctor);
-        } else if (type.isDonor()) {
-            if (arePrefixesNotPresentDonor(argMultimap)) {
-                return new AddCommand(type);
-            }
-
-            if (areNumberOfPrefixesCorrectDonor(argMultimap)) {
-                //arePrefixesPresentDonor(argMultimap);
-
-                Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-                Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-                Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-                BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
-                TissueType tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
-                Organ organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
-                OrganExpiryDate organExpiryDate =
-                        ParserUtil.parseOrganExpiryDate(argMultimap.getValue(PREFIX_ORGAN_EXPIRY_DATE).get());
-                Status status = new Status(Status.STATUS_NOT_PROCESSING);
-                TaskList taskList = new TaskList("");
-                Donor donor = new Donor(type, nric, name, phone, age, bloodType, tissueType, organ, organExpiryDate,
-                        status);
-                return new AddCommand(donor);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
-        } else if (type.isPatient()) {
-            if (arePrefixesNotPresentPatient(argMultimap)) {
-                return new AddCommand(type);
-            }
-
-            arePrefixesPresentPatient(argMultimap);
-
-            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
-            Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
-            BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE).get());
-            TissueType tissueType = ParserUtil.parseTissueType(argMultimap.getValue(PREFIX_TISSUE_TYPE).get());
-            Organ organ = ParserUtil.parseOrgan(argMultimap.getValue(PREFIX_ORGAN).get());
-            DoctorInCharge doctorInCharge =
-                    ParserUtil.parseDoctorInCharge(argMultimap.getValue(PREFIX_DOCTOR_IN_CHARGE).get());
-            Status status = new Status(Status.STATUS_NOT_PROCESSING);
-            Patient patient = new Patient(type, nric, name, phone, age, priority,
-                    bloodType, tissueType, organ, doctorInCharge, status);
+        } else if (type.isDonor() && areNumberOfPrefixesCorrectDonor(argMultimap)) {
+            //TaskList taskList = new TaskList("");
+            Donor donor = createDonor(type, argMultimap);
+            return new AddCommand(donor);
+        } else if (type.isPatient() && areNumberOfPrefixesCorrectPatient(argMultimap)) {
+            Patient patient = createPatient(type, argMultimap);
             return new AddCommand(patient);
         } else {
-            //TODO: refine error message later
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Throws an exception if the preamble of an input is not empty.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
-     * Returns true if at least one prefix contains non-empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean areAnyPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent()).count() != 0;
-    }
-
-    /**
-     * Throws ParseException when one of the required prefixes for {@code Patient} are absent.
-     */
-    private static void arePrefixesPresentPatient(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN, PREFIX_DOCTOR_IN_CHARGE)
-                        || !argMultimap.getPreamble().isEmpty()) {
+    private static void isPreambleEmpty(ArgumentMultimap argMultimap) throws ParseException {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-    }
-
-    /**
-     * Throws ParseException when one of the required prefixes for Donor are absent.
-     */
-    private static void arePrefixesPresentDonor(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN, PREFIX_ORGAN_EXPIRY_DATE)
-                        || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
-     * Throws ParseException when one of the required prefixes for Doctor are absent.
-     */
-    private static void arePrefixesPresentDoctor(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
-     * Returns true if at least one prefix is specified for {@code Doctor} is present
-     */
-    private static boolean arePrefixesNotPresentDoctor(ArgumentMultimap argMultimap) {
-        if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
-            || !argMultimap.getPreamble().isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns true if at least one prefix is specified for {@code Patient} is present
-     */
-    private static boolean arePrefixesNotPresentPatient(ArgumentMultimap argMultimap) {
-        if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_PRIORITY, PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN, PREFIX_DOCTOR_IN_CHARGE)
-            || !argMultimap.getPreamble().isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns true if at least one prefix is specified for {@code Donor} is present
-     */
-    private static boolean arePrefixesNotPresentDonor(ArgumentMultimap argMultimap) {
-        if (areAnyPrefixPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE,
-            PREFIX_ORGAN_EXPIRY_DATE, PREFIX_BLOOD_TYPE, PREFIX_TISSUE_TYPE, PREFIX_ORGAN)
-            || !argMultimap.getPreamble().isEmpty()) {
-            return false;
-        }
-        return true;
     }
 
     private static boolean areNumberOfPrefixesCorrectDoctor(ArgumentMultimap argumentMultimap) {
