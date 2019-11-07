@@ -691,18 +691,31 @@ Edits the name and phone number of the specified donor to be <code>Betsy Crower<
 <div class="sect2">
 <h3 id="finding-persons-by-attributes-code-find-code"><a class="link" href="#finding-persons-by-attributes-code-find-code">5.5. Finding persons by attributes: <code>find</code></a></h3>
 <div class="paragraph">
-<p>You can use the <code>find</code> command to search for persons whose attributes match your input keywords. Matching persons will
-be displayed in a list.<br></p>
+<p>You can use the <code>find</code> command to search for persons whose attributes match your input keywords. A list of matching
+persons along with the number of exact and possible matches will be displayed.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>find <em>PREFIX</em>/<em>KEYWORD</em></code></p>
+<p>Format: <code>find <em>PREFIX</em>/<em>KEYWORD</em> (<em>PREFIX</em>/<em>KEYWORD</em>&#8230;&#8203;)</code></p>
 </div>
 <div class="paragraph">
-<p>Optional parameters: Multiple <code>keywords</code> per <code>prefix</code>, multiple <code>prefixes</code> in the same find command.</p>
+<p>Optional parameters: Multiple <em>keyword</em>s per <em>prefix</em>, multiple <em>prefixe</em>s in the same find command.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may wish to reference <a href="#list-of-attributes">Section 4, &#8220;List of Attributes&#8221;</a>, to view the list of available prefixes to search by.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>The find command performs case insensitive <code>OR</code> matching within a prefix and <code>AND</code> matching between prefixes. The
-following example illustrates this concept:</p>
+<p>The find command is <strong>case insensitive</strong> and performs <strong>OR</strong> matching within a prefix and <strong>AND</strong> matching between
+prefixes. It also matches similar looking words to account for possible typos in your keywords. The following example illustrates
+these concepts:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -711,47 +724,57 @@ following example illustrates this concept:</p>
 <div class="title">Figure 12. Find command with multiple prefixes and multiple keywords per prefix.</div>
 </div>
 <div class="paragraph">
-<p>As seen from Figure 12, <code>find n/Duncan n/Lionel n/Helen t/patient t/donor</code> displays 'Duncan Chua', <code>Lionel Doe</code> and
-<code>Helen Davidson</code>. This is due to the fact that Duncan&#8217;s name matches either of 'Duncan' <code>OR</code> 'Lionel' <code>OR</code> 'Helen' <code>AND</code>
-he is also either a 'doctor' <code>OR</code> 'donor'. The same is true for Lionel and Helen. You should note that the only
-exception to this rule is tissue type matching, which uses <code>AND</code> matching within the prefix.</p>
+<p>In Figure 12, you can see that <code>find n/Duncan n/Loinel n/Helen t/patient t/donor</code> shows a list of 44 matches. The two
+exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
+keywords. 'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan&#8217;s name matches
+either of 'Duncan' <strong>OR</strong> 'Loinel' <strong>OR</strong> 'Helen' <strong>AND</strong> he is also either a 'patient' <strong>OR</strong> 'donor'. The same is true
+for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
+picked up on that typo or we&#8217;d have missed Lionel!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The only exception to this rule is tissue type matching, which uses <code>AND</code> matching within the prefix.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>You may wish to reference the following section: <a href="#list-of-attributes">Section 4, &#8220;List of Attributes&#8221;</a>, to view the list of available prefixes to
-search by.</p>
-</div>
-<div class="paragraph">
-<p>Here are some examples and pointers showcasing the use of <code>find</code>:</p>
-</div>
-<div class="paragraph">
-<p><em>Use case with single prefix and keyword</em><br>
-* <code>find n/Alice</code><br>
-Displays all persons whose name contains 'Alice'</p>
-</div>
-<div class="paragraph">
-<p><em>Use case demonstrating keyword case insensitivity</em><br>
-* <code>find n/aLiCe</code><br>
-Displays the same result as the preceding example.</p>
+<p>Lets take a look at some examples and pointers showcasing the use of <code>find</code>:</p>
 </div>
 <div class="paragraph">
 <p><em>Use case with multiple keywords per prefix</em><br>
-* <code>find n/Alice n/Benson b/A b/B b/O</code><br>
-Displays all persons whose name contains either 'Alice' or 'Benson' and whose blood type is either 'A', 'B' or 'O'.</p>
+* <code>find n/Laura n/Marisha Ray b/A b/B b/O</code><br>
+Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.</p>
 </div>
 <div class="paragraph">
 <p><em>Use case demonstrating prefix order insensitivity</em><br>
-* <code>find b/A n/Benson b/O n/Alice b/B</code><br>
+* <code>find b/A n/Benson Carter b/O n/Alice b/B</code><br>
 Displays the same result as the preceding example.</p>
-</div>
-<div class="paragraph">
-<p><em>Use case demonstrating full name capture</em><br>
-* <code>find n/Laura Bailey n/Marisha Ray</code><br>
-Displays all persons whose name contains 'Laura Bailey' or 'Marisha Ray'.</p>
 </div>
 <div class="paragraph">
 <p><em>Use case demonstrating tissue type finding</em><br>
 * <code>find tt/4,1,2,3</code><br>
 Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Looking for exact matches? No problem! Just replace <code>find</code> with <code>exactFind</code>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>That&#8217;s it for this section. Congratulations, you now know how to use the <code>find</code> command!</p>
 </div>
 </div>
 <div class="sect2">
@@ -1268,4 +1291,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 10:53:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 01:12:32 UTC</div></div></div></body></html>
