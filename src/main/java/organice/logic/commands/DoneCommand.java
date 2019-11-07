@@ -60,8 +60,8 @@ public class DoneCommand extends Command {
      * Both of them must be matched and is processing in order to be valid.
      * The method will first convert the Nrics given in String to an actual Nric type,
      * then it will create the donor and patient with the respective Nric in ORAGANice.
-     * @param firstNric the first Nric given by the user in String.
-     * @param secondNric the second Nric given by the user in String.
+     * @param firstNric the first Nric given by the user.
+     * @param secondNric the second Nric given by the user.
      * @param model
      * @return a boolean true false stating whether the inputs are valid.
      */

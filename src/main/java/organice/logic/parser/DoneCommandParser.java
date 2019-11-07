@@ -6,6 +6,8 @@ import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_RESULT;
 
+import java.util.List;
+
 import organice.logic.commands.DoneCommand;
 import organice.logic.parser.exceptions.ParseException;
 
@@ -21,34 +23,29 @@ public class DoneCommandParser implements Parser<DoneCommand> {
      */
     public DoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
-
-        String prefixNricString = PREFIX_NRIC.toString();
-        String preficResString = PREFIX_RESULT.toString();
 
         String firstNric;
         String secondNric;
 
         String result;
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_RESULT);
 
         try {
-            if (nameKeywords[0].startsWith(prefixNricString)
-                    && nameKeywords[1].startsWith(prefixNricString)
-                    && nameKeywords[2].startsWith(preficResString)) {
-                firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
-                secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
-                result = nameKeywords[2].replaceFirst(preficResString, "");
-                if (result.trim().isEmpty()) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
-                }
-            } else {
+            List<String> allNricValues = argMultimap.getAllValues(PREFIX_NRIC);
+            List<String> allResultValues = argMultimap.getAllValues(PREFIX_RESULT);
+
+            if (allNricValues.size() != 2 && allResultValues.size() != 1) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
             }
+
+            firstNric = allNricValues.get(0);
+            secondNric = allNricValues.get(1);
+            result = allResultValues.get(0);
+
             return new DoneCommand(firstNric, secondNric, result);
-        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+        } catch  (NullPointerException | ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
