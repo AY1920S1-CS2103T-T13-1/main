@@ -33,7 +33,7 @@ public class Name {
         for (String str : nameArr) { //Make the first character in name uppercase the rest lowercase
             fullName += str.substring(0, 1) + str.substring(1).toLowerCase() + " ";
         }
-        this.fullName = fullName;
+        this.fullName = fullName.trim();
     }
 
     /**
