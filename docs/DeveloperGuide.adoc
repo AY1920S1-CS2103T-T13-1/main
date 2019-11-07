@@ -201,22 +201,51 @@ If there is a parameter, ORGANice will check the `TYPE` input and display the re
 or donors that corresponds to the input.
 
 === Matching feature
-This section describes how the matching feature is implemented.
+This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
+explained, followed by an explanation of design considerations.
 
-This feature is facilitated by the `MatchCommand` class, which extends the `Command` class.
-This class implements the operation `MatchCommand#match(Person donor, Patient patient)`.
-It checks if the given donor and patient have compatible
-blood and tissue types.
+==== Logic of Matching
+This section explains the logic of matching.
 
-The following methods in `ModelManager` accesses the `match` method:
+Matching is done by implementing the `MatchCommand#match(Person donor, Patient patient)` method. It takes in a Donor
+object and a Patient object, which represents a donor and a patient respectively. The method returns true if the patient
+and donor are a match, and false otherwise. The code for the `match` method is shown below:
+```
+public static boolean match(Person donor, Patient patient) {
+    if (!(donor instanceof Donor)) {
+        return false;
+    }
+
+    BloodType donorBloodType = ((Donor) donor).getBloodType();
+    BloodType patientBloodType = patient.getBloodType();
+
+    TissueType donorTissueType = ((Donor) donor).getTissueType();
+    TissueType patientTissueType = patient.getTissueType();
+
+    Double successRate = donorTissueType.getPercentageMatch(patientTissueType);
+
+    if (patientBloodType.isBloodTypeMatch(donorBloodType) && successRate >= SUCCESSFUL_PERCENTAGE) {
+        Donor donorToSet = (Donor) donor;
+        donorToSet.addMatchResult(patient.getNric(), successRate);
+        donorToSet.setSuccessRate(patient.getNric());
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+
+This `match` method is used in `ModelManager` to find matches. The following methods
+in `ModelManager` accesses the `match` method:
 
 * `ModelManager#matchDonors(Patient patient)` -- Matches all donors in ORGANice with the specified patient.
 For each donor that matches the patient, a `MatchedDonor` object is created and stored.
 * `ModelManager#matchPatients()` -- Matches all donors with all patients. For every patient in ORGANice,
 a `MatchedPatient` object is created to store the number of donors that matches that patient.
 
-`MatchedDonor` and `MatchedPatient` objects are initially stored in an `ObservableList` called
-`listOfMatches`. Objects in the `listOfMatches` will be stored in a
+`MatchedDonor` and `MatchedPatient` objects are stored in an `ObservableList` called
+`listOfMatches`. This `ObservableList` can be accessed by `Logic` and displayed by the `UI`
+component.
 
 ==== UI of Matching
 This section explains the UI design of the matching feature.
@@ -527,9 +556,15 @@ __insertar diagrama de secuencia__
 ==== Design Considerations
 
 
+=== [Proposed] Data Encryption
+
+_{Explain here how the data encryption feature will be implemented}_
+
+// end::dataencryption[]
+
 === Logging
 
-We are currently using the `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
