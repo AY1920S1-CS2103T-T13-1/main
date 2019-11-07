@@ -398,9 +398,9 @@ image::MatchingDonorsDisplayed.png[width=790]
 For more information on the compatibility rate, you may refer to <<FAQ>>.
 
 ==== Matching all patients
-This section will explain how to run kidney matching tests on all patients stored in ORGANice and illustrate the process
+This section will explain how to run kidney matching tests on all patients and illustrate the process
 with an example.
-If you want to match all the patients in ORGANice,
+If you want to find potential donors for all patients,
 type `match ic/all` in the Command Box and press kbd:[Enter].
 
 You will see a list of all the patients in ORGANice along with the number of
@@ -413,11 +413,11 @@ This means that 'Someone edited' has 3 potential donors.
 image::PatientMatchResults.png[width=790]
 
 Following this, you can sort the matches based on different criteria to
-determine which patient to prioritize.
-Refer to <<Sorting matches: `sort`>> for more information.
+determine which patient to prioritize. Head over to the next section to find out
+how to sort matches.
 
 === Sorting matches: `sort`
-After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
+After using the match command, you can sort the list of matches to determine which patient to prioritize for organ transplant.
 
 **The sort command can only be used after a match command** to sort the resulting list of patient-donor pairs generated.
 There are three categories by which you can sort the matches, namely:
@@ -656,6 +656,8 @@ for harmful interactions between patient and donor's blood
 
 * duplicate: refers to two persons of the same type which have the same NRIC
 
-* compatibility rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
+* compatibility rate: A percentage from 0 to 100% that indicates the degree of compatibility
+between the patient and the donor.
+This percentage is calculated from the number of tissue matches between the patient and donor.
 
 * priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.
