@@ -106,6 +106,7 @@ public class EditCommand extends Command {
         throw new PersonNotFoundException();
     }
 
+
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
@@ -121,86 +122,98 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
 
         assert Type.isValidType(updatedType.toString());
-        if (updatedType.isPatient()) {
-            Age updatedAge = editPersonDescriptor.getAge().orElse(((Patient) personToEdit).getAge());
-            BloodType updatedBloodType =
-                    editPersonDescriptor.getBloodType().orElse(((Patient) personToEdit).getBloodType());
-            TissueType updatedTissueType =
-                    editPersonDescriptor.getTissueType().orElse(((Patient) personToEdit).getTissueType());
-            Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Patient) personToEdit).getOrgan());
-            Priority updatedPriority =
-                    editPersonDescriptor.getPriority().orElse(((Patient) personToEdit).getPriority());
-            DoctorInCharge updatedDoctorInCharge =
-                    editPersonDescriptor.getDoctorInCharge().orElse(((Patient) personToEdit).getDoctorInCharge());
-            Status updatedStatus = ((Patient) personToEdit).getStatus();
-            if (editPersonDescriptor.getOrganExpiryDate().isPresent()) {
-                throw new CommandException("There is no organ's expiry date field in patient");
-            }
-            return new Patient(updatedType, updatedNric, updatedName, updatedPhone, updatedAge, updatedPriority,
-                    updatedBloodType, updatedTissueType, updatedOrgan, updatedDoctorInCharge, updatedStatus);
-        } else if (updatedType.isDonor()) {
-            Age updatedAge = editPersonDescriptor.getAge().orElse(((Donor) personToEdit).getAge());
-            BloodType updatedBloodType =
-                    editPersonDescriptor.getBloodType().orElse(((Donor) personToEdit).getBloodType());
-            TissueType updatedTissueType =
-                    editPersonDescriptor.getTissueType().orElse(((Donor) personToEdit).getTissueType());
-            Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Donor) personToEdit).getOrgan());
-            OrganExpiryDate updatedOrganExpiryDate =
-                    editPersonDescriptor.getOrganExpiryDate().orElse(((Donor) personToEdit).getOrganExpiryDate());
-            Status updatedStatus = ((Donor) personToEdit).getStatus();
-            String errorMessage = "";
-            boolean hasError = false;
-            if (editPersonDescriptor.getPriority().isPresent()) {
-                errorMessage += "There is no priority field in donor\n";
-                hasError = true;
-            }
-            if (editPersonDescriptor.getPriority().isPresent()) {
-                errorMessage += "There is no priority field in donor";
-                hasError = true;
-            }
-            if (hasError) {
+        if (updatedType.isDoctor()) {
+            String errorMessage = getErrorMessage(personToEdit, editPersonDescriptor);
+            if (!errorMessage.equals("")) {
                 throw new CommandException(errorMessage);
             }
 
-            return new Donor(updatedType, updatedNric, updatedName, updatedPhone, updatedAge,
-                updatedBloodType, updatedTissueType, updatedOrgan, updatedOrganExpiryDate, updatedStatus);
-        } else if (updatedType.isDoctor()) {
-            String errorMessage = "";
-            boolean hasError = false;
+            return new Doctor(updatedType, updatedNric, updatedName, updatedPhone);
+        } else {
+            if (updatedType.isPatient()) {
+                Age updatedAge = editPersonDescriptor.getAge().orElse(((Patient) personToEdit).getAge());
+                BloodType updatedBloodType =
+                    editPersonDescriptor.getBloodType().orElse(((Patient) personToEdit).getBloodType());
+                TissueType updatedTissueType =
+                    editPersonDescriptor.getTissueType().orElse(((Patient) personToEdit).getTissueType());
+                Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Patient) personToEdit).getOrgan());
+                Status updatedStatus = ((Patient) personToEdit).getStatus();
+                Priority updatedPriority =
+                        editPersonDescriptor.getPriority().orElse(((Patient) personToEdit).getPriority());
+                DoctorInCharge updatedDoctorInCharge =
+                        editPersonDescriptor.getDoctorInCharge().orElse(((Patient) personToEdit).getDoctorInCharge());
+
+                String errorMessage = getErrorMessage(personToEdit, editPersonDescriptor);
+                if (!errorMessage.equals("")) {
+                    throw new CommandException(errorMessage);
+                }
+
+                return new Patient(updatedType, updatedNric, updatedName, updatedPhone, updatedAge, updatedPriority,
+                    updatedBloodType, updatedTissueType, updatedOrgan, updatedDoctorInCharge, updatedStatus);
+            } else if (updatedType.isDonor()) {
+                Age updatedAge = editPersonDescriptor.getAge().orElse(((Donor) personToEdit).getAge());
+                BloodType updatedBloodType =
+                    editPersonDescriptor.getBloodType().orElse(((Donor) personToEdit).getBloodType());
+                TissueType updatedTissueType =
+                    editPersonDescriptor.getTissueType().orElse(((Donor) personToEdit).getTissueType());
+                Organ updatedOrgan = editPersonDescriptor.getOrgan().orElse(((Donor) personToEdit).getOrgan());
+                Status updatedStatus = ((Donor) personToEdit).getStatus();
+                OrganExpiryDate updatedOrganExpiryDate =
+                    editPersonDescriptor.getOrganExpiryDate().orElse(((Donor) personToEdit).getOrganExpiryDate());
+
+                String errorMessage = getErrorMessage(personToEdit, editPersonDescriptor);
+                if (!errorMessage.equals("")) {
+                    throw new CommandException(errorMessage);
+                }
+
+                return new Donor(updatedType, updatedNric, updatedName, updatedPhone, updatedAge,
+                    updatedBloodType, updatedTissueType, updatedOrgan, updatedOrganExpiryDate, updatedStatus);
+            }
+        }
+        throw new CommandException(EditCommand.MESSAGE_USAGE);
+    }
+
+    /**
+     * Returns an error message if user tried to edit a person's attribute that does not exist.
+     */
+    private static String getErrorMessage(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        Type updatedType = editPersonDescriptor.getType().orElse(personToEdit.getType());
+        String errorMessage = "";
+        if (updatedType.isDoctor()) {
             if (editPersonDescriptor.getAge().isPresent()) {
                 errorMessage += "There is no age field in doctor\n";
-                hasError = true;
             }
             if (editPersonDescriptor.getBloodType().isPresent()) {
                 errorMessage += "There is no blood type field in doctor\n";
-                hasError = true;
             }
             if (editPersonDescriptor.getTissueType().isPresent()) {
                 errorMessage += "There is no tissue type field in doctor\n";
-                hasError = true;
             }
             if (editPersonDescriptor.getOrganExpiryDate().isPresent()) {
                 errorMessage += "There is no organ's expiry date field in doctor\n";
-                hasError = true;
             }
             if (editPersonDescriptor.getOrgan().isPresent()) {
                 errorMessage += "There is no organ field in doctor\n";
-                hasError = true;
             }
             if (editPersonDescriptor.getDoctorInCharge().isPresent()) {
-                errorMessage += "There is no doctor in charge field in doctor";
-                hasError = true;
+                errorMessage += "There is no doctor in charge field in doctor\n";
             }
             if (editPersonDescriptor.getPriority().isPresent()) {
                 errorMessage += "There is no priority field in doctor";
-                hasError = true;
             }
-            if (hasError) {
-                throw new CommandException(errorMessage);
+        } else if (updatedType.isPatient()) {
+            if (editPersonDescriptor.getOrganExpiryDate().isPresent()) {
+                errorMessage += "There is no organ's expiry date field in patient";
             }
-            return new Doctor(updatedType, updatedNric, updatedName, updatedPhone);
+        } else if (updatedType.isDonor()) {
+            if (editPersonDescriptor.getPriority().isPresent()) {
+                errorMessage += "There is no priority field in donor\n";
+            }
+            if (editPersonDescriptor.getPriority().isPresent()) {
+                errorMessage += "There is no priority field in donor";
+            }
         }
-        throw new CommandException(EditCommand.MESSAGE_USAGE);
+        return errorMessage;
     }
 
     @Override
