@@ -45,7 +45,7 @@ public class DoneCommandParser implements Parser<DoneCommand> {
             result = allResultValues.get(0);
 
             return new DoneCommand(firstNric, secondNric, result);
-        } catch  (NullPointerException | ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
