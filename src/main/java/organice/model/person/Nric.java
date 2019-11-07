@@ -1,10 +1,10 @@
 package organice.model.person;
 
-import java.util.AbstractMap;
-import java.util.Map;
-
 import static java.util.Objects.requireNonNull;
 import static organice.commons.util.AppUtil.checkArgument;
+
+import java.util.AbstractMap;
+import java.util.Map;
 
 /**
  * Represents a Person's NRIC in ORGANice.
@@ -12,10 +12,8 @@ import static organice.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "Nric must be a valid Singaporean Nric that starts with any of " +
-            "'S/T/F/G', has 7 numbers afterward and ends with a valid checksum letter.";
-
-    public final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Nric must be a valid Singaporean Nric that starts with any of "
+            + "'S/T/F/G', has 7 numbers afterward and ends with a valid checksum letter.";
 
     public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
 
@@ -47,6 +45,8 @@ public class Nric {
             new AbstractMap.SimpleEntry<>(9, 'L'),
             new AbstractMap.SimpleEntry<>(10, 'K'));
 
+    public final String value;
+
     /**
      * Constructs a {@code Nric}.
      *
@@ -58,8 +58,6 @@ public class Nric {
         value = nric.toUpperCase();
     }
 
-    // Nric checksum calculation referenced from:
-    // https://ayumilovemaple.wordpress.com/2008/09/24/validation-singapore-nric-number-verification/
     /**
      * Returns true if a given string is a valid Nric
      */
@@ -69,14 +67,21 @@ public class Nric {
             return false;
         }
 
-        return test.charAt(test.length() - 1) == calculateChecksumLetter(test);
+        return test.toUpperCase().charAt(test.length() - 1) == calculateChecksumLetter(test);
     }
 
+    // Nric checksum calculation referenced from:
+    // https://ayumilovemaple.wordpress.com/2008/09/24/validation-singapore-nric-number-verification/
+
+    /**
+     * Calculates the checksum letter of a given Nric.
+     */
     public static char calculateChecksumLetter(String nric) {
         requireNonNull(nric);
         checkArgument(nric.toUpperCase().matches(VALIDATION_REGEX));
 
-        char[] nricChars = nric.toCharArray();
+        String nricCopy = nric.toUpperCase();
+        char[] nricChars = nricCopy.toCharArray();
 
         char firstLetter = nricChars[0];
         int firstDigit = Integer.parseInt(String.valueOf(nricChars[1]));
