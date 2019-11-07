@@ -53,13 +53,12 @@ public class FindCommand extends Command {
      */
     private List<Person> fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList) {
         // Fuzzy Match by Levenshtein Distance is not implemented for following prefixes:
-        // Age, Priority, BloodType, TissueType
+        // Type, Age, Priority, BloodType, TissueType
         // Typos in these fields have a very small Levenshtein Distance (LD) as typical field length is very small
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         List<String> nricKeywords = argMultimap.getAllValues(PREFIX_NRIC);
         List<String> phoneKeywords = argMultimap.getAllValues(PREFIX_PHONE);
-        List<String> typeKeywords = argMultimap.getAllValues(PREFIX_TYPE);
 
         // List containing combined Levenshtein Distance of persons in inputList
         ArrayList<Integer> distanceList = new ArrayList<>();
@@ -73,8 +72,6 @@ public class FindCommand extends Command {
                     : findMinLevenshteinDistance(nricKeywords, currentPerson.getNric().toString());
             combinedLevenshteinDistance += phoneKeywords.isEmpty() ? 0
                     : findMinLevenshteinDistance(phoneKeywords, currentPerson.getPhone().toString());
-            combinedLevenshteinDistance += typeKeywords.isEmpty() ? 0
-                    : findMinLevenshteinDistance(typeKeywords, currentPerson.getType().toString());
 
             distanceList.add(i, combinedLevenshteinDistance);
         }
