@@ -463,7 +463,11 @@ public class FormUiManager {
         mainWindow.getForm().increaseProgress();
         currentState++;
         history.add(currentState, formField);
-        FormAnimation.typingAnimation(mainWindow, fieldValue.toUpperCase(), formField);
+        if (formField.equals(FormField.NAME)) { //Name is case sensitive while the rest is not
+            FormAnimation.typingAnimation(mainWindow, fieldValue, formField);
+        } else {
+            FormAnimation.typingAnimation(mainWindow, fieldValue.toUpperCase(), formField);
+        }
         logger.info(String.format("----------------[USER INPUT][%s: %s]", formField.toUpperCase(), fieldValue));
     }
 
