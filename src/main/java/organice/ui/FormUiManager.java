@@ -397,13 +397,8 @@ public class FormUiManager {
      */
     private CommandResult addDoctorToList() throws ParseException, CommandException {
         DoctorForm form = (DoctorForm) mainWindow.getForm();
-        String[] nameArr = form.getName().getText().trim().split(" ");
-        String name = "";
-        for (String str : nameArr) { //Make the first character in name uppercase the rest lowercase
-            name += str.substring(0, 1) + str.substring(1).toLowerCase() + " ";
-        }
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.DOCTOR + " " + PREFIX_NAME
-                + name.trim() + " " + PREFIX_NRIC + form.getNric().getText() + " "
+                + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
                 + PREFIX_PHONE + form.getPhone().getText();
 
         CommandResult commandResult = mainWindow.getLogic().execute(command);
@@ -415,13 +410,8 @@ public class FormUiManager {
      */
     private CommandResult addDonorToList() throws ParseException, CommandException {
         DonorForm form = (DonorForm) mainWindow.getForm();
-        String[] nameArr = form.getName().getText().trim().split(" ");
-        String name = "";
-        for (String str : nameArr) { //Make the first character in name uppercase the rest lowercase
-            name += str.substring(0, 1) + str.substring(1).toLowerCase() + " ";
-        }
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.DONOR + " " + PREFIX_NAME
-                + name.trim() + " " + PREFIX_NRIC + form.getNric().getText() + " "
+                + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
                 + PREFIX_PHONE + form.getPhone().getText() + " " + PREFIX_AGE + form.getAge().getText() + " "
                 + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE
                 + form.getBloodType().getText() + " "
@@ -437,13 +427,8 @@ public class FormUiManager {
      */
     private CommandResult addPatientToList() throws ParseException, CommandException {
         PatientForm form = (PatientForm) mainWindow.getForm();
-        String[] nameArr = form.getName().getText().trim().split(" ");
-        String name = "";
-        for (String str : nameArr) { //Make the first character in name uppercase the rest lowercase
-            name += str.substring(0, 1) + str.substring(1).toLowerCase() + " ";
-        }
         String command = AddCommand.COMMAND_WORD + " " + PREFIX_TYPE + Type.PATIENT + " " + PREFIX_NAME
-                + name.trim() + " " + PREFIX_NRIC + form.getNric().getText() + " "
+                + form.getName().getText() + " " + PREFIX_NRIC + form.getNric().getText() + " "
                 + PREFIX_PHONE + form.getPhone().getText() + " " + PREFIX_AGE + form.getAge().getText() + " "
                 + PREFIX_ORGAN + form.getOrgan().getText() + " " + PREFIX_BLOOD_TYPE
                 + form.getBloodType().getText() + " " + PREFIX_TISSUE_TYPE + form.getTissueType().getText()
