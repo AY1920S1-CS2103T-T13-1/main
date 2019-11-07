@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import organice.commons.core.GuiSettings;
 import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
@@ -80,7 +81,18 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasDoctorInCharge(DoctorInCharge doctorIc) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+
+    @Override
     public Patient getPatient(Nric patientNric) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Person getPerson(Nric personNric) {
         throw new AssertionError("This method should not be called.");
     }
 

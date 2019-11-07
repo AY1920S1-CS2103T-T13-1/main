@@ -11,6 +11,7 @@ import organice.commons.core.GuiSettings;
 import organice.logic.commands.exceptions.CommandException;
 
 import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
@@ -97,6 +98,11 @@ public interface Model {
     boolean hasDonor(Nric donor);
 
     /**
+     * Returns true if a patient's doctor in charge is the same as {@code doctorIc} exists in the address book.
+     */
+    boolean hasDoctorInCharge(DoctorInCharge doctorIc);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -133,6 +139,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Retrieves the {@code Person} with the specified {@code Nric}
+     * @throws PersonNotFoundException if the {@code Person} with the {@code Nric} cannot be found.
+     */
+    Person getPerson(Nric personNric) throws PersonNotFoundException;
 
     /**
      * Retrieves the {@code Patient} with the specified {@code Nric}

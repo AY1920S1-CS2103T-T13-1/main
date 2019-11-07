@@ -25,6 +25,7 @@ import organice.model.comparator.NumOfMatchesComparator;
 import organice.model.comparator.PriorityComparator;
 import organice.model.comparator.SuccessRateComparator;
 import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
 import organice.model.person.Donor;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
@@ -148,6 +149,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDoctorInCharge(DoctorInCharge doctorIc) {
+        requireNonNull(doctorIc);
+        return addressBook.hasDoctorInCharge(doctorIc);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -156,6 +163,12 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public Person getPerson(Nric personNric) throws PersonNotFoundException {
+        requireNonNull(personNric);
+        return addressBook.getPerson(personNric);
     }
 
     @Override
