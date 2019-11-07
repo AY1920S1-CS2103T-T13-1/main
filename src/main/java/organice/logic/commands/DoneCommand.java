@@ -18,8 +18,7 @@ import organice.model.person.exceptions.PersonNotFoundException;
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finish the processing of patients and donors"
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finish the processing of patients and donors \n"
             + "Parameters: ic/PATIENT NRIC ic/DONOR NRIC res/[pass/fail] \n"
             + "Example: " + COMMAND_WORD + " ic/s4512345A ic/s7711123C res/pass";
 
@@ -42,10 +41,11 @@ public class DoneCommand extends Command {
 
     /**
      * Creates a DoneCommand to determine if the given patient and donor can be deleted from the system.
+     * The method will first convert the Nrics given in String to an actual Nric type.
      * If the cross-matching fails, the patient and donor will need to be in the system for further matching.
      * If the cross-matching pass, the patient and donor can be deleted from ORGANice.
-     * @param firstNricString
-     * @param secondNricString
+     * @param firstNricString the first Nric given by the user, in String.
+     * @param secondNricString the second Nric given by the user, in String.
      */
     public DoneCommand(String firstNricString, String secondNricString, String result) {
         requireNonNull(firstNricString, secondNricString);
@@ -58,8 +58,8 @@ public class DoneCommand extends Command {
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and is processing in order to be valid.
-     * The method will first convert the Nrics given in String to an actual Nric type,
-     * then it will create the donor and patient with the respective Nric in ORAGANice.
+     * the method will create the donor and patient with the respective Nrics in ORAGANice
+     * from the parameters.
      * @param firstNric the first Nric given by the user.
      * @param secondNric the second Nric given by the user.
      * @param model
