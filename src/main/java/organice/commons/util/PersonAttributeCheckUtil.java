@@ -12,27 +12,29 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.List;
+
 import organice.logic.parser.ArgumentMultimap;
-import organice.model.person.Name;
-import organice.model.person.Nric;
-import organice.model.person.Phone;
-import organice.model.person.Type;
 import organice.model.person.Age;
-import organice.model.person.Priority;
 import organice.model.person.BloodType;
 import organice.model.person.DoctorInCharge;
-import organice.model.person.TissueType;
-import organice.model.person.OrganExpiryDate;
+import organice.model.person.Name;
+import organice.model.person.Nric;
 import organice.model.person.Organ;
-
-import java.util.List;
-import java.util.function.Predicate;
+import organice.model.person.OrganExpiryDate;
+import organice.model.person.Phone;
+import organice.model.person.Priority;
+import organice.model.person.TissueType;
+import organice.model.person.Type;
 
 /**
  * Helper functions for checking properties or validity of Person and Person child class attributes.
  */
 public class PersonAttributeCheckUtil {
 
+    /**
+     * Checks that the values in the given {@code argMultimap} are valid.
+     */
     public static void checkValidityAttributes(ArgumentMultimap argMultimap) {
         // attempt to create the attribute from values in multimap
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
@@ -61,7 +63,4 @@ public class PersonAttributeCheckUtil {
         organKeywords.forEach(Organ::new);
     }
 
-    public static boolean checkConditionAttributes(List<?> attributes, Predicate<?>) {
-        // return true if all attributes pass predicate
-    }
 }

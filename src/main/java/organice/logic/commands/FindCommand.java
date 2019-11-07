@@ -5,7 +5,6 @@ import static organice.commons.util.StringUtil.calculateLevenshteinDistance;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CliSyntax.PREFIX_NRIC;
 import static organice.logic.parser.CliSyntax.PREFIX_PHONE;
-import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
