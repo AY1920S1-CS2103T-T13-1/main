@@ -34,8 +34,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose prefixes are similar to any of"
             + " the specified prefix-keywords pairs (case-insensitive) and displays them as a list with index numbers."
             + "\nList of Prefixes: n/, ic/, p/, a/, t/, pr/, b/, d/, tt/, exp/, o/"
-            + "Parameters: PREFIX/KEYWORD [MORE_PREFIX-KEYWORD_PAIRS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice t/doctor";
+            + "\nParameters: PREFIX/KEYWORD [MORE_PREFIX-KEYWORD_PAIRS]..."
+            + "\nExample: " + COMMAND_WORD + " n/alice t/doctor";
 
     // Maximum Levenshtein Distance tolerated for a fuzzy match
     private static final int FUZZY_THRESHOLD = 5;
