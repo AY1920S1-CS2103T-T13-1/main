@@ -132,7 +132,7 @@ public class SampleDataUtil {
                                     + TISSUETYPE_VALUES[(iterator + 5) % TISSUETYPE_VALUES.length]
                     ),
                     new Organ("kidney"),
-                    new OrganExpiryDate(OrganExpiryDate.DATE_FORMAT.format(Calendar.getInstance().getTime())),
+                    new OrganExpiryDate(OrganExpiryDate.DATE_FORMAT.format(calendar.getTime())),
                     new Status(Status.STATUS_NOT_PROCESSING)
             );
             donorList.add(newDonor);
