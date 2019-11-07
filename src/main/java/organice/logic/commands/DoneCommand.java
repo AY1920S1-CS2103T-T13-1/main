@@ -58,7 +58,7 @@ public class DoneCommand extends Command {
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and is processing in order to be valid.
-     * the method will create the donor and patient with the respective Nrics in ORAGANice
+     * The method will create the donor and patient with the respective Nrics in ORAGANice
      * from the parameters.
      * @param firstNric the first Nric given by the user.
      * @param secondNric the second Nric given by the user.
