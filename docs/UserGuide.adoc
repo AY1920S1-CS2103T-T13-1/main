@@ -96,7 +96,7 @@ a person and the criteria for valid inputs:
 
 * b/**BLOODTYPE** - the blood type of the person
 ** Applicable to: patients and donors
-** Valid input: A/B/AB/O
+** Valid input: A+/B+/AB+/O+/A-/B-/AB-/O-
 
 * p/**PHONE** - contact number of a person
 ** Applicable to: patients, doctors, donors
@@ -123,7 +123,9 @@ a person and the criteria for valid inputs:
 
 * tt/**TISSUE TYPE** - the type of tissues
 ** Applicable to: patients and donors
-** Valid input: a string of 6 numbers (from 1 - 12), separated by commas
+** Valid input: a string of 6 unique numbers (from 1 - 12), separated by commas. Note that the order of the tissue types
+does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are treated as the same input because they contain the
+same 6 unique numbers.
 
 * exp/**EXPIRY** - expiry date of a donor's organ
 ** Applicable to: donors
@@ -173,14 +175,18 @@ There are two methods to add a person:
 * Method 1: Normal Add
 * Method 2: Add with system prompting
 
-To understand how to add a person via the 'Normal Add' method, go to <<Normal Add>>.
-To understand how to add a person via the 'Add with system prompting' method, go to <<Add with system prompting>>.
+To understand how to add a person via the 'Normal Add' method, go to <<Adding as per normal>>.
+To understand how to add a person via the 'Add with system prompting' method, go to <<Adding with system prompting>>.
 
+Note that when you add a person, ORGANice will detect if the person you are trying to add
+has the same NRIC as another person in ORGANice. When this happens, ORGANice will not allow you to
+add that person. An error message will be displayed, prompting you to change the NRIC of the person you are trying to
+add.
 
-==== Normal Add
+==== Adding as per normal
 
-Normal add refers to specifying all the attributes in the command. To add, type in the following
-commands to add a person:
+This method of adding refers to specifying all the attributes in the command. To add, type in the
+commands of the following format to add a person:
 
 Format for adding patients: `add t/patient n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
 p/**PHONE** pr/**PRIORITY** ic/**NRIC** d/**DOCTOR** a/**AGE**` +
@@ -190,21 +196,18 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
 
 Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE**`
 
-After adding a person, ORGANice will display a form which contains the attributes of the person. Press
-kbd:[Enter] to confirm the details.
-
 [TIP]
-View the List of Attributes in the beginning of <<Features>> to find out what each attribute mean.
+View the List of Attributes in the beginning of <<Features>> to find out the meaning of each parameter.
 
 Examples:
 
-* `add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+* `add t/patient n/John Doe o/kidney b/A+ tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
 d/S2235456D a/29`
-* `add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+* `add t/donor n/Betsy Kim o/kidney b/AB- tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
 exp/23-Nov-2020 a/21`
 * `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
 
-==== Add with system prompting
+==== Adding with system prompting
 
 In this mode, instead of typing a long command at one go, you can add a person's attributes one by one.
 After entering an attribute, the system will prompt you to input another attribute.
@@ -317,55 +320,52 @@ Edits the phone number of the specified patient to be `91234567`.
 * `edit S8732457G n/Betsy Crower p/91234567` +
 Edits the name and phone number of the specified donor to be `Betsy Crower` and `91234567` respectively.
 
-// tag::find[]
 === Finding persons by attributes: `find`
 
-You can use the `find` command to search for persons whose attributes match your input keywords. Matching persons will
-be displayed in a list. +
+You can use the `find` command to search for persons whose attributes match your input keywords. A list of matching
+persons along with the number of exact and possible matches will be displayed. +
 
-Format: `find __PREFIX__/__KEYWORD__`
+Format: `find __PREFIX__/__KEYWORD__ (__PREFIX__/__KEYWORD__...)`
 
-Optional parameters: Multiple `keywords` per `prefix`, multiple `prefixes` in the same find command.
+Optional parameters: Multiple __keyword__s per __prefix__, multiple __prefixe__s in the same find command.
 
-The find command performs case insensitive `OR` matching within a prefix and `AND` matching between prefixes. The
-following example illustrates this concept:
+[TIP]
+You may wish to reference <<List of Attributes>>, to view the list of available prefixes to search by.
+
+The find command is **case insensitive** and performs **OR** matching within a prefix and **AND** matching between
+prefixes. It also matches similar looking words to account for possible typos in your keywords. The following example illustrates
+these concepts:
 
 .Find command with multiple prefixes and multiple keywords per prefix.
 image::findByPrefix.png[width="790"]
 
-As seen from Figure 12, `find n/Duncan n/Lionel n/Helen t/patient t/donor` displays 'Duncan Chua', `Lionel Doe` and
-`Helen Davidson`. This is due to the fact that Duncan's name matches either of 'Duncan' `OR` 'Lionel' `OR` 'Helen' `AND`
-he is also either a 'doctor' `OR` 'donor'. The same is true for Lionel and Helen. You should note that the only
-exception to this rule is tissue type matching, which uses `AND` matching within the prefix.
+In Figure 12, you can see that `find n/Duncan n/Loinel n/Helen t/patient t/donor` shows a list of 44 matches. The two
+exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
+keywords. 'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan's name matches
+either of 'Duncan' **OR** 'Loinel' **OR** 'Helen' **AND** he is also either a 'patient' **OR** 'donor'. The same is true
+for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
+picked up on that typo or we'd have missed Lionel!
 
-You may wish to reference the following section: <<List of Attributes>>, to view the list of available prefixes to
-search by.
+NOTE: The only exception to this rule is tissue type matching, which uses `AND` matching within the prefix.
 
-Here are some examples and pointers showcasing the use of `find`:
-
-__Use case with single prefix and keyword__ +
-* `find n/Alice` +
-Displays all persons whose name contains 'Alice'
-
-__Use case demonstrating keyword case insensitivity__ +
-* `find n/aLiCe` +
-Displays the same result as the preceding example.
+Lets take a look at some examples and pointers showcasing the use of `find`:
 
 __Use case with multiple keywords per prefix__ +
-* `find n/Alice n/Benson b/A b/B b/O` +
-Displays all persons whose name contains either 'Alice' or 'Benson' and whose blood type is either 'A', 'B' or 'O'.
+* `find n/Laura n/Marisha Ray b/A b/B b/O` +
+Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.
 
 __Use case demonstrating prefix order insensitivity__ +
-* `find b/A n/Benson b/O n/Alice b/B` +
+* `find b/A n/Benson Carter b/O n/Alice b/B` +
 Displays the same result as the preceding example.
-
-__Use case demonstrating full name capture__ +
-* `find n/Laura Bailey n/Marisha Ray` +
-Displays all persons whose name contains 'Laura Bailey' or 'Marisha Ray'.
 
 __Use case demonstrating tissue type finding__ +
 * `find tt/4,1,2,3` +
 Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.
+
+[TIP]
+Looking for exact matches? No problem! Just replace `find` with `exactFind`!
+
+That's it for this section. Congratulations, you now know how to use the `find` command!
 
 === Detecting matches: `match`
 
@@ -528,14 +528,6 @@ To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own
 
 Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-=== Detecting duplicates
-
-When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
-A duplicate is defined as: Two persons of the same type who have the same NRIC.
-
-When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
-should be changed.
 
 == Future improvements
 
