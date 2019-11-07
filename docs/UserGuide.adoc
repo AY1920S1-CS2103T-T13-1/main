@@ -381,47 +381,39 @@ To learn how to run kidney matching tests on all patients,
 refer to <<Matching all patients>>.
 
 ==== Matching a specific patient
-This section will explain how to run kidney matching tests on a specific patient and give you an example.
-To get a list of potential donors for a patient,
-type in a command of the format `match ic/**PATIENT NRIC**`.
+This section will explain how to run kidney matching tests for a specific patient and illustrate
+the process with an example.
+To get a list of potential donors for a patient, type in `match ic/**PATIENT NRIC**`.
 
-Here is an example. Suppose you want to find potential donors for a patient called "John Doe" and his NRIC is "S1234568R".
-You will have to type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
+Here is an example. Suppose you want to find potential donors for a patient "John Doe" and his NRIC is "S1234568R".
+Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
-You will see a list of potential donors for John Doe along with the success
+You will see a list of potential donors for John Doe along with the compatibility
 rate of each donor, similar to Figure 13.
 
 //TODO need to change this to another screenshot
-.List of Donors that match John Doe
+.List of potential donors for John Doe
 image::MatchingDonorsDisplayed.png[width=790]
 
-For more information on the success rate, you may refer to <<FAQ>>.
+For more information on the compatibility rate, you may refer to <<FAQ>>.
 
 ==== Matching all patients
-This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
-through an example.
-To match all the patients in ORGANice,
+This section will explain how to run kidney matching tests on all patients stored in ORGANice and illustrate the process
+with an example.
+If you want to match all the patients in ORGANice,
 type `match ic/all` in the Command Box and press kbd:[Enter].
 
 You will see a list of all the patients in ORGANice along with the number of
 potential donors for each patient.
 
-//TODO change the Figure name as more diagrams are added.
-For example, you have three patients named 'Someone edited',
-'Gary Tennant' and 'Elle Brady' respectively stored in ORGANice.
-Some donors are also stored in ORGANice.
-If you type `match ic/all` in the Command Box and press kbd:[Enter],
-you will see 'Someone edited', 'Gary Tennant'
-and 'Elle Brady' along with the number of matching donors each patient has. +
-
-Referring to Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
+As seen in Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
 This means that 'Someone edited' has 3 potential donors.
 
 .List of Persons with number of matching donors
 image::PatientMatchResults.png[width=790]
 
-
-Following this, you can sort the matches based on different categories to deduce which patient to prioritize.
+Following this, you can sort the matches based on different criteria to
+determine which patient to prioritize.
 Refer to <<Sorting matches: `sort`>> for more information.
 
 === Sorting matches: `sort`
@@ -628,12 +620,18 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
 ** Optional parameters: any parameter from <<List of Attributes>>
 * *Find* : `find`
 ** Optional parameters: any parameter from <<List of Attributes>>
-* *Match* : `match [all/ic]`
-** Optional parameters: `sort/[rate/expiry/priority]` +
-* *Processing*: `processing icP/**NRIC of Patient** icD/**NRIC OF DONOR**`
+* *Match* :
+** *Match a specific patient*: `match ic/**NRIC OF PATIENT**`
+** *Match all patients*: `match ic/all`
+* *Sort matches*:
+** *Sort based on compatibility rate*: `sort/rate`
+** *Sort based on organ expiry date*: `sort expiry`
+** *Sort based on patient priority* `sort priority` +
+* *Processing*: `processing ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR**`
+* *Mark tasks as done*: `processingMarkDone ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR**
 * *List* : `list t/**TYPE**`
 * *Help* : `help`
-* *Done* : `done icP/**NRIC of Patient** icD/**NRIC OF DONOR** `
+* *Done* : `done ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR** `
 * *Exit* : `exit`
 
 == Glossary
@@ -658,6 +656,6 @@ for harmful interactions between patient and donor's blood
 
 * duplicate: refers to two persons of the same type which have the same NRIC
 
-* success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
+* compatibility rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
 
 * priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.
