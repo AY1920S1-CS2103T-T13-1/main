@@ -10,7 +10,7 @@ import organice.logic.commands.ProcessingMarkDoneCommand;
 import organice.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new ExactFindCommand object
  */
 public class ProcessingMarkDoneCommandParser implements Parser<ProcessingMarkDoneCommand> {
 
@@ -30,15 +30,19 @@ public class ProcessingMarkDoneCommandParser implements Parser<ProcessingMarkDon
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        if (nameKeywords[0].startsWith(prefixNricString) && nameKeywords[1].startsWith(prefixNricString)) {
-            firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
-            secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
-            taskNumber = nameKeywords[2];
-        } else {
+        try {
+            if (nameKeywords[0].startsWith(prefixNricString) && nameKeywords[1].startsWith(prefixNricString)) {
+                firstNric = nameKeywords[0].replaceFirst(prefixNricString, "");
+                secondNric = nameKeywords[1].replaceFirst(prefixNricString, "");
+                taskNumber = nameKeywords[2];
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ProcessingCommand.MESSAGE_USAGE));
+            }
+            return new ProcessingMarkDoneCommand(firstNric, secondNric, taskNumber);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ProcessingCommand.MESSAGE_USAGE));
         }
-        return new ProcessingMarkDoneCommand(firstNric, secondNric, taskNumber);
     }
-
 }
