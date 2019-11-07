@@ -115,7 +115,7 @@ public class SampleDataUtil {
         for (; iterator < numPersons; iterator++, nricBody += Math.random() * (nricIncrementMax + 1)) {
             // Random date within +[30, 150) days
             calendar.add(Calendar.DATE,
-                    (int) (Math.random() * ((maxDateIncrement - minDateIncrement) + 1) + minDateIncrement);
+                    (int) (Math.random() * ((maxDateIncrement - minDateIncrement) + 1) + minDateIncrement));
             Donor newDonor = new Donor(
                     new Type("donor"),
                     new Nric(NRIC_LETTERS[iterator % NRIC_LETTERS.length]
