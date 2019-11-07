@@ -3,7 +3,9 @@ package organice.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import organice.commons.core.LogsCenter;
 import organice.logic.parser.MatchCommandParser;
 import organice.model.Model;
 import organice.model.person.BloodType;
@@ -40,7 +42,10 @@ public class MatchCommand extends Command {
     private String input;
     private Patient patient;
 
+    private static final Logger logger = LogsCenter.getLogger(MatchCommand.class);
+
     public MatchCommand(String input) {
+        logger.info("Input to MatchCommand: " + input);
         requireNonNull(input);
         this.input = input;
     }
@@ -87,7 +92,7 @@ public class MatchCommand extends Command {
         model.removeMatches();
         model.matchAllPatients();
         CommandResult commandResult = new CommandResult(MESSAGE_SUCCESS);
-        commandResult.setMatch(true);
+        logger.info("Finished matching all patients and all donors in ORGANice!");
         return commandResult;
     }
 
@@ -113,9 +118,12 @@ public class MatchCommand extends Command {
                             patientNric.toString()));
                 }
 
-                commandResult.setMatch(true);
+                logger.info(String.format("Finished matching Patient of NRIC: %s with number of matches: %d",
+                        patientNric.toString(), numberOfMatches));
                 return commandResult;
             } else {
+                logger.info(String.format("Patient of NRIC: %s not found in ORGANice!",
+                        patientNric.toString()));
                 return new CommandResult(String.format(MESSAGE_PERSON_NOT_FOUND, patientNric));
             }
         } catch (PersonNotFoundException pne) {
