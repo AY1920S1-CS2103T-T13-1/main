@@ -26,7 +26,6 @@
 <li><a href="#mark-as-done-code-done-code">5.9. Mark as done : <code>done</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">5.10. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">5.11. Saving the data</a></li>
-<li><a href="#detecting-duplicates">5.12. Detecting duplicates</a></li>
 </ul>
 </li>
 <li><a href="#future-improvements">6. Future improvements</a>
@@ -225,7 +224,7 @@ a person and the criteria for valid inputs:</p>
 <p>Applicable to: patients and donors</p>
 </li>
 <li>
-<p>Valid input: A/B/AB/O</p>
+<p>Valid input: A+/B+/AB+/O+/A-/B-/AB-/O-</p>
 </li>
 </ul>
 </div>
@@ -316,7 +315,9 @@ a person and the criteria for valid inputs:</p>
 <p>Applicable to: patients and donors</p>
 </li>
 <li>
-<p>Valid input: a string of 6 numbers (from 1 - 12), separated by commas</p>
+<p>Valid input: a string of 6 unique numbers (from 1 - 12), separated by commas. Note that the order of the tissue types
+does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are treated as the same input because they contain the
+same 6 unique numbers.</p>
 </li>
 </ul>
 </div>
@@ -420,14 +421,20 @@ depending on what is specified.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>To understand how to add a person via the 'Normal Add' method, go to <a href="#normal-add">Section 5.2.1, &#8220;Normal Add&#8221;</a>.
-To understand how to add a person via the 'Add with system prompting' method, go to <a href="#add-with-system-prompting">Section 5.2.2, &#8220;Add with system prompting&#8221;</a>.</p>
+<p>To understand how to add a person via the 'Normal Add' method, go to <a href="#adding-as-per-normal">Section 5.2.1, &#8220;Adding as per normal&#8221;</a>.
+To understand how to add a person via the 'Add with system prompting' method, go to <a href="#adding-with-system-prompting">Section 5.2.2, &#8220;Adding with system prompting&#8221;</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that when you add a person, ORGANice will detect if the person you are trying to add
+has the same NRIC as another person in ORGANice. When this happens, ORGANice will not allow you to
+add that person. An error message will be displayed, prompting you to change the NRIC of the person you are trying to
+add.</p>
 </div>
 <div class="sect3">
-<h4 id="normal-add"><a class="link" href="#normal-add">5.2.1. Normal Add</a></h4>
+<h4 id="adding-as-per-normal"><a class="link" href="#adding-as-per-normal">5.2.1. Adding as per normal</a></h4>
 <div class="paragraph">
-<p>Normal add refers to specifying all the attributes in the command. To add, type in the following
-commands to add a person:</p>
+<p>This method of adding refers to specifying all the attributes in the command. To add, type in the
+commands of the following format to add a person:</p>
 </div>
 <div class="paragraph">
 <p>Format for adding patients: <code>add t/patient n/<strong>NAME</strong> o/<strong>ORGAN</strong> b/<strong>BLOOD TYPE</strong> tt/<strong>TISSUE TYPE</strong>
@@ -440,10 +447,6 @@ p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/
 <div class="paragraph">
 <p>Format for adding doctors: <code>add t/doctor n/<strong>NAME</strong> ic/<strong>NRIC</strong> p/<strong>PHONE</strong></code></p>
 </div>
-<div class="paragraph">
-<p>After adding a person, ORGANice will display a form which contains the attributes of the person. Press
-<kbd>Enter</kbd> to confirm the details.</p>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -451,7 +454,7 @@ p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-View the List of Attributes in the beginning of <a href="#Features">Section 5, &#8220;Features&#8221;</a> to find out what each attribute mean.
+View the List of Attributes in the beginning of <a href="#Features">Section 5, &#8220;Features&#8221;</a> to find out the meaning of each parameter.
 </td>
 </tr>
 </table>
@@ -462,11 +465,11 @@ View the List of Attributes in the beginning of <a href="#Features">Section 5, &
 <div class="ulist">
 <ul>
 <li>
-<p><code>add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+<p><code>add t/patient n/John Doe o/kidney b/A+ tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
 d/S2235456D a/29</code></p>
 </li>
 <li>
-<p><code>add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+<p><code>add t/donor n/Betsy Kim o/kidney b/AB- tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
 exp/23-Nov-2020 a/21</code></p>
 </li>
 <li>
@@ -476,7 +479,7 @@ exp/23-Nov-2020 a/21</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="add-with-system-prompting"><a class="link" href="#add-with-system-prompting">5.2.2. Add with system prompting</a></h4>
+<h4 id="adding-with-system-prompting"><a class="link" href="#adding-with-system-prompting">5.2.2. Adding with system prompting</a></h4>
 <div class="paragraph">
 <p>In this mode, instead of typing a long command at one go, you can add a person&#8217;s attributes one by one.
 After entering an attribute, the system will prompt you to input another attribute.</p>
@@ -1048,17 +1051,6 @@ match detection with other patients and donors.</p>
 There is no need to save manually.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="detecting-duplicates"><a class="link" href="#detecting-duplicates">5.12. Detecting duplicates</a></h3>
-<div class="paragraph">
-<p>When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
-A duplicate is defined as: Two persons of the same type who have the same NRIC.</p>
-</div>
-<div class="paragraph">
-<p>When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
-should be changed.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1291,4 +1283,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 04:48:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 11:59:08 UTC</div></div></div></body></html>
