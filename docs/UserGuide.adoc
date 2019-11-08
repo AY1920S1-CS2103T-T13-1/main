@@ -322,7 +322,7 @@ The format is such that after the `edit` keyword, provide the person's NRIC, fol
 Format: `edit **NRIC**` followed by attributes to update
 
 For instance, if you want to change a patient's phone number to 91234567, you can provide his or her NRIC followed by the new phone number
-as follow: `edit S8732457G p/91234567`.
+as follows: `edit S8732457G p/91234567`.
 
 **You can only make changes to attributes that the person has.**
 For example, you cannot change a doctor's age because a doctor does not have that attribute in ORGANice.
