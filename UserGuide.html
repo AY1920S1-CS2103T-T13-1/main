@@ -18,7 +18,7 @@
 <li><a href="#viewing-help-code-help-code">5.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-code">5.2. Adding a person: <code>add</code></a></li>
 <li><a href="#listing-persons-code-list-code">5.3. Listing persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">5.4. Editing a person : <code>edit</code></a></li>
+<li><a href="#editing-a-person-s-attribute-code-edit-code">5.4. Editing a person&#8217;s attribute : <code>edit</code></a></li>
 <li><a href="#finding-persons-by-attributes-code-find-code">5.5. Finding persons by attributes: <code>find</code></a></li>
 <li><a href="#detecting-matches-code-match-code">5.6. Detecting matches: <code>match</code></a></li>
 <li><a href="#sorting-matches-code-sort-code">5.7. Sorting matches: <code>sort</code></a></li>
@@ -641,54 +641,69 @@ For example, if you enter the wrong name and want to undo the action, type <code
 <div class="sect2">
 <h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">5.3. Listing persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all doctors, donors, or patients in ORGANice, depending on the type of person specified. Shows all
-persons in ORGANice if no type is specified.</p>
+<p>This list command can show you the list of persons in ORGANice.</p>
+</div>
+<div class="sect3">
+<h4 id="listing-all-persons"><a class="link" href="#listing-all-persons">5.3.1. Listing all persons</a></h4>
+<div class="paragraph">
+<p>Simply type <code>list</code> in the Command Box and ORGANice will show you all patients, doctors and donors present in the system.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>list</code></p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="listing-persons-of-a-specified-type"><a class="link" href="#listing-persons-of-a-specified-type">5.3.2. Listing persons of a specified type</a></h4>
 <div class="paragraph">
-<p>Optional parameters: Type parameter - <code>t/TYPE</code></p>
+<p>If you wish to see a certain type of person only, you can provide the type parameter in the list command.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Optional parameter: Type - <code>t/TYPE</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-Lists all patients, doctors and donors in the records.</p>
-</li>
-<li>
-<p><code>list t/patient</code><br>
-Lists all patients only.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>For instance, if you only want to see all doctors, you can enter the following:
+<code>list t/doctor</code>. Likewise, you can change the type parameter in the same manner to see only patients or donors.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">5.4. Editing a person : <code>edit</code></a></h3>
+<h3 id="editing-a-person-s-attribute-code-edit-code"><a class="link" href="#editing-a-person-s-attribute-code-edit-code">5.4. Editing a person&#8217;s attribute : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits the information of the person with the specified NRIC to the attributes specified.
-It is up to the user to specify which attributes should be updated.<br></p>
+<p>If you want to make any changes to a person&#8217;s attribute, you can edit the information using an edit command.
+If there are multiple attributes to change, you can do so in the same edit command.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit <strong>NRIC</strong></code></p>
+<p>The format is such that after the <code>edit</code> keyword, provide the person&#8217;s NRIC, followed by the attribute(s) that you want to change in the edit command.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Format: <code>edit <strong>NRIC</strong></code> followed by attributes to update</p>
+</div>
+<div class="paragraph">
+<p>For instance, if you want to change a patient&#8217;s phone number to 91234567, you can provide his or her NRIC followed by the new phone number
+as follows: <code>edit S8732457G p/91234567</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>You can only make changes to attributes that the person has.</strong>
+For example, you cannot change a doctor&#8217;s age because a doctor does not have that attribute in ORGANice.</p>
+</div>
+<div class="paragraph">
+<p><strong>In addition, there are some attributes that cannot be edited.</strong> These include:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit S8732457G p/91234567</code><br>
-Edits the phone number of the specified patient to be <code>91234567</code>.</p>
+<p>NRIC</p>
 </li>
 <li>
-<p><code>edit S8732457G n/Betsy Crower p/91234567</code><br>
-Edits the name and phone number of the specified donor to be <code>Betsy Crower</code> and <code>91234567</code> respectively.</p>
+<p>Type</p>
+</li>
+<li>
+<p>Organ expiry date</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>You might want to refer to <a href="#list-of-attributes">Section 4, &#8220;List of Attributes&#8221;</a> to see what attributes are applicable to each type of person in ORGANice.</p>
 </div>
 </div>
 <div class="sect2">
@@ -856,7 +871,7 @@ how to sort matches.</p>
 </div>
 <div class="paragraph">
 <p><strong>The sort command can only be used after a match command</strong> to sort the resulting list of patient-donor pairs generated.
-There are three categories by which you can sort the matches, namely:</p>
+There are three criteria in which you can sort the matches, namely:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -872,69 +887,55 @@ There are three categories by which you can sort the matches, namely:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These categories are further elaborated below. Note that <strong>only one category can be used in one sort command</strong>.</p>
+<p>These criteria will be further explained below.</p>
+</div>
+<div class="paragraph">
+<p>Note that <strong>only one criteria can be used in one sort command</strong>.</p>
 </div>
 <div class="sect3">
 <h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">5.7.1. Sorting based on donor&#8217;s organ expiry date</a></h4>
 <div class="paragraph">
-<p>This category sorts a list of matched donors belonging to a particular patient based on the donated organ&#8217;s expiry date (from the earliest to the latest expiry date).</p>
-</div>
-<div class="paragraph">
-<p>This allows you to determine which organs are expiring soon so that you can prioritize them for organ transplant.</p>
+<p>To find out which organs are expiring soon, you can sort the list of matched donors based on the donor&#8217;s organ expiry date (from the earliest to the latest expiry date).</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>sort expiry</code></p>
 </div>
 <div class="paragraph">
-<p>Example:<br>
-After running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get the list of donors that are compatible with said patient.
-You can then run <code>sort expiry</code> to obtain the list of donors with the earliest organ expiration date at the top of the list.</p>
+<p>For example, after running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get the list of donors that are compatible with said patient.
+You can then run <code>sort expiry</code> to obtain the list of donors with earlier organ expiry dates near the top of the list.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">5.7.2. Sorting based on priority</a></h4>
 <div class="paragraph">
-<p>This category sorts a list of matched patients based on their priority (from highest to lowest). You may refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> for more information on priority.</p>
-</div>
-<div class="paragraph">
-<p>This allows you to determine which patient to prioritize for organ transplant.</p>
+<p>To determine which patient to prioritize for organ transplant, you can sort the list of matched patients based on their priority (from highest to lowest).
+You may refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> to understand what priority means.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>sort priority</code></p>
 </div>
 <div class="paragraph">
-<p>Example:<br>
-After running <code>match ic/all</code>, you will obtain a list of patients.
-You can then run <code>sort priority</code> to obtain a list with high priority patients at the top of the list.</p>
+<p>For example, after running <code>match ic/all</code>, you will obtain a list of patients.
+You can then run <code>sort priority</code> to obtain the list with higher priority patients near the top of the list.</p>
 </div>
 <div class="paragraph">
-<p>Note:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>In cases where patients have the <strong>same priority</strong>, those with more matched donors will be displayed first.
+<p>Note that in the case where patients have the <strong>same priority</strong>, those with more matched donors will be displayed first.
 If these two factors are the same for a group of patients, they will be displayed according to their names in alphabetical order.</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="sorting-based-on-success-rate-of-match"><a class="link" href="#sorting-based-on-success-rate-of-match">5.7.3. Sorting based on success rate of match</a></h4>
 <div class="paragraph">
-<p>This category sorts the list of matched donors belonging to a particular patient based on the success rate of the match (from highest to lowest).
-(Refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> for more information on success rate.)</p>
-</div>
-<div class="paragraph">
-<p>This allows you to determine which patient-donor pair has the highest compatibility and are safe to proceed for organ transplant.</p>
+<p>To determine which patient-donor pair is the most compatible, you can
+sort the list of compatible donors of that patient based on the success rate of the match (from highest to lowest).
+You can refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> for more information on success rate.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>sort rate</code></p>
 </div>
 <div class="paragraph">
-<p>Example:<br>
-After running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get the list of donors that are compatible with said patient.
-You can then run <code>sort rate</code> to obtain the list of donors with the highest success rate at the top of the list. <br></p>
+<p>Take for instance, after running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get a list of donors that are compatible with said patient.
+You can then run <code>sort rate</code> to obtain the list of donors with higher success rates near the top of the list.</p>
 </div>
 </div>
 </div>
@@ -1306,4 +1307,4 @@ This percentage is calculated from the number of tissue matches between the pati
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 16:25:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 17:29:00 UTC</div></div></div></body></html>
