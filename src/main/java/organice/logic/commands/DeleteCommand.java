@@ -3,6 +3,8 @@ package organice.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static organice.commons.core.Messages.MESSAGE_PERSON_NOT_FOUND;
 
+import java.util.ArrayList;
+
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
 import organice.model.person.DoctorInCharge;
@@ -20,7 +22,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the person identified by the nric's of the person.\n"
+        + ": Deletes the person identified by the input NRIC.\n"
         + "Parameters: NRIC\n"
         + "Example: " + COMMAND_WORD + " S2121503A";
 
@@ -55,7 +57,14 @@ public class DeleteCommand extends Command {
         } else if (targetType.isDonor() && ((Donor) targetPerson).getStatus().isProcessing()) {
             throw new CommandException(MESSAGE_DONOR_UNDER_PROCESSING);
         } else if (targetType.isDoctor() && model.hasDoctorInCharge(new DoctorInCharge(targetNric.toString()))) {
-            throw new CommandException(MESSAGE_DOCTOR_HAS_PATIENTS);
+            DoctorInCharge doctorIc = new DoctorInCharge(targetNric.toString());
+            ArrayList<Patient> listOfPatients = model.getPatientsWithDoctorIc(doctorIc);
+            String errorMsg = "\nPatients that are attached to the doctor are: ";
+            for (Patient patient : listOfPatients) {
+                errorMsg += "[NAME: " + patient.getName() + " NRIC: " + patient.getNric() + "], ";
+            }
+            errorMsg = errorMsg.substring(0, errorMsg.length() - 2); //Remove extra space and comma
+            throw new CommandException(MESSAGE_DOCTOR_HAS_PATIENTS + errorMsg);
         }
 
         Person personToDelete = model.getPerson(targetNric);

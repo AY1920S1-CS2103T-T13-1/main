@@ -102,6 +102,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ArrayList<Patient> getPatientsWithDoctorIc(DoctorInCharge doctorIc) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
         throw new AssertionError("This method should not be called.");
     }

@@ -164,6 +164,11 @@ public interface Model {
     ArrayList<Doctor> getListOfDoctors();
 
     /**
+     * Returns list of patients with a specific doctor in charge in ORGANice
+     */
+    ArrayList<Patient> getPatientsWithDoctorIc(DoctorInCharge doctorIc);
+
+    /**
      * Matches all Patients to all Donors in ORGANice.
      */
     void matchAllPatients();

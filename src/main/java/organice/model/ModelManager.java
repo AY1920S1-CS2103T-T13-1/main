@@ -305,6 +305,26 @@ public class ModelManager implements Model {
         return listOfDoctors;
     }
 
+    /**
+     * Returns a list of {@code Patient} with a specified doctor in charge in ORGANice.
+     */
+    public ArrayList<Patient> getPatientsWithDoctorIc(DoctorInCharge doctorIc) {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ArrayList<Patient> listOfPatients = new ArrayList<>();
+
+        for (Person person : filteredPersons) {
+            if (!(person instanceof Patient)) {
+                continue;
+            }
+            if (!((Patient) person).getDoctorInCharge().equals(doctorIc)) {
+                continue;
+            }
+
+            listOfPatients.add(((Patient) person));
+        }
+        return listOfPatients;
+    }
+
 
     /**
      * Add a MatchedDonor to the list to be displayed.
