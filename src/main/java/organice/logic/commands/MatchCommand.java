@@ -20,7 +20,6 @@ import organice.model.person.exceptions.PersonNotFoundException;
  * Matches patient and donor in ORGANice.
  */
 public class MatchCommand extends Command {
-
     public static final String COMMAND_WORD = "match";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Runs a matching algorithm on patients and donors to"
@@ -38,11 +37,10 @@ public class MatchCommand extends Command {
 
     public static final Double SUCCESSFUL_PERCENTAGE = 60.0;
 
+    private static final Logger logger = LogsCenter.getLogger(MatchCommand.class);
 
     private String input;
     private Patient patient;
-
-    private static final Logger logger = LogsCenter.getLogger(MatchCommand.class);
 
     public MatchCommand(String input) {
         logger.info("Input to MatchCommand: " + input);
