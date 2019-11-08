@@ -63,7 +63,7 @@ public class FormUiManager {
     private static final String MESSAGE_UNDO_SUCCESS = "Successfully undo the previous entry!";
     private static final String MESSAGE_UNDO_ERROR = "You can't undo at this stage!";
     private static final String MESSAGE_SPECIAL_COMMAND = "Here are some special commands you can use: "
-            + "'/undo' to undo your last entry, '/exit' to exit the application, and 'abort' to abandon the form.";
+            + "'/undo' to undo your last entry, '/exit' to exit the application, and '/abort' to abandon the form.";
 
     private MainWindow mainWindow;
     private Type formType;
