@@ -55,10 +55,10 @@ public class ProcessingMarkDoneCommand extends Command {
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and their status must be processing already.
-     * The method will first convert the Nrics given in String to an actual Nric type,
-     * then it will create the donor and patient with the respective Nric in ORAGANice.
-     * @param firstNric the first Nric given by the user in String.
-     * @param secondNric the second Nric given by the user in String.
+     * The method will create the donor and patient with the respective Nrics in ORAGANice
+     * from the parameters.
+     * @param firstNric the first Nric given by the user.
+     * @param secondNric the second Nric given by the user.
      * @param model
      * @return a boolean true false stating whether the inputs are valid.
      */
@@ -98,7 +98,7 @@ public class ProcessingMarkDoneCommand extends Command {
         requireNonNull(model);
         try {
             if (isValidDonorPatientPair(firstNric, secondNric, model)
-                && taskNumber < donor.getProcessingList(patientNric).size()) {
+                && taskNumber < donor.getProcessingList(patientNric).size() + 1) {
                 model.getFilteredPersonList();
                 donor.markTaskAsDone(taskNumber);
                 return new CommandResult(donor.getProcessingList(patientNric).display());

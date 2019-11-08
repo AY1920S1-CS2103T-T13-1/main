@@ -96,7 +96,7 @@ a person and the criteria for valid inputs:
 
 * b/**BLOODTYPE** - the blood type of the person
 ** Applicable to: patients and donors
-** Valid input: A/B/AB/O
+** Valid input: A+/B+/AB+/O+/A-/B-/AB-/O-
 
 * p/**PHONE** - contact number of a person
 ** Applicable to: patients, doctors, donors
@@ -123,7 +123,9 @@ a person and the criteria for valid inputs:
 
 * tt/**TISSUE TYPE** - the type of tissues
 ** Applicable to: patients and donors
-** Valid input: a string of 6 numbers (from 1 - 12), separated by commas
+** Valid input: a string of 6 unique numbers (from 1 - 12), separated by commas. Note that the order of the tissue types
+does not matter. For example, tt/1,2,3,4,5,6 and tt/6,5,3,4,2,1 are treated as the same input because they contain the
+same 6 unique numbers.
 
 * exp/**EXPIRY** - expiry date of a donor's organ
 ** Applicable to: donors
@@ -176,14 +178,18 @@ There are two methods to add a person:
 * Method 1: Normal Add
 * Method 2: Add with system prompting
 
-To understand how to add a person via the 'Normal Add' method, go to <<Normal Add>>.
-To understand how to add a person via the 'Add with system prompting' method, go to <<Add with system prompting>>.
+To understand how to add a person via the 'Normal Add' method, go to <<Adding as per normal>>.
+To understand how to add a person via the 'Add with system prompting' method, go to <<Adding with system prompting>>.
 
+Note that when you add a person, ORGANice will detect if the person you are trying to add
+has the same NRIC as another person in ORGANice. When this happens, ORGANice will not allow you to
+add that person. An error message will be displayed, prompting you to change the NRIC of the person you are trying to
+add.
 
-==== Normal Add
+==== Adding as per normal
 
-Normal add refers to specifying all the attributes in the command. To add, type in the following
-commands to add a person:
+This method of adding refers to specifying all the attributes in the command. To add, type in the
+commands of the following format to add a person:
 
 Format for adding patients: `add t/patient n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
 p/**PHONE** pr/**PRIORITY** ic/**NRIC** d/**DOCTOR** a/**AGE**` +
@@ -193,21 +199,18 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
 
 Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE**`
 
-After adding a person, ORGANice will display a form which contains the attributes of the person. Press
-kbd:[Enter] to confirm the details.
-
 [TIP]
-View the List of Attributes in the beginning of <<Features>> to find out what each attribute mean.
+View the List of Attributes in the beginning of <<Features>> to find out the meaning of each parameter.
 
 Examples:
 
-* `add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+* `add t/patient n/John Doe o/kidney b/A+ tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
 d/S2235456D a/29`
-* `add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+* `add t/donor n/Betsy Kim o/kidney b/AB- tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
 exp/23-Nov-2020 a/21`
 * `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
 
-==== Add with system prompting
+==== Adding with system prompting
 
 In this mode, instead of typing a long command at one go, you can add a person's attributes one by one.
 After entering an attribute, the system will prompt you to input another attribute.
@@ -336,102 +339,107 @@ For example, you cannot change a doctor's age because a doctor does not have tha
 You might want to refer to <<List of Attributes>> to see what attributes are applicable to each type of person in ORGANice.
 // end::edit[]
 
-// tag::find[]
 === Finding persons by attributes: `find`
 
-You can use the `find` command to search for persons whose attributes match your input keywords. Matching persons will
-be displayed in a list. +
+You can use the `find` command to search for persons whose attributes match your input keywords. A list of matching
+persons along with the number of exact and possible matches will be displayed. +
 
-Format: `find __PREFIX__/__KEYWORD__`
+Format: `find __PREFIX__/__KEYWORD__ (__PREFIX__/__KEYWORD__...)`
 
-Optional parameters: Multiple `keywords` per `prefix`, multiple `prefixes` in the same find command.
+Optional parameters: Multiple __keyword__s per __prefix__, multiple __prefixe__s in the same find command.
 
-The find command performs case insensitive `OR` matching within a prefix and `AND` matching between prefixes. The
-following example illustrates this concept:
+[TIP]
+You may wish to reference <<List of Attributes>>, to view the list of available prefixes to search by.
+
+The find command is **case insensitive** and performs **OR** matching within a prefix and **AND** matching between
+prefixes. It also matches similar looking words to account for possible typos in your keywords. The following example illustrates
+these concepts:
 
 .Find command with multiple prefixes and multiple keywords per prefix.
 image::findByPrefix.png[width="790"]
 
-As seen from Figure 12, `find n/Duncan n/Lionel n/Helen t/patient t/donor` displays 'Duncan Chua', `Lionel Doe` and
-`Helen Davidson`. This is due to the fact that Duncan's name matches either of 'Duncan' `OR` 'Lionel' `OR` 'Helen' `AND`
-he is also either a 'doctor' `OR` 'donor'. The same is true for Lionel and Helen. You should note that the only
-exception to this rule is tissue type matching, which uses `AND` matching within the prefix.
+In Figure 12, you can see that `find n/Duncan n/Loinel n/Helen t/patient t/donor` shows a list of 44 matches. The two
+exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
+keywords. 'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan's name matches
+either of 'Duncan' **OR** 'Loinel' **OR** 'Helen' **AND** he is also either a 'patient' **OR** 'donor'. The same is true
+for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
+picked up on that typo or we'd have missed Lionel!
 
-You may wish to reference the following section: <<List of Attributes>>, to view the list of available prefixes to
-search by.
+NOTE: The only exception to this rule is tissue type matching, which uses `AND` matching within the prefix.
 
-Here are some examples and pointers showcasing the use of `find`:
-
-__Use case with single prefix and keyword__ +
-* `find n/Alice` +
-Displays all persons whose name contains 'Alice'
-
-__Use case demonstrating keyword case insensitivity__ +
-* `find n/aLiCe` +
-Displays the same result as the preceding example.
+Lets take a look at some examples and pointers showcasing the use of `find`:
 
 __Use case with multiple keywords per prefix__ +
-* `find n/Alice n/Benson b/A b/B b/O` +
-Displays all persons whose name contains either 'Alice' or 'Benson' and whose blood type is either 'A', 'B' or 'O'.
+* `find n/Laura n/Marisha Ray b/A b/B b/O` +
+Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.
 
 __Use case demonstrating prefix order insensitivity__ +
-* `find b/A n/Benson b/O n/Alice b/B` +
+* `find b/A n/Benson Carter b/O n/Alice b/B` +
 Displays the same result as the preceding example.
-
-__Use case demonstrating full name capture__ +
-* `find n/Laura Bailey n/Marisha Ray` +
-Displays all persons whose name contains 'Laura Bailey' or 'Marisha Ray'.
 
 __Use case demonstrating tissue type finding__ +
 * `find tt/4,1,2,3` +
 Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.
+
+[TIP]
+Looking for exact matches? No problem! Just replace `find` with `exactFind`!
+
+That's it for this section. Congratulations, you now know how to use the `find` command!
 // end::find[]
 
 // tag::match[]
 === Detecting matches: `match`
 
-This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
+This command runs a kidney matching test on patients and donors in ORGANice and displays potential matches.
+A patient-donor pair is considered a potential match if they pass the blood type and
+tissue compatibility tests.
 Refer to <<FAQ>> for a better understanding of the procedure for kidney matching.
 
-You can either run a kidney matching test on all patients and donors or find matching donors for a specific patient.
-To learn how to run kidney matching tests on all patients, refer to <<Matching all patients>>. To learn how to run
-kidney matching tests on a specific patient, refer to <<Matching a specific patient>>.
+You can either run a kidney matching test on a specific patient or on all patients in ORGANice.
+To learn how to run kidney matching tests on a specific patient,
+refer to <<Matching a specific patient>>.
+To learn how to run kidney matching tests on all patients,
+refer to <<Matching all patients>>.
 
 ==== Matching a specific patient
-This section will explain how to run kidney matching tests on a specific patient and run you through an example.
-To run a match of a specific patient, type in a command of the format `match ic/**NRIC**`.
+This section will explain how to run kidney matching tests for a specific patient and illustrate
+the process with an example.
+To get a list of potential donors for a patient, type in `match ic/**PATIENT NRIC**`.
 
-Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R". This is
-what you can do:
+Here is an example. Suppose you want to find potential donors for a patient "John Doe" and his NRIC is "S1234568R".
+Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
-. Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
+You will see a list of potential donors for John Doe along with the compatibility
+rate of each donor, similar to Figure 13.
 
-. The list of donors and their success rate are displayed as shown in the screenshot below. +
-+
+//TODO need to change this to another screenshot
+.List of potential donors for John Doe
 image::MatchingDonorsDisplayed.png[width=790]
-+
-For more information on the success rate, you may refer to <<FAQ>>.
+
+For more information on the compatibility rate, you may refer to <<FAQ>>.
 
 ==== Matching all patients
-This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
-through an example.
-To match all the patients in ORGANice, do the following:
+This section will explain how to run kidney matching tests on all patients and illustrate the process
+with an example.
+If you want to find potential donors for all patients,
+type `match ic/all` in the Command Box and press kbd:[Enter].
 
-. Type `match ic/all` in the command box and press kbd:[Enter].
+You will see a list of all the patients in ORGANice along with the number of
+potential donors for each patient.
 
-. The list of patients and the number of matching donors each patient have are displayed in the screenshot below.
-+
+As seen in Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
+This means that 'Someone edited' has 3 potential donors.
+
+.List of Persons with number of matching donors
 image::PatientMatchResults.png[width=790]
-+
 
-Following this, you can sort the matches based on different categories to deduce which patient to prioritize.
-+
-Refer to refer to <<Sorting matches: `sort`>> for more information.
-// end::match[]
+Following this, you can sort the matches based on different criteria to
+determine which patient to prioritize. Head over to the next section to find out
+how to sort matches.
 
 // tag::sort[]
 === Sorting matches: `sort`
-After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.
+After using the match command, you can sort the list of matches to determine which patient to prioritize for organ transplant.
 
 **The sort command can only be used after a match command** to sort the resulting list of patient-donor pairs generated.
 There are three criteria in which you can sort the matches, namely:
@@ -546,14 +554,6 @@ To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own
 Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Detecting duplicates
-
-When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
-A duplicate is defined as: Two persons of the same type who have the same NRIC.
-
-When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
-should be changed.
-
 == Future improvements
 
 This section describes features that can be added or improved in version 2.0.
@@ -636,12 +636,18 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
 ** Optional parameters: any parameter from <<List of Attributes>>
 * *Find* : `find`
 ** Optional parameters: any parameter from <<List of Attributes>>
-* *Match* : `match [all/ic]`
-** Optional parameters: `sort/[rate/expiry/priority]` +
-* *Processing*: `processing icP/**NRIC of Patient** icD/**NRIC OF DONOR**`
+* *Match* :
+** *Match a specific patient*: `match ic/**NRIC OF PATIENT**`
+** *Match all patients*: `match ic/all`
+* *Sort matches*:
+** *Sort based on compatibility rate*: `sort/rate`
+** *Sort based on organ expiry date*: `sort expiry`
+** *Sort based on patient priority* `sort priority` +
+* *Processing*: `processing ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR**`
+* *Mark tasks as done*: `processingMarkDone ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR**
 * *List* : `list t/**TYPE**`
 * *Help* : `help`
-* *Done* : `done icP/**NRIC of Patient** icD/**NRIC OF DONOR** `
+* *Done* : `done ic/**NRIC OF PATIENT** ic/**NRIC OF DONOR** `
 * *Exit* : `exit`
 
 == Glossary
@@ -666,6 +672,8 @@ for harmful interactions between patient and donor's blood
 
 * duplicate: refers to two persons of the same type which have the same NRIC
 
-* success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.
+* compatibility rate: A percentage from 0 to 100% that indicates the degree of compatibility
+between the patient and the donor.
+This percentage is calculated from the number of tissue matches between the patient and donor.
 
 * priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.
