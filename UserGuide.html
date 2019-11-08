@@ -416,13 +416,13 @@ depending on what is specified.</p>
 <p>Method 1: Normal Add</p>
 </li>
 <li>
-<p>Method 2: Add with system prompting</p>
+<p>Method 2: Form mode</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>To understand how to add a person via the 'Normal Add' method, go to <a href="#adding-as-per-normal">Section 5.2.1, &#8220;Adding as per normal&#8221;</a>.
-To understand how to add a person via the 'Add with system prompting' method, go to <a href="#adding-with-system-prompting">Section 5.2.2, &#8220;Adding with system prompting&#8221;</a>.</p>
+To understand how to add a person via the 'Form mode' method, go to <a href="#form-mode">Section 5.2.2, &#8220;Form mode&#8221;</a>.</p>
 </div>
 <div class="paragraph">
 <p>Note that when you add a person, ORGANice will detect if the person you are trying to add
@@ -479,9 +479,9 @@ exp/23-Nov-2020 a/21</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-with-system-prompting"><a class="link" href="#adding-with-system-prompting">5.2.2. Adding with system prompting</a></h4>
+<h4 id="form-mode"><a class="link" href="#form-mode">5.2.2. Form mode</a></h4>
 <div class="paragraph">
-<p>In this mode, instead of typing a long command at one go, you can add a person&#8217;s attributes one by one.
+<p>In this mode, instead of typing a long command at one go, you can add a person&#8217;s attribute one by one.
 After entering an attribute, the system will prompt you to input another attribute.</p>
 </div>
 <div class="paragraph">
@@ -508,14 +508,14 @@ Here are some special commands that might be useful when you are in the process 
 </ul>
 </div>
 <div class="paragraph">
-<p>Note that <code>/exit</code>, <code>/abort</code>, and <code>/undo</code> commands can be used at any point in time, while <code>/done</code> command can only be used once all the required attributes have been specified.</p>
+<p>Note that <code>/exit</code>, <code>/abort</code>, and <code>/undo</code> commands can be used at any point in time, while <code>/done</code> command can only be used once all the required attributes have been filled.</p>
 </div>
 <div class="paragraph">
-<p>These are the important commands for this feature, so now let&#8217;s take a look at an example of this how this feature can be used.
-When you want to add a <code>Patient</code>, type <code>add t/patient</code> in the <code>Command Box</code>. Three changes will occur on your screen:</p>
+<p>These are the important commands for this feature, so now let&#8217;s take a look at an example on how you can use this feature.
+Let&#8217;s say you want to add a patient to the application. You should type <code>add t/patient</code> in the <code>Command Box</code>. Three changes will occur on your screen:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>A form will appear in the space where the <code>Person List</code> used to occupy.</p>
 </li>
@@ -523,9 +523,9 @@ When you want to add a <code>Patient</code>, type <code>add t/patient</code> in 
 <p>The <code>Message Display Box</code> will display a message that prompts you to enter the patient’s name.</p>
 </li>
 <li>
-<p>There is a <code>Progress Bar</code> detailing how much of the form is filled.</p>
+<p>There is a <code>Progress Bar</code> detailing your progress in filling up the form.</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="paragraph">
 <p>Refer to the <code>Figure 4</code> to see how the resulting screen will look like.</p>
@@ -534,11 +534,11 @@ When you want to add a <code>Patient</code>, type <code>add t/patient</code> in 
 <div class="content">
 <img src="images/addForm.png" alt="addForm" width="790">
 </div>
-<div class="title">Figure 4. Screenshot of the screen after you have successfully entered the <code>Form</code> mode</div>
+<div class="title">Figure 4. Screenshot of the screen after you have successfully entered the form mode</div>
 </div>
 <div class="paragraph">
 <p>If you want to add a patient named "John Doe", type <code>John Doe</code> and then press <kbd>Enter</kbd>.
-After entering the name, the patient&#8217;s name will be displayed on the form and the progress bar will increase indicating your progress in filling up the form as seen in <code>Figure 5</code>.</p>
+After entering the name, the patient&#8217;s name will be displayed on the form and the progress bar will increase as seen in <code>Figure 5</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -554,18 +554,18 @@ If not, ORGANice will display a warning message stating the criteria for a valid
 <p>Say you typed in "G999999999A" and pressed <kbd>Enter</kbd> when ORGANice prompts you to type in the NRIC of the patient.
 Three changes occur to ORGANice, which can be seen in the <code>Figure 6</code>:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Your input will remain in the <code>Command Box</code>, but the colour of the input text turns to red.</p>
 </li>
 <li>
-<p>An error message is displayed in the <code>Message Display Box</code>. This error message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.</p>
+<p>A warning message is displayed in the <code>Message Display Box</code>. This warning message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.</p>
 </li>
 <li>
 <p>Your input will not be reflected in the form.</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -583,7 +583,7 @@ Three changes occur to ORGANice, which can be seen in the <code>Figure 6</code>:
 </li>
 <li>
 <p>Click the <code>Find Match</code> button to directly add the person and find the potential donors at the same time.
-Note that the <code>Find Match</code> button will only appear on the <code>Patient</code> form.</p>
+Note that the <code>Find Match</code> button will only appear on the <code>Patient</code> form. Note that this action is only applicable if you are adding a patient.</p>
 </li>
 </ul>
 </div>
@@ -597,8 +597,8 @@ Note that the <code>Find Match</code> button will only appear on the <code>Patie
 <div class="title">Figure 7. Form layout after all the required attributes have been specified</div>
 </div>
 <div class="paragraph">
-<p>When you type in <code>/done</code>, the Person List will return to its original state of displaying people in ORGANice.
-The Message Display Box will show a success message, indicating that you have successfully added a new person to the Person List as seen in <code>Figure 8</code>.</p>
+<p>When you type in <code>/done</code>, the <code>Person List</code> will return to its original state of displaying people in ORGANice.
+The <code>Message Display Box</code> will show a success message, indicating that you have successfully added a new person to the Person List as seen in <code>Figure 8</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -607,8 +607,8 @@ The Message Display Box will show a success message, indicating that you have su
 <div class="title">Figure 8. The UI changed back to it&#8217;s original state and shows a success message</div>
 </div>
 <div class="paragraph">
-<p>The <code>Find Match</code> button will appear when the list is fully filled. You can click this button and you will be shown a list of potential donors as seen in <code>Figure 10</code>. Note that the Find Match button will only appear on the Patient form.
-Refer to <code>Figure 7</code> on where you can find the <code>Find Match</code> button</p>
+<p>The <code>Find Match</code> button will appear when all attributes are filled. After you clicked this button, <code>ORGANice</code> will add the patient to the list and it will execute the <code>Match</code> command as described in <a href="#detecting-matches-code-match-code">Section 5.6, &#8220;Detecting matches: <code>match</code>&#8221;</a>.
+<code>ORGANice</code> will then return back to its original state(exits from the form mode) and shows the list of potential donors for the patient you have just added as seen in <code>Figure 10</code>. Note that this button only appeared if you are adding a patient.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -634,7 +634,7 @@ For example, if you enter the wrong name and want to undo the action, type <code
 <div class="content">
 <img src="images/undoCommand.png" alt="undoCommand" width="790">
 </div>
-<div class="title">Figure 11. Form layout showing that the last entry is removed after you typed in <code>/undo</code></div>
+<div class="title">Figure 11. Form layout showing that the last entry is removed after you typed in '/undo'</div>
 </div>
 </div>
 </div>
@@ -1307,4 +1307,4 @@ This percentage is calculated from the number of tissue matches between the pati
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 17:29:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 19:19:55 UTC</div></div></div></body></html>
