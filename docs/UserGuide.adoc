@@ -272,8 +272,8 @@ The Message Display Box will show a success message, indicating that you have su
 .The UI changed back to it's original state and shows a success message
 image::addSuccess.png[width="790"]
 
-The `Find Match` button will appear when the list is fully filled. You can click this button and you will be shown a list of potential donors as seen in `Figure 10`. Note that the Find Match button will only appear on the Patient form.
-Refer to `Figure 7` on where you can find the `Find Match` button
+The `Find Match` button will appear when all attributes are filled. When you click this button, `ORGANice` will add the patient to the list and it will execute the `Match` command as seen in `Figure 10`.
+Refer to <<Detecting matches: `match`>> for the `Match` command. Note that this button only appeared if you are adding a patient.
 
 .The UI displayed the potential donors for a patient that you have added
 image::findMatch.png[width="790"]
