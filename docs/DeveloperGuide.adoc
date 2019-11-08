@@ -134,8 +134,10 @@ NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) 
 [[Design-Model]]
 === Model component
 
+// tag::modeldiagram[]
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
+// end::modeldiagram[]
 
 The `Model`,
 
@@ -163,6 +165,7 @@ Classes used by multiple components are in the `organice.commons` package.
 == Implementation
 This section describes some noteworthy details on how features in ORGANice are implemented.
 
+// tag::list[]
 === List feature
 This section describes how the list feature is implemented.
 
@@ -199,6 +202,7 @@ When the user enters a list command, the result differs depending on the paramet
 If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
 If there is a parameter, ORGANice will check the `TYPE` input and display the respective list of doctors, patients
 or donors that corresponds to the input.
+// end::list[]
 
 === Matching feature
 This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
@@ -383,8 +387,7 @@ This section will explain the reason for having some aspects.
 
 // end::formmode[]
 
-// tag::dataencryption[]
-
+// tag::sort[]
 === Sort feature
 This section describes how the sort feature is implemented.
 
@@ -492,6 +495,7 @@ with current implementations (able to wrap `ObservableList` and sort the content
 * **Alternative 2:** Use `Collections.sort()`.
 ** Pros: Time complexity is O(n*log(n)) which is relatively fast.
 ** Cons: Cannot make use of existing methods in ORGANice that work for Comparator.
+// end::sort[]
 
 === Processing feature
 This section describes how the processing feature is implemented.
@@ -699,6 +703,7 @@ Use case ends.
 +
 Use case ends.
 
+// tag::usecasesort[]
 === Use case: Sort list according to priority/rate/expiry
 
 *MSS*
@@ -721,7 +726,9 @@ Use case ends.
 Steps 1a1-1a2 are repeated until the data entered are correct.
 +
 Use case resumes at step 2.
+// end::usecasesort[]
 
+// tag::usecaselist[]
 === Use case: List all patients/donors/doctors
 
 *MSS*
@@ -737,15 +744,11 @@ Use case ends.
 * 1a. ORGANice detects an invalid parameter.
 +
 [none]
-** 1a1. ORGANice requests for correct parameter.
+** 1a1. ORGANice returns error message.
 +
-** 1a2. User enters correct parameter.
-+
-Steps 1a1-1a2 are repeated until the data entered are correct.
-+
-Use case resumes at step 2.
+Use case ends.
 
-_{More to be added}_
+// end::usecaselist[]
 
 [appendix]
 == Non Functional Requirements
