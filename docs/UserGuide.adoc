@@ -229,7 +229,7 @@ Let's say you want to add a patient to the application. You should type `add t/p
 
 1. A form will appear in the space where the `Person List` used to occupy.
 2. The `Message Display Box` will display a message that prompts you to enter the patient’s name.
-3.  There is a `Progress Bar` detailing your progress in filling up the form.
+3. There is a `Progress Bar` detailing your progress in filling up the form.
 
 Refer to the `Figure 4` to see how the resulting screen will look like.
 
@@ -249,7 +249,7 @@ Say you typed in "G999999999A" and pressed kbd:[Enter] when ORGANice prompts you
 Three changes occur to ORGANice, which can be seen in the `Figure 6`:
 
 1. Your input will remain in the `Command Box`, but the colour of the input text turns to red.
-2. An error message is displayed in the `Message Display Box`. This error message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.
+2. A warning message is displayed in the `Message Display Box`. This warning message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.
 3. Your input will not be reflected in the form.
 
 .Form layout if you entered an invalid value
