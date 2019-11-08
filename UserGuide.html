@@ -783,77 +783,76 @@ Looking for exact matches? No problem! Just replace <code>find</code> with <code
 <div class="sect2">
 <h3 id="detecting-matches-code-match-code"><a class="link" href="#detecting-matches-code-match-code">5.6. Detecting matches: <code>match</code></a></h3>
 <div class="paragraph">
-<p>This command runs a kidney matching test on patients and donors in ORGANice and displays the match results.
+<p>This command runs a kidney matching test on patients and donors in ORGANice and displays potential matches.
+A patient-donor pair is considered a potential match if they pass the blood type and
+tissue compatibility tests.
 Refer to <a href="#faq">Section 7, &#8220;FAQ&#8221;</a> for a better understanding of the procedure for kidney matching.</p>
 </div>
 <div class="paragraph">
-<p>You can either run a kidney matching test on all patients and donors or find matching donors for a specific patient.
-To learn how to run kidney matching tests on all patients, refer to <a href="#matching-all-patients">Section 5.6.2, &#8220;Matching all patients&#8221;</a>. To learn how to run
-kidney matching tests on a specific patient, refer to <a href="#matching-a-specific-patient">Section 5.6.1, &#8220;Matching a specific patient&#8221;</a>.</p>
+<p>You can either run a kidney matching test on a specific patient or on all patients in ORGANice.
+To learn how to run kidney matching tests on a specific patient,
+refer to <a href="#matching-a-specific-patient">Section 5.6.1, &#8220;Matching a specific patient&#8221;</a>.
+To learn how to run kidney matching tests on all patients,
+refer to <a href="#matching-all-patients">Section 5.6.2, &#8220;Matching all patients&#8221;</a>.</p>
 </div>
 <div class="sect3">
 <h4 id="matching-a-specific-patient"><a class="link" href="#matching-a-specific-patient">5.6.1. Matching a specific patient</a></h4>
 <div class="paragraph">
-<p>This section will explain how to run kidney matching tests on a specific patient and run you through an example.
-To run a match of a specific patient, type in a command of the format <code>match ic/<strong>NRIC</strong></code>.</p>
+<p>This section will explain how to run kidney matching tests for a specific patient and illustrate
+the process with an example.
+To get a list of potential donors for a patient, type in <code>match ic/<strong>PATIENT NRIC</strong></code>.</p>
 </div>
 <div class="paragraph">
-<p>Here is an example. Suppose you want to match a specific patient called "John Doe" and his NRIC is "S1234568R". This is
-what you can do:</p>
+<p>Here is an example. Suppose you want to find potential donors for a patient "John Doe" and his NRIC is "S1234568R".
+Type <code>match ic/S1234568R</code> in the Command Box and press <kbd>Enter</kbd>.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Type <code>match ic/S1234568R</code> in the Command Box and press <kbd>Enter</kbd>.</p>
-</li>
-<li>
-<p>The list of donors and their success rate are displayed as shown in the screenshot below.<br></p>
+<div class="paragraph">
+<p>You will see a list of potential donors for John Doe along with the compatibility
+rate of each donor, similar to Figure 13.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/MatchingDonorsDisplayed.png" alt="MatchingDonorsDisplayed" width="790">
 </div>
+<div class="title">Figure 13. List of potential donors for John Doe</div>
 </div>
 <div class="paragraph">
-<p>For more information on the success rate, you may refer to <a href="#faq">Section 7, &#8220;FAQ&#8221;</a>.</p>
-</div>
-</li>
-</ol>
+<p>For more information on the compatibility rate, you may refer to <a href="#faq">Section 7, &#8220;FAQ&#8221;</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="matching-all-patients"><a class="link" href="#matching-all-patients">5.6.2. Matching all patients</a></h4>
 <div class="paragraph">
-<p>This section will explain how to run kidney matching tests on all patients stored in ORGANice and run you
-through an example.
-To match all the patients in ORGANice, do the following:</p>
+<p>This section will explain how to run kidney matching tests on all patients and illustrate the process
+with an example.
+If you want to find potential donors for all patients,
+type <code>match ic/all</code> in the Command Box and press <kbd>Enter</kbd>.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Type <code>match ic/all</code> in the command box and press <kbd>Enter</kbd>.</p>
-</li>
-<li>
-<p>The list of patients and the number of matching donors each patient have are displayed in the screenshot below.</p>
+<div class="paragraph">
+<p>You will see a list of all the patients in ORGANice along with the number of
+potential donors for each patient.</p>
+</div>
+<div class="paragraph">
+<p>As seen in Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
+This means that 'Someone edited' has 3 potential donors.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/PatientMatchResults.png" alt="PatientMatchResults" width="790">
 </div>
+<div class="title">Figure 14. List of Persons with number of matching donors</div>
 </div>
 <div class="paragraph">
-<p>Following this, you can sort the matches based on different categories to deduce which patient to prioritize.</p>
-</div>
-<div class="paragraph">
-<p>Refer to refer to <a href="#sorting-matches-code-sort-code">Section 5.7, &#8220;Sorting matches: <code>sort</code>&#8221;</a> for more information.</p>
-</div>
-</li>
-</ol>
+<p>Following this, you can sort the matches based on different criteria to
+determine which patient to prioritize. Head over to the next section to find out
+how to sort matches.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="sorting-matches-code-sort-code"><a class="link" href="#sorting-matches-code-sort-code">5.7. Sorting matches: <code>sort</code></a></h3>
 <div class="paragraph">
-<p>After matching patients and donors, you can sort the list of matches to determine which patient to prioritize for organ transplant.</p>
+<p>After using the match command, you can sort the list of matches to determine which patient to prioritize for organ transplant.</p>
 </div>
 <div class="paragraph">
 <p><strong>The sort command can only be used after a match command</strong> to sort the resulting list of patient-donor pairs generated.
@@ -1212,17 +1211,39 @@ p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/
 </div>
 </li>
 <li>
-<p><strong>Match</strong> : <code>match [all/ic]</code></p>
+<p><strong>Match</strong> :</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Optional parameters: <code>sort/[rate/expiry/priority]</code><br></p>
+<p><strong>Match a specific patient</strong>: <code>match ic/<strong>NRIC OF PATIENT</strong></code></p>
+</li>
+<li>
+<p><strong>Match all patients</strong>: <code>match ic/all</code></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Processing</strong>: <code>processing icP/<strong>NRIC of Patient</strong> icD/<strong>NRIC OF DONOR</strong></code></p>
+<p><strong>Sort matches</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Sort based on compatibility rate</strong>: <code>sort/rate</code></p>
+</li>
+<li>
+<p><strong>Sort based on organ expiry date</strong>: <code>sort expiry</code></p>
+</li>
+<li>
+<p><strong>Sort based on patient priority</strong> <code>sort priority</code><br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Processing</strong>: <code>processing ic/<strong>NRIC OF PATIENT</strong> ic/<strong>NRIC OF DONOR</strong></code></p>
+</li>
+<li>
+<p><strong>Mark tasks as done</strong>: `processingMarkDone ic/<strong>NRIC OF PATIENT</strong> ic/<strong>NRIC OF DONOR</strong></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list t/<strong>TYPE</strong></code></p>
@@ -1231,7 +1252,7 @@ p/<strong>PHONE</strong> ic/<strong>NRIC</strong> exp/<strong>EXPIRY</strong> a/
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
-<p><strong>Done</strong> : `done icP/<strong>NRIC of Patient</strong> icD/<strong>NRIC OF DONOR</strong> `</p>
+<p><strong>Done</strong> : `done ic/<strong>NRIC OF PATIENT</strong> ic/<strong>NRIC OF DONOR</strong> `</p>
 </li>
 <li>
 <p><strong>Exit</strong> : <code>exit</code></p>
@@ -1275,7 +1296,9 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 <p>duplicate: refers to two persons of the same type which have the same NRIC</p>
 </li>
 <li>
-<p>success rate: refers to a number which indicates the degree of compatibility between the patient and donor. This percentage is calculated from the number of tissue matches between the patient and donor.</p>
+<p>compatibility rate: A percentage from 0 to 100% that indicates the degree of compatibility
+between the patient and the donor.
+This percentage is calculated from the number of tissue matches between the patient and donor.</p>
 </li>
 <li>
 <p>priority: used to indicate the level of importance or urgency of getting organ transplant for the patient. The different levels are include high, medium and low, and it is specified by the doctor after an assessment.</p>
@@ -1283,4 +1306,4 @@ for harmful interactions between patient and donor&#8217;s blood</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 10:12:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 16:25:42 UTC</div></div></div></body></html>
