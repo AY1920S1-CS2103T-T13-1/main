@@ -13,7 +13,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.stream.Stream;
 
 import organice.logic.commands.AddCommand;
@@ -45,11 +45,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the type is not specified correctly in the input arguments
      */
     private static Type parseType(ArgumentMultimap argumentMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
-        } catch (NoSuchElementException ex) {
+        List<String> allTypeInputs = argumentMultimap.getAllValues(PREFIX_TYPE);
+        if (allTypeInputs.size() != 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
+        return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
     }
 
     /**
@@ -130,7 +131,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getAllValues(prefix).size() == 1);
     }
 
     /**
