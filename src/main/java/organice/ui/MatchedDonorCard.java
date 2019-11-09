@@ -69,12 +69,12 @@ public class MatchedDonorCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MatchCard)) {
+        if (!(other instanceof MatchedDonorCard)) {
             return false;
         }
 
         // state check
-        MatchCard card = (MatchCard) other;
+        MatchedDonorCard card = (MatchedDonorCard) other;
         return id.getText().equals(card.id.getText())
             && donor.equals(card.donor);
     }
