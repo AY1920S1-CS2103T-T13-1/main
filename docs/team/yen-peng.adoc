@@ -61,6 +61,8 @@ include::../UserGuide.adoc[tag=list]
 
 include::../UserGuide.adoc[tag=sort]
 
+include::../UserGuide.adoc[tag=help]
+
 == Contributions to the Developer Guide
 
 |===
