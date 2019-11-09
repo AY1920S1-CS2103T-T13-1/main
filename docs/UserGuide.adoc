@@ -548,19 +548,19 @@ Example:
 // tag::delete[]
 === Deleting a person : `delete`
 
-If you want to delete a person in ORGANice you can type in a command in the following format: `delete **NRIC**`  +
-ORGANice will prevent you from deleting persons in the following categories:
+If you want to delete a person in ORGANice, you can type in a command of the following format: `delete **NRIC**`  +
+ORGANice will prevent you from deleting a person if he/she is any of the following:
 
-* They are a patient and their status is currently under processing.
-* They are a donor and their status is currently under processing.
-* They are a doctor and they are in charge of some number of patients in ORGANice.
+* A patient whose status is currently under processing.
+* A donor whose status is currently under processing.
+* A doctor who is in charge of one or more patients in ORGANice.
 
-If you want to delete a patient that has NRIC of S4612296H and is not currently under processing, type the following command: `delete S4612296H`
+Here is an example. If you want to delete a patient with the NRIC S4612296H and is not under processing, type the following command: `delete S4612296H`.
 
 // end::delete[]
 === Clearing all entries : `clear`
 
-You can clear all entries in ORGANice by typing `clear`. You should run clear to start a fresh version of ORGANice after you have familiarised yourself with the commands using our dummy data.
+You can clear all data in ORGANice by typing `clear`. You could use this command to remove all dummy data after you have familiarized yourself with how ORGANice works.
 
 === Exiting the program : `exit`
 
