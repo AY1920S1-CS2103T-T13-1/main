@@ -43,7 +43,7 @@ public class ProcessingCommand extends Command {
         secondNric = new Nric(secondNricString);
     }
 
-    /**
+     /**
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and the patient should be only paired with this donor uniquely.

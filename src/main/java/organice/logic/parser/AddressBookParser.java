@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 import organice.logic.commands.AddCommand;
 import organice.logic.commands.ClearCommand;
 import organice.logic.commands.Command;
+import organice.logic.commands.DeleteCommand;
 import organice.logic.commands.DoneCommand;
 import organice.logic.commands.EditCommand;
+import organice.logic.commands.ExactFindCommand;
 import organice.logic.commands.ExitCommand;
 import organice.logic.commands.FindCommand;
 import organice.logic.commands.HelpCommand;
@@ -19,7 +21,6 @@ import organice.logic.commands.MatchCommand;
 import organice.logic.commands.ProcessingCommand;
 import organice.logic.commands.ProcessingMarkDoneCommand;
 import organice.logic.commands.SortCommand;
-
 import organice.logic.parser.exceptions.ParseException;
 
 /**
@@ -55,11 +56,17 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case ExactFindCommand.COMMAND_WORD:
+            return new ExactFindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);

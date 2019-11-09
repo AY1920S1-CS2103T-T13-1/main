@@ -51,7 +51,7 @@ public class ProcessingMarkDoneCommand extends Command {
         }
     }
 
-    /**
+     /**
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and their status must be processing already.
@@ -98,7 +98,7 @@ public class ProcessingMarkDoneCommand extends Command {
         requireNonNull(model);
         try {
             if (isValidDonorPatientPair(firstNric, secondNric, model)
-                && taskNumber < donor.getProcessingList(patientNric).size()) {
+                && taskNumber < donor.getProcessingList(patientNric).size() + 1) {
                 model.getFilteredPersonList();
                 donor.markTaskAsDone(taskNumber);
                 return new CommandResult(donor.getProcessingList(patientNric).display());

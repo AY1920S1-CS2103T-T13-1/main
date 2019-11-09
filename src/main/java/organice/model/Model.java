@@ -1,6 +1,7 @@
 package organice.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -9,6 +10,8 @@ import organice.commons.core.GuiSettings;
 
 import organice.logic.commands.exceptions.CommandException;
 
+import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
 import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
@@ -95,6 +98,11 @@ public interface Model {
     boolean hasDonor(Nric donor);
 
     /**
+     * Returns true if a patient's doctor in charge is the same as {@code doctorIc} exists in the address book.
+     */
+    boolean hasDoctorInCharge(DoctorInCharge doctorIc);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -123,11 +131,20 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getFullPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Retrieves the {@code Person} with the specified {@code Nric}
+     * @throws PersonNotFoundException if the {@code Person} with the {@code Nric} cannot be found.
+     */
+    Person getPerson(Nric personNric) throws PersonNotFoundException;
 
     /**
      * Retrieves the {@code Patient} with the specified {@code Nric}
@@ -140,6 +157,16 @@ public interface Model {
      * @throws PersonNotFoundException if the {@code Donor} with the {@code Nric} cannot be found.
      */
     Donor getDonor(Nric donorNric) throws PersonNotFoundException;
+
+    /**
+     * Returns list of doctors in ORGANice
+     */
+    ArrayList<Doctor> getListOfDoctors();
+
+    /**
+     * Returns list of patients with a specific doctor in charge in ORGANice
+     */
+    ArrayList<Patient> getPatientsWithDoctorIc(DoctorInCharge doctorIc);
 
     /**
      * Matches all Patients to all Donors in ORGANice.

@@ -14,8 +14,11 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.ArrayList;
+
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.Model;
+import organice.model.person.Doctor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -42,15 +45,15 @@ public class AddCommand extends Command {
             + PREFIX_DOCTOR_IN_CHARGE + "DOCTOR IN CHARGE "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "patient "
-            + PREFIX_NRIC + "S1234568R "
+            + PREFIX_NRIC + "S1482410C "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_AGE + "21 "
             + PREFIX_PRIORITY + "high "
-            + PREFIX_BLOOD_TYPE + "A "
+            + PREFIX_BLOOD_TYPE + "A+ "
             + PREFIX_TISSUE_TYPE + "1,2,3,4,5,6 "
             + PREFIX_ORGAN + "kidney "
-            + PREFIX_DOCTOR_IN_CHARGE + "S1111111A\n"
+            + PREFIX_DOCTOR_IN_CHARGE + "S8297151C\n"
             + "\nTo add a donor, the command format is as follows:\n"
             + PREFIX_TYPE + "TYPE "
             + PREFIX_NRIC + "NRIC "
@@ -63,12 +66,12 @@ public class AddCommand extends Command {
             + PREFIX_ORGAN_EXPIRY_DATE + "ORGAN EXPIRY DATE"
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "donor "
-            + PREFIX_NRIC + "S1234568R "
+            + PREFIX_NRIC + "S1482410C "
             + PREFIX_NAME + "John Doe Donor "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_AGE + "21 "
             + PREFIX_PRIORITY + "high "
-            + PREFIX_BLOOD_TYPE + "A "
+            + PREFIX_BLOOD_TYPE + "A+ "
             + PREFIX_TISSUE_TYPE + "1,2,3,4,5,6 "
             + PREFIX_ORGAN + "kidney "
             + PREFIX_ORGAN_EXPIRY_DATE + "23-Oct-2019\n"
@@ -77,10 +80,9 @@ public class AddCommand extends Command {
             + PREFIX_NRIC + "NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_AGE + "AGE "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "doctor "
-            + PREFIX_NRIC + "S1234568R "
+            + PREFIX_NRIC + "S1482410C "
             + PREFIX_NAME + "John Doe Doctor "
             + PREFIX_PHONE + "98765432\n"
             + "\nTo add a person in a form mode, the command is as follows:\n"
@@ -89,7 +91,8 @@ public class AddCommand extends Command {
             + PREFIX_TYPE + "doctor ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in ORGANice";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A person with the same NRIC already exists in ORGANice.\n"
+            + "Please change your NRIC input.";
     public static final String MESSAGE_DOCTOR_NOT_FOUND = "The doctor in charge specified is not found in ORGANice";
 
     private final Person toAdd;
@@ -123,7 +126,13 @@ public class AddCommand extends Command {
         if (toAdd.getType().toString().equals("patient")) {
             Nric doctorInCharge = new Nric(((Patient) toAdd).getDoctorInCharge().toString());
             if (!model.hasDoctor(doctorInCharge)) {
-                throw new CommandException(MESSAGE_DOCTOR_NOT_FOUND);
+                ArrayList<Doctor> listOfDoctors = model.getListOfDoctors();
+                String errorMsg = "\nCurrent available doctors are: ";
+                for (Doctor doctor : listOfDoctors) {
+                    errorMsg += "[NAME: " + doctor.getName() + " NRIC: " + doctor.getNric() + "], ";
+                }
+                errorMsg = errorMsg.substring(0, errorMsg.length() - 2); //Remove extra space and comma
+                throw new CommandException(MESSAGE_DOCTOR_NOT_FOUND + errorMsg);
             }
         }
 

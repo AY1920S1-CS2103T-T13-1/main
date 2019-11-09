@@ -8,7 +8,7 @@ import organice.logic.commands.ProcessingMarkDoneCommand;
 import organice.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new ExactFindCommand object
  */
 public class ProcessingMarkDoneCommandParser implements Parser<ProcessingMarkDoneCommand> {
 
