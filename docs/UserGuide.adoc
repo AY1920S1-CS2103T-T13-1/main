@@ -155,16 +155,13 @@ is also acceptable.
 
 // tag::help[]
 === Viewing help : `help`
-There may be times where you do not understand how ORGANice works, or you need a simple reminder on how to use
-ORGANice. To access the user guide of ORGANice, you can do the following:
+There may be times where you need more information on how ORGANice works.
+To access the user guide of ORGANice, you can do the following:
 
-. Type `help` in the Command Box and press kbd:[Enter].
-. A new window is launched, as shown in Figure 3. Open the link in a browser to read this document.
-. Click the x button to close the window and return to the default display.
-
-.**Help Window**
-
-image::HelpWindow.png[width="790"]
+Simply type `help` in the Command Box and press kbd:[Enter].
+You will see a link to our user guide given on a pop-up window.
+You may click on this link to guide you through how to use ORGANice.
+Click the kbd:[x] button to close the window and return to the default display.
 // end::help[]
 
 // tag::add[]

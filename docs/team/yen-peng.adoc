@@ -4,22 +4,27 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: ORGANice
-
 ---
+This project portfolio details my main contributions towards the development of ORGANice.
 
 == Overview
 
-ORGANice is a Command Line Interface (CLI) desktop application used to facilitate the organ matching process. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ORGANice is a Command Line Interface (CLI) desktop application used to facilitate the organ matching process.
+This application is targeted at medical professionals in Singapore to store and find a compatible donor for patients waiting for an organ transplant.
+
+This software engineering project is done by a team of 5 students including myself from the National University of Singapore (NUS) under a two-month-long time frame.
+This project is a modification of an existing application known as "Address Book", which stores and manages people's contact information.
+As for the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to list down persons in ORGANice and sort matches according to different criteria*
+* *Major enhancement*: added *the ability to sort matches according to different criteria*
 ** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Credits: _{mention `here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added a list command that allows the user to list down all persons or persons of a specified type in ORGANice.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
