@@ -51,7 +51,7 @@ public class ProcessingMarkDoneCommand extends Command {
         }
     }
 
-     /**
+    /**
      * Method to check if the two Nrics given are valid.
      * It needs to contain one patient and one donor.
      * Both of them must be matched and their status must be processing already.
