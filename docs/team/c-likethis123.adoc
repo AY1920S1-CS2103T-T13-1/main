@@ -28,10 +28,16 @@ Words highlighted in grey refers to technical terms in this application.
 * *Major enhancement*: added the ability to match patients and donors
 //this portion will be changed
 ** What it does: This feature identifies a list of potential matches between patients and organ donors.
-** Justification: This feature allows users to find matches efficiently.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Justification: This feature allows users to find potential donors for patients in a hospital efficiently.
+//tutor said don't use 'affects' but i'm struggling to think of another word rn.
+** Highlights: The addition of this feature affects commands to be added in future.
+It required an in-depth analysis of design alternatives.
+The implementation too was challenging as it required an understanding of how to change the list
+displayed in Address Book 3.
 
 * *Minor enhancement*: refactored Person class to the Patient class.
+
+* *Minor enhancement*: added coloured tags to each person in the person list.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -39,14 +45,15 @@ Words highlighted in grey refers to technical terms in this application.
 
 ** Project management:
 *** Created issues to keep track of work to be done.
+*** Arranged for system and acceptance testing.
 ** Enhancements to existing features:
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 *** Refactored code to improve code quality
 *** Implemented logging features
 *** Fixed bugs
 ** Documentation:
-*** Authored the 'Introduction', 'Quick Start', 'Components of ORGANice',
-'Detecting matches' and 'Viewing help' sub-sections in the 'Features' section
+*** Authored the 'Introduction', 'Quick Start', 'Components of ORGANice' and
+'Detecting matches' sub-sections in the 'Features' section
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
@@ -58,7 +65,7 @@ This section documents my contributions to the User Guide. I authored the follow
 * Introduction
 * Quick Start
 * Components of ORGANice
-* 'Detecting matches' and 'Viewing help' sub-sections in the 'Features' section
+* 'Detecting matches' in the 'Features' section
 
 Given below are excerpts of my contribution to the User Guide.
 
