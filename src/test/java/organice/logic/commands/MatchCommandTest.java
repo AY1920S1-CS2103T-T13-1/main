@@ -9,20 +9,27 @@ import static organice.logic.commands.CommandTestUtil.COMPATIBLE_TISSUE_TYPE_IRE
 import static organice.logic.commands.CommandTestUtil.VALID_NAME_PATIENT_IRENE;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_BOB;
 import static organice.logic.commands.CommandTestUtil.VALID_NRIC_PATIENT_IRENE;
-import static organice.model.person.BloodType.BLOODTYPE_A;
-import static organice.model.person.BloodType.BLOODTYPE_AB;
-import static organice.model.person.BloodType.BLOODTYPE_B;
-import static organice.model.person.BloodType.BLOODTYPE_O;
+
+import static organice.model.person.BloodType.BLOODTYPE_AB_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_AB_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_A_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_A_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_B_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_B_PLUS;
+import static organice.model.person.BloodType.BLOODTYPE_O_MINUS;
+import static organice.model.person.BloodType.BLOODTYPE_O_PLUS;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DONOR_IRENE_DONOR;
 import static organice.testutil.TypicalPersons.PATIENT_BOB;
 import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -39,19 +46,47 @@ import organice.testutil.DonorBuilder;
 import organice.testutil.PatientBuilder;
 
 public class MatchCommandTest {
-    //Donors of all types
-    static final Donor DONOR_A = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_A.toString()).build();
-    static final Donor DONOR_B = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_B.toString()).build();
-    static final Donor DONOR_AB = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_AB.toString()).build();
-    static final Donor DONOR_O = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_O.toString()).build();
+    //Donors of positive blood types
+    static final Donor DONOR_A_PLUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_A_PLUS.toString())
+            .build();
+    static final Donor DONOR_B_PLUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_B_PLUS.toString())
+            .build();
+    static final Donor DONOR_AB_PLUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_AB_PLUS.toString())
+            .build();
+    static final Donor DONOR_O_PLUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_O_PLUS.toString())
+            .build();
     static final Donor DONOR_SIMILAR_TISSUE = new DonorBuilder(DONOR_IRENE_DONOR)
             .withTissueType(COMPATIBLE_TISSUE_TYPE_IRENE).build();
 
-    //Patient of all types
-    static final Patient PATIENT_A = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_A.toString()).build();
-    static final Patient PATIENT_B = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_B.toString()).build();
-    static final Patient PATIENT_AB = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_AB.toString()).build();
-    static final Patient PATIENT_O = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_O.toString()).build();
+    //Donors of all types
+    static final Donor DONOR_A_MINUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_A_MINUS.toString())
+            .build();
+    static final Donor DONOR_B_MINUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_B_MINUS.toString())
+            .build();
+    static final Donor DONOR_AB_MINUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_AB_MINUS.toString())
+            .build();
+    static final Donor DONOR_O_MINUS = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType(BLOODTYPE_O_MINUS.toString())
+            .build();
+
+    //Patient of all positive blood types
+    static final Patient PATIENT_A_PLUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_A_PLUS.toString())
+            .build();
+    static final Patient PATIENT_B_PLUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_B_PLUS.toString())
+            .build();
+    static final Patient PATIENT_AB_PLUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_AB_PLUS.toString())
+            .build();
+    static final Patient PATIENT_O_PLUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_O_PLUS.toString())
+            .build();
+
+    //Patient of all negative blood types
+    static final Patient PATIENT_A_MINUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_A_MINUS.toString())
+            .build();
+    static final Patient PATIENT_B_MINUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_B_MINUS.toString())
+            .build();
+    static final Patient PATIENT_AB_MINUS = new PatientBuilder(PATIENT_IRENE)
+            .withBloodType(BLOODTYPE_AB_MINUS.toString()).build();
+    static final Patient PATIENT_O_MINUS = new PatientBuilder(PATIENT_IRENE).withBloodType(BLOODTYPE_O_MINUS.toString())
+            .build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -64,7 +99,7 @@ public class MatchCommandTest {
         String validNric = VALID_NRIC_PATIENT_IRENE;
 
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
-        ObservableList<Person> listOfDonors = modelStub.getMatchList();
+        ObservableList<Person> listOfDonors = modelStub.getDisplayedPersonList();
 
         String expectedMessage = String.format(MatchCommand.MESSAGE_SUCCESS_MATCH_PATIENT, listOfDonors.size(),
                 VALID_NAME_PATIENT_IRENE, VALID_NRIC_PATIENT_IRENE);
@@ -78,7 +113,7 @@ public class MatchCommandTest {
         String validNric = VALID_NRIC_PATIENT_IRENE;
 
         CommandResult commandResult = new MatchCommand(validNric).execute(modelStub);
-        ObservableList<Person> listOfDonors = modelStub.getMatchList();
+        ObservableList<Person> listOfDonors = modelStub.getDisplayedPersonList();
 
         String expectedMessage = String.format(MatchCommand.MESSAGE_NO_MATCHES, VALID_NAME_PATIENT_IRENE,
                 VALID_NRIC_PATIENT_IRENE);
@@ -99,60 +134,61 @@ public class MatchCommandTest {
 
     @Test
     public void match_isSuccessfulMatch() throws Exception {
-        MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
-
-        boolean matchResult = matchCommand.match(DONOR_IRENE_DONOR, PATIENT_IRENE);
-        assertTrue(matchResult); //100% match and same blood type
-
-        //donor with 4/6 matching tissues and same blood type.
-        matchResult = matchCommand.match(DONOR_SIMILAR_TISSUE, PATIENT_IRENE);
+        //100% match and same blood type
+        boolean matchResult = MatchCommand.match(DONOR_IRENE_DONOR, PATIENT_IRENE);
         assertTrue(matchResult);
 
-        //donor with blood type A matches patient with blood type A and AB
-        assertEquals(matchCommand.match(DONOR_A, PATIENT_A), true);
-        assertEquals(matchCommand.match(DONOR_A, PATIENT_AB), true);
+        //donor with 4/6 matching tissues and same blood type.
+        matchResult = MatchCommand.match(DONOR_SIMILAR_TISSUE, PATIENT_IRENE);
+        assertTrue(matchResult);
+
+        //donor with blood type A+ can donate to patients of blood types A+ and AB+
+        assertTrue(MatchCommand.match(DONOR_A_PLUS, PATIENT_A_PLUS));
+        assertTrue(MatchCommand.match(DONOR_A_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type B matches patient with blood type B and AB
-        assertEquals(matchCommand.match(DONOR_B, PATIENT_B), true);
-        assertEquals(matchCommand.match(DONOR_B, PATIENT_AB), true);
+        assertTrue(MatchCommand.match(DONOR_B_MINUS, PATIENT_B_MINUS));
+        assertTrue(MatchCommand.match(DONOR_B_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type AB matches patient with blood type AB
-        assertEquals(matchCommand.match(DONOR_AB, PATIENT_AB), true);
+        assertTrue(MatchCommand.match(DONOR_AB_MINUS, PATIENT_AB_PLUS));
 
         //donor with blood type O matches patient with blood type A, B, AB and O
-        assertEquals(matchCommand.match(DONOR_O, PATIENT_A), true);
-        assertEquals(matchCommand.match(DONOR_O, PATIENT_B), true);
-        assertEquals(matchCommand.match(DONOR_O, PATIENT_AB), true);
-        assertEquals(matchCommand.match(DONOR_O, PATIENT_O), true);
+        assertTrue(MatchCommand.match(DONOR_O_MINUS, PATIENT_A_PLUS));
+        assertTrue(MatchCommand.match(DONOR_O_MINUS, PATIENT_B_MINUS));
+        assertTrue(MatchCommand.match(DONOR_O_PLUS, PATIENT_AB_PLUS));
+        assertTrue(MatchCommand.match(DONOR_O_PLUS, PATIENT_O_PLUS));
     }
 
     @Test
     public void match_isNotSuccessfulMatch() throws Exception {
         MatchCommand matchCommand = new MatchCommand(VALID_NRIC_PATIENT_IRENE);
 
-        Donor differentBloodType = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType("B").build();
+        Donor differentBloodType = new DonorBuilder(DONOR_IRENE_DONOR).withBloodType("B+").build();
         boolean matchResult = matchCommand.match(differentBloodType, PATIENT_IRENE);
         assertFalse(matchResult); //100% tissue match and different blood type
 
         //donor with 4/6 matching tissues and different blood type.
         //Hardcoded because there is no way to change tissue types in a more elegant manner
         Donor someMatchingTissues = new DonorBuilder(DONOR_IRENE_DONOR).withTissueType(COMPATIBLE_TISSUE_TYPE_IRENE)
-                .withBloodType("B").build();
+                .withBloodType("B+").build();
         matchResult = matchCommand.match(someMatchingTissues, PATIENT_IRENE);
         assertFalse(matchResult);
 
         //donor with blood type A do not match patients with blood type B and O
-        assertEquals(matchCommand.match(DONOR_A, PATIENT_B), false);
-        assertEquals(matchCommand.match(DONOR_A, PATIENT_O), false);
+        assertFalse(matchCommand.match(DONOR_A_PLUS, PATIENT_B_MINUS));
+        assertFalse(matchCommand.match(DONOR_A_PLUS, PATIENT_O_MINUS));
+        assertFalse(matchCommand.match(DONOR_A_PLUS, PATIENT_A_MINUS));
 
-        //donor with blood type B do not match patients with blood type A and P
-        assertEquals(matchCommand.match(DONOR_B, PATIENT_A), false);
-        assertEquals(matchCommand.match(DONOR_B, PATIENT_O), false);
+        //donor with blood type B do not match patients with blood type A and O
+        assertFalse(matchCommand.match(DONOR_B_MINUS, PATIENT_A_MINUS));
+        assertFalse(matchCommand.match(DONOR_B_MINUS, PATIENT_O_MINUS));
 
         //donor with blood type AB do not match patients with blood type A, B and O
-        assertEquals(matchCommand.match(DONOR_AB, PATIENT_A), false);
-        assertEquals(matchCommand.match(DONOR_AB, PATIENT_B), false);
-        assertEquals(matchCommand.match(DONOR_AB, PATIENT_O), false);
+        assertFalse(matchCommand.match(DONOR_AB_PLUS, PATIENT_A_MINUS));
+        assertFalse(matchCommand.match(DONOR_AB_MINUS, PATIENT_B_MINUS));
+        assertFalse(matchCommand.match(DONOR_AB_MINUS, PATIENT_O_MINUS));
+        assertFalse(matchCommand.match(DONOR_AB_PLUS, PATIENT_AB_MINUS));
     }
 
     @Test
@@ -186,11 +222,13 @@ public class MatchCommandTest {
      */
     private class ModelStubWithDonor extends ModelStub {
         private FilteredList<Person> filteredPersons;
+        private ObservableList<Person> displayedPersons;
         private ObservableList<Person> listOfMatches;
 
         ModelStubWithDonor(Patient patient, Donor donor) {
             AddressBook addressBook = new AddressBookBuilder().withPerson(patient).withPerson(donor).build();
             filteredPersons = new FilteredList<>(addressBook.getPersonList());
+            setDisplayedPersonList(Arrays.asList(filteredPersons.toArray(Person[]::new)));
         }
 
         @Override
@@ -213,8 +251,19 @@ public class MatchCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getDisplayedPersonList() {
+            return displayedPersons;
+        }
+
+        @Override
+        public void setDisplayedPersonList(List<Person> personList) {
+            displayedPersons = FXCollections.observableList(personList);
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             filteredPersons.setPredicate(predicate);
+            setDisplayedPersonList(Arrays.asList(filteredPersons.toArray(Person[]::new)));
         }
 
         @Override
@@ -224,6 +273,7 @@ public class MatchCommandTest {
 
         private void addMatchedDonor(MatchedDonor matchedDonor) {
             listOfMatches.add(matchedDonor);
+            setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
         }
 
         @Override
@@ -244,16 +294,17 @@ public class MatchCommandTest {
                     addMatchedDonor(matchedDonor);
                 }
             }
-        }
-
-        @Override
-        public ObservableList<Person> getMatchList() {
-            return listOfMatches;
+            setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
         }
 
         @Override
         public void removeMatches() {
             listOfMatches = observableArrayList();
+        }
+
+        @Override
+        public int numberOfMatches() {
+            return listOfMatches.size();
         }
 
         @Override
@@ -267,11 +318,13 @@ public class MatchCommandTest {
      */
     private class ModelStubWithoutDonor extends ModelStub {
         private FilteredList<Person> filteredPersons;
+        private ObservableList<Person> displayedPersons;
         private ObservableList<Person> listOfMatches;
 
         public ModelStubWithoutDonor(Patient patient) {
             AddressBook addressBook = new AddressBookBuilder().withPerson(patient).build();
             filteredPersons = new FilteredList<>(addressBook.getPersonList());
+            setDisplayedPersonList(Arrays.asList(filteredPersons.toArray(Person[]::new)));
         }
 
         @Override
@@ -294,8 +347,19 @@ public class MatchCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getDisplayedPersonList() {
+            return displayedPersons;
+        }
+
+        @Override
+        public void setDisplayedPersonList(List<Person> personList) {
+            displayedPersons = FXCollections.observableList(personList);
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             filteredPersons.setPredicate(predicate);
+            setDisplayedPersonList(Arrays.asList(filteredPersons.toArray(Person[]::new)));
         }
 
         @Override
@@ -305,6 +369,7 @@ public class MatchCommandTest {
 
         private void addMatchedDonor(MatchedDonor matchedDonor) {
             listOfMatches.add(matchedDonor);
+            setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
         }
 
         @Override
@@ -325,16 +390,18 @@ public class MatchCommandTest {
                     addMatchedDonor(matchedDonor);
                 }
             }
-        }
-
-        @Override
-        public ObservableList<Person> getMatchList() {
-            return listOfMatches;
+            setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
         }
 
         @Override
         public void removeMatches() {
             listOfMatches = observableArrayList();
+            setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
+        }
+
+        @Override
+        public int numberOfMatches() {
+            return listOfMatches.size();
         }
 
         @Override

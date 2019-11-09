@@ -1,12 +1,17 @@
 package organice.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
+
 import organice.logic.commands.exceptions.CommandException;
+
+import organice.model.person.Doctor;
+import organice.model.person.Donor;
 import organice.model.person.Nric;
 import organice.model.person.Patient;
 import organice.model.person.Person;
@@ -87,6 +92,11 @@ public interface Model {
     boolean hasPatient(Nric patient);
 
     /**
+     * Returns true if a donor in charge with the same NRIC as {@code donor} exists in the address book.
+     */
+    boolean hasDonor(Nric donor);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -106,8 +116,17 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Returns the list of persons to be displayed */
+    ObservableList<Person> getDisplayedPersonList();
+
+    /** Sets the list of persons to be displayed to the given {@code personList} */
+    void setDisplayedPersonList(List<Person> personList);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getFullPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -120,6 +139,17 @@ public interface Model {
      * @throws PersonNotFoundException if the {@code Patient} with the {@code Nric} cannot be found.
      */
     Patient getPatient(Nric patientNric) throws PersonNotFoundException;
+
+    /**
+     * Retrieves the {@code Donor} with the specified {@code Nric}
+     * @throws PersonNotFoundException if the {@code Donor} with the {@code Nric} cannot be found.
+     */
+    Donor getDonor(Nric donorNric) throws PersonNotFoundException;
+
+    /**
+     * Returns list of doctors in ORGANice
+     */
+    ArrayList<Doctor> getListOfDoctors();
 
     /**
      * Matches all Patients to all Donors in ORGANice.
@@ -137,20 +167,9 @@ public interface Model {
     void matchDonors(Patient patient);
 
     /**
-     * Retrieves the match list.
-     */
-    ObservableList<Person> getMatchList();
-
-    /**
-
      * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
      */
     int numberOfMatches();
-
-    /**
-     * Retrieves the sort list.
-     */
-    SortedList<Person> getSortList();
 
     /**
      * Sorts list by priority level.
