@@ -258,17 +258,17 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setType(toCopy.type);
-            setNric(toCopy.nric);
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setAge(toCopy.age);
-            setPriority(toCopy.priority);
-            setBloodType(toCopy.bloodType);
-            setDoctorInCharge(toCopy.doctorInCharge);
-            setOrganExpiryDate(toCopy.organExpiryDate);
-            setOrgan(toCopy.organ);
-            setTissueType(toCopy.tissueType);
+            this.type = toCopy.type;
+            this.nric = toCopy.nric;
+            this.name = toCopy.name;
+            this.phone = toCopy.phone;
+            this.age = toCopy.age;
+            this.priority = toCopy.priority;
+            this.bloodType = toCopy.bloodType;
+            this.tissueType = toCopy.tissueType;
+            this.organ = toCopy.organ;
+            this.doctorInCharge = toCopy.doctorInCharge;
+            this.organExpiryDate = toCopy.organExpiryDate;
         }
 
         /**
@@ -279,16 +279,8 @@ public class EditCommand extends Command {
                     bloodType, doctorInCharge, organExpiryDate, organ, tissueType);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
         }
 
         public Optional<Phone> getPhone() {
@@ -299,12 +291,48 @@ public class EditCommand extends Command {
             return Optional.ofNullable(nric);
         }
 
-        public void setNric(Nric nric) {
-            this.nric = nric;
-        }
-
         public Optional<Type> getType() {
             return Optional.ofNullable(type);
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
+
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
+        public Optional<DoctorInCharge> getDoctorInCharge() {
+            return Optional.ofNullable(doctorInCharge);
+        }
+
+        public Optional<OrganExpiryDate> getOrganExpiryDate() {
+            return Optional.ofNullable(organExpiryDate);
+        }
+
+        public Optional<Organ> getOrgan() {
+            return Optional.ofNullable(organ);
+        }
+
+        public Optional<TissueType> getTissueType() {
+            return Optional.ofNullable(tissueType);
+        }
+
+        public void setName(Name name) {
+            this.name = name;
+        }
+
+        public void setPhone(Phone phone) {
+            this.phone = phone;
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
         }
 
         public void setType(Type type) {
@@ -315,56 +343,28 @@ public class EditCommand extends Command {
             this.age = age;
         }
 
-        public Optional<Age> getAge() {
-            return Optional.ofNullable(age);
-        }
-
         public void setPriority(Priority priority) {
             this.priority = priority;
-        }
-
-        public Optional<Priority> getPriority() {
-            return Optional.ofNullable(priority);
         }
 
         public void setBloodType(BloodType bloodType) {
             this.bloodType = bloodType;
         }
 
-        public Optional<BloodType> getBloodType() {
-            return Optional.ofNullable(bloodType);
-        }
-
         public void setDoctorInCharge(DoctorInCharge doctorInCharge) {
             this.doctorInCharge = doctorInCharge;
-        }
-
-        public Optional<DoctorInCharge> getDoctorInCharge() {
-            return Optional.ofNullable(doctorInCharge);
         }
 
         public void setOrganExpiryDate(OrganExpiryDate organExpiryDate) {
             this.organExpiryDate = organExpiryDate;
         }
 
-        public Optional<OrganExpiryDate> getOrganExpiryDate() {
-            return Optional.ofNullable(organExpiryDate);
-        }
-
         public void setOrgan(Organ organ) {
             this.organ = organ;
         }
 
-        public Optional<Organ> getOrgan() {
-            return Optional.ofNullable(organ);
-        }
-
         public void setTissueType(TissueType tissueType) {
             this.tissueType = tissueType;
-        }
-
-        public Optional<TissueType> getTissueType() {
-            return Optional.ofNullable(tissueType);
         }
 
         @Override
@@ -385,7 +385,14 @@ public class EditCommand extends Command {
             return getType().equals(e.getType())
                     && getNric().equals(e.getNric())
                     && getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone());
+                    && getPhone().equals(e.getPhone())
+                    && getAge().equals(e.getAge())
+                    && getPriority().equals(e.getPriority())
+                    && getBloodType().equals(e.getBloodType())
+                    && getTissueType().equals(e.getTissueType())
+                    && getOrgan().equals(e.getOrgan())
+                    && getDoctorInCharge().equals(e.getDoctorInCharge())
+                    && getOrganExpiryDate().equals(e.getOrganExpiryDate());
         }
     }
 }
