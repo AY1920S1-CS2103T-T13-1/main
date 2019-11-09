@@ -545,6 +545,23 @@ Example:
 * `done icP/S7896432A icD/S4578902G res/fail`
 // end::mark[]
 
+// tag::delete[]
+=== Deleting a person : `delete`
+
+If you want to delete a person in ORGANice you can type in a command in the following format: `delete **NRIC**`  +
+ORGANice will prevent you to delete a person if the person you want to delete has the following criteria:
+
+* It is a patient and his status is currently under processing.
+* It is a donor and his status is currently under processing.
+* It is a doctor and he is in charge of some number of patients in ORGANice.
+
+If you want to delete a patient that has NRIC numbver of S4612296H and is not currently under processing, type the following command: `delete S4612296H`
+
+// end::delete[]
+=== Clearing all entries : `clear`
+
+You can clear all the entries in ORGANice if you found that the entries are long outdated by typing `clear`. +
+
 === Exiting the program : `exit`
 
 To exit ORGANice, type `exit` in the Command Box. ORGANice will close on its own.
