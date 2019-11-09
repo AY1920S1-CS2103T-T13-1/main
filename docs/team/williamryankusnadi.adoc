@@ -23,6 +23,7 @@ Below is the list of main features that are available in our application:
 * Processing feature
 
 == Summary of contributions
+Below are the summary of my contributions for this project which include feature enhancements, project management, and documentation.
 
 * *Major enhancement*: Added *the ability to add a person with form mode*.
 ** What it does: Allows user to add a person by typing each attribute one at a time.
