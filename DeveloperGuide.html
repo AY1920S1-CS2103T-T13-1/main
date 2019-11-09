@@ -422,58 +422,27 @@ or donors that corresponds to the input.</p>
 <div class="sect2">
 <h3 id="matching-feature"><a class="link" href="#matching-feature">4.2. Matching feature</a></h3>
 <div class="paragraph">
-<p>This section describes how the matching feature is implemented. The changes to Logic, UI and Model will be
-explained, followed by an explanation of design considerations.</p>
-</div>
-<div class="sect3">
-<h4 id="logic-of-matching"><a class="link" href="#logic-of-matching">4.2.1. Logic of Matching</a></h4>
-<div class="paragraph">
-<p>This section explains the logic of matching.</p>
+<p>This section describes how the matching feature is implemented.</p>
 </div>
 <div class="paragraph">
-<p>Matching is done by implementing the <code>MatchCommand#match(Person donor, Patient patient)</code> method. It takes in a Donor
-object and a Patient object, which represents a donor and a patient respectively. The method returns true if the patient
-and donor are a match, and false otherwise. The code for the <code>match</code> method is shown below:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>public static boolean match(Person donor, Patient patient) {
-    if (!(donor instanceof Donor)) {
-        return false;
-    }
-
-    BloodType donorBloodType = ((Donor) donor).getBloodType();
-    BloodType patientBloodType = patient.getBloodType();
-
-    TissueType donorTissueType = ((Donor) donor).getTissueType();
-    TissueType patientTissueType = patient.getTissueType();
-
-    Double successRate = donorTissueType.getPercentageMatch(patientTissueType);
-
-    if (patientBloodType.isBloodTypeMatch(donorBloodType) &amp;&amp; successRate &gt;= SUCCESSFUL_PERCENTAGE) {
-        Donor donorToSet = (Donor) donor;
-        donorToSet.addMatchResult(patient.getNric(), successRate);
-        donorToSet.setSuccessRate(patient.getNric());
-        return true;
-    } else {
-        return false;
-    }
-}</code></pre>
-</div>
+<p>Matching is facilitated by the <code>MatchCommand</code> class, which extends the <code>Command</code> class.
+It implements the <code>MatchCommand#match(Person donor, Patient patient)</code> operation, which checks if the given patient and
+donor have compatible blood and tissue types. For the context of this application, a patient and donor
+pair with compatible blood and tissue types is considered as a potential match.</p>
 </div>
 <div class="paragraph">
-<p>This <code>match</code> method is used in <code>ModelManager</code> to find matches. The following methods
-in <code>ModelManager</code> accesses the <code>match</code> method:</p>
+<p>The following operations in <code>ModelManager</code> accesses the <code>match</code> method:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGANice with the specified patient.
-For each donor that matches the patient, a <code>MatchedDonor</code> object is created and stored.</p>
+For each donor that potentially matches the patient, a <code>MatchedDonor</code> object is created to store
+the compatibility rate of the donor with the patient.</p>
 </li>
 <li>
 <p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients. For every patient in ORGANice,
-a <code>MatchedPatient</code> object is created to store the number of donors that matches that patient.</p>
+a <code>MatchedPatient</code> object is created to store the number of donors that are potential matches with that patient.</p>
 </li>
 </ul>
 </div>
@@ -482,122 +451,124 @@ a <code>MatchedPatient</code> object is created to store the number of donors th
 <code>listOfMatches</code>. This <code>ObservableList</code> can be accessed by <code>Logic</code> and displayed by the <code>UI</code>
 component.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="ui-of-matching"><a class="link" href="#ui-of-matching">4.2.2. UI of Matching</a></h4>
 <div class="paragraph">
-<p>This section explains the UI design of the matching feature.</p>
+<p>Each time a user invokes the match feature, the contents of <code>listOfMatches</code> are deleted.
+New <code>MatchedPatient</code> and <code>MatchedDonor</code> objects are created and stored in the list again.</p>
 </div>
 <div class="paragraph">
-<p>After the match command is invoked, a <code>CommandResult</code> object is returned.
-The <code>MainWindow</code> decides which list to display via an if-else block. The code snippet below
-shows the if-else block:</p>
+<p>Given below is an example usage scenario and how the match feature works at each step:</p>
 </div>
-<div class="listingblock">
+<div class="paragraph">
+<p>Step 1. The user opens up the application with an existing list of patients and donors.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user types in the command <code>match ic/all</code>. Each patient will be matched with
+all donors via the <code>MatchCommand#match</code> operation. A <code>MatchedPatient</code> object will be created
+for each patient, which stores the patient&#8217;s attributes and the number of potential donors the patient has.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user types in the command <code>match ic/S7016432I</code>. Existing <code>MatchedPatient</code> or <code>MatchedDonor</code> objects
+in the <code>listOfMatches</code> are removed. For each potential donors of the patient with the NRIC S7016432I, a <code>MatchedDonor</code>
+object is created, accompanied with the compatibility rate.</p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarises what happens when a user executes the match feature:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>    if (commandResult.isMatch()) {
-        handleMatch();
-    } else {
-        handleNonMatches();
-    }</code></pre>
+<img src="images/MatchActivityDiagram.png" alt="MatchActivityDiagram">
 </div>
-</div>
-<div class="paragraph">
-<p><code>handleMatch()</code> and <code>handleNonMatches()</code> are in the <code>MainWindow</code> class. The <code>handleMatch()</code> method
-selects the <code>listOfMatches</code> list to display, while the <code>handleNonMatches()</code> method selects the
-<code>filteredPersons</code> list to display.</p>
-</div>
-<div class="paragraph">
-<p>All lists are displayed in a <code>PersonListPanel</code>. This is a custom UI component that inherits the <code>UiPart&lt;Region&gt;</code> class.
-The constructor of <code>PersonListPanel</code> takes in an <code>ObservableList&lt;Person&gt;</code> object and creates
- a list of <code>PersonListViewCell</code> objects to be displayed.</p>
-</div>
-<div class="paragraph">
-<p>The <code>updateItem(Person person, boolean empty)</code> method displays the <code>MatchedDonor</code> and
-<code>MatchedPatient</code> objects available in the <code>ObservableList&lt;Person&gt;</code> object. The following is the code snippet for
-<code>#updateItem()</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code>protected void updateItem(Person person, boolean empty) {
-    super.updateItem(person, empty);
-    if (empty || person == null) {
-        setGraphic(null);
-        setText(null);
-    } else {
-        if (person instanceof Doctor) {
-            setGraphic(new DoctorCard((Doctor) person, getIndex() + 1).getRoot());
-        } else if (person instanceof MatchedDonor) {
-            setGraphic(new MatchCard((Donor) person, getIndex() + 1).getRoot());
-        } else if (person instanceof Donor) {
-            setGraphic(new DonorCard((Donor) person, getIndex() + 1).getRoot());
-        } else if (person instanceof MatchedPatient) {
-            setGraphic(new NumberOfMatches((MatchedPatient) person, getIndex() + 1).getRoot());
-        } else if (person instanceof Patient) {
-            setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
-        } else {
-            setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-        }
-    }
-}</code></pre>
-</div>
-</div>
+<div class="title">Figure 10. Activity Diagram of the Match Command</div>
 </div>
 <div class="sect3">
-<h4 id="model-of-matching"><a class="link" href="#model-of-matching">4.2.3. Model of Matching</a></h4>
-<div class="paragraph">
-<p>This section will discuss aspects of the match feature that interacts with the <code>Model</code> component.</p>
-</div>
-<div class="paragraph">
-<p>As explained earlier, <code>MatchedDonor</code> and <code>MatchedPatient</code> objects store
-match results for a specific donor and patient respectively. Each time
-the match command is invoked, previous <code>MatchedDonor</code> and <code>MatchedPatient</code> objects
-will be removed from the list.</p>
-</div>
-<div class="paragraph">
-<p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects only exist in-memory and will not be saved to the hard disk.
-This means that data stored in <code>MatchedDonor</code> and <code>MatchedPatient</code> objects will not be accessible
-in the next app launch.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.4. Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.1. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section will explain the reason for having some aspects.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect-bugs-introduced"><a class="link" href="#aspect-bugs-introduced">Aspect: Bugs introduced</a></h5>
+<h5 id="aspect-storage-of-match-results"><a class="link" href="#aspect-storage-of-match-results">Aspect: Storage of match results</a></h5>
 <div class="paragraph">
-<p>This section explains why the current implementation is chosen.
-Previously, the matching feature was implemented by storing match results in the
-<code>Patient</code> and <code>Donor</code> objects.</p>
+<p>This section explores several ways of storing match results of patients and donors.</p>
 </div>
-<div class="paragraph">
-<p>Each <code>Patient</code> and <code>Donor</code> has a <code>isMatch()</code> method, which checks if the match results should be displayed
-or if the <code>Patient</code> and <code>Donor</code> attributes should be displayed. The match results will be displayed when <code>isMatch()</code>
-evaluates to <code>true</code>.</p>
-</div>
-<div class="paragraph">
-<p>It was discovered that there were many bugs introduced via this approach. The root cause of the bugs could not be
-identified. {Link to bug report}</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-non-persistence-of-match-results"><a class="link" href="#aspect-non-persistence-of-match-results">Aspect: Non-persistence of match results</a></h5>
-<div class="paragraph">
-<p>This section explains why the match results are not stored.</p>
-</div>
-<div class="paragraph">
-<p>One reason is to ensure that all objects in the <code>listOfMatches</code> ObservableList are different after
-executing a match command. This ensures that the <code>updateItem()</code> method would be called to
-update the <code>PersonListPanel</code> display.</p>
-</div>
-<div class="paragraph">
-<p>Another reason is to override previous match results with new results from the latest match command.
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Choice 1 (current choice)</strong>: Delete <code>MatchedPatient</code> and <code>MatchedDonor</code> objects
+created in previous <code>MatchCommand</code> executions when there is a new <code>MatchCommand</code> executed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to write extra code to store match results in the hard disk. Previous match results are overriden with new results
+from the latest match command.
 A scenario in which this would be important is if a user matches a patient, edits the patient information,
-then runs the matching again. The matching would be based on the latest patient data.
-{Include a diagram here}</p>
+then runs the matching again. The matching would be based on the latest patient data.</p>
+</li>
+<li>
+<p>Cons: Redundant matching occurs in a scenario where the user executes a match command with the same parameters twice.</p>
+</li>
+</ul>
 </div>
+</li>
+<li>
+<p><strong>Choice 2:</strong> For each patient, keep a list of match results. After every <code>MatchCommand</code> is executed, save
+the match results to the hard disk.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A history of match results can be stored. It reduces redundant matching.</p>
+</li>
+<li>
+<p>Cons: More code to write to store match results to the hard disk.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-display-of-match-results"><a class="link" href="#aspect-display-of-match-results">4.2.2. Aspect: Display of match results</a></h4>
+<div class="paragraph">
+<p>This section explains some considerations for displaying match results,
+which are stored in <code>MatchedPatient</code> and <code>MatchedDonor</code> objects.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Choice 1 (current choice):</strong>: Display <code>MatchedDonor</code> and <code>MatchedPatient</code> objects in <code>PersonListPanel</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement because additional code is added to <code>PersonListPanel</code>, which is a UI component already existing in
+AddressBook 3.
+The constructor of <code>PersonListPanel</code> takes in an <code>ObservableList&lt;Person&gt;</code> object and creates
+a list of <code>PersonListViewCell</code> objects to be displayed.</p>
+</li>
+<li>
+<p>Cons: The <code>MatchedDonor</code> and <code>MatchedPatient</code> classes need to inherit from the <code>Person</code> class, even though they represent
+match results, not people.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Choice 2:</strong> Create a new list panel called <code>MatchListPanel</code>, which displays objects of the <code>Match</code> class.
+<code>MatchedDonor</code> and <code>MatchedPatient</code> classes extend from the <code>Match</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: <code>MatchedDonor</code> and <code>MatchedPatient</code> classes do not inherit unwanted methods from <code>Person</code> class.
+The <code>Match</code> class can contain methods more specific to matching.</p>
+</li>
+<li>
+<p>Cons: There would be two types of list panels. Upon executing each command, the correct list panel must be selected
+and displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -758,7 +729,7 @@ assuming the user has entered a <code>match ic/<strong>NRIC</strong></code> comm
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 10. Structure of the Logic Component when executing <code>sort rate</code> command</div>
+<div class="title">Figure 11. Structure of the Logic Component when executing <code>sort rate</code> command</div>
 </div>
 <div class="paragraph">
 <p>After the command is given by the user, it would be parsed by the <code>AddressBookParser</code>.
@@ -1590,4 +1561,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 10:46:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:55:49 UTC</div></div></div></body></html>
