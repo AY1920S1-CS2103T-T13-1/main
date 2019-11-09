@@ -25,8 +25,8 @@ Below is the list of main features that are available in our application:
 == Summary of contributions
 
 * *Major enhancement*: Added *the ability to add a person with form mode*.
-** What it does: Allows user to add a person by typing one attribute one at a time.
-** Justification: This feature improves the product significantly because a user can ensure that he/she enter the person's attributes correctly
+** What it does: Allows user to add a person by typing each attribute one at a time.
+** Justification: This feature improves the product significantly because a user can ensure that he/she enter the person's attributes correctly which is essential for an application that will be used in a hospital.
 ** Highlights: This feature includes other special commands such as 'undo' if the user typed in a wrong input and `Find Match` button so that the user can click on this button to directly find the potential donor for a patient without typing another command.
 
 * *Code contributed*: https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=williamryank&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=WilliamRyank&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[Code contributed]

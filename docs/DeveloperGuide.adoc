@@ -361,7 +361,7 @@ This section will explain the reason for having some aspects.
 ===== Aspect: How form mode feature executes
 
 * **Alternative 1 (current choice):** Use the same `add` command to do the `Form` mode.
-** Pros: Easy to implement.
+** Pros: Easy to implement. This is the reason why this alternative is chosen as it does not take too much time to implement.
 ** Cons: May not be the best approach since one command will have two different modes.
 * **Alternative 2:** Use a new command for the `Form` mode.
 ** Pros: Will be less confusing for the user since there is a separate command for `Form` mode
