@@ -343,7 +343,14 @@ This section explains the implementation of the form mode feature.
 
 The form mode mechanism is facilitated by `FormUiManager`.
 It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time a user input a specific attribute.
-Additionally, it implements the following operations:
+The following object diagram models the relationship and dependencies between `FormUiManager` and other objects:
+
+.Object Diagram for the `FormUiManager`
+image::FormUiManagerObjectDiagram.png[]
+
+`FormUiManager` will need an object of class `Type` in order to determine what type of form(patient, doctor, or donor) will be displayed to the user
+
+Additionally, `FormUiManager` implements the following operations:
 
 * `FormUiManager#getPersonDetails()` -- Modifies `CommandBox` and prompts the user to input the attributes required.
 * `FormUiManager#setPersonDetails()` -- Sets the value for all required attributes of a specific type of person.
@@ -383,7 +390,7 @@ if (commandResult.isForm()) {
             }
 ```
 
-Step 4. The `FormUiManager` changes the display of the application based on the type of the person specified in Step 1 by modifying the content of the `PersonListPanelPlaceholder` as well as the `CommandExecutor` in the `CommandBox` object by calling `FormUiManager#getPersonFields()`.
+Step 4. The `FormUiManager` changes the display of the application based on the type of the person specified in Step 1 by modifying the content of the `PersonListPanelPlaceholder` as well as the `CommandExecutor` in the `CommandBox` object by calling `FormUiManager#getPersonDetails()`.
 
 Step 5. The user inputs the attribute that is prompted until all the required attributes are specified.
 
@@ -393,10 +400,12 @@ Step 7. `FormUiManager` calls the `AddressBookParser#parseCommand()` to add the 
 
 Given below is the Sequence Diagram for interactions within the Logic component when a user typed in `add t/doctor`
 
+.Sequential Diagram for the form mode feature
 image::AddFormSequenceDiagram.png[]
 
 The following activity diagram summarizes what happens when you execute the `add t/**TYPE**` command:
 
+.Activity Diagram for adding a person using form mode feature
 image::Form.png[width="300", height="300"]
 
 ==== Design Considerations

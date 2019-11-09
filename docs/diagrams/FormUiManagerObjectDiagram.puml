@@ -1,0 +1,10 @@
+@startuml
+!include style.puml
+skinparam classBackgroundColor UI_COLOR
+
+class "<u>formUiManager:FormUiManager"
+
+"<u>formUiManager:FormUiManager" -> "<u>type:FormType"
+"<u>formUiManager:FormUiManager" -> "<u>logger:Logger"
+"<u>formUiManager:FormUiManager" -> "<u>mainWindow:MainWindow"
+@enduml
