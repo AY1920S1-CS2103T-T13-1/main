@@ -71,10 +71,3 @@ include::../DeveloperGuide.adoc[tag=sort]
 include::../DeveloperGuide.adoc[tag=usecaselist]
 
 include::../DeveloperGuide.adoc[tag=usecasesort]
-
-
-== PROJECT: Duke
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
