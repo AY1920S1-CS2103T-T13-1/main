@@ -77,6 +77,15 @@ public class EditCommand extends Command {
             Person personToEdit = nricToPerson(nric, lastShownList);
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+            if (personToEdit.getType().isPatient()) {
+                DoctorInCharge updatedDoctorInCharge = editPersonDescriptor.getDoctorInCharge().orElse(
+                        ((Patient) personToEdit).getDoctorInCharge());
+                if (!model.hasDoctor(new Nric(updatedDoctorInCharge.toString()))) {
+                    throw new CommandException(String.format("Doctor with NRIC %s does not exist in ORGANice!",
+                            updatedDoctorInCharge.toString()));
+                }
+            }
+
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
