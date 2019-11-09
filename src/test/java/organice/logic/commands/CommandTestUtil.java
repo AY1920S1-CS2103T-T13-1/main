@@ -23,6 +23,7 @@ import organice.logic.commands.exceptions.CommandException;
 import organice.logic.parser.ArgumentMultimap;
 import organice.logic.parser.ArgumentTokenizer;
 import organice.logic.parser.MatchCommandParser;
+import organice.logic.parser.exceptions.ParseException;
 import organice.model.AddressBook;
 import organice.model.Model;
 import organice.model.person.Person;
@@ -45,11 +46,11 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_PATIENT_BOB = "22222222";
     public static final String VALID_PHONE_PATIENT_IRENE = "85355255";
 
-    public static final String VALID_NRIC_DOCTOR_AMY = "S1111111A";
-    public static final String VALID_NRIC_DONOR_JOHN = "T1312123P";
-    public static final String VALID_NRIC_PATIENT_BOB = "G2222222B";
-    public static final String VALID_NRIC_PATIENT_IRENE = "S1111112A";
-    public static final String VALID_NRIC_DONOR_IRENE_DONOR = "S9876543G";
+    public static final String VALID_NRIC_DOCTOR_AMY = "S8078981E";
+    public static final String VALID_NRIC_DONOR_JOHN = "S6488870F";
+    public static final String VALID_NRIC_PATIENT_BOB = "S7044112H";
+    public static final String VALID_NRIC_PATIENT_IRENE = "S9605440H";
+    public static final String VALID_NRIC_DONOR_IRENE_DONOR = "S9155102J";
 
     public static final String VALID_TYPE_DOCTOR_AMY = "doctor";
     public static final String VALID_TYPE_DONOR_JOHN = "donor";
@@ -63,9 +64,9 @@ public class CommandTestUtil {
     public static final String VALID_PRIORITY_PATIENT_IRENE = "high";
     public static final String VALID_PRIORITY_PATIENT_BOB = "medium";
 
-    public static final String VALID_BLOOD_TYPE_DONOR_JOHN = "A";
-    public static final String VALID_BLOOD_TYPE_PATIENT_BOB = "B";
-    public static final String VALID_BLOOD_TYPE_PATIENT_IRENE = "O";
+    public static final String VALID_BLOOD_TYPE_DONOR_JOHN = "A+";
+    public static final String VALID_BLOOD_TYPE_PATIENT_BOB = "B-";
+    public static final String VALID_BLOOD_TYPE_PATIENT_IRENE = "O+";
 
     public static final String VALID_TISSUE_TYPE_DONOR_JOHN = "1,2,3,4,5,6";
     public static final String VALID_TISSUE_TYPE_PATIENT_BOB = "7,8,9,10,11,12";
@@ -81,8 +82,8 @@ public class CommandTestUtil {
     public static final String VALID_ORGAN_EXPIRY_DATE_DONOR_JOHN = "20-Jan-2020";
     public static final String VALID_ORGAN_EXPIRY_DATE_DONOR_JOHNY = "21-Jan-2020";
 
-    public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_BOB = "S1111111A";
-    public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_IRENE = "S1231231B";
+    public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_BOB = "S8162183G";
+    public static final String VALID_DOCTOR_IN_CHARGE_PATIENT_IRENE = "F1289064T";
 
     public static final String VALID_STATUS_DONOR_JOHN = Status.STATUS_NOT_PROCESSING;
     public static final String VALID_STATUS_PATIENT_IRENE = Status.STATUS_NOT_PROCESSING;
@@ -183,7 +184,7 @@ public class CommandTestUtil {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(actualModel, expectedModel);
-        } catch (CommandException ce) {
+        } catch (CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -223,7 +224,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final ArgumentMultimap searchParams = ArgumentTokenizer
-                .tokenize(FindCommand.COMMAND_WORD + " n/" + person.getName().fullName, PREFIX_NAME);
+                .tokenize(ExactFindCommand.COMMAND_WORD + " n/" + person.getName().fullName, PREFIX_NAME);
 
         model.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertEquals(1, model.getFilteredPersonList().size());

@@ -12,7 +12,7 @@ import static organice.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static organice.logic.parser.CliSyntax.PREFIX_TISSUE_TYPE;
 import static organice.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import organice.logic.commands.AddCommand;
@@ -23,6 +23,7 @@ import organice.logic.parser.exceptions.ParseException;
 import organice.model.Model;
 import organice.model.person.Age;
 import organice.model.person.BloodType;
+import organice.model.person.Doctor;
 import organice.model.person.DoctorInCharge;
 import organice.model.person.FormField;
 import organice.model.person.Name;
@@ -55,11 +56,14 @@ public class FormUiManager {
     private static final String PROMPT_DOCTOR_IC = "Enter doctor in charge's nric:\n";
     private static final String PROMPT_ORGAN_EXPIRY_DATE = "Enter organ expiry date:\n";
     private static final String PROMPT_DONE = "Please ensure you have typed in the correct details."
-            + "\nType '/done' to confirm OR '/abort to cancel the add command";
+            + "\nYou can only type in '/done' to confirm, '/abort' to abort the form,  '/undo' to undo your "
+                    + "previous entry, or '/exit' to exit the application";
 
     private static final String MESSAGE_ABORT = "Form successfully aborted!";
     private static final String MESSAGE_UNDO_SUCCESS = "Successfully undo the previous entry!";
     private static final String MESSAGE_UNDO_ERROR = "You can't undo at this stage!";
+    private static final String MESSAGE_SPECIAL_COMMAND = "Here are some special commands you can use: "
+            + "'/undo' to undo your last entry, '/exit' to exit the application, and '/abort' to abandon the form.";
 
     private MainWindow mainWindow;
     private Type formType;
@@ -67,7 +71,7 @@ public class FormUiManager {
     private Logger logger;
 
     // For undo feature purpose
-    private LinkedList<String> history = new LinkedList<>();
+    private ArrayList<String> history = new ArrayList<>();
     private int currentState = -1;
 
 
@@ -305,9 +309,15 @@ public class FormUiManager {
             logger.warning("[ADD COMMAND FORM MODE] Doctor's NRIC entered is not valid");
             throw new ParseException(DoctorInCharge.MESSAGE_CONSTRAINTS);
         } else if (!model.hasDoctor(new Nric(personDoctorIc))) {
-            mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
+            ArrayList<Doctor> listOfDoctors = model.getListOfDoctors();
+            String errorMsg = "\nCurrent available doctors are: ";
+            for (Doctor doctor : listOfDoctors) {
+                errorMsg += "[NAME: " + doctor.getName() + " NRIC: " + doctor.getNric() + "], ";
+            }
+            errorMsg = errorMsg.substring(0, errorMsg.length() - 2); //Remove extra space and comma
+            mainWindow.getResultDisplay().setFeedbackToUser(AddCommand.MESSAGE_DOCTOR_NOT_FOUND + errorMsg);
             logger.warning("[ADD COMMAND FORM MODE] Doctor is not found in ORGANice");
-            throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND);
+            throw new ParseException(AddCommand.MESSAGE_DOCTOR_NOT_FOUND + errorMsg);
         }
 
         successFillingField(personDoctorIc, FormField.DOCTOR_IC);
@@ -350,7 +360,11 @@ public class FormUiManager {
     private void getPersonField(CommandBox commandBox, String prompt) {
         mainWindow.getCommandBoxPlaceholder().getChildren().clear();
         mainWindow.getCommandBoxPlaceholder().getChildren().add(commandBox.getRoot());
-        mainWindow.getResultDisplay().setFeedbackToUser(prompt);
+        if (prompt == PROMPT_DONE) {
+            mainWindow.getResultDisplay().setFeedbackToUser(prompt);
+        } else {
+            mainWindow.getResultDisplay().setFeedbackToUser(prompt + "\n" + MESSAGE_SPECIAL_COMMAND);
+        }
     }
 
     public void getPersonDetails() {
@@ -381,6 +395,8 @@ public class FormUiManager {
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             FormAnimation.fadingAnimation(mainWindow);
+        } else {
+            throw new CommandException(PROMPT_DONE);
         }
 
         // Reset the UI display to the initial state
@@ -447,7 +463,11 @@ public class FormUiManager {
         mainWindow.getForm().increaseProgress();
         currentState++;
         history.add(currentState, formField);
-        FormAnimation.typingAnimation(mainWindow, fieldValue, formField);
+        if (formField.equals(FormField.NAME)) { //Name is case sensitive while the rest is not
+            FormAnimation.typingAnimation(mainWindow, fieldValue, formField);
+        } else {
+            FormAnimation.typingAnimation(mainWindow, fieldValue.toUpperCase(), formField);
+        }
         logger.info(String.format("----------------[USER INPUT][%s: %s]", formField.toUpperCase(), fieldValue));
     }
 
