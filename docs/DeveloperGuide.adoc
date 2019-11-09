@@ -289,13 +289,13 @@ This section explains the implementation of the form mode feature.
 ==== Implementation
 
 The form mode mechanism is facilitated by `FormUiManager`.
-It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time a user input a specific attribute.
+It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time you input a specific attribute.
 The following object diagram models the relationship and dependencies between `FormUiManager` and other objects:
 
 .Object Diagram for the `FormUiManager`
 image::FormUiManagerObjectDiagram.png[]
 
-`FormUiManager` will need an object of class `Type` in order to determine what type of form(patient, doctor, or donor) will be displayed to the user
+`FormUiManager` will need an object of class `Type` in order to determine what type of form(patient, doctor, or donor) will be displayed to you.
 
 Additionally, `FormUiManager` implements the following operations:
 
@@ -305,11 +305,11 @@ Additionally, `FormUiManager` implements the following operations:
 * `FormUiManager#addPatientToList()` -- Adds a patient to the person list.
 * `FormUiManager#addDonorToList()` -- Adds a donor to the person list.
 
-These operations are exposed in the `Logic` interface when the specific command is invoked by the user.
+These operations are exposed in the `Logic` interface when the specific command is invoked by you.
 
-Given below is an example usage scenario and how the form mode mechanism behaves at each step:
+Given below is an example usage scenario and how the form mode mechanism behaves at each step so that you can better understand how the different classes interact with each other:
 
-Step 1. The user launches the application for the first time.
+Step 1. A user launches the application for the first time.
 
 Step 2. The user executes `add t/doctor` command to add a doctor in the form mode. The `add` command calls `AddressBookParser#parseCommand()` that will return a new `AddCommand` instance.
 
