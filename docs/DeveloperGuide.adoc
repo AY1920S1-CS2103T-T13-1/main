@@ -292,7 +292,7 @@ The form mode mechanism is facilitated by `FormUiManager`.
 It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time you input a specific attribute.
 The following object diagram models the relationship and dependencies between `FormUiManager` and other objects:
 
-.Object Diagram for the `FormUiManager`
+.Object Diagram for the `FormUiManager` object
 image::FormUiManagerObjectDiagram.png[]
 
 `FormUiManager` will need an object of class `Type` in order to determine what type of form(patient, doctor, or donor) will be displayed to you.
