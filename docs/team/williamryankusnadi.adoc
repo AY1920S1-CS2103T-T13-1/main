@@ -12,7 +12,7 @@ My team and I developed ORGANice during our 2nd year of our Computer Science deg
 This is what our project looks like:
 
 .The graphical user interface for ORGANice
-image::Ui.png[width="790" height="500"]
+image::ORGANiceComponents.png[width="790" height="500"]
 
 Below is the list of main features that are available in our application:
 
