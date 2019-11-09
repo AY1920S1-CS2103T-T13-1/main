@@ -313,13 +313,9 @@ public class ModelManager implements Model {
         ArrayList<Patient> listOfPatients = new ArrayList<>();
 
         for (Person person : filteredPersons) {
-            if (!(person instanceof Patient)) {
+            if (!(person instanceof Patient) || !((Patient) person).getDoctorInCharge().equals(doctorIc)) {
                 continue;
             }
-            if (!((Patient) person).getDoctorInCharge().equals(doctorIc)) {
-                continue;
-            }
-
             listOfPatients.add(((Patient) person));
         }
         return listOfPatients;
