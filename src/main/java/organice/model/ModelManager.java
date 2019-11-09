@@ -5,6 +5,7 @@ import static organice.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,11 +16,16 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import organice.commons.core.GuiSettings;
 import organice.commons.core.LogsCenter;
+
 import organice.logic.commands.MatchCommand;
 import organice.logic.commands.exceptions.CommandException;
 import organice.model.comparator.ExpiryDateComparator;
+import organice.model.comparator.NameComparator;
+import organice.model.comparator.NumOfMatchesComparator;
 import organice.model.comparator.PriorityComparator;
 import organice.model.comparator.SuccessRateComparator;
+import organice.model.person.Doctor;
+import organice.model.person.DoctorInCharge;
 import organice.model.person.Donor;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
@@ -37,6 +43,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Person> displayedPersons;
     private ObservableList<Person> listOfMatches = FXCollections.observableArrayList();
     private SortedList<MatchedDonor> sortedMatchedDonors;
     private SortedList<MatchedPatient> sortedMatchedPatients;
@@ -53,6 +60,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        displayedPersons = FXCollections.observableList(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -112,7 +120,11 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
-    @Override
+    /**
+     * To check if the model have a person with the given Nric.
+     * @param personNric
+     * @return a boolean true or false if the person exist.
+     */
     public boolean hasPerson(Nric personNric) {
         requireNonNull(personNric);
         return addressBook.hasPerson(personNric);
@@ -131,6 +143,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasDonor(Nric donor) {
+        requireNonNull(donor);
+        return addressBook.hasDonor(donor);
+    }
+
+    @Override
+    public boolean hasDoctorInCharge(DoctorInCharge doctorIc) {
+        requireNonNull(doctorIc);
+        return addressBook.hasDoctorInCharge(doctorIc);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -142,17 +166,40 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getPerson(Nric personNric) throws PersonNotFoundException {
+        requireNonNull(personNric);
+        return addressBook.getPerson(personNric);
+    }
+
+    @Override
+    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
+        requireNonNull(patientNric);
+        return addressBook.getPatient(patientNric);
+    }
+
+    @Override
+    public Donor getDonor(Nric donorNric) throws PersonNotFoundException {
+        requireNonNull(donorNric);
+        return addressBook.getDonor(donorNric);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public Patient getPatient(Nric patientNric) throws PersonNotFoundException {
-        requireNonNull(patientNric);
+    //=========== Displayed Person List ======================================================================
 
-        return addressBook.getPatient(patientNric);
+    @Override
+    public ObservableList<Person> getDisplayedPersonList() {
+        return displayedPersons;
+    }
+
+    @Override
+    public void setDisplayedPersonList(List<Person> personList) {
+        displayedPersons = FXCollections.observableList(personList);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -167,9 +214,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFullPersonList() {
+        Predicate predicate = filteredPersons.getPredicate();
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        ObservableList<Person> fullPersonList = FXCollections.observableList(
+                Arrays.asList(filteredPersons.toArray(Person[]::new)));
+        filteredPersons.setPredicate(predicate);
+        return fullPersonList;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        setDisplayedPersonList(Arrays.asList(filteredPersons.toArray(Person[]::new)));
     }
 
     @Override
@@ -228,6 +286,41 @@ public class ModelManager implements Model {
         return listOfDonors;
     }
 
+    /**
+     * Returns a list of {@code Doctor} in ORGANice.
+     */
+    @Override
+    public ArrayList<Doctor> getListOfDoctors() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ArrayList<Doctor> listOfDoctors = new ArrayList<>();
+
+        for (Person person : filteredPersons) {
+            if (!(person instanceof Doctor)) {
+                continue;
+            }
+
+            listOfDoctors.add((Doctor) person);
+        }
+
+        return listOfDoctors;
+    }
+
+    /**
+     * Returns a list of {@code Patient} with a specified doctor in charge in ORGANice.
+     */
+    public ArrayList<Patient> getPatientsWithDoctorIc(DoctorInCharge doctorIc) {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ArrayList<Patient> listOfPatients = new ArrayList<>();
+
+        for (Person person : filteredPersons) {
+            if (!(person instanceof Patient) || !((Patient) person).getDoctorInCharge().equals(doctorIc)) {
+                continue;
+            }
+            listOfPatients.add(((Patient) person));
+        }
+        return listOfPatients;
+    }
+
 
     /**
      * Add a MatchedDonor to the list to be displayed.
@@ -236,6 +329,8 @@ public class ModelManager implements Model {
     public void addMatchedDonor(MatchedDonor matchedDonorToAdd) {
         requireNonNull(matchedDonorToAdd);
         listOfMatches.add(matchedDonorToAdd);
+        setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
+
     }
 
     /**
@@ -245,6 +340,7 @@ public class ModelManager implements Model {
     public void addMatchedPatient(MatchedPatient matchedPatientToAdd) {
         requireNonNull(matchedPatientToAdd);
         listOfMatches.add(matchedPatientToAdd);
+        setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
     }
 
     /**
@@ -253,6 +349,7 @@ public class ModelManager implements Model {
      */
     public void removeMatches() {
         listOfMatches = FXCollections.observableArrayList();
+        setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
     }
 
     /**
@@ -277,46 +374,33 @@ public class ModelManager implements Model {
             matchedPatient.setNumberOfMatches(numberOfMatches);
             addMatchedPatient(matchedPatient);
         }
+        setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
     }
 
     /**
      * Match Donors to the specified {@code Patient}.
      */
     public void matchDonors(Patient patient) {
-        //filter out donors.
         List<Donor> listOfDonors = getListOfDonors();
-
         //if match, create a MatchedDonor and add to the list.
         for (Donor donor : listOfDonors) {
             boolean isMatch = MatchCommand.match(donor, patient);
-
             if (isMatch) {
                 MatchedDonor matchedDonor = new MatchedDonor(donor);
                 addMatchedDonor(matchedDonor);
             }
         }
+        setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
     }
 
     /**
-     * Retrieves the Match List
+     * Returns the number of {@code MatchedDonors} that matches a specific {@code Patient}.
      */
-    public ObservableList<Person> getMatchList() {
-        return listOfMatches;
+    public int numberOfMatches() {
+        return listOfMatches.size();
     }
 
     //=========== Sorted Person List Accessors =============================================================
-
-    /**
-     * Retrieves the sort list.
-     */
-    public SortedList<Person> getSortList() {
-        Person firstperson = listOfMatches.get(0);
-        if (firstperson instanceof MatchedPatient) {
-            return (SortedList<Person>) (SortedList<?>) sortedMatchedPatients;
-        } else {
-            return (SortedList<Person>) (SortedList<?>) sortedMatchedDonors;
-        }
-    }
 
     /**
      * Sorts list by priority level.
@@ -326,7 +410,10 @@ public class ModelManager implements Model {
         try {
             sortedMatchedPatients = new SortedList<>((ObservableList<MatchedPatient>) (ObservableList<?>)
                     listOfMatches);
+            sortedMatchedPatients.setComparator(new NameComparator());
+            sortedMatchedPatients.setComparator(new NumOfMatchesComparator());
             sortedMatchedPatients.setComparator(new PriorityComparator());
+            setDisplayedPersonList(Arrays.asList(sortedMatchedPatients.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by Priority only works after 'match ic/all'.");
         }
@@ -339,8 +426,9 @@ public class ModelManager implements Model {
     public void sortBySuccessRate() throws CommandException {
         try {
             sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                listOfMatches);
+                    listOfMatches);
             sortedMatchedDonors.setComparator(new SuccessRateComparator());
+            setDisplayedPersonList(Arrays.asList(sortedMatchedDonors.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by success rate "
                     + "only works after executing 'match ic/[patient NRIC]'.");
@@ -354,8 +442,9 @@ public class ModelManager implements Model {
     public void sortByOrganExpiryDate() throws CommandException {
         try {
             sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                listOfMatches);
+                    listOfMatches);
             sortedMatchedDonors.setComparator(new ExpiryDateComparator());
+            setDisplayedPersonList(Arrays.asList(sortedMatchedDonors.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
             throw new CommandException("Sorting by organ expiry date "
                     + "only works after executing 'match ic/[patient NRIC]'.");

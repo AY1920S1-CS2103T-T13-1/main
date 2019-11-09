@@ -3,6 +3,7 @@ package organice.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static organice.testutil.Assert.assertThrows;
 import static organice.testutil.TypicalPersons.DOCTOR_ALICE;
@@ -11,16 +12,18 @@ import static organice.testutil.TypicalPersons.PATIENT_IRENE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import organice.commons.core.GuiSettings;
+import organice.logic.commands.ExactFindCommand;
+import organice.logic.parser.ArgumentMultimap;
+import organice.logic.parser.ArgumentTokenizer;
 import organice.model.person.MatchedDonor;
 import organice.model.person.MatchedPatient;
-import organice.model.person.NameContainsKeywordsPredicate;
 import organice.model.person.Person;
+import organice.model.person.PersonContainsPrefixesPredicate;
 import organice.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -120,7 +123,7 @@ public class ModelManagerTest {
         MatchedDonor matchedDonor = new MatchedDonor(DONOR_IRENE_DONOR);
         modelManager.addMatchedDonor(matchedDonor);
 
-        List<Person> listOfMatches = modelManager.getMatchList();
+        List<Person> listOfMatches = modelManager.getDisplayedPersonList();
         assertEquals(1, listOfMatches.size());
     }
 
@@ -129,7 +132,7 @@ public class ModelManagerTest {
         MatchedPatient matchedPatient = new MatchedPatient(PATIENT_IRENE);
         modelManager.addMatchedPatient(matchedPatient);
 
-        List<Person> listOfMatches = modelManager.getMatchList();
+        List<Person> listOfMatches = modelManager.getDisplayedPersonList();
         assertEquals(1, listOfMatches.size());
 
     }
@@ -142,7 +145,7 @@ public class ModelManagerTest {
         MatchedDonor matchedDonor = new MatchedDonor(DONOR_IRENE_DONOR);
 
         modelManager.matchDonors(PATIENT_IRENE);
-        List<Person> listOfMatches = modelManager.getMatchList();
+        List<Person> listOfMatches = modelManager.getDisplayedPersonList();
         MatchedDonor matchedDonorAfterMatching = (MatchedDonor) listOfMatches.get(0);
 
         assertEquals(matchedDonor, matchedDonorAfterMatching);
@@ -156,7 +159,7 @@ public class ModelManagerTest {
         MatchedPatient matchedPatient = new MatchedPatient(PATIENT_IRENE);
 
         modelManager.matchAllPatients();
-        List<Person> listOfMatches = modelManager.getMatchList();
+        List<Person> listOfMatches = modelManager.getDisplayedPersonList();
         MatchedPatient matchedPatientAfterMatching = (MatchedPatient) listOfMatches.get(0);
 
         assertEquals(matchedPatient, matchedPatientAfterMatching);
@@ -168,7 +171,7 @@ public class ModelManagerTest {
         modelManager.addMatchedDonor(matchedDonor);
 
         modelManager.removeMatches();
-        List<Person> listOfMatches = modelManager.getMatchList();
+        List<Person> listOfMatches = modelManager.getDisplayedPersonList();
         assertEquals(0, listOfMatches.size());
     }
 
@@ -196,8 +199,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = DOCTOR_ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        ArgumentMultimap searchParams = ArgumentTokenizer
+                .tokenize(ExactFindCommand.COMMAND_WORD + " n/" + DOCTOR_ALICE.getName().fullName, PREFIX_NAME);
+        modelManager.updateFilteredPersonList(new PersonContainsPrefixesPredicate(searchParams));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

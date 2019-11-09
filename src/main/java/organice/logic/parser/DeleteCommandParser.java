@@ -2,9 +2,9 @@ package organice.logic.parser;
 
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import organice.commons.core.index.Index;
 import organice.logic.commands.DeleteCommand;
 import organice.logic.parser.exceptions.ParseException;
+import organice.model.person.Nric;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -18,12 +18,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            Nric nric = ParserUtil.parseNric(args);
+            return new DeleteCommand(nric);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
