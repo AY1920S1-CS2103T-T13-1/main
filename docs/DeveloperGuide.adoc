@@ -214,7 +214,7 @@ The following operations in `ModelManager` accesses the `match` method:
 
 * `ModelManager#matchDonors(Patient patient)` -- Matches all donors in ORGANice with the specified patient.
 For each donor that potentially matches the patient, a `MatchedDonor` object is created to store
-the compatability rate of the donor with the patient.
+the compatibility rate of the donor with the patient.
 * `ModelManager#matchPatients()` -- Matches all donors with all patients. For every patient in ORGANice,
 a `MatchedPatient` object is created to store the number of donors that are potential matches with that patient.
 
@@ -224,6 +224,20 @@ component.
 
 Each time a user invokes the match feature, the contents of `listOfMatches` are deleted.
 New `MatchedPatient` and `MatchedDonor` objects are created and stored in the list again.
+
+Given below is an example usage scenario and how the match feature works at each step:
+
+Step 1. The user opens up the application with an existing list of patients and donors.
+//add object diagram
+
+Step 2. The user types in the command `match ic/all`. Each patient will be matched with
+all donors via the `MatchCommand#match` operation. A `MatchedPatient` object will be created
+for each patient, which stores the patient's attributes and the number of potential donors the patient has.
+//add object diagram.
+
+Step 3. The user types in the command `match ic/S7016432I`. Existing `MatchedPatient` or `MatchedDonor` objects
+in the `listOfMatches` are removed. For each potential donors of the patient with the NRIC S7016432I, a `MatchedDonor`
+object is created, accompanied with the compatibility rate.
 
 The following activity diagram summarises what happens when a user executes the match feature:
 
