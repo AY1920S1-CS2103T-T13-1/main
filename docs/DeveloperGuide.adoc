@@ -337,7 +337,7 @@ then runs the matching again. The matching would be based on the latest patient 
 
 // tag::formmode[]
 === Form mode feature
-This section explains the implementation of the adding person in form mode feature.
+This section explains the implementation of the form mode feature.
 
 ==== Implementation
 

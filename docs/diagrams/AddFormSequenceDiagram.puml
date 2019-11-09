@@ -79,6 +79,8 @@ LogicManager -> FormUiManager : getPhone("91230201")
 
 FormUiManager -> FormUiManager : setPersonDetails()
 
+FormUiManager -> FormUiManager : addDoctorToList()
+
 FormUiManager --> LogicManager : execute("add t/doctor n/John Doe ic/S4612296H p/9123021")
 
 LogicManager -> AddressBookParser : parseCommand("add t/doctor n/John Doe ...")
