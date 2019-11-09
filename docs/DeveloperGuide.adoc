@@ -293,7 +293,7 @@ It modifies the `CommandBox` as well as `PersonPanelListPlaceholder` each time y
 The following object diagram models the relationship and dependencies between `FormUiManager` and other objects:
 
 .Object Diagram for the `FormUiManager` object
-image::FormUiManagerObjectDiagram.png[]
+image::FormUiManagerObjectDiagram.png[width="300"]
 
 `FormUiManager` will need an object of class `Type` in order to determine what type of form(patient, doctor, or donor) will be displayed to you.
 
