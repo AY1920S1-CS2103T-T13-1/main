@@ -124,7 +124,7 @@ public class EditCommand extends Command {
         assert Type.isValidType(updatedType.toString());
         if (updatedType.isDoctor()) {
             String errorMessage = getErrorMessage(personToEdit, editPersonDescriptor);
-            if (!errorMessage.equals("")) {
+            if (!errorMessage.isBlank()) {
                 throw new CommandException(errorMessage);
             }
 
@@ -199,18 +199,18 @@ public class EditCommand extends Command {
                 errorMessage += "There is no doctor in charge field in doctor\n";
             }
             if (editPersonDescriptor.getPriority().isPresent()) {
-                errorMessage += "There is no priority field in doctor";
+                errorMessage += "There is no priority field in doctor\n";
             }
         } else if (updatedType.isPatient()) {
             if (editPersonDescriptor.getOrganExpiryDate().isPresent()) {
-                errorMessage += "There is no organ's expiry date field in patient";
+                errorMessage += "There is no organ's expiry date field in patient\n";
             }
         } else if (updatedType.isDonor()) {
             if (editPersonDescriptor.getPriority().isPresent()) {
                 errorMessage += "There is no priority field in donor\n";
             }
-            if (editPersonDescriptor.getPriority().isPresent()) {
-                errorMessage += "There is no priority field in donor";
+            if (editPersonDescriptor.getDoctorInCharge().isPresent()) {
+                errorMessage += "There is no doctor in charge field in donor\n";
             }
         }
         return errorMessage;
