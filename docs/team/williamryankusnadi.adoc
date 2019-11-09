@@ -3,8 +3,6 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
----
-
 == About the project
 
 My team and I developed ORGANice during our 2nd year of our Computer Science degree in National University of Singapore for our Software Engineering Project. ORGANice is a desktop application for hospital administration staff who prefer to use Command Line Interface applications to manage organ transplants. The purpose of this project portfolio is to demonstrate my contribution to the project as well as to the user and developer guides
