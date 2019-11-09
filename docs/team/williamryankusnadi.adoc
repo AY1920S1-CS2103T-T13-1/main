@@ -66,7 +66,7 @@ include::../UserGuide.adoc[tag=add]
 
 {start of extract}
 
-include::../DeveloperGuide.adoc[tag=formmode]
+//include::../DeveloperGuide.adoc[tag=formmode]
 
 {end of extract}
 
