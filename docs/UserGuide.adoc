@@ -230,17 +230,17 @@ Note that `/exit`, `/abort`, and `/undo` commands can be used at any point in ti
 These are the important commands for this feature, so now let's take a look at an example on how you can use this feature.
 Let's say you want to add a patient to the application. You should type `add t/patient` in the `Command Box`. Three changes will occur on your screen:
 
-1. A form will appear in the space where the `Person List` used to occupy.
-2. The `Message Display Box` will display a message that prompts you to enter the patient’s name.
-3. There is a `Progress Bar` detailing your progress in filling up the form.
+1. A form will appear in the space where the Person List used to occupy.
+2. The Message Display Box will display a message that prompts you to enter the patient’s name.
+3. There is a Progress Bar detailing your progress in filling up the form.
 
-Refer to the `Figure 4` to see how the resulting screen will look like.
+Refer to the Figure 4 to see how the resulting screen will look like.
 
 .Screenshot of the screen after you have successfully entered the form mode
 image::addForm.png[width="790"]
 
 If you want to add a patient named "John Doe", type `John Doe` and then press kbd:[Enter].
-After entering the name, the patient's name will be displayed on the form and the progress bar will increase as seen in `Figure 5`.
+After entering the name, the patient's name will be displayed on the form and the progress bar will increase as seen in Figure 5.
 
 .Form layout after you have entered a valid name
 image::nameFilled.png[width="790"]
@@ -249,10 +249,10 @@ Each time you type an input, ORGANice will check if it is a valid input. If the 
 If not, ORGANice will display a warning message stating the criteria for a valid input of that attribute.
 
 Say you typed in "G999999999A" and pressed kbd:[Enter] when ORGANice prompts you to type in the NRIC of the patient.
-Three changes occur to ORGANice, which can be seen in the `Figure 6`:
+Three changes occur to ORGANice, which can be seen in the Figure 6:
 
-1. Your input will remain in the `Command Box`, but the colour of the input text turns to red.
-2. A warning message is displayed in the `Message Display Box`. This warning message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.
+1. Your input will remain in the Command Box, but the colour of the input text turns to red.
+2. A warning message is displayed in the Message Display Box. This warning message details the criteria for a valid NRIC input. This error message is specific to the attribute type. For example if you typed in an invalid NRIC, an error message detailing the criteria for a valid NRIC will be displayed.
 3. Your input will not be reflected in the form.
 
 .Form layout if you entered an invalid value
@@ -275,20 +275,20 @@ The `Message Display Box` will show a success message, indicating that you have 
 .The UI changed back to it's original state and shows a success message
 image::addSuccess.png[width="790"]
 
-The `Find Match` button will appear when all attributes are filled. After you clicked this button, `ORGANice` will add the patient to the list and it will execute the `Match` command as described in <<Detecting matches: `match`>>.
-`ORGANice` will then return back to its original state(exits from the form mode) and shows the list of potential donors for the patient you have just added as seen in `Figure 10`. Note that this button only appeared if you are adding a patient.
+The 'Find Match' button will appear when all attributes are filled. After you clicked this button, `ORGANice` will add the patient to the list and it will execute the 'match' command.
+ORGANice will then return back to its original state(exits from the form mode) and shows the list of potential donors for the patient you have just added as seen in Figure 10. Note that this button only appeared if you are adding a patient.
 
 .The UI displayed the potential donors for a patient that you have added
 image::findMatch.png[width="790"]
 
 At any point in time, if you decided not to proceed with the addition and typed in `/abort`, you will be directed into the main page and notified that
-you have abandoned the form as seen in `Figure 10`.
+you have abandoned the form as seen in Figure 10.
 
 .The UI changed back to it's original state and shows a message the form has been abandoned
 image::abandonForm.png[width="790"]
 
 Furthermore, if you made any mistake while you are filling up the form, you can type in `/undo` to remove the last entry you entered.
-For example, if you enter the wrong name and want to undo the action, type `/undo` in the `Command Box` and press kbd:[Enter]. Your previous input for the name will be removed from the form as seen in `Figure 11`
+For example, if you enter the wrong name and want to undo the action, type `/undo` in the Command Box and press kbd:[Enter]. Your previous input for the name will be removed from the form as seen in Figure 11
 
 .Form layout showing that the last entry is removed after you typed in '/undo'
 image::undoCommand.png[width="790"]
@@ -484,6 +484,7 @@ Format: `sort rate`
 Take for instance, after running a match command on a specific patient with `match ic/**NRIC**`, you will get a list of donors that are compatible with said patient.
 You can then run `sort rate` to obtain the list of donors with higher success rates near the top of the list.
 // end::sort[]
+// end::match[]
 
 // tag::process[]
 === Processing potential matches: `processing`

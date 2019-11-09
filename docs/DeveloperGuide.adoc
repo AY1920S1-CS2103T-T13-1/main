@@ -358,7 +358,7 @@ image::Form.png[width="300", height="300"]
 ==== Design Considerations
 This section will explain the reason for having some aspects.
 
-===== Aspect: How undo & redo executes
+===== Aspect: How form mode feature executes
 
 * **Alternative 1 (current choice):** Use the same `add` command to do the `Form` mode.
 ** Pros: Easy to implement.
