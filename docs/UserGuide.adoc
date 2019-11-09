@@ -167,7 +167,6 @@ ORGANice. To access the user guide of ORGANice, you can do the following:
 image::HelpWindow.png[width="790"]
 // end::help[]
 
-// tag::add[]
 === Adding a person: `add`
 
 This command allows you to add a patient, doctor, or donor to ORGANice with the attributes given,
@@ -210,6 +209,7 @@ d/S2235456D a/29`
 exp/23-Nov-2020 a/21`
 * `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
 
+// tag::add[]
 ==== Form mode
 
 In this mode, instead of typing a long command at one go, you can add a person's attribute one by one.
