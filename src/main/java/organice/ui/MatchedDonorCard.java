@@ -7,11 +7,11 @@ import javafx.scene.layout.Region;
 import organice.model.person.Donor;
 
 /**
- * An UI component that displays information of a {@code Donor}.
+ * An UI component that displays information of a {@code MatchedDonor}.
  */
-public class MatchCard extends UiPart<Region> {
+public class MatchedDonorCard extends UiPart<Region> {
 
-    private static final String FXML = "MatchCard.fxml";
+    private static final String FXML = "MatchedDonorCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -46,7 +46,7 @@ public class MatchCard extends UiPart<Region> {
     @FXML
     private Label success;
 
-    public MatchCard(Donor donor, int displayedIndex) {
+    public MatchedDonorCard(Donor donor, int displayedIndex) {
         super(FXML);
         this.donor = donor;
         id.setText(displayedIndex + ". ");
