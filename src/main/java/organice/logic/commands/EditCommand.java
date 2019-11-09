@@ -78,8 +78,8 @@ public class EditCommand extends Command {
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             if (personToEdit.getType().isPatient()) {
-                DoctorInCharge updatedDoctorInCharge = editPersonDescriptor.getDoctorInCharge().orElse(
-                        ((Patient) personToEdit).getDoctorInCharge());
+                DoctorInCharge updatedDoctorInCharge = editPersonDescriptor.getDoctorInCharge().orElse((
+                        (Patient) personToEdit).getDoctorInCharge());
                 if (!model.hasDoctor(new Nric(updatedDoctorInCharge.toString()))) {
                     throw new CommandException(String.format("Doctor with NRIC %s does not exist in ORGANice!",
                             updatedDoctorInCharge.toString()));
