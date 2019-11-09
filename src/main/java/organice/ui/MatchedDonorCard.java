@@ -58,7 +58,7 @@ public class MatchedDonorCard extends UiPart<Region> {
         tissueType.setText("Tissue type: " + donor.getTissueType().value);
         organ.setText("Organ: " + donor.getOrgan().value);
         organExpiryDate.setText("Organ Expiry Date: " + donor.getOrganExpiryDate().value);
-        success.setText("Success Rate: " + donor.getSuccessRate());
+        success.setText("Compatibility Rate: " + donor.getSuccessRate());
     }
 
     @Override
