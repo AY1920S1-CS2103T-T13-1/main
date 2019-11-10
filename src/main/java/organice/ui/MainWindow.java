@@ -274,6 +274,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isForm()) {
+                logger.info("[FORM MODE activated}");
                 resultDisplayPlaceholder.setMinHeight(100);
                 FormAnimation.fadingAnimation(this);
                 Type formType = commandResult.getFormType();

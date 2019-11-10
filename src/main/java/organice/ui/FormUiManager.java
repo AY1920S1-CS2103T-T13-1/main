@@ -501,6 +501,7 @@ public class FormUiManager {
     }
 
     private void handleAbort() {
+        logger.info("[FORM MODE aborted]");
         FormAnimation.fadingAnimation(mainWindow);
         mainWindow.getResultDisplay().setFeedbackToUser(MESSAGE_ABORT);
         mainWindow.resetInnerParts();
