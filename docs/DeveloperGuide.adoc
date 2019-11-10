@@ -136,7 +136,7 @@ NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) 
 
 // tag::modeldiagram[]
 .Structure of the Model Component
-image::ModelClassDiagram.png[]
+image::ModelClassDiagram.png[width=790]
 // end::modeldiagram[]
 
 The `Model`,
@@ -196,7 +196,7 @@ The code snippet below shows what these predicates are:
 The activity diagram below illustrates what happens when a user uses the list command.
 
 .Activity Diagram of a List Command
-image::ListActivityDiagram.png[]
+image::ListActivityDiagram.png[width=750]
 
 When the user enters a list command, the result differs depending on the parameter of the command.
 If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
@@ -422,7 +422,7 @@ The `SuccessRateComparator` is created to compare two matched patients' rate of 
 Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort rate)`,
 assuming the user has entered a `match ic/**NRIC**` command before this.
 
-.Structure of the Logic Component when executing `sort rate` command
+.Sequential Diagram of the `sort rate` command
 image::SortSequenceDiagram.png[width=790]
 
 After the command is given by the user, it would be parsed by the `AddressBookParser`.
