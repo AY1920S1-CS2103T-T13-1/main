@@ -179,7 +179,7 @@ public interface Model {
     /**
      * Sorts list by rate of success.
      */
-    void sortBySuccessRate() throws CommandException;
+    void sortByCompatibilityRate() throws CommandException;
 
     /**
      * Sorts list by organ expiry date.

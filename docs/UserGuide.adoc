@@ -324,16 +324,13 @@ as follows: `edit S8732457G p/91234567`.
 **You can only make changes to attributes that the person has.**
 For example, you cannot change a doctor's age because a doctor does not have that attribute in ORGANice.
 
-**In addition, there are some attributes that cannot be edited.** These include:
+**In addition, there are attributes that cannot be edited.** These include:
 
 * NRIC
 +
 * Type
-+
-* Organ expiry date
 
-
-You might want to refer to <<List of Attributes>> to see what attributes are applicable to each type of person in ORGANice.
+You may want to refer to <<List of Attributes>> to see what attributes are applicable to each type of person in ORGANice.
 // end::edit[]
 
 === Finding persons by attributes: `find`
