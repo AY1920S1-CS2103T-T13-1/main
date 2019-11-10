@@ -110,10 +110,20 @@ It will be very intuitive for the hospital staffs to determine which tasks are d
 This section will explain the command, `done` I implemented for ORGANice.
 
 *** What it does: +
+It allows users to determine if a patient and a donor is all done.
+Meaning, the patient and donor have gone through a test and we know know if the patient rejected the organ from the donor or not.
+If the patient is not compatible with the donor, then both the patient and donor will be saved back into ORGANice and available for future organ matching detection.
+However, they will not be able to match each other anymore.
+If the patient is compatible with the donor, then both of the patient and donor will be removed from ORGANice.
 
 *** Justification: +
+Our algorithm is only able to find the compatibility of the blood type and tissue type of the patient and donor pair.
+However, a cross-matching test is needed to determine if the patient will reject the donor's organ.
+Hence, there is a chance that the result of the cross-matching test is negative and the patient and donor will need to find another match.
 
 *** Highlights: +
+This feature will save a history of all rejected patients a donor have so as to not allow the donor to be matched again with them.
+This will ensure that the same patient and donor do not go through another round of cross-matching just to return the same negative result.
 
 === Code Contributed
 
@@ -123,6 +133,24 @@ Please refer to this link to view the code I wrote:
 === Other Contributions
 
 ** **Enhancements**
+
+*** Enhance the `edit` feature to allow users to edit a person's by their NRIC instead of their index number. +
+(Pull request
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/119[#119]])
+
+*** Enhance the `edit` feature to allow users to edit other attributes of a person. +
+(Pull request
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/177[#177]])
+
+*** Added `BloodType` and `TissueType` attributes to the `Donor` and `Patient` classes. +
+(Pull requests
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/82[#82]],
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/89[#89]],
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/96[#96]])
+
+*** Added `Status` attribute to the `Donor` and `Patient` classes for the `processing` feature. +
+(Pull requests
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/139[#139]])
 
 ** **Documentations**
 
@@ -134,7 +162,7 @@ Please refer to this link to view the code I wrote:
 
 === Proposed Enhancement for v2.0
 
-== Contibutions to Developer Guide
+== Contributions to Developer Guide
 
 === Current Enhancement
 
