@@ -450,13 +450,40 @@ with current implementations (able to wrap `ObservableList` and sort the content
 === Processing feature
 This section describes how the processing feature is implemented.
 
-Processing is done by accessing `Patient` and `Donor` in `ModelManager`, then creating an ArrayList named, `ProcessingList` to store the tasks needed to do.
+Processing is facilitated by the `ProcessingCommand` class, which extends the `Command` class.
 
-If the donor and patient pair had never been processed before, a default `ProcessingList` will be generated and it will belong to the patient and donor pair uniquely.
+Processing is done by accessing `Patient` and `Donor` in `ModelManager`,
+then creating a `ProcessingList` which acts like ArrayList to store the tasks which needs to be done.
+
+It implements the `ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` boolean operation. +
+This method will first determine which Nric belongs to a patient and which Nric belongs to a donor
+since the input allows user to give two Nric in no particular order. +
+Then, it will check if the donor have a `ProcessingList` generated before.
+If the donor have an empty `ProcessingList`, it means that the donor is newly processed.
+Hence, it will mean that the donor may be able to pair with the given patient.
+If the donor already have a `ProcessingList`, it means that the donor is already being processed with a patient. +
+Then, this method will check if the patient given by the user is the same patient being processed together with this donor.
+This is done by checking the `Patient` attribute that is tagged to the `ProcessingList` of the donor. +
+Finally, the method will check if the patient and donor given by the user is valid by checking if
+they are able to be matched or not and if they exist in ORGANice.
+
+This command also make changes to the `Status` of the patient and donor.
+`Status` is an attribute of `Patient` and `Donor`. however, it cannot be edited or added by users.
+
+* When a new `Patient` or `Donor` object is created, the `Status` of the new object will be set to `not processing`.
+
+* When the `Processing` command is being executed, `Status` of the `Patient` and the `Donor` will be changed to `processing`,
+provided that the `Patient` and `Donor` are valid.
+
+* When the `Done` command is being executed, `Status` of the `Patient` and the `Donor` will be changed to `done`,
+provided that the `Patient` and `Donor` are valid.
+
+
+If the donor and patient have never been processed before, a default `ProcessingList` will be generated and it will belong to the patient and donor pair uniquely.
 
 If the user made any changes to the `ProcessingList`, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient's NRIC.
 
-//Todo: additional feature such as add tasks, delete tasks etc
+//Todo: additional feature such as add, edit and delete tasks
 
 ==== Design considerations
 This section will explain the reason for having some aspects.
