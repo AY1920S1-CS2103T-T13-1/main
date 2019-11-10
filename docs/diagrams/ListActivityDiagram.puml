@@ -1,24 +1,18 @@
 @startuml
 
 start
-:user enters list command;
-:identify parameter of list command;
+:User enters list command;
 if () then ([no parameter])
-    :display all persons;
-else ([invalid parameter])
-    :display "invalid command" message;
-endif
-if (is a Type?) then (yes)
-    :update list to show
-        all patients;
-elseif (is donor?) then (yes)
-    :update list to show
-        all donors;
-elseif (is doctor?) then (yes)
-    :update list to show
-          all doctors;
-else (invalid parameter)
-    :display error message;
+    :ORGANice displays all persons;
+else ([has parameter])
+    :ORGANice checks parameter;
+    if () then ([valid Type parameter])
+        :ORGANice displays list of persons
+                of the specified Type;
+    else ([invalid parameter])
+        :    ORGANice displays an
+        "invalid command" message;
+    endif
 endif
 stop
 @enduml
