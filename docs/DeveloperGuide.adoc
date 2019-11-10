@@ -395,7 +395,6 @@ Sorting is done by using `Comparators` in the `Logic` component and makes use of
 This command only works after a `MatchCommand` is called by the user, because it takes in `listOfMatches` returned
 from calling a `MatchCommand`. Importantly, this `listOfMatches` is an `ObservableList`, which cannot be modified.
 Therefore, it makes use of `SortedList` to wrap around the `ObservableList` so that the list can be modified by sorting.
-The `boolean` in `CommandResult#setSort(boolean isSort)` will be set to `true` for a list that has been sorted.
 Thus far, the sort command can only take in one `String` parameter, but more methods can be added in the future for more sorting options.
 
 Three methods of sorting are implemented to sort based on the following categories:
@@ -472,7 +471,7 @@ Integer otherPriorityNumber = 0;
     }
 ```
 
-This implementation was the result of using `String` to represent the different priorities in the `Priority` class.
+This implementation is the result of using `String` to represent the different priorities in the `Priority` class.
 Therefore, they are converted into `Integer` for easier comparison. An alternative solution would be to make use of
 `Enum` class to define each priority so that this `compareTo` method implementation can be simplified.
 
@@ -483,7 +482,7 @@ This section will explain two aspects considered in designing the sort feature.
 * **Alternative 1 (current choice):** Use `SortedList`.
 ** Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
 with current implementations (able to wrap `ObservableList` and sort the content).
-** Cons: It is not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.
+** Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.
 * **Alternative 2:** Use `ArrayList`.
 ** Pros: Fast index-based access and works on any `Collection` class.
 ** Cons: Iterating through the list to display the result takes O(n) time, which is slower than using `SortedList`.
@@ -493,7 +492,7 @@ with current implementations (able to wrap `ObservableList` and sort the content
 ** Pros: Simpler implementation as able to make use of existing methods in ORGANice such as `setComparator`.
 ** Cons: More coding involved.
 * **Alternative 2:** Use `Collections.sort()`.
-** Pros: Time complexity is O(n*log(n)) which is relatively fast.
+** Pros: Has a time complexity of O(n*log(n)) which is relatively fast.
 ** Cons: Cannot make use of existing methods in ORGANice that work for Comparator.
 // end::sort[]
 
@@ -502,9 +501,9 @@ This section describes how the processing feature is implemented.
 
 Processing is done by accessing `Patient` and `Donor` in `ModelManager`, then creating an ArrayList named, `ProcessingList` to store the tasks needed to do.
 
-If the donor and patient pair had never been processed before, a default `ProcessingList` will be generated and it will belong to the patient and donor pair uniquely.
+If the donor and patient pair has never been processed before, a default `ProcessingList` will be generated and it will belong to the patient and donor pair uniquely.
 
-If the user made any changes to the `ProcessingList`, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient's NRIC.
+If the user makes any changes to the `ProcessingList`, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient's NRIC.
 
 //Todo: additional feature such as add tasks, delete tasks etc
 
