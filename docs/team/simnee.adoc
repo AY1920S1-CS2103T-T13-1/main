@@ -5,25 +5,32 @@
 
 == PROJECT: ORGANice
 
+---
+
 :sectnums:
 == Introduction
+
 This document aims to show an overview of my involvements in the project, ORGANice.
 My role in this project was to implement the task list for the users to track the
 administrative tasks that needs to be done.
 
 === Project Description
+
 ORGANice is developed by a team of five students in National University of Singapore (NUS).
 All of us are year 2 Computer Science students,taking the Software Engineering module, CS2103T.
 
 === Project Scope
+
 ORGANice was made for our CS2103T module's team project (TP). Over the course of 6 weeks, we were tasked
 with either enhancing or morphing a Command Line Interface (CLI) desktop addressbook application.
 We chose to morph it into an organ transplant manager, ORGANice.
+It has a Graphical User Interface (GUI) which is created with JavaFX.
 
 The target audiences of ORGANice are the hospital administrative staffs as we aim to help ease their
 workload when trying to match all their patients with all the donors' organs they have.
 
 === Project Summary
+
 ORGANice is an organ transplant manager.
 Currently, hospital administrative staffs have many patients and organ donors information in their records.
 Whenever, they have a new patient who needed an organ, they often have to go through many manual search and
@@ -54,44 +61,64 @@ image::snPPP1.png[width="790"]
 === Key formatting
 
 == Summary of Contributions
+
 This section lists the codes and documentations I contributed to ORGANice.
 
 I was responsible of implementing the `processing`, `processingMarkDone` and `done` commands.
 I also ensured the code quality is up to standard.
 
 === Main Feature : `Processing`
+
 This section will explain the command, `processing` I implemented for ORGANice.
 
-*** What it does:
+*** What it does: +
 It allow user to view a whole list of administrative tasks which needs to be done to arrange for cross-matching test
 between a patient and a donor.
 
-*** Justification:
+*** Justification: +
 Hospital staffs often need to do a lot of paper work and administrative tasks.
 There is now an increasing number of patients admitting to hospitals and if they need an organ,
 there will be a standard operating procedure which need to be followed.
 With ORGANice, staffs will not need to manually keep track of which tasks are not yet done for every patients.
 
-*** Highlights:
+*** Highlights: +
 A default task list will be generated when the user use the command with valid NRICs of donor and patient.
 The task list generated belong to the donor and patient only.
 This will not lead to any confusions as
 it is impossible to have a donor matching with more than one patient or a patient matching with more than one donor.
 
 === Main Feature : `ProcessingMarkDone`
+
 This section will explain the command, `processingMarkDone` I implemented for ORGANice.
 
-*** What it does:
-It allows users to mark a task on
-*** Justification:
-*** Highlights:
+*** What it does: +
+It allows users to mark a task on the list of administrative tasks as done.
+
+*** Justification: +
+This command will allow the hospital staffs to have a better overview of what are the existing tasks which need to be done.
+This will reduce the chance of hospital staffs doing a single task for more than one time or miss out a task by accident.
+
+*** Highlights: +
+This feature cannot be used if the patient and donor have not been processed before.
+This will ensure that the correct list is edited instead of a wrong one.
+The list will also be generated with either a cross, ✘, or a tick, ✓ beside each task.
+It will be very intuitive for the hospital staffs to determine which tasks are done already.
+
 
 === Main Feature : `Done`
-*** What it does:
-*** Justification:
-*** Highlights:
+
+This section will explain the command, `done` I implemented for ORGANice.
+
+*** What it does: +
+
+*** Justification: +
+
+*** Highlights: +
 
 === Code Contributed
+
+Please refer to this link to view the code I wrote:
+ [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=SimNee&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[RepoSense]]
 
 === Other Contributions
 
