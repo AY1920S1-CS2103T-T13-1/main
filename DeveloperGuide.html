@@ -461,15 +461,32 @@ New <code>MatchedPatient</code> and <code>MatchedDonor</code> objects are create
 <div class="paragraph">
 <p>Step 1. The user opens up the application with an existing list of patients and donors.</p>
 </div>
-<div class="paragraph">
-<p>Step 2. The user types in the command <code>match ic/all</code>. Each patient will be matched with
-all donors via the <code>MatchCommand#match</code> operation. A <code>MatchedPatient</code> object will be created
-for each patient, which stores the patient&#8217;s attributes and the number of potential donors the patient has.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/MatchState0.png" alt="MatchState0">
+</div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user types in the command <code>match ic/S7016432I</code>. Existing <code>MatchedPatient</code> or <code>MatchedDonor</code> objects
-in the <code>listOfMatches</code> are removed. For each potential donors of the patient with the NRIC S7016432I, a <code>MatchedDonor</code>
-object is created, accompanied with the compatibility rate.</p>
+<p>Step 2. The user types in the command <code>match ic/all</code>. Each patient will be matched with
+all donors via the <code>MatchCommand#match</code> operation. A <code>MatchedPatient</code> object is created
+for each patient, which stores the patient&#8217;s attributes and the number of potential donors the patient has.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MatchState1.png" alt="MatchState1">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. The user types in the command <code>match ic/<strong>PATIENT NRIC</strong></code>, where <strong>PATIENT NRIC</strong> is the NRIC of a patient in
+ORGANice.
+Existing objects in the <code>listOfMatches</code> are removed.
+For each potential donor of the specified patient, a `MatchedDonor`object is created,
+accompanied with the compatibility rate.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MatchState2.png" alt="MatchState2">
+</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarises what happens when a user executes the match feature:</p>
@@ -1561,4 +1578,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:16:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:21:34 UTC</div></div></div></body></html>
