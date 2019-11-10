@@ -237,13 +237,13 @@ Let's say you want to add a patient to the application. You should type `add t/p
 Refer to the Figure 4 to see how the resulting screen will look like.
 
 .Screenshot of the screen after you have successfully entered the form mode
-image::addForm.png[width="790"]
+image::addForm.png[width="790", height="500"]
 
 If you want to add a patient named "John Doe", type `John Doe` and then press kbd:[Enter].
 After entering the name, the patient's name will be displayed on the form and the progress bar will increase as seen in Figure 5.
 
 .Form layout after you have entered a valid name
-image::nameFilled.png[width="790"]
+image::nameFilled.png[width="790", height="500"]
 
 Each time you type an input, ORGANice will check if it is a valid input. If the input is valid, it will be reflected on the form.
 If not, ORGANice will display a warning message stating the criteria for a valid input of that attribute.
@@ -256,7 +256,7 @@ Three changes occur to ORGANice, which can be seen in the Figure 6:
 3. Your input will not be reflected in the form.
 
 .Form layout if you entered an invalid value
-image::invalidInput.png[width="790"]
+image::invalidInput.png[width="790", height="500"]
 
 After all of the attributes have been specified, you can type in:
 
@@ -267,31 +267,31 @@ Note that the `Find Match` button will only appear on the `Patient` form. Note t
 The `Figure 7` will show how the form will look like after you have entered all the required attributes.
 
 .Form layout after all the required attributes have been specified
-image::allFieldSpecified.png[width="790"]
+image::allFieldSpecified.png[width="790", height="500"]
 
 When you type in `/done`, the `Person List` will return to its original state of displaying people in ORGANice.
 The `Message Display Box` will show a success message, indicating that you have successfully added a new person to the Person List as seen in `Figure 8`.
 
 .The UI changed back to it's original state and shows a success message
-image::addSuccess.png[width="790"]
+image::addSuccess.png[width="790", height="500"]
 
 The 'Find Match' button will appear when all attributes are filled. After you clicked this button, `ORGANice` will add the patient to the list and it will execute the 'match' command.
 ORGANice will then return back to its original state(exits from the form mode) and shows the list of potential donors for the patient you have just added as seen in Figure 10. Note that this button only appeared if you are adding a patient.
 
 .The UI displayed the potential donors for a patient that you have added
-image::findMatch.png[width="790"]
+image::findMatch.png[width="790", height="500"]
 
 At any point in time, if you decided not to proceed with the addition and typed in `/abort`, you will be directed into the main page and notified that
 you have abandoned the form as seen in Figure 10.
 
 .The UI changed back to it's original state and shows a message the form has been abandoned
-image::abandonForm.png[width="790"]
+image::abandonForm.png[width="790", height="500"]
 
 Furthermore, if you made any mistake while you are filling up the form, you can type in `/undo` to remove the last entry you entered.
 For example, if you enter the wrong name and want to undo the action, type `/undo` in the Command Box and press kbd:[Enter]. Your previous input for the name will be removed from the form as seen in Figure 11
 
 .Form layout showing that the last entry is removed after you typed in '/undo'
-image::undoCommand.png[width="790"]
+image::undoCommand.png[width="790", height="500"]
 // end::add[]
 
 // tag::list[]

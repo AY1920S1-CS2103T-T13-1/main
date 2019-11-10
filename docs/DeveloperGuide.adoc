@@ -366,7 +366,6 @@ This section will explain the reason for having some aspects.
 * **Alternative 2:** Use a new command for the `Form` mode.
 ** Pros: Will be less confusing for the user since there is a separate command for `Form` mode
 ** Cons: We must creates a new parser and command classes just to deal with another `add` functionality.
-
 // end::formmode[]
 
 // tag::dataencryption[]

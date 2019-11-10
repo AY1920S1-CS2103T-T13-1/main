@@ -75,11 +75,11 @@ public class FormUiManager {
     private int currentState = -1;
 
 
-    public FormUiManager(MainWindow mainWindow, Type formType, Model model, Logger logger) {
+    public FormUiManager(MainWindow mainWindow, Type formType) {
         this.mainWindow = mainWindow;
         this.formType = formType;
-        this.model = model;
-        this.logger = logger;
+        this.model = mainWindow.getModel();
+        this.logger = mainWindow.getLogger();
     }
 
     private CommandResult getName(String personName) throws ParseException {
