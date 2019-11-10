@@ -26,9 +26,6 @@ public class CommandResult {
     /** This Command Result is marked as a Match Command */
     private boolean isMatch;
 
-    /** This Command Result is marked as a Sort Command */
-    private boolean isSort;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -39,7 +36,6 @@ public class CommandResult {
         this.form = form;
         this.formType = formType;
         this.isMatch = false;
-        this.isSort = false;
     }
 
     /**
@@ -90,14 +86,6 @@ public class CommandResult {
 
     public boolean isMatch() {
         return isMatch;
-    }
-
-    public void setSort(boolean isSort) {
-        this.isSort = isSort;
-    }
-
-    public boolean isSort() {
-        return isSort;
     }
 
     @Override

@@ -425,8 +425,7 @@ public class ModelManager implements Model {
     @Override
     public void sortBySuccessRate() throws CommandException {
         try {
-            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                    listOfMatches);
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) listOfMatches);
             sortedMatchedDonors.setComparator(new SuccessRateComparator());
             setDisplayedPersonList(Arrays.asList(sortedMatchedDonors.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
@@ -441,8 +440,7 @@ public class ModelManager implements Model {
     @Override
     public void sortByOrganExpiryDate() throws CommandException {
         try {
-            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) (ObservableList<?>)
-                    listOfMatches);
+            sortedMatchedDonors = new SortedList<>((ObservableList<? extends MatchedDonor>) listOfMatches);
             sortedMatchedDonors.setComparator(new ExpiryDateComparator());
             setDisplayedPersonList(Arrays.asList(sortedMatchedDonors.toArray(Person[]::new)));
         } catch (ClassCastException | IllegalArgumentException ex) {
