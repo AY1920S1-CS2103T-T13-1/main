@@ -55,7 +55,7 @@ The following is a list of the various formats and what they mean: +
 ** Project Management
 *** Created issues to keep track of tasks to be done.
 ** Enhancements to existing features
-*** Fixed bug related to list feature. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/236[#236]
+*** Fixed bug related to the list feature. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/236[#236]
 ** Documentation
 *** Updated information about our team in the "About Us" section of ORGANice. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/11[#11]
 *** Authored the sections that guide users through the features 'Edit', 'List', 'Sort' and 'Help' in the User Guide. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/133[#133]
