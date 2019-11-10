@@ -883,7 +883,7 @@ There are three criteria in which you can sort the matches, namely:</p>
 <p>Sorting based on priority</p>
 </li>
 <li>
-<p>Sorting based on success rate of match</p>
+<p>Sorting based on compatibility rate of match</p>
 </li>
 </ul>
 </div>
@@ -925,18 +925,18 @@ If these two factors are the same for a group of patients, they will be displaye
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-success-rate-of-match"><a class="link" href="#sorting-based-on-success-rate-of-match">5.7.3. Sorting based on success rate of match</a></h4>
+<h4 id="sorting-based-on-compatibility-rate-of-match"><a class="link" href="#sorting-based-on-compatibility-rate-of-match">5.7.3. Sorting based on compatibility rate of match</a></h4>
 <div class="paragraph">
 <p>To determine which patient-donor pair is the most compatible, you can
-sort the list of compatible donors of that patient based on the success rate of the match (from highest to lowest).
-You can refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> for more information on success rate.</p>
+sort the list of compatible donors of that patient based on the compatibility rate of the match (from highest to lowest).
+You can refer to <a href="#glossary">Section 9, &#8220;Glossary&#8221;</a> for more information on the compatibility rate.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>sort rate</code></p>
 </div>
 <div class="paragraph">
 <p>Take for instance, after running a match command on a specific patient with <code>match ic/<strong>NRIC</strong></code>, you will get a list of donors that are compatible with said patient.
-You can then run <code>sort rate</code> to obtain the list of donors with higher success rates near the top of the list.</p>
+You can then run <code>sort rate</code> to obtain the list of donors with higher compatibility rates near the top of the list.</p>
 </div>
 </div>
 </div>
@@ -1169,28 +1169,10 @@ It is further divided into two sub-sections: <strong>Proposed New Features</stro
 <p>This section describes features that can be added to ORGANice in version 2.0.</p>
 </div>
 <div class="sect3">
-<h4 id="filtering-persons-code-filter-code"><a class="link" href="#filtering-persons-code-filter-code">6.1.1. Filtering persons: <code>filter</code></a></h4>
+<h4 id="implementing-tab-completion"><a class="link" href="#implementing-tab-completion">6.1.1. Implementing tab completion</a></h4>
 <div class="paragraph">
-<p>Filters a patient/doctor/donor by specific attributes.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>filter [patient/donor/doctor] [options]</code></p>
-</div>
-<div class="paragraph">
-<p>Returns a list of patients/doctors/doctors that has the specified attributes.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>filter t/patient g/M</code></p>
-</li>
-<li>
-<p><code>filter t/donor g/M n/Chua</code></p>
-</li>
-</ul>
+<p>This feature allows the program to automatically fill in
+partially typed commands upon pressing the <kbd>Tab</kbd> key.</p>
 </div>
 </div>
 </div>
@@ -1202,17 +1184,14 @@ It is further divided into two sub-sections: <strong>Proposed New Features</stro
 <div class="sect3">
 <h4 id="mass-addition-of-data"><a class="link" href="#mass-addition-of-data">6.2.1. Mass addition of data</a></h4>
 <div class="paragraph">
-<p>Add more than one patient/doctor/donor from data in a specified text file.</p>
-</div>
-<div class="paragraph">
-<p>A duplicate is defined as: two persons of the same type having the same ID.
-When a duplicate is detected, it prompts the user to change the data in the text file.</p>
+<p>This extension to the 'add' feature allows users to add more than one
+patient/doctor/donor from data in a specified text file.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="supporting-more-types-of-transplants"><a class="link" href="#supporting-more-types-of-transplants">6.2.2. Supporting more types of transplants</a></h4>
 <div class="paragraph">
-<p>Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for<br>
+<p>Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for
 more types of organs.</p>
 </div>
 </div>
@@ -1223,12 +1202,6 @@ more types of organs.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>process <strong>NRIC</strong></code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="advanced-find"><a class="link" href="#advanced-find">6.2.4. Advanced find</a></h4>
-<div class="paragraph">
-<p>Finding in v2.0 is more advanced with the implementation of fuzzy search and partial matching of keywords.</p>
 </div>
 </div>
 </div>
@@ -1260,8 +1233,8 @@ that contains the data of your previous ORGANice folder.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Q</strong>: What is the success rate and how is it computed?<br>
-<strong>A</strong>: The success rate measures the tissue compatibility between a donor and a patient. It is computed via this formula: (number of common tissue types between donor and patient) / 6 * 100%</p>
+<p><strong>Q</strong>: What is the compatibility rate and how is it computed?<br>
+<strong>A</strong>: The compatibility rate measures the tissue compatibility between a donor and a patient. It is computed via this formula: (number of common tissue types between donor and patient) / 6 * 100%</p>
 </div>
 </div>
 </div>
@@ -1410,4 +1383,4 @@ This percentage is calculated from the number of tissue matches between the pati
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:41:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:02:52 UTC</div></div></div></body></html>
