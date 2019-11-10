@@ -31,8 +31,8 @@ This section elaborates on the enhancements I did to ORGANice.
 
 * *Major enhancement*: Added the ability to sort matches according to different criteria.
 ** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, priority of the patient, or donor's organ expiry date.
-** Justification: Helps user make more informed decisions with regards.
-** Highlights: Affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Justification: Helps the hospital to make more informed decisions after knowing which pairs are the most compatible, which patient to prioritize, and which organs are expiring soon respectively.
+** Highlights: Can add in more sorting options as future enhancements. The implementation is slightly challenging as it took into consideration how the match feature is implemented.
 
 * *Minor enhancement*: Added a list feature that allows the user to list down all persons or persons of a specified type in ORGANice.
 
@@ -56,6 +56,8 @@ This section elaborates on the enhancements I did to ORGANice.
 |===
 
 Start of excerpt:
+
+include::../UserGuide.adoc[tag=edit]
 
 include::../UserGuide.adoc[tag=list]
 
