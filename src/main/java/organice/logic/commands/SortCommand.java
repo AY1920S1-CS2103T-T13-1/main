@@ -1,8 +1,8 @@
 package organice.logic.commands;
 
-import java.util.logging.Logger;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.logging.Logger;
 
 import organice.commons.core.LogsCenter;
 import organice.logic.commands.exceptions.CommandException;
@@ -25,9 +25,9 @@ public class SortCommand extends Command {
     public static final String LIST_OF_SORTED_PATIENTS = "List of matched patients found.\n";
     public static final String MESSAGE_SUCCESS = "Successfully sorted.\n";
 
-    private String input;
-
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
+
+    private String input;
 
     public SortCommand(String input) {
         logger.info("Input to SortCommand: " + input);
