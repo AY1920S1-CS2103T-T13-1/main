@@ -10,13 +10,17 @@ This document is written to document my role and contributions to ORGANice. It i
 for the module CS2103T, the introductory Software Engineering module in NUS.
 
 === About the team
-We are a group of 5 Year 2 Computer Science undergraduates.
+We are a group of 5 Year 2 Computer Science undergraduates. It took us two months to conceptualise
+and implement this project.
 
 === About ORGANice
 ORGANice is an organ matching desktop application designed for hospital administration staff who prefer typing. +
+It allows hospital administrators to store hospital data, find potential organ donors for
+patients and follow up on administrative procedures regarding organ matching.
 
 It is morphed from Address Book 3, which is a desktop application used for teaching Software Engineering principles.
-The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX.
+The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI)
+created with JavaFX.
 It is written in Java, and has about 10,000 lines of code (LoC).
 
 === Formatting used in this document
@@ -24,36 +28,47 @@ Words highlighted in grey refers to technical terms in this application.
 
 
 == Summary of contributions
+The following sections presents the enhancements I implemented in greater detail.
 
-* *Major enhancement*: added the ability to match patients and donors
-//this portion will be changed
-** What it does: This feature identifies a list of potential matches between patients and organ donors.
-** Justification: This feature allows users to find potential donors for patients in a hospital efficiently.
+* *Major enhancement 1*: added the ability to match patients and donors
+** What it does: identifies potential donors for patients in the application.
+** Justification: allows users to find suitable donors for patients efficiently
+based on compatibility between patients and donors.
 //tutor said don't use 'affects' but i'm struggling to think of another word rn.
-** Highlights: The addition of this feature affects commands to be added in future.
-It required an in-depth analysis of design alternatives.
-The implementation too was challenging as it required an understanding of how to change the list
-displayed in Address Book 3.
+** Highlights: The addition of this feature affects other features such as sorting matches and
+processing matches.
+Therefore, it required an in-depth analysis of how to store and display match results.
+The implementation too was challenging as it required a deep understanding of
+how to store and change the list displayed in Address Book 3.
 
-* *Minor enhancement*: refactored Person class to the Patient class.
+* *Major enhancement 2*: added the Patient class, which extends the Person class.
+** What it does: allows patients to be added and stored in ORGANice
+** Justification: allows users to manage patient data easily.
+** Highlights: The addition of this feature required careful consideration of how
+to display, store and differentiate patients from other types of people in ORGANice.
 
-* *Minor enhancement*: added coloured tags to each person in the person list.
+* *Minor enhancement 1*: added coloured tags to patients and donors
+ (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/169[#169]).
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=c-likethis123&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=C-likethis123&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[RepoSense]]
+
 
 * *Other contributions*:
 
 ** Project management:
 *** Created issues to keep track of work to be done.
 *** Arranged for system and acceptance testing.
+*** Managed release v1.3.1 on Github
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional unit and integration tests for existing features
+to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 *** Refactored code to improve code quality
-*** Implemented logging features
+*** Implemented logging to the match feature (Pull request [])
 *** Fixed bugs
 ** Documentation:
 *** Authored the 'Introduction', 'Quick Start', 'Components of ORGANice' and
 'Detecting matches' sub-sections in the 'Features' section
+(Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/138/files[#138])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
@@ -71,9 +86,8 @@ Given below are excerpts of my contribution to the User Guide.
 
 {Start of extract from User Guide}
 
-include::../UserGuide.adoc[tag=intro]
-
 include::../UserGuide.adoc[tag=match]
+
 {End of extract from User Guide}
 
 == Contributions to the Developer Guide
@@ -81,7 +95,7 @@ This section documents my contributions to the Developer Guide. I authored the f
 
 * Introduction
 * Setting up
-* 'Matching feature' sub-section in the 'Implementation' section
+* 'Matching feature'
 
 Given below are excerpts of my contribution to the Developer Guide.
 
