@@ -5,11 +5,13 @@
 
 == Project Portfolio for ORGANice
 ---
-This project portfolio details my main contributions towards the development of a team project called ORGANice.
+This project portfolio details my main contributions towards a team project called ORGANice.
 
 == 1. Overview
 
-This section briefly describes what ORGANice is and the team behind it, followed by an explanation of the formatting used in this document.
+|===
+|This section briefly describes what ORGANice is and the team behind it, followed by an explanation of the formats used in this document.
+|===
 
 === 1.1 About ORGANice
 
@@ -21,41 +23,54 @@ ORGANice is the product of a software engineering project done by a team of 5 st
 Under a two-month-long time frame, we conceptualised ORGANice and moulded it from an existing application, known as "Address Book", that stores and manages people's contact information.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
-=== 1.2 Formatting Used
+=== 1.2 Meaning of the Formats
 
-Words that are highlighted in grey are technical terms used in this software engineering project.
+The following is a list of the various formats and what they mean: +
+
+* Grey highlighted texts in the excerpts of sections 3 and 4 are technical terms used in this project.
+* Blue underlined texts are hyperlinks that bring you to the relevant information on the web.
+* Italicised texts are used to distinguish the description of an excerpt from the excerpt itself.
+* Texts surrounded by a box are the preface to a section in this portfolio.
 
 == 2. Summary of Contributions
 
-This section elaborates on the enhancements I did to ORGANice.
+|===
+|This section elaborates on the enhancements I did to ORGANice with the relevant pull requests (in blue) appended.
+|===
 
-* *Major enhancement*: Added the ability to sort matches according to different criteria.
+* *Major enhancement*: Added the ability to sort matches according to different criteria. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/145[#145]
 ** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, priority of the patient, or donor's organ expiry date.
 ** Justification: Helps the hospital to make more informed decisions after knowing which pairs are the most compatible, which patient to prioritize, and which organs are expiring soon respectively.
-** Highlights: Can add in more sorting options as future enhancements. The implementation is slightly challenging as it took into consideration how the match feature is implemented.
+** Highlights: Able to in more sorting options in future enhancements. The implementation is challenging as it required an in-depth analysis of how the match feature is implemented.
 
-* *Minor enhancement*: Added a list feature that allows the user to list down all persons or persons of a specified type in ORGANice.
+* *Minor enhancement*: Added a list feature that allows the user to list down all persons or persons of a specified type in ORGANice. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/113[#113]
 
-* *Minor enhancement*: Added an organ class to ORGANice.
+* *Minor enhancement*: Added an organ class to ORGANice. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/86[#86]
 
-* *Minor enhancement*: Designed the logo of ORGANice, and updated the application window to display title and logo.
+* *Minor enhancement*: Designed the logo of ORGANice, and updated the application window to display title and logo. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/136[#136]
 
 * *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=Yen-Peng&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Yen-Peng&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[RepoSense]]
 
 * *Other contributions*:
-** Documentation:
-*** Updated the About Us page of ORGANice: https://github.com/AY1920S1-CS2103T-T13-1/main/commit/de6675c93eefa808ab11327910b64fb44853fa03[#11]
+** Project Management
+*** Created issues to keep track of tasks to be done.
+** Enhancements to existing features
+*** Fixed bug related to list feature. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/236[#236]
+** Documentation
+*** Updated information about our team in the "About Us" section of ORGANice. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/11[#11]
+*** Authored the sections that guide users through the features 'Edit', 'List', 'Sort' and 'Help' in the User Guide. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/133[#133]
+*** Authored the implementations and use cases of the 'List' and 'Sort' features in the Developer Guide, and amended the Model Diagram. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/131[#131],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Reviewed pull requests with non-trivial review comments. https://github.com/AY1920S1-CS2103T-T13-1/main/pull/148[#148], https://github.com/AY1920S1-CS2103T-T13-1/main/pull/150[#150]
 
-== Contributions to the User Guide
-
+== 3. Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|This section showcases my ability to write documentation targeting end-users through an excerpt of what I wrote for the User Guide.
 |===
 
-Start of excerpt:
+_(Start of excerpt)_
 
 include::../UserGuide.adoc[tag=edit]
 
@@ -65,13 +80,23 @@ include::../UserGuide.adoc[tag=sort]
 
 include::../UserGuide.adoc[tag=help]
 
-== Contributions to the Developer Guide
+_(End of excerpt)_
+
+== 4. Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|This section showcases my ability to write technical documentation through an excerpt of what I authored for the Developer Guide.
 |===
+
+_The following is a Model Diagram that I have updated in order to reflect the changes made to the application:_
 
 include::../DeveloperGuide.adoc[tag=modeldiagram]
+
+
+
+_In addition, I have also written the implementation and use cases for the 'List' and 'Sort' features as shown in the excerpt below._
+
+_(Start of excerpt)_
 
 include::../DeveloperGuide.adoc[tag=list]
 
@@ -80,3 +105,5 @@ include::../DeveloperGuide.adoc[tag=sort]
 include::../DeveloperGuide.adoc[tag=usecaselist]
 
 include::../DeveloperGuide.adoc[tag=usecasesort]
+
+_(End of excerpt)_
