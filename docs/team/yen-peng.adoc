@@ -3,15 +3,15 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: ORGANice
+== Project Portfolio for ORGANice
 ---
 This project portfolio details my main contributions towards the development of a team project called ORGANice.
 
-== Overview
+== 1. Overview
 
-This section briefly describes what ORGANice is and the team behind it, as well as the formatting used in this document.
+This section briefly describes what ORGANice is and the team behind it, followed by an explanation of the formatting used in this document.
 
-=== About ORGANice
+=== 1.1 About ORGANice
 
 ORGANice is a Command Line Interface (CLI) desktop application, meaning that user interaction is mainly through typing in commands.
 This application is targeted at hospital administrators and its main features include storing hospital information,
@@ -21,47 +21,32 @@ ORGANice is the product of a software engineering project done by a team of 5 st
 Under a two-month-long time frame, we conceptualised ORGANice and moulded it from an existing application, known as "Address Book", that stores and manages people's contact information.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
-=== Formatting Used
+=== 1.2 Formatting Used
 
 Words that are highlighted in grey are technical terms used in this software engineering project.
 
-== Summary of Contributions
+== 2. Summary of Contributions
 
 This section elaborates on the enhancements I did to ORGANice.
 
-* *Major enhancement*: added *the ability to sort matches according to different criteria*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention `here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Added the ability to sort matches according to different criteria.
+** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, priority of the patient, or donor's organ expiry date.
+** Justification: Helps user make more informed decisions with regards.
+** Highlights: Affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
-* *Minor enhancement*: added a list command that allows the user to list down all persons or persons of a specified type in ORGANice.
+* *Minor enhancement*: Added a list feature that allows the user to list down all persons or persons of a specified type in ORGANice.
 
 * *Minor enhancement*: Added an organ class to ORGANice.
 
 * *Minor enhancement*: Designed the logo of ORGANice, and updated the application window to display title and logo.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=Yen-Peng&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Yen-Peng&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[RepoSense]]
 
 * *Other contributions*:
-
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated the About Us page of ORGANice: https://github.com/AY1920S1-CS2103T-T13-1/main/commit/de6675c93eefa808ab11327910b64fb44853fa03[#11]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
