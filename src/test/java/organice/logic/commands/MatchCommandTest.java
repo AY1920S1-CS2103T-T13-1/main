@@ -306,11 +306,6 @@ public class MatchCommandTest {
         public int numberOfMatches() {
             return listOfMatches.size();
         }
-
-        @Override
-        public int numberOfMatches() {
-            return listOfMatches.size();
-        }
     }
 
     /**
@@ -397,11 +392,6 @@ public class MatchCommandTest {
         public void removeMatches() {
             listOfMatches = observableArrayList();
             setDisplayedPersonList(Arrays.asList(listOfMatches.toArray(Person[]::new)));
-        }
-
-        @Override
-        public int numberOfMatches() {
-            return listOfMatches.size();
         }
 
         @Override
