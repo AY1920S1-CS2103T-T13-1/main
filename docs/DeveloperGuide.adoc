@@ -200,8 +200,9 @@ image::ListActivityDiagram.png[width=750]
 
 When the user enters a list command, the result differs depending on the parameter of the command.
 If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
-If there is a parameter, ORGANice will check the `TYPE` input and display the respective list of doctors, patients
-or donors that corresponds to the input.
+If there is a parameter, ORGANice will check if it is a valid `TYPE` input and display the respective list of doctors, patients
+or donors that corresponds to the parameter given by the user. If the parameter is invalid, an error message will be displayed in
+the Result Box to indicate that the command format is incorrect.
 // end::list[]
 
 === Matching feature
