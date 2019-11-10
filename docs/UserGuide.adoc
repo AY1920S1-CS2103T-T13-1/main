@@ -158,10 +158,10 @@ is also acceptable.
 There may be times where you need more information on how ORGANice works.
 To access the user guide of ORGANice, you can do the following:
 
-Simply type `help` in the Command Box and press kbd:[Enter].
-You will see a link to our user guide given on a pop-up window.
-You may click on this link to guide you through how to use ORGANice.
-Click the kbd:[x] button to close the window and return to the default display.
+Simply use the `help` command and you see a link to our user guide given in a pop-up window.
+You may click on this link to see our user guide for more information on how to use ORGANice.
+
+To exit the window, click the 'x' button found near the top of the window to close it and return to the default display.
 // end::help[]
 
 // tag::add[]

@@ -70,7 +70,9 @@ https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]
 |This section showcases my ability to write documentation targeting end-users through an excerpt of what I wrote for the User Guide.
 |===
 
-_(Start of excerpt)_
+_Given below is an excerpt of the features I have written for the User Guide._
+
+_(Start of excerpt from User Guide)_
 
 include::../UserGuide.adoc[tag=edit]
 
@@ -80,7 +82,7 @@ include::../UserGuide.adoc[tag=sort]
 
 include::../UserGuide.adoc[tag=help]
 
-_(End of excerpt)_
+_(End of excerpt from User Guide)_
 
 == 4. Contributions to the Developer Guide
 
@@ -96,7 +98,7 @@ include::../DeveloperGuide.adoc[tag=modeldiagram]
 
 _In addition, I have also written the implementation and use cases for the 'List' and 'Sort' features as shown in the excerpt below._
 
-_(Start of excerpt)_
+_(Start of excerpt from Developer Guide)_
 
 include::../DeveloperGuide.adoc[tag=list]
 
@@ -106,4 +108,4 @@ include::../DeveloperGuide.adoc[tag=usecaselist]
 
 include::../DeveloperGuide.adoc[tag=usecasesort]
 
-_(End of excerpt)_
+_(End of excerpt from Developer Guide)_
