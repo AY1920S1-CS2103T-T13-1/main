@@ -500,6 +500,9 @@ public class FormUiManager {
         }
     }
 
+    /**
+     * Handles abort special command. It will redirect the user to the original state of the application.
+     */
     private void handleAbort() {
         logger.info("[FORM MODE aborted]");
         FormAnimation.fadingAnimation(mainWindow);
