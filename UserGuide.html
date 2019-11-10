@@ -23,9 +23,10 @@
 <li><a href="#detecting-matches-code-match-code">5.6. Detecting matches: <code>match</code></a></li>
 <li><a href="#sorting-matches-code-sort-code">5.7. Sorting matches: <code>sort</code></a></li>
 <li><a href="#processing-potential-matches-code-processing-code">5.8. Processing potential matches: <code>processing</code></a></li>
-<li><a href="#mark-as-done-code-done-code">5.9. Mark as done : <code>done</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">5.10. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">5.11. Saving the data</a></li>
+<li><a href="#checking-the-task-list-code-processingmarkdone-code">5.9. Checking the task list : <code>processingMarkDone</code></a></li>
+<li><a href="#mark-as-done-code-done-code">5.10. Mark as done : <code>done</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">5.11. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">5.12. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#future-improvements">6. Future improvements</a>
@@ -942,49 +943,143 @@ You can then run <code>sort rate</code> to obtain the list of donors with higher
 <div class="sect2">
 <h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">5.8. Processing potential matches: <code>processing</code></a></h3>
 <div class="paragraph">
-<p>After finding a list of matches, the hospital is free to schedule a cross-matching test between
-a specific donor and patient.<br></p>
+<p>After finding a list of matches, the hospital will be able to schedule a cross-matching test between
+a specific donor and patient.
+To schedule a cross-matching test, there will be a lot of other administrative tasks to be done.
+Hence, this command will be able to allow you to have an overview on what kind of tasks you need to do for that
+particular pair of donor and patient before the cross-matching.</p>
+</div>
+<div class="sect3">
+<h4 id="code-status-code-of-the-donor-and-patient-pair"><a class="link" href="#code-status-code-of-the-donor-and-patient-pair">5.8.1. <code>Status</code> of the donor and patient pair</a></h4>
+<div class="paragraph">
+<p>You can also view the current state of every donor and patient in ORGANice by looking at their <code>Status</code>.</p>
 </div>
 <div class="paragraph">
-<p>After typing this command, the following changes occur:</p>
+<p>The <code>Status</code> of patient and donor can be either <code>Not Processing</code>, <code>Processing</code> or <code>Done</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A list will be generated to show the necessary tasks the hospital need to do for the respective donor and patient.</p>
+<p><code>Not Processing</code> : The current donor or patient is not yet matched with anyone and is not going for any cross-matching test yet.</p>
 </li>
 <li>
-<p>The list will be unique to the specific donor and patient pair</p>
+<p><code>Processing</code> : The current donor or patient found a match already and is in the midst of preparing for a cross-matching test.</p>
 </li>
 <li>
-<p>The list can be updated using <code>done<strong> TASK NUMBER</strong></code><br></p>
+<p><code>Done</code> : The current donor or patient have completed the cross-matching and the result of the cross-matching shows a positive result.
+Hence, this donor or patient does not need to be in ORGANice anymore.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The list will be saved after the command <code>exit</code> is executed. The page will then stop displaying the list.</p>
+<p>All the patients and donors should be <code>Not Processing</code> initially.
+When the command is used for the first time for the patient and donor pair, the <code>Status</code> of the patient and donor will change from <code>Not Processing</code> to <code>Processing</code>.
+If the patient and donor is being processed, their <code>Status</code> will remain <code>Processing</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="task-list-for-the-donor-and-patient"><a class="link" href="#task-list-for-the-donor-and-patient">5.8.2. Task list for the donor and patient</a></h4>
+<div class="paragraph">
+<p>This command will show you the task list for the <code>Processing</code> donor and patient for you to be able to keep track of the necessary standard of procedure easily.</p>
+</div>
+<div class="paragraph">
+<p>Currently you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generate a default task list automatically for newly processed patient and donor if they are <code>Not Processing</code> initially.</p>
+</li>
+<li>
+<p>View the list which belongs to the patient and donor pair who are already <code>Processing</code>.</p>
+</li>
+<li>
+<p>Mark a task as done in the task list generated from the patient and donor using another command
+<code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code>
+which will be explained further later.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-processing-code-the-donor-and-patient"><a class="link" href="#code-processing-code-the-donor-and-patient">5.8.3. <code>Processing</code> the donor and patient</a></h4>
+<div class="paragraph">
+<p>When you use this command, the following will occur:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A default task list will be generated to show the necessary tasks the hospital needs to do for the respective donor and patient.</p>
+</li>
+<li>
+<p>The task list will be unique to the specific donor and patient.</p>
+</li>
+<li>
+<p>The task list can be updated using another command,<code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code></p>
+</li>
+<li>
+<p>The task list will be saved automatically.</p>
+</li>
+<li>
+<p>A donor can only be in <code>Processing</code> state with only one patient and vice versa.
+This means, if a donor and a patient is already in <code>Processing</code> state, they will not be able to be processed with another donor or patient.</p>
+</li>
+<li>
+<p>A screenshot of the list generated can be shown below:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/processing.png" alt="processing" width="790">
+</div>
+<div class="title">Figure 15. Screenshot of the screen after you use the command on a valid donor and patient</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>processing ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong></code><br>
-The order of the NRICs does not matter.</p>
+The order of the NRICs does not matter, as long as the patient and the donor must be valid.</p>
 </div>
 <div class="paragraph">
 <p>Example:
-<code>processing ic/S6764235G ic/S1234567D</code></p>
+<code>processing ic/S6764235G ic/S5234567D</code></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">5.9. Mark as done : <code>done</code></a></h3>
+<h3 id="checking-the-task-list-code-processingmarkdone-code"><a class="link" href="#checking-the-task-list-code-processingmarkdone-code">5.9. Checking the task list : <code>processingMarkDone</code></a></h3>
+<div class="paragraph">
+<p>As introduced above, this command serves to help you mark a task on the task list as done.
+This will allow you to be able to know what other administrative things you need to do
+for the specific donor and patient before the cross-matching test.
+Beside each task on the task list, there will be either a cross, ✘, or a tick, ✓.
+A tick would mean that the task is completed and a cross will mean that the task has not yet been completed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/processingMarkDone.png" alt="processingMarkDone" width="790">
+</div>
+<div class="title">Figure 16. Screenshot of the screen after you use the command on a valid donor and patient and a valid task number</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code><br>
+The order of the NRICs does not matter, as long as the task number, patient and donor must be valid.
+The donor and patient need to be in <code>Processing</code> state to be considered valid.</p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>processingMarkDone ic/S6764235G ic/S5234567D 1</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">5.10. Mark as done : <code>done</code></a></h3>
 <div class="paragraph">
 <p>After the hospital has the results of the cross matching test, they can
-update the results in ORGANice. Cross matching tests have two possible results: pass or fail.</p>
+update the results in ORGANice.
+Cross matching tests have two possible results: pass or fail.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>done icP/<strong>NRIC OF PATIENT</strong> icD/<strong>NRIC OF DONOR</strong> res/[pass/fail]</code></p>
-</div>
-<div class="paragraph">
-<p><code>icP/<strong>NRIC OF PATIENT</strong></code> refers to the NRIC of the patient, while <code>icD/<strong>NRIC OF DONOR</strong></code>
-refers to the NRIC of the donor.</p>
+<p>Format: <code>done ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> res/[pass/fail]</code>
+The order of the NRICs does not matter, as long as the patient and the donor must be valid.</p>
 </div>
 <div class="paragraph">
 <p>The following section outlines what happens based on the two results:<br></p>
@@ -995,15 +1090,20 @@ refers to the NRIC of the donor.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>It is up to the hospital staff to schedule an organ transplant surgery
+<p>Run the command based on the given format</p>
+</li>
+<li>
+<p>It is up to the you to schedule an organ transplant surgery
 between the patient and donor.</p>
 </li>
 <li>
-<p>Mark the patient and donor as 'done', based on the command format.</p>
+<p>Mark the patient and donor as <code>Done</code>, based on the command format.</p>
 </li>
 <li>
-<p>After running the command, the system removes the patient and donor from the matching pool.
-The patient and donor statuses will be marked to 'done'.</p>
+<p>The patient and donor statuses will be marked as <code>Done</code>.</p>
+</li>
+<li>
+<p>After running the command, the system removes the patient and donor from ORGANice.</p>
 </li>
 </ol>
 </div>
@@ -1016,11 +1116,14 @@ The patient and donor statuses will be marked to 'done'.</p>
 <p>Run the command based on the given format</p>
 </li>
 <li>
-<p>The patient and donor will be added back to the matching pool for
+<p>The donor and patient will be added back to the matching pool for
 match detection with other patients and donors.</p>
 </li>
 <li>
-<p>The patient-donor pair will not be considered a potential match in future match detection.</p>
+<p>The patient and donor statuses will be marked as <code>Not Processing</code>.</p>
+</li>
+<li>
+<p>The donor and patient pair will not be considered a potential match in future match detection.</p>
 </li>
 </ol>
 </div>
@@ -1030,22 +1133,22 @@ match detection with other patients and donors.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>done icP/S7896432A icD/S4578902G res/pass</code></p>
+<p><code>done ic/S6764235G ic/S5234567D res/pass</code></p>
 </li>
 <li>
-<p><code>done icP/S7896432A icD/S4578902G res/fail</code></p>
+<p><code>done ic/S6764235G ic/S5234567D res/fail</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.10. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">5.11. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>To exit ORGANice, type <code>exit</code> in the Command Box. ORGANice will close on its own.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.11. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">5.12. Saving the data</a></h3>
 <div class="paragraph">
 <p>Data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1307,4 +1410,4 @@ This percentage is calculated from the number of tissue matches between the pati
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:21:34 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:41:59 UTC</div></div></div></body></html>
