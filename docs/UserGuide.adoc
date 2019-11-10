@@ -506,7 +506,7 @@ The `Status` of patient and donor can be either `Not Processing`, `Processing` o
 * `Processing` : The current donor or patient found a match already and is in the midst of preparing for a cross-matching test.
 
 * `Done` : The current donor or patient have completed the cross-matching and the result of the cross-matching shows a positive result.
-Hence, this donor or patient do not need to be in ORGANice anymore.
+Hence, this donor or patient does not need to be in ORGANice anymore.
 
 All the patients and donors should be `Not Processing` initially.
 When the command is used for the first time for the patient and donor pair, the `Status` of the patient and donor will change from `Not Processing` to `Processing`.
@@ -530,7 +530,7 @@ which will be explained further later.
 
 When you use this command, the following will occur:
 
-* A default task list will be generated to show the necessary tasks the hospital need to do for the respective donor and patient.
+* A default task list will be generated to show the necessary tasks the hospital needs to do for the respective donor and patient.
 
 * The task list will be unique to the specific donor and patient.
 
@@ -563,7 +563,7 @@ As introduced above, this command serves to help you mark a task on the task lis
 This will allow you to be able to know what other administrative things you need to do
 for the specific donor and patient before the cross-matching test.
 Beside each task on the task list, there will be either a cross, ✘, or a tick, ✓.
-A tick would mean that the task is completed and a cross will mean that the task is not completed.
+A tick would mean that the task is completed and a cross will mean that the task has not yet been completed.
 
 .Screenshot of the screen after you use the command on a valid donor and patient and a valid task number
 
@@ -597,7 +597,7 @@ If the result of the cross matching is a 'pass':
 . It is up to the you to schedule an organ transplant surgery
 between the patient and donor.
 . Mark the patient and donor as `Done`, based on the command format.
-. The patient and donor statuses will be marked to `Done`.
+. The patient and donor statuses will be marked as `Done`.
 . After running the command, the system removes the patient and donor from ORGANice.
 
 
@@ -608,7 +608,7 @@ If the result of the cross matching is a 'fail': +
 . The donor and patient will be added back to the matching pool for
 match detection with other patients and donors.
 
-. The patient and donor statuses will be marked to `Not Processing`.
+. The patient and donor statuses will be marked as `Not Processing`.
 
 . The donor and patient pair will not be considered a potential match in future match detection.
 
