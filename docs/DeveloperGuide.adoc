@@ -196,7 +196,7 @@ The code snippet below shows what these predicates are:
 The activity diagram below illustrates what happens when a user uses the list command.
 
 .Activity Diagram of a List Command
-image::ListActivityDiagram.png[width=750]
+image::ListActivityDiagram.png[width=700]
 
 When the user enters a list command, the result differs depending on the parameter of the command.
 If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients and donors on the list.
@@ -404,7 +404,7 @@ Three methods of sorting are implemented to sort based on the following categori
 +
 * Sorting based on priority with `sort priority`
 +
-* Sorting based on success rate of match with `sort rate`
+* Sorting based on compatibility rate of match with `sort rate`
 
 These three methods' implementation will be further elaborated upon below.
 
@@ -414,21 +414,21 @@ Sorting by Expiry sorts a list of `MatchedDonor` using the `ModelManager#sortByO
 In this method, the `ExpiryComparator` is used to compare two matched donors' organ expiry date, and this requires
 the `OrganExpiryDate` of the donors to be parsed into a date format that can be compared.
 
-==== Sort by Success Rate
-Sorting by Success Rate sorts a list of `MatchedPatient` using the `ModelManager#sortBySuccessRate()` method.
+==== Sort by Compatibility Rate
+Sorting by Compatibility Rate sorts a list of `MatchedPatient` using the `ModelManager#sortBySuccessRate()` method.
 
-The `SuccessRateComparator` is created to compare two matched patients' rate of success for the match.
+The `CompatibilityRateComparator` is created to compare two matched patients' rate of compatibility for the match.
 
-Given below is the Sequence Diagram for the interactions with the `Logic` component for the `execute(sort rate)`,
-assuming the user has entered a `match ic/**NRIC**` command before this.
+Given below is a Sequence Diagram to show the interactions with the `Logic` component when executing the `execute(sort rate)` method,
+assuming the user has entered a valid `match ic/**NRIC**` command before this.
 
 .Sequential Diagram of the `sort rate` command
 image::SortSequenceDiagram.png[width=790]
 
 After the command is given by the user, it would be parsed by the `AddressBookParser`.
 The `SortCommandParser` then parses the parameter `rate` and a `SortCommand` is created.
-The `LogicManager` will then execute the command and call the `sortBySuccessRate()` method from the `ModelManager`.
-The list of `MatchedPatient` will then be sorted based on their match's success rate.
+The `LogicManager` will then execute the command and call the `sortByCompatibilityRate()` method from the `ModelManager`.
+The list of `MatchedPatient` will then be sorted based on their match's compatibility rate.
 
 ==== Sort by Priority
 Sorting by Expiry sorts a list of `MatchedPatient` using the `ModelManager#sortByPriority()` method.
@@ -639,11 +639,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |mark a match as done|know that a particular match has undergone a surgery
 
-|`* * *` |user |sort the potential donors by success rate/priority|match a patient with the best possible donor
+|`* * *` |user |sort the potential donors of a patient by compatibility rate |match a patient with the most compatible donor
 
-|`* * ` |user |add multiple data using external file|reduce the time to add in a data into the system
+|`* * *` |user |sort the potential donors of a patient by organ expiry date |ensure that organs are used before they expire
 
-|`* * ` |user |find a patient/donor/doctor with incomplete keywords|reduce the time to type in the whole keyword
+|`* * *` |user |sort the patients by priority |find out which patients I should prioritize
+
+|`* * ` |user |add multiple data using external file |reduce the time to add in a data into the system
+
+|`* * ` |user |find a patient/donor/doctor with incomplete keywords |reduce the time to type in the whole keyword
 |=======================================================================
 
 _{More to be added}_
