@@ -467,8 +467,9 @@ This is done by checking the `Patient` attribute that is tagged to the `Processi
 Finally, the method will check if the patient and donor given by the user is valid by checking if
 they are able to be matched or not and if they exist in ORGANice.
 
-This command also make changes to the `Status` of the patient and donor.
-`Status` is an attribute of `Patient` and `Donor`. however, it cannot be edited or added by users.
+`Status` class is also  created and it is one of the attributes of `Patient` and `Donor`.
+However, this cannot be edited or added by users. +
+Processing command make changes to the `Status` of the patient and donor.
 
 * When a new `Patient` or `Donor` object is created, the `Status` of the new object will be set to `not processing`.
 
@@ -477,7 +478,6 @@ provided that the `Patient` and `Donor` are valid.
 
 * When the `Done` command is being executed, `Status` of the `Patient` and the `Donor` will be changed to `done`,
 provided that the `Patient` and `Donor` are valid.
-
 
 If the donor and patient have never been processed before, a default `ProcessingList` will be generated and it will belong to the patient and donor pair uniquely.
 
@@ -491,7 +491,7 @@ This section will explain the reason for having some aspects.
 ===== Aspect: Method of storing the `ProcessingList`
 * **Alternative 1 (current choice):** Use ArrayList to store the tasks.
 ** Pros: Easy to implement.
-** Cons: It is not the most efficient algorithm and the huge number of `ProcessingList` may take up a huge datafile at the end of the day.
+** Cons: Future extension on this will be difficult as the `ProcessingList` is unique to this feature.
 * **Alternative 2:** Use a new class that works like ArrayList.
 ** Pros: Able to implement more specific methods for the ProcessingList.
 ** Cons: More methods and test cases needed and it is harder to implement.
