@@ -11,14 +11,14 @@ The purpose of this project portfolio is to present my main contributions to ORG
 
 This section covers the project scope and description, followed an explanation of the formats used.
 
-=== 1.1 Project Scope
+=== 1.1 Project scope
 
 ORGANice is the product of a software engineering project done by a team of 5 students, including myself, who are second-year Computer Science students from the National University of Singapore (NUS).
 Under a two-month-long time frame, we conceptualised ORGANice and molded it from an existing application, known as "Address Book", that stores and manages people's contact information.
 My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
-=== 1.1 Project Description
+=== 1.1 Project description
 
 ORGANice is a Command Line Interface (CLI) desktop application, meaning that user interaction is mainly through typing in commands.
 This application is targeted at hospital administrators and its main features include storing hospital information,
@@ -32,7 +32,7 @@ finding compatible donors for patients awaiting organ transplants, and following
 * Keep track of patient-donor pairs slated for further compatibility tests using `processing` and subsequent administrative tasks using `processingmarkdone`
 * Mark patient-donor pair as `done` to remove from future matching results
 
-=== 1.2 Meaning of the Formats Used
+=== 1.2 Meaning of the formats used
 
 The following is a list of various formats used and what they mean:
 
