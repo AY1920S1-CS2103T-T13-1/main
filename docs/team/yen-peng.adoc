@@ -5,7 +5,7 @@
 
 == Project Portfolio for ORGANice
 
-The purpose of this project portfolio is to present my main contributions towards ORGANice.
+The purpose of this project portfolio is to present my main contributions to ORGANice.
 
 == 1. Introduction
 
@@ -14,7 +14,7 @@ This section covers the project scope and description, followed an explanation o
 === 1.1 Project Scope
 
 ORGANice is the product of a software engineering project done by a team of 5 students, including myself, who are second-year Computer Science students from the National University of Singapore (NUS).
-Under a two-month-long time frame, we conceptualised ORGANice and moulded it from an existing application, known as "Address Book", that stores and manages people's contact information.
+Under a two-month-long time frame, we conceptualised ORGANice and molded it from an existing application, known as "Address Book", that stores and manages people's contact information.
 My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
@@ -46,7 +46,7 @@ The following is a list of various formats used and what they mean:
 This section elaborates on the enhancements I did to ORGANice with the relevant links (in blue).
 
 * *Major enhancement*: Added the ability to sort matches according to different criteria. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/145[#145])
-** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, priority of the patient, or donor's organ expiry date.
+** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, the priority of the patients, or donors' organ expiry date.
 ** Justification: Helps the hospital to make more informed decisions after knowing which pairs are the most compatible, which patient to prioritize, and which organs are expiring soon respectively.
 ** Highlights: Able to in more sorting options in future enhancements. The implementation is challenging as it required an in-depth analysis of how the match feature is implemented.
 
@@ -79,7 +79,7 @@ https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153])
 This section showcases my ability to write documentation targeting end-users through an excerpt of what I have written for the User Guide,
 and this includes the `sort`, `list`, `help` and `edit` features.
 
-[teal]#{Start of excerpt from User Guide}#
+[teal]#{Start of the excerpt from User Guide}#
 
 include::../UserGuide.adoc[tag=sort]
 
@@ -89,15 +89,15 @@ include::../UserGuide.adoc[tag=help]
 
 include::../UserGuide.adoc[tag=edit]
 
-[teal]#{End of excerpt from User Guide}#
+[teal]#{End of the excerpt from User Guide}#
 
 == 4. Contributions to the Developer Guide
 
 This section showcases my ability to write technical documentation and to visually represent a system using
-Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence shown in the excerpt will be use cases for
+Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence shown in the excerpt below will be use cases for
 `list` and `sort` features, followed by their implementations, and lastly, the `Model` class diagram that I have updated.
 
-[teal]#{Start of excerpt from Developer Guide}#
+[teal]#{Start of the excerpt from Developer Guide}#
 
 include::../DeveloperGuide.adoc[tag=usecaselist]
 
@@ -109,4 +109,4 @@ include::../DeveloperGuide.adoc[tag=sort]
 
 include::../DeveloperGuide.adoc[tag=modeldiagram]
 
-[teal]#{End of excerpt from Developer Guide}#
+[teal]#{End of the excerpt from Developer Guide}#

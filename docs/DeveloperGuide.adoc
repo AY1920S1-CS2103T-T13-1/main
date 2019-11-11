@@ -173,7 +173,7 @@ The list feature is implemented using the `ListCommand(Type type)`. When the lis
 the method `ModelManager#updateFilteredPersonList(Predicate<Person> predicate)` takes in a predicate
 to decide what type of `Person` to show on the `filteredPersons` list.
 
-Therefore, in addition to the existing `PREDICATE_SHOW_ALL_PERSONS` predicate, three others predicates are introduced
+Therefore, in addition to the existing `PREDICATE_SHOW_ALL_PERSONS` predicate, three other predicates are introduced
 in the `Model` interface to update the list.
 
 The code snippet below shows what these predicates are:
@@ -200,10 +200,10 @@ The activity diagram below illustrates what happens when a user uses the list co
 image::ListActivityDiagram.png[width=450]
 
 When the user enters a list command, the result differs depending on the parameter of the command.
-If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients and donors on the list.
+If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients, and donors on the list.
 If there is a parameter, ORGANice will check if it is a valid `TYPE` parameter and display the correct list of persons
 that corresponds to this type.
-If the parameter is not valid, an error message will be displayed in the Result Box to indicate that the command is invalid.
+If the parameter is not valid, an error message will be displayed to indicate that the command is invalid.
 // end::list[]
 
 === Matching feature
@@ -359,15 +359,15 @@ Three methods of sorting are implemented to sort based on the following categori
 +
 * Sorting based on priority with `sort priority`
 +
-* Sorting based on compatibility rate of match with `sort rate`
+* Sorting based on compatibility rate of the match with `sort rate`
 
 These three methods' implementation will be further elaborated upon below.
 
 ==== Sort by Expiry
 Sorting by Expiry sorts a list of `MatchedDonor` with the `ModelManager#sortByOrganExpiryDate()` method.
 
-In this method, the `ExpiryComparator` is used to compare two matched donors' organ expiry date, and this requires
-the `OrganExpiryDate` of the donors to be parsed into a date format that can be compared.
+In this method, the `ExpiryComparator` is used to compare two matched donors' organ expiry dates, and this requires
+the `OrganExpiryDate` of the donors to be parsed into a data format that can be compared.
 
 ==== Sort by Compatibility Rate
 Sorting by Compatibility Rate sorts a list of `MatchedPatient` using the `ModelManager#sortBySuccessRate()` method.
@@ -434,14 +434,14 @@ Therefore, they are converted into `Integer` for easier comparison. An alternati
 ==== Design considerations
 This section will explain two aspects considered in designing the sort feature.
 
-===== Aspect: Method of storing sorted result
+===== Aspect: Method of storing the sorted result
 * **Alternative 1 (current choice):** Use `SortedList`.
 ** Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
 with current implementations (able to wrap `ObservableList` and sort the content).
 ** Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.
 * **Alternative 2:** Use `ArrayList`.
 ** Pros: Fast index-based access and works on any `Collection` class.
-** Cons: Slower than `SortedList` as it takes O(n) time to iterate through list to display results.
+** Cons: Slower than `SortedList` as it takes O(n) time to iterate and display the results.
 
 ===== Aspect: Method of sorting
 * **Alternative 1 (current choice):** Use `Comparator` and `Comparable`.
