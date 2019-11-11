@@ -458,14 +458,32 @@ then creating a `ProcessingList` which acts like ArrayList to store the tasks wh
 It implements the `ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` boolean operation. +
 This method will first determine which Nric belongs to a patient and which Nric belongs to a donor
 since the input allows user to give two Nric in no particular order. +
-Then, it will check if the donor have a `ProcessingList` generated before.
-If the donor have an empty `ProcessingList`, it means that the donor is newly processed.
-Hence, it will mean that the donor may be able to pair with the given patient.
+It will also get the `Donor` and `Patient` objects with the NRIC given. +
+Then, it will check if the donor have a `ProcessingList` generated before. +
+If the donor have an empty `ProcessingList`, it means that the donor is newly processed. +
+Hence, it will mean that the donor may be able to pair with the given patient. +
 If the donor already have a `ProcessingList`, it means that the donor is already being processed with a patient. +
-Then, this method will check if the patient given by the user is the same patient being processed together with this donor.
+Then, this method will check if the patient given by the user is the same patient being processed together with this donor. +
 This is done by checking the `Patient` attribute that is tagged to the `ProcessingList` of the donor. +
 Finally, the method will check if the patient and donor given by the user is valid by checking if
-they are able to be matched or not and if they exist in ORGANice.
+they are able to be matched or not and if they exist in ORGANice. +
+A code snippet of the method is shown below: This code aims to get the `Donor` and `Patient` from the given Nrics given by the user. +
+This method is necessary since users able to give the Nrics input in no particular order.
+```
+if (model.hasDonor(firstNric)) {
+    donorNric = firstNric;
+    donor = model.getDonor(donorNric);
+
+    patientNric = secondNric;
+    patient = model.getPatient(patientNric);
+} else {
+    patientNric = firstNric;
+    patient = model.getPatient(patientNric);
+
+    donorNric = secondNric;
+    donor = model.getDonor(donorNric);
+}
+```
 
 `Status` class is also  created and it is one of the attributes of `Patient` and `Donor`.
 However, this cannot be edited or added by users. +
@@ -483,6 +501,15 @@ If the donor and patient have never been processed before, a default `Processing
 
 If the user made any changes to the `ProcessingList`, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient's NRIC.
 
+When the user execute the processing feature, the method, `ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` will be called
+to determine if the user give a valid patient and donor input. +
+It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself. +
+Then, the `Status` of the patient and donor will be set to `processing`.
+
+Following is a class diagram to show the processing feature
+
+TODO diag
+
 //Todo: additional feature such as add, edit and delete tasks
 
 ==== Design considerations
@@ -494,7 +521,15 @@ This section will explain the reason for having some aspects.
 ** Cons: Future extension on this will be difficult as the `ProcessingList` is unique to this feature.
 * **Alternative 2:** Use a new class that works like ArrayList.
 ** Pros: Able to implement more specific methods for the ProcessingList.
-** Cons: More methods and test cases needed and it is harder to implement.
+** Cons: More methods and test cases needed.
+
+===== Aspect: Using specific prefixes for Nric inputs
+* **Alternative 1 (current choice):** Nrics of patient and donor can be inputted in no particular order.
+** Pros: More user friendly as users
+** Cons: Future extension on this will be difficult as the `ProcessingList` is unique to this feature.
+* **Alternative 2:** Use a new class that works like ArrayList.
+** Pros: Able to implement more specific methods for the ProcessingList.
+** Cons: More methods and test cases needed.
 
 === Finding feature
 This section explains the implementation of the find persons by attributes feature.

@@ -241,3 +241,5 @@ _{End of Third Extract from User Guide}_
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+
