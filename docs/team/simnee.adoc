@@ -88,7 +88,7 @@ I also ensured that the code quality is up to standard.
 This section will explain the command, `processing` which I implemented for ORGANice.
 
 *** What it does:
-It allow users to view a whole list of administrative tasks which needs to be done to arrange for cross-matching test
+It allow users to view a whole list of administrative tasks which needs to be followed to arrange for cross-matching test
 between a patient and a donor.
 
 *** Justification:
@@ -98,7 +98,7 @@ there will be a standard operating procedure which needs to be followed
 With ORGANice, staff will not need to manually keep track of which tasks are not done yet for every patients.
 
 *** Highlights:
-A default task list will be generated when the user use the command with valid NRICs of donor and patient.
+A default task list will be generated when the user uses the command with valid NRICs of donor and patient.
 The task list generated belong to the donor and patient only.
 This will not lead to any confusions as
 it is impossible to have a donor matching with more than one patient or a patient matching with more than one donor.
