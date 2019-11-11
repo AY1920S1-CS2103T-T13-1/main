@@ -959,7 +959,7 @@ provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
 <p>If the user makes any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
 </div>
 <div class="paragraph">
-<p>When the user execute the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
+<p>When the user executes the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
 to determine if the user give a valid patient and donor input.<br>
 It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself.<br>
 Then, the <code>Status</code> of the patient and donor will be set to <code>processing</code>.
@@ -1106,7 +1106,7 @@ then determine if the patient and donor can match each other or not.</p>
 </div>
 <div class="paragraph">
 <p>It implements the <code>DoneCommand#isPass(String result)</code> boolean operation.<br>
-This method check whether the result of the cross-matching test.<br></p>
+This method checks whether the result of the cross-matching test.<br></p>
 </div>
 <div class="paragraph">
 <p>If the patient and donor did a cross-matching test and the result of the test is a fail,
@@ -1809,4 +1809,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:06:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:15:13 UTC</div></div></div></body></html>

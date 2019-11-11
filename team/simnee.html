@@ -39,7 +39,7 @@ workload when trying to match all their patients with all the donors' organs the
 <div class="paragraph">
 <p>ORGANice is an organ transplant manager.
 Currently, hospital administrative staffs have many patients and organ donors information in their records.
-Whenever they have a new patient who needed an organ, they often have to go through many manual searches and
+Whenever they have a new patient who needs an organ, they often have to go through many manual searches and
 matching to find a compatible donor. We aim to reduce such menial work using ORGANice and speed up this process.<br>
 ORGANice is able to:<br></p>
 </div>
@@ -134,7 +134,7 @@ between a patient and a donor.</p>
 <p>Justification:
 Hospital staffs often need to do a lot of paper work and administrative tasks.
 There is now an increasing number of patients admitting to hospitals and if they need an organ,
-there will be a standard operating procedure which needs to be followed
+there will be a standard operating procedure which needs to be followed.
 With ORGANice, staff will not need to manually keep track of which tasks are not done yet for every patients.</p>
 </li>
 <li>
@@ -160,7 +160,7 @@ It allows users to mark a task on the list of administrative tasks as done.</p>
 </li>
 <li>
 <p>Justification:
-This command will allow the hospital staffs to have a better overview of what are the existing tasks which need to be done.
+This command will allow the hospital staffs to have a better overview of what are the existing tasks that needs to be done.
 This will reduce the chance of hospital staffs doing a single task for more than one time or miss out a task by accident.</p>
 </li>
 <li>
@@ -183,7 +183,7 @@ It will be very intuitive for the hospital staffs to determine which tasks are d
 <li>
 <p>What it does:
 It allows users to determine if a patient and a donor is all done.<br>
-Meaning, the patient and donor have gone through a test and we know know if the patient rejected the organ from the donor or not.<br>
+Meaning, the patient and donor have gone through a test and we know if the patient rejected the organ from the donor or not.<br>
 If the patient is not compatible with the donor, then both the patient and donor will be saved back into ORGANice and available for future organ matching detection.<br>
 However, they will not be able to match each other anymore.<br>
 If the patient is compatible with the donor, then both of the patient and donor will be removed from ORGANice.</p>
@@ -196,7 +196,7 @@ Hence, there is a chance that the result of the cross-matching test is negative 
 </li>
 <li>
 <p>Highlights:
-This feature will save a history of all rejected patients a donor have so as to not allow the donor to be matched again with them.
+This feature will save a history of all rejected patients a donor has so as to not allow the donor to be matched again with them.
 This will ensure that the same patient and donor do not go through another round of cross-matching just to return the same negative result.</p>
 </li>
 </ul>
@@ -614,7 +614,7 @@ provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
 <p>If the user makes any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
 </div>
 <div class="paragraph">
-<p>When the user execute the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
+<p>When the user executes the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
 to determine if the user give a valid patient and donor input.<br>
 It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself.<br>
 Then, the <code>Status</code> of the patient and donor will be set to <code>processing</code>.
@@ -650,7 +650,7 @@ then determine if the patient and donor can match each other or not.</p>
 </div>
 <div class="paragraph">
 <p>It implements the <code>DoneCommand#isPass(String result)</code> boolean operation.<br>
-This method check whether the result of the cross-matching test.<br></p>
+This method checks whether the result of the cross-matching test.<br></p>
 </div>
 <div class="paragraph">
 <p>If the patient and donor did a cross-matching test and the result of the test is a fail,
@@ -668,4 +668,4 @@ then the patient and donor can be removed from ORGANice already.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:06:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:15:13 UTC</div></div></div></body></html>
