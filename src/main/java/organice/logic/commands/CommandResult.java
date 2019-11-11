@@ -80,12 +80,14 @@ public class CommandResult {
         return form;
     }
 
+
     public void setSort(boolean isSort) {
         this.isSort = isSort;
     }
 
     public boolean isSort() {
         return isSort;
+
     }
 
     @Override
