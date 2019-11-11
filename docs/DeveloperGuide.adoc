@@ -599,6 +599,47 @@ This section will explain the reason for having some aspects.
 === Done feature
 This section describes how the done feature is implemented.
 
+Done is facilitated by the `DoneCommand` class, which extends the `Command` class.
+
+Done is done by accessing `Patient` and `Donor` in `ModelManager`,
+then determine if the patient and donor can match each other or not.
+
+It implements the `DoneCommand#isPass(String result)` boolean operation. +
+This method check if the result of the cross-matching test. +
+
+If the patient and donor did a cross-matching test and the result of the test is a fail,
+then the patient and donor will need to be send back to find new matches and they
+should not be able to match each other anymore. +
+`Donor` will have an ArrayList `patientsMatchedBefore` which stores all the patients' Nric which fails to match with it.
+Then, the patient and donor will have their `Status` set to `not processing` so that it will be able to find a match in ORGANice.
+
+If the patient and donor did a cross-matching test and the result of the test is a pass,
+then the patient and donor can be removed from ORGANice already.
+
+Following is an object diagram to show the processingMarkDone feature
+
+TODO diagram
+
+//Todo store the patient and donor information as archive instead of removing it
+
+==== Design considerations
+This section will explain the reason for having some aspects.
+
+===== Aspect:
+* **Alternative 1 (current choice):**
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+===== Aspect: Using specific prefixes for Nric inputs
+* **Alternative 1 (current choice):** Nrics of patient and donor can be inputted in no particular order.
+** Pros: More user friendly as users do not need to make sure the Nric must be in correct order. (For example, patient's Nric must come before donor's Nric)
+** Cons: It is harder to implement and more exceptions need to be taken care of.
+* **Alternative 2:** Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.
+** Pros: It is easier to implement as `icP/PATIENT NRIC` and `icD/DONOR NRIC` will be easier to parse to the Command method.
+** Cons: It is less user friendly as users need to remember more prefixes for this entire application.
 
 // end::doneDG[]
 
