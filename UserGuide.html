@@ -37,19 +37,20 @@ to get started.</p>
 <li><a href="#list-of-attributes">3. List of Attributes</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
+<li><a href="#viewing-help-code-help-code">4.1. Viewing help: <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-persons-code-list-code">4.3. Listing persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-s-attribute-code-edit-code">4.4. Editing a person&#8217;s attribute : <code>edit</code></a></li>
+<li><a href="#listing-persons-code-list-code">4.3. Listing persons: <code>list</code></a></li>
+<li><a href="#editing-a-person-s-attribute-code-edit-code">4.4. Editing a person&#8217;s attribute: <code>edit</code></a></li>
 <li><a href="#finding-persons-by-attributes-code-find-code">4.5. Finding persons by attributes: <code>find</code></a></li>
 <li><a href="#detecting-matches-code-match-code">4.6. Detecting matches: <code>match</code></a></li>
-<li><a href="#processing-potential-matches-code-processing-code">4.7. Processing potential matches: <code>processing</code></a></li>
-<li><a href="#checking-the-task-list-code-processingmarkdone-code">4.8. Checking the task list : <code>processingMarkDone</code></a></li>
-<li><a href="#mark-as-done-code-done-code">4.9. Mark as done : <code>done</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">4.10. Deleting a person : <code>delete</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.13. Saving the data</a></li>
+<li><a href="#sorting-matches-code-sort-code">4.7. Sorting matches: <code>sort</code></a></li>
+<li><a href="#processing-potential-matches-code-processing-code">4.8. Processing potential matches: <code>processing</code></a></li>
+<li><a href="#checking-the-task-list-code-processingmarkdone-code">4.9. Checking the task list: <code>processingMarkDone</code></a></li>
+<li><a href="#mark-as-done-code-done-code">4.10. Mark as done: <code>done</code></a></li>
+<li><a href="#deleting-a-person-code-delete-code">4.11. Deleting a person : <code>delete</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.12. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.14. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#future-improvements">5. Future improvements</a>
@@ -373,29 +374,17 @@ is also acceptable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help: <code>help</code></a></h3>
 <div class="paragraph">
-<p>There may be times where you do not understand how ORGANice works, or you need a simple reminder on how to use
-ORGANice. To access the user guide of ORGANice, you can do the following:</p>
+<p>There may be times where you need more information on how ORGANice works.
+To access the user guide of ORGANice, you can do the following:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Type <code>help</code> in the Command Box and press <kbd>Enter</kbd>.</p>
-</li>
-<li>
-<p>A new window is launched, as shown in Figure 3. Open the link in a browser to read this document.</p>
-</li>
-<li>
-<p>Click the x button to close the window and return to the default display.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Simply type <code>help</code> in the Command Box and press <kbd>Enter</kbd>. You will see a link given in a pop-up "Help" window.
+You may click on the <kbd>Copy URL</kbd> button and paste it in a browser to see our user guide for more information on how to use ORGANice.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/HelpWindow.png" alt="HelpWindow" width="790">
-</div>
-<div class="title">Figure 3. <strong>Help Window</strong></div>
+<div class="paragraph">
+<p>To exit the window, click the <kbd>x</kbd> button found near the top of the window to close it and return to the default display.</p>
 </div>
 </div>
 <div class="sect2">
@@ -531,7 +520,7 @@ Let&#8217;s say you want to add a patient to the application. You should type <c
 <div class="content">
 <img src="images/addForm.png" alt="addForm" width="790">
 </div>
-<div class="title">Figure 4. Screenshot of the screen after you have successfully entered the form mode</div>
+<div class="title">Figure 3. Screenshot of the screen after you have successfully entered the form mode</div>
 </div>
 <div class="paragraph">
 <p>If you want to add a patient named "John Doe", type <code>John Doe</code> and then press <kbd>Enter</kbd>.
@@ -541,7 +530,7 @@ After entering the name, the patient&#8217;s name will be displayed on the form 
 <div class="content">
 <img src="images/nameFilled.png" alt="nameFilled" width="790">
 </div>
-<div class="title">Figure 5. Form layout after you have entered a valid name</div>
+<div class="title">Figure 4. Form layout after you have entered a valid name</div>
 </div>
 <div class="paragraph">
 <p>Each time you type an input, ORGANice will check if it is a valid input. If the input is valid, it will be reflected on the form.
@@ -568,7 +557,7 @@ Three changes occur to ORGANice, which can be seen in the <code>Figure 6</code>:
 <div class="content">
 <img src="images/invalidInput.png" alt="invalidInput" width="790">
 </div>
-<div class="title">Figure 6. Form layout if you entered an invalid value</div>
+<div class="title">Figure 5. Form layout if you entered an invalid value</div>
 </div>
 <div class="paragraph">
 <p>After all of the attributes have been specified, you can type in:</p>
@@ -591,7 +580,7 @@ Note that the <code>Find Match</code> button will only appear on the <code>Patie
 <div class="content">
 <img src="images/allFieldSpecified.png" alt="allFieldSpecified" width="790">
 </div>
-<div class="title">Figure 7. Form layout after all the required attributes have been specified</div>
+<div class="title">Figure 6. Form layout after all the required attributes have been specified</div>
 </div>
 <div class="paragraph">
 <p>When you type in <code>/done</code>, the <code>Person List</code> will return to its original state of displaying people in ORGANice.
@@ -601,7 +590,7 @@ The <code>Message Display Box</code> will show a success message, indicating tha
 <div class="content">
 <img src="images/addSuccess.png" alt="addSuccess" width="790">
 </div>
-<div class="title">Figure 8. The UI changed back to it&#8217;s original state and shows a success message</div>
+<div class="title">Figure 7. The UI changed back to it&#8217;s original state and shows a success message</div>
 </div>
 <div class="paragraph">
 <p>The <code>Find Match</code> button will appear when all attributes are filled. After you clicked this button, <code>ORGANice</code> will add the patient to the list and it will execute the <code>Match</code> command as described in <a href="#detecting-matches-code-match-code">Section 4.6, &#8220;Detecting matches: <code>match</code>&#8221;</a>.
@@ -611,7 +600,7 @@ The <code>Message Display Box</code> will show a success message, indicating tha
 <div class="content">
 <img src="images/findMatch.png" alt="findMatch" width="790">
 </div>
-<div class="title">Figure 9. The UI displayed the potential donors for a patient that you have added</div>
+<div class="title">Figure 8. The UI displayed the potential donors for a patient that you have added</div>
 </div>
 <div class="paragraph">
 <p>At any point in time, if you decided not to proceed with the addition and typed in <code>/abort</code>, you will be directed into the main page and notified that
@@ -621,7 +610,7 @@ you have abandoned the form as seen in <code>Figure 10</code>.</p>
 <div class="content">
 <img src="images/abandonForm.png" alt="abandonForm" width="790">
 </div>
-<div class="title">Figure 10. The UI changed back to it&#8217;s original state and shows a message the form has been abandoned</div>
+<div class="title">Figure 9. The UI changed back to it&#8217;s original state and shows a message the form has been abandoned</div>
 </div>
 <div class="paragraph">
 <p>Furthermore, if you made any mistake while you are filling up the form, you can type in <code>/undo</code> to remove the last entry you entered.
@@ -631,22 +620,19 @@ For example, if you enter the wrong name and want to undo the action, type <code
 <div class="content">
 <img src="images/undoCommand.png" alt="undoCommand" width="790">
 </div>
-<div class="title">Figure 11. Form layout showing that the last entry is removed after you typed in '/undo'</div>
+<div class="title">Figure 10. Form layout showing that the last entry is removed after you typed in '/undo'</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">4.3. Listing persons : <code>list</code></a></h3>
+<h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">4.3. Listing persons: <code>list</code></a></h3>
 <div class="paragraph">
 <p>This list command can show you the list of persons in ORGANice.</p>
 </div>
 <div class="sect3">
 <h4 id="listing-all-persons"><a class="link" href="#listing-all-persons">4.3.1. Listing all persons</a></h4>
 <div class="paragraph">
-<p>Simply type <code>list</code> in the Command Box and ORGANice will show you all patients, doctors and donors present in the system.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>list</code></p>
+<p>Simply type <code>list</code> in the Command Box and press <kbd>Enter</kbd>. ORGANice will show you all patients, doctors, and donors present in the system.</p>
 </div>
 </div>
 <div class="sect3">
@@ -664,7 +650,7 @@ For example, if you enter the wrong name and want to undo the action, type <code
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-s-attribute-code-edit-code"><a class="link" href="#editing-a-person-s-attribute-code-edit-code">4.4. Editing a person&#8217;s attribute : <code>edit</code></a></h3>
+<h3 id="editing-a-person-s-attribute-code-edit-code"><a class="link" href="#editing-a-person-s-attribute-code-edit-code">4.4. Editing a person&#8217;s attribute: <code>edit</code></a></h3>
 <div class="paragraph">
 <p>If you want to make any changes to a person&#8217;s attribute, you can edit the information using an edit command.
 If there are multiple attributes to change, you can do so in the same edit command.</p>
@@ -684,7 +670,7 @@ as follows: <code>edit S8732457G p/91234567</code>.</p>
 For example, you cannot change a doctor&#8217;s age because a doctor does not have that attribute in ORGANice.</p>
 </div>
 <div class="paragraph">
-<p><strong>In addition, there are some attributes that cannot be edited.</strong> These include:</p>
+<p><strong>Besides that, some attributes cannot be edited.</strong> These include:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -694,13 +680,10 @@ For example, you cannot change a doctor&#8217;s age because a doctor does not ha
 <li>
 <p>Type</p>
 </li>
-<li>
-<p>Organ expiry date</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You might want to refer to <a href="#list-of-attributes">Section 3, &#8220;List of Attributes&#8221;</a> to see what attributes are applicable to each type of person in ORGANice.</p>
+<p>You may want to refer to <a href="#list-of-attributes">Section 3, &#8220;List of Attributes&#8221;</a> to see what attributes apply to each type of person in ORGANice.</p>
 </div>
 </div>
 <div class="sect2">
@@ -736,7 +719,7 @@ these concepts:</p>
 <div class="content">
 <img src="images/findByPrefix.png" alt="findByPrefix" width="790">
 </div>
-<div class="title">Figure 12. Find command with multiple prefixes and multiple keywords per prefix.</div>
+<div class="title">Figure 11. Find command with multiple prefixes and multiple keywords per prefix.</div>
 </div>
 <div class="paragraph">
 <p>In Figure 12, you can see that <code>find n/Duncan n/Loinel n/Helen t/patient t/donor</code> shows a list of 44 matches. The two
@@ -826,7 +809,7 @@ rate of each donor, similar to Figure 13.</p>
 <div class="content">
 <img src="images/MatchingDonorsDisplayed.png" alt="MatchingDonorsDisplayed" width="790">
 </div>
-<div class="title">Figure 13. List of potential donors for John Doe</div>
+<div class="title">Figure 12. List of potential donors for John Doe</div>
 </div>
 <div class="paragraph">
 <p>For more information on the compatibility rate, you may refer to <a href="#faq">Section 6, &#8220;FAQ&#8221;</a>.</p>
@@ -852,14 +835,19 @@ This means that 'Someone edited' has 3 potential donors.</p>
 <div class="content">
 <img src="images/PatientMatchResults.png" alt="PatientMatchResults" width="790">
 </div>
-<div class="title">Figure 14. List of Persons with number of matching donors</div>
+<div class="title">Figure 13. List of Persons with number of matching donors</div>
 </div>
 <div class="paragraph">
 <p>Following this, you can sort the matches based on different criteria to
 determine which patient to prioritize. Head over to the next section to find out
-how to sort matches.
-=== Sorting matches: <code>sort</code>
-After using the match command, you can sort the list of matches to determine which patient to prioritize for organ transplant.</p>
+how to sort matches.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sorting-matches-code-sort-code"><a class="link" href="#sorting-matches-code-sort-code">4.7. Sorting matches: <code>sort</code></a></h3>
+<div class="paragraph">
+<p>After using the match command, you can sort the list of matches to determine which patients to prioritize for an organ transplant.</p>
 </div>
 <div class="paragraph">
 <p><strong>The sort command can only be used after a match command</strong> to sort the resulting list of patient-donor pairs generated.
@@ -874,7 +862,7 @@ There are three criteria in which you can sort the matches, namely:</p>
 <p>Sorting based on priority</p>
 </li>
 <li>
-<p>Sorting based on compatibility rate of match</p>
+<p>Sorting based on the compatibility rate of match</p>
 </li>
 </ul>
 </div>
@@ -882,11 +870,10 @@ There are three criteria in which you can sort the matches, namely:</p>
 <p>These criteria will be further explained below.</p>
 </div>
 <div class="paragraph">
-<p>Note that <strong>only one criteria can be used in one sort command</strong>.</p>
-</div>
+<p>Note that <strong>only one criterion can be used in a single sort command</strong>.</p>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">4.6.3. Sorting based on donor&#8217;s organ expiry date</a></h4>
+<h4 id="sorting-based-on-donor-s-organ-expiry-date"><a class="link" href="#sorting-based-on-donor-s-organ-expiry-date">4.7.1. Sorting based on donor&#8217;s organ expiry date</a></h4>
 <div class="paragraph">
 <p>To find out which organs are expiring soon, you can sort the list of matched donors based on the donor&#8217;s organ expiry date (from the earliest to the latest expiry date).</p>
 </div>
@@ -899,9 +886,9 @@ You can then run <code>sort expiry</code> to obtain the list of donors with earl
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">4.6.4. Sorting based on priority</a></h4>
+<h4 id="sorting-based-on-priority"><a class="link" href="#sorting-based-on-priority">4.7.2. Sorting based on priority</a></h4>
 <div class="paragraph">
-<p>To determine which patient to prioritize for organ transplant, you can sort the list of matched patients based on their priority (from highest to lowest).
+<p>To determine which patient to prioritize for an organ transplant, you can sort the list of matched patients based on their priority (from highest to lowest).
 You may refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> to understand what priority means.</p>
 </div>
 <div class="paragraph">
@@ -917,11 +904,11 @@ If these two factors are the same for a group of patients, they will be displaye
 </div>
 </div>
 <div class="sect3">
-<h4 id="sorting-based-on-compatibility-rate-of-match"><a class="link" href="#sorting-based-on-compatibility-rate-of-match">4.6.5. Sorting based on compatibility rate of match</a></h4>
+<h4 id="sorting-based-on-the-compatibility-rate-of-match"><a class="link" href="#sorting-based-on-the-compatibility-rate-of-match">4.7.3. Sorting based on the compatibility rate of match</a></h4>
 <div class="paragraph">
 <p>To determine which patient-donor pair is the most compatible, you can
 sort the list of compatible donors of that patient based on the compatibility rate of the match (from highest to lowest).
-You can refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on the compatibility rate.</p>
+You may refer to <a href="#glossary">Section 8, &#8220;Glossary&#8221;</a> for more information on the compatibility rate.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>sort rate</code></p>
@@ -933,7 +920,7 @@ You can then run <code>sort rate</code> to obtain the list of donors with higher
 </div>
 </div>
 <div class="sect2">
-<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">4.7. Processing potential matches: <code>processing</code></a></h3>
+<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">4.8. Processing potential matches: <code>processing</code></a></h3>
 <div class="paragraph">
 <p>After finding a list of matches, the hospital will be able to schedule a cross-matching test between
 a specific donor and patient.
@@ -942,7 +929,7 @@ Hence, this command will be able to allow you to have an overview on what kind o
 particular pair of donor and patient before the cross-matching.</p>
 </div>
 <div class="sect3">
-<h4 id="code-status-code-of-the-donor-and-patient-pair"><a class="link" href="#code-status-code-of-the-donor-and-patient-pair">4.7.1. <code>Status</code> of the donor and patient pair</a></h4>
+<h4 id="code-status-code-of-the-donor-and-patient-pair"><a class="link" href="#code-status-code-of-the-donor-and-patient-pair">4.8.1. <code>Status</code> of the donor and patient pair</a></h4>
 <div class="paragraph">
 <p>You can also view the current state of every donor and patient in ORGANice by looking at their <code>Status</code>.</p>
 </div>
@@ -970,7 +957,7 @@ If the patient and donor is being processed, their <code>Status</code> will rema
 </div>
 </div>
 <div class="sect3">
-<h4 id="task-list-for-the-donor-and-patient"><a class="link" href="#task-list-for-the-donor-and-patient">4.7.2. Task list for the donor and patient</a></h4>
+<h4 id="task-list-for-the-donor-and-patient"><a class="link" href="#task-list-for-the-donor-and-patient">4.8.2. Task list for the donor and patient</a></h4>
 <div class="paragraph">
 <p>This command will show you the task list for the <code>Processing</code> donor and patient for you to be able to keep track of the necessary standard of procedure easily.</p>
 </div>
@@ -994,7 +981,7 @@ which will be explained further later.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="code-processing-code-the-donor-and-patient"><a class="link" href="#code-processing-code-the-donor-and-patient">4.7.3. <code>Processing</code> the donor and patient</a></h4>
+<h4 id="code-processing-code-the-donor-and-patient"><a class="link" href="#code-processing-code-the-donor-and-patient">4.8.3. <code>Processing</code> the donor and patient</a></h4>
 <div class="paragraph">
 <p>When you use this command, the following will occur:</p>
 </div>
@@ -1025,7 +1012,7 @@ This means, if a donor and a patient is already in <code>Processing</code> state
 <div class="content">
 <img src="images/processing.png" alt="processing" width="790">
 </div>
-<div class="title">Figure 15. Screenshot of the screen after you use the command on a valid donor and patient</div>
+<div class="title">Figure 14. Screenshot of the screen after you use the command on a valid donor and patient</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>processing ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong></code><br>
@@ -1038,7 +1025,7 @@ The order of the NRICs does not matter, as long as the patient and the donor mus
 </div>
 </div>
 <div class="sect2">
-<h3 id="checking-the-task-list-code-processingmarkdone-code"><a class="link" href="#checking-the-task-list-code-processingmarkdone-code">4.8. Checking the task list : <code>processingMarkDone</code></a></h3>
+<h3 id="checking-the-task-list-code-processingmarkdone-code"><a class="link" href="#checking-the-task-list-code-processingmarkdone-code">4.9. Checking the task list: <code>processingMarkDone</code></a></h3>
 <div class="paragraph">
 <p>As introduced above, this command serves to help you mark a task on the task list as done.
 This will allow you to be able to know what other administrative things you need to do
@@ -1050,7 +1037,7 @@ A tick would mean that the task is completed and a cross will mean that the task
 <div class="content">
 <img src="images/processingMarkDone.png" alt="processingMarkDone" width="790">
 </div>
-<div class="title">Figure 16. Screenshot of the screen after you use the command on a valid donor and patient and a valid task number</div>
+<div class="title">Figure 15. Screenshot of the screen after you use the command on a valid donor and patient and a valid task number</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code><br>
@@ -1063,7 +1050,7 @@ The donor and patient need to be in <code>Processing</code> state to be consider
 </div>
 </div>
 <div class="sect2">
-<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">4.9. Mark as done : <code>done</code></a></h3>
+<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">4.10. Mark as done: <code>done</code></a></h3>
 <div class="paragraph">
 <p>After the hospital has the results of the cross matching test, they can
 update the results in ORGANice.
@@ -1134,7 +1121,7 @@ match detection with other patients and donors.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.10. Deleting a person : <code>delete</code></a></h3>
+<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.11. Deleting a person : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>If you want to delete a person in ORGANice, you can type in a command of the following format: <code>delete <strong>NRIC</strong></code> <br>
 ORGANice will prevent you from deleting a person if he/she is any of the following:</p>
@@ -1157,19 +1144,19 @@ ORGANice will prevent you from deleting a person if he/she is any of the followi
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.12. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>You can clear all data in ORGANice by typing <code>clear</code>. You could use this command to remove all dummy data after you have familiarized yourself with how ORGANice works.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>To exit ORGANice, type <code>exit</code> in the Command Box. ORGANice will close on its own.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.13. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.14. Saving the data</a></h3>
 <div class="paragraph">
 <p>Data is saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1404,4 +1391,4 @@ This percentage is calculated from the number of tissue matches between the pati
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:59:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:29:38 UTC</div></div></div></body></html>

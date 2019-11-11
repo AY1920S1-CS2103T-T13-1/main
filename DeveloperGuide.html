@@ -313,7 +313,7 @@ The lifeline for <code>EditCommandParser</code> should end at the destroy marker
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="630">
 </div>
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
@@ -384,23 +384,25 @@ the method <code>ModelManager#updateFilteredPersonList(Predicate&lt;Person&gt; p
 to decide what type of <code>Person</code> to show on the <code>filteredPersons</code> list.</p>
 </div>
 <div class="paragraph">
-<p>Therefore, in addition to the existing <code>PREDICATE_SHOW_ALL_PERSONS</code> predicate, three others predicates are introduced
-in the <code>Model</code> interface to update the list.
-The code snippet below shows what these predicates are:</p>
+<p>Therefore, in addition to the existing <code>PREDICATE_SHOW_ALL_PERSONS</code> predicate, three other predicates are introduced
+in the <code>Model</code> interface to update the list.</p>
+</div>
+<div class="paragraph">
+<p>The code snippet below shows what these predicates are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>    /** {@code Predicate} that always evaluate to true */
-    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_PERSONS = unused -&gt; true;
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="comment">/** {@code Predicate} that always evaluate to true */</span>
+    <span class="predefined-type">Predicate</span>&lt;Person&gt; PREDICATE_SHOW_ALL_PERSONS = unused -&gt; <span class="predefined-constant">true</span>;
 
-    /** {@code Predicate} that always evaluate to true if person is a doctor */
-    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_DOCTORS = person -&gt; person.getType().isDoctor();
+    <span class="comment">/** {@code Predicate} that always evaluate to true if person is a doctor */</span>
+    <span class="predefined-type">Predicate</span>&lt;Person&gt; PREDICATE_SHOW_ALL_DOCTORS = person -&gt; person.getType().isDoctor();
 
-    /** {@code Predicate} that always evaluate to true  if person is a donor */
-    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_DONORS = person -&gt; person.getType().isDonor();
+    <span class="comment">/** {@code Predicate} that always evaluate to true  if person is a donor */</span>
+    <span class="predefined-type">Predicate</span>&lt;Person&gt; PREDICATE_SHOW_ALL_DONORS = person -&gt; person.getType().isDonor();
 
-    /** {@code Predicate} that always evaluate to true if person is a patient */
-    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_PATIENTS = person -&gt; person.getType().isPatient();</code></pre>
+    <span class="comment">/** {@code Predicate} that always evaluate to true if person is a patient */</span>
+    <span class="predefined-type">Predicate</span>&lt;Person&gt; PREDICATE_SHOW_ALL_PATIENTS = person -&gt; person.getType().isPatient();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,15 +410,16 @@ The code snippet below shows what these predicates are:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram">
+<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram" width="450">
 </div>
 <div class="title">Figure 9. Activity Diagram of a List Command</div>
 </div>
 <div class="paragraph">
 <p>When the user enters a list command, the result differs depending on the parameter of the command.
-If there is no parameter, ORGANice will simply list all existing doctors, patients and donors on the list.
-If there is a parameter, ORGANice will check the <code>TYPE</code> input and display the respective list of doctors, patients
-or donors that corresponds to the input.</p>
+If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients, and donors on the list.
+If there is a parameter, ORGANice will check if it is a valid <code>TYPE</code> parameter and display the correct list of persons
+that corresponds to this type.
+If the parameter is not valid, an error message will be displayed to indicate that the command is invalid.</p>
 </div>
 </div>
 <div class="sect2">
@@ -698,7 +701,6 @@ Additionally, it implements the following operations:</p>
 This command only works after a <code>MatchCommand</code> is called by the user, because it takes in <code>listOfMatches</code> returned
 from calling a <code>MatchCommand</code>. Importantly, this <code>listOfMatches</code> is an <code>ObservableList</code>, which cannot be modified.
 Therefore, it makes use of <code>SortedList</code> to wrap around the <code>ObservableList</code> so that the list can be modified by sorting.
-The <code>boolean</code> in <code>CommandResult#setSort(boolean isSort)</code> will be set to <code>true</code> for a list that has been sorted.
 Thus far, the sort command can only take in one <code>String</code> parameter, but more methods can be added in the future for more sorting options.</p>
 </div>
 <div class="paragraph">
@@ -713,7 +715,7 @@ Thus far, the sort command can only take in one <code>String</code> parameter, b
 <p>Sorting based on priority with <code>sort priority</code></p>
 </li>
 <li>
-<p>Sorting based on success rate of match with <code>sort rate</code></p>
+<p>Sorting based on compatibility rate of the match with <code>sort rate</code></p>
 </li>
 </ul>
 </div>
@@ -723,36 +725,36 @@ Thus far, the sort command can only take in one <code>String</code> parameter, b
 <div class="sect3">
 <h4 id="sort-by-expiry"><a class="link" href="#sort-by-expiry">4.4.1. Sort by Expiry</a></h4>
 <div class="paragraph">
-<p>Sorting by Expiry sorts a list of <code>MatchedDonor</code> using the <code>ModelManager#sortByOrganExpiryDate()</code> method.</p>
+<p>Sorting by Expiry sorts a list of <code>MatchedDonor</code> with the <code>ModelManager#sortByOrganExpiryDate()</code> method.</p>
 </div>
 <div class="paragraph">
-<p>In this method, the <code>ExpiryComparator</code> is used to compare two matched donors' organ expiry date, and this requires
-the <code>OrganExpiryDate</code> of the donors to be parsed into a date format that can be compared.</p>
+<p>In this method, the <code>ExpiryComparator</code> is used to compare two matched donors' organ expiry dates, and this requires
+the <code>OrganExpiryDate</code> of the donors to be parsed into a data format that can be compared.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sort-by-success-rate"><a class="link" href="#sort-by-success-rate">4.4.2. Sort by Success Rate</a></h4>
+<h4 id="sort-by-compatibility-rate"><a class="link" href="#sort-by-compatibility-rate">4.4.2. Sort by Compatibility Rate</a></h4>
 <div class="paragraph">
-<p>Sorting by Success Rate sorts a list of <code>MatchedPatient</code> using the <code>ModelManager#sortBySuccessRate()</code> method.</p>
+<p>Sorting by Compatibility Rate sorts a list of <code>MatchedPatient</code> using the <code>ModelManager#sortBySuccessRate()</code> method.</p>
 </div>
 <div class="paragraph">
-<p>The <code>SuccessRateComparator</code> is created to compare two matched patients' rate of success for the match.</p>
+<p>The <code>CompatibilityRateComparator</code> is created to compare two matched patients' rate of compatibility for the match.</p>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for the interactions with the <code>Logic</code> component for the <code>execute(sort rate)</code>,
-assuming the user has entered a <code>match ic/<strong>NRIC</strong></code> command before this.</p>
+<p>Given below is a Sequence Diagram to show the interactions with the <code>Logic</code> component when executing the <code>execute(sort rate)</code> method,
+assuming the user has entered a valid <code>match ic/<strong>NRIC</strong></code> command before this.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="790">
+<img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 11. Structure of the Logic Component when executing <code>sort rate</code> command</div>
+<div class="title">Figure 11. Sequential Diagram of the <code>sort rate</code> command</div>
 </div>
 <div class="paragraph">
 <p>After the command is given by the user, it would be parsed by the <code>AddressBookParser</code>.
 The <code>SortCommandParser</code> then parses the parameter <code>rate</code> and a <code>SortCommand</code> is created.
-The <code>LogicManager</code> will then execute the command and call the <code>sortBySuccessRate()</code> method from the <code>ModelManager</code>.
-The list of <code>MatchedPatient</code> will then be sorted based on their match&#8217;s success rate.</p>
+The <code>LogicManager</code> will then execute the command and call the <code>sortByCompatibilityRate()</code> method from the <code>ModelManager</code>.
+The list of <code>MatchedPatient</code> will then be sorted based on their match&#8217;s compatibility rate.</p>
 </div>
 </div>
 <div class="sect3">
@@ -780,31 +782,31 @@ A code snippet of this method is shown below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>@Override
-public int compareTo(Priority priority) {
-Integer thisPriorityNumber = 0;
-Integer otherPriorityNumber = 0;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">int</span> compareTo(Priority priority) {
+<span class="predefined-type">Integer</span> thisPriorityNumber = <span class="integer">0</span>;
+<span class="predefined-type">Integer</span> otherPriorityNumber = <span class="integer">0</span>;
 
-        if (this.isHighPriority()) {
-            thisPriorityNumber = 3;
-        } else if (this.isMediumPriority()) {
-            thisPriorityNumber = 2;
-        } else if (this.isLowPriority()) {
-            thisPriorityNumber = 1;
+        <span class="keyword">if</span> (<span class="local-variable">this</span>.isHighPriority()) {
+            thisPriorityNumber = <span class="integer">3</span>;
+        } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="local-variable">this</span>.isMediumPriority()) {
+            thisPriorityNumber = <span class="integer">2</span>;
+        } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="local-variable">this</span>.isLowPriority()) {
+            thisPriorityNumber = <span class="integer">1</span>;
         }
-        if (priority.isHighPriority()) {
-            otherPriorityNumber = 3;
-        } else if (priority.isMediumPriority()) {
-            otherPriorityNumber = 2;
-        } else if (priority.isLowPriority()) {
-            otherPriorityNumber = 1;
+        <span class="keyword">if</span> (priority.isHighPriority()) {
+            otherPriorityNumber = <span class="integer">3</span>;
+        } <span class="keyword">else</span> <span class="keyword">if</span> (priority.isMediumPriority()) {
+            otherPriorityNumber = <span class="integer">2</span>;
+        } <span class="keyword">else</span> <span class="keyword">if</span> (priority.isLowPriority()) {
+            otherPriorityNumber = <span class="integer">1</span>;
         }
-        return thisPriorityNumber.compareTo(otherPriorityNumber);
+        <span class="keyword">return</span> thisPriorityNumber.compareTo(otherPriorityNumber);
     }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This implementation was the result of using <code>String</code> to represent the different priorities in the <code>Priority</code> class.
+<p>This implementation is the result of using <code>String</code> to represent the different priorities in the <code>Priority</code> class.
 Therefore, they are converted into <code>Integer</code> for easier comparison. An alternative solution would be to make use of
 <code>Enum</code> class to define each priority so that this <code>compareTo</code> method implementation can be simplified.</p>
 </div>
@@ -815,7 +817,7 @@ Therefore, they are converted into <code>Integer</code> for easier comparison. A
 <p>This section will explain two aspects considered in designing the sort feature.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect-method-of-storing-sorted-result"><a class="link" href="#aspect-method-of-storing-sorted-result">Aspect: Method of storing sorted result</a></h5>
+<h5 id="aspect-method-of-storing-the-sorted-result"><a class="link" href="#aspect-method-of-storing-the-sorted-result">Aspect: Method of storing the sorted result</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -827,7 +829,7 @@ Therefore, they are converted into <code>Integer</code> for easier comparison. A
 with current implementations (able to wrap <code>ObservableList</code> and sort the content).</p>
 </li>
 <li>
-<p>Cons: It is not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.</p>
+<p>Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.</p>
 </li>
 </ul>
 </div>
@@ -840,7 +842,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <p>Pros: Fast index-based access and works on any <code>Collection</code> class.</p>
 </li>
 <li>
-<p>Cons: Iterating through the list to display the result takes O(n) time, which is slower than using <code>SortedList</code>.</p>
+<p>Cons: Slower than <code>SortedList</code> as it takes O(n) time to iterate and display the results.</p>
 </li>
 </ul>
 </div>
@@ -870,7 +872,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Time complexity is O(n*log(n)) which is relatively fast.</p>
+<p>Pros: Has a time complexity of O(n*log(n)) which is relatively fast.</p>
 </li>
 <li>
 <p>Cons: Cannot make use of existing methods in ORGANice that work for Comparator.</p>
@@ -892,10 +894,10 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <p>Processing is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>, then creating an ArrayList named, <code>ProcessingList</code> to store the tasks needed to do.</p>
 </div>
 <div class="paragraph">
-<p>If the donor and patient pair had never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
+<p>If the donor and patient pair has never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
 </div>
 <div class="paragraph">
-<p>If the user made any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
+<p>If the user makes any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
@@ -1191,8 +1193,20 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort the potential donors by success rate/priority</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">match a patient with the best possible donor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort the potential donors of a patient by compatibility rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">match a patient with the most compatible donor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort the potential donors of a patient by organ expiry date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure that organs are used before they expire</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort the patients by priority</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find out which patients I should prioritize</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">`* * `</p></td>
@@ -1400,24 +1414,15 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. ORGANice requests for correct parameter.</p>
-</li>
-<li>
-<p>1a2. User enters correct parameter.</p>
+<p>1a1. ORGANice returns error message.</p>
 <div class="paragraph">
-<p>Steps 1a1-1a2 are repeated until the data entered are correct.</p>
-</div>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
 </div>
 </div>
 </div>
@@ -1578,4 +1583,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:59:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:29:38 UTC</div></div></div></body></html>
