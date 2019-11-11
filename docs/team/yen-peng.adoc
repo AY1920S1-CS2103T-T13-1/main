@@ -4,12 +4,12 @@
 :stylesDir: ../stylesheets
 
 == Project Portfolio for ORGANice
----
-The purpose of this project portfolio is to present my main contributions towards a team project called ORGANice.
+
+The purpose of this project portfolio is to present my main contributions towards ORGANice.
 
 == 1. Introduction
 
-This section covers the project scope and description, followed an explanation of formats used in this portfolio.
+This section covers the project scope and description, followed an explanation of the formats used.
 
 === 1.1 Project Scope
 
@@ -18,39 +18,32 @@ Under a two-month-long time frame, we conceptualised ORGANice and moulded it fro
 My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
-=== 1.1 About ORGANice
+=== 1.1 Project Description
 
 ORGANice is a Command Line Interface (CLI) desktop application, meaning that user interaction is mainly through typing in commands.
-
 This application is targeted at hospital administrators and its main features include storing hospital information,
 finding compatible donors for patients awaiting organ transplants, and following up on administrative matters related to the organ matching process.
 
-**ORGANice is able to do the following for you:**
+**ORGANice has the following features:**
 
 * Maintain the information of doctors, donors, and patients using `add` and `edit`
 * Find information quickly using `find` and `list`
-* Find compatible organ donors for patients using `match`
-* Sort matches according to different criteria using `sort`
-* Keep track of patient-donor pairs slated for further compatibility tests using `processing`
-* Keep track of subsequent administrative tasks to do by marking completed tasks as done using `processingmarkdone`
-* Determine if organ transplant is a success and mark pair as `done` to remove from future matching results
-
-**This is what ORGANice looks like:**
-
-.The graphical user interface for ORGANice
-image::pppyp.png[width="700"]
-
+* Match compatible organ donors with patients and sort the matches using `match` and `sort`
+* Keep track of patient-donor pairs slated for further compatibility tests using `processing` and subsequent administrative tasks using `processingmarkdone`
+* Mark patient-donor pair as `done` to remove from future matching results
 
 === 1.2 Meaning of the Formats Used
 
 The following is a list of various formats used and what they mean:
 
 * `sort`  --  Purple texts are technical terms used in this project.
-* https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]  --  Blue underlined texts consist of a link that brings you to relevant information on the webpage.
+* https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]  --  Blue underlined texts consist of a link that opens up a relevant webpage.
+
+<<<
 
 == 2. Summary of Contributions
 
-This section elaborates on the enhancements I did to ORGANice with the relevant links (in blue) appended.
+This section elaborates on the enhancements I did to ORGANice with the relevant links (in blue).
 
 * *Major enhancement*: Added the ability to sort matches according to different criteria. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/145[#145])
 ** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, priority of the patient, or donor's organ expiry date.
@@ -74,48 +67,46 @@ This section elaborates on the enhancements I did to ORGANice with the relevant 
 ** Documentation
 *** Updated information about our team in the "About Us" section of ORGANice. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/11[#11])
 *** Authored the sections that guide users through the features 'Edit', 'List', 'Sort' and 'Help' in the User Guide. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/133[#133])
-*** Authored the implementations and use cases of the 'List' and 'Sort' features in the Developer Guide, and amended the Model Class Diagram. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/131[#131],
+*** Authored the implementations and use cases of the 'List' and 'Sort' features in the Developer Guide. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/131[#131],
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153])
 ** Community
 *** Reviewed pull requests with non-trivial review comments. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/148[#148], https://github.com/AY1920S1-CS2103T-T13-1/main/pull/150[#150])
 
+<<<
+
 == 3. Contributions to the User Guide
 
-This section showcases my ability to write documentation targeting end-users through an excerpt of what I wrote for the User Guide.
+This section showcases my ability to write documentation targeting end-users through an excerpt of what I have written for the User Guide,
+and this includes the `sort`, `list`, `help` and `edit` features.
 
-{Start of excerpt from User Guide}
-
-include::../UserGuide.adoc[tag=edit]
-
-include::../UserGuide.adoc[tag=list]
+[teal]#{Start of excerpt from User Guide}#
 
 include::../UserGuide.adoc[tag=sort]
 
+include::../UserGuide.adoc[tag=list]
+
 include::../UserGuide.adoc[tag=help]
 
-{End of excerpt from User Guide}
+include::../UserGuide.adoc[tag=edit]
+
+[teal]#{End of excerpt from User Guide}#
 
 == 4. Contributions to the Developer Guide
 
 This section showcases my ability to write technical documentation and to visually represent a system using
-Unified Modelling Language (UML) diagrams in the Developer Guide.
+Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence shown in the excerpt will be use cases for
+`list` and `sort` features, followed by their implementations, and lastly, the `Model` class diagram that I have updated.
 
-The following is a Model Class Diagram that I have updated in order to reflect the changes made to the application:
-
-include::../DeveloperGuide.adoc[tag=modeldiagram]
-
-
-
-In addition, I have also written the implementation and use cases for the 'List' and 'Sort' features as shown in the excerpt below.
-
-{Start of excerpt from Developer Guide}
-
-include::../DeveloperGuide.adoc[tag=list]
-
-include::../DeveloperGuide.adoc[tag=sort]
+[teal]#{Start of excerpt from Developer Guide}#
 
 include::../DeveloperGuide.adoc[tag=usecaselist]
 
 include::../DeveloperGuide.adoc[tag=usecasesort]
 
-{End of excerpt from Developer Guide}
+include::../DeveloperGuide.adoc[tag=list]
+
+include::../DeveloperGuide.adoc[tag=sort]
+
+include::../DeveloperGuide.adoc[tag=modeldiagram]
+
+[teal]#{End of excerpt from Developer Guide}#

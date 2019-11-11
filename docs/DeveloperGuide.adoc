@@ -131,12 +131,12 @@ image::EditSequenceDiagram.png[]
 
 NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::modeldiagram[]
 [[Design-Model]]
 === Model component
 
-// tag::modeldiagram[]
 .Structure of the Model Component
-image::ModelClassDiagram.png[width=700]
+image::ModelClassDiagram.png[width=630]
 // end::modeldiagram[]
 
 The `Model`,
@@ -175,6 +175,7 @@ to decide what type of `Person` to show on the `filteredPersons` list.
 
 Therefore, in addition to the existing `PREDICATE_SHOW_ALL_PERSONS` predicate, three others predicates are introduced
 in the `Model` interface to update the list.
+
 The code snippet below shows what these predicates are:
 
 ``` java
@@ -196,7 +197,7 @@ The code snippet below shows what these predicates are:
 The activity diagram below illustrates what happens when a user uses the list command.
 
 .Activity Diagram of a List Command
-image::ListActivityDiagram.png[width=700]
+image::ListActivityDiagram.png[width=450]
 
 When the user enters a list command, the result differs depending on the parameter of the command.
 If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients and donors on the list.
@@ -363,7 +364,7 @@ Three methods of sorting are implemented to sort based on the following categori
 These three methods' implementation will be further elaborated upon below.
 
 ==== Sort by Expiry
-Sorting by Expiry sorts a list of `MatchedDonor` using the `ModelManager#sortByOrganExpiryDate()` method.
+Sorting by Expiry sorts a list of `MatchedDonor` with the `ModelManager#sortByOrganExpiryDate()` method.
 
 In this method, the `ExpiryComparator` is used to compare two matched donors' organ expiry date, and this requires
 the `OrganExpiryDate` of the donors to be parsed into a date format that can be compared.
@@ -377,7 +378,7 @@ Given below is a Sequence Diagram to show the interactions with the `Logic` comp
 assuming the user has entered a valid `match ic/**NRIC**` command before this.
 
 .Sequential Diagram of the `sort rate` command
-image::SortSequenceDiagram.png[width=790]
+image::SortSequenceDiagram.png[width=600]
 
 After the command is given by the user, it would be parsed by the `AddressBookParser`.
 The `SortCommandParser` then parses the parameter `rate` and a `SortCommand` is created.
@@ -440,7 +441,7 @@ with current implementations (able to wrap `ObservableList` and sort the content
 ** Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.
 * **Alternative 2:** Use `ArrayList`.
 ** Pros: Fast index-based access and works on any `Collection` class.
-** Cons: Iterating through the list to display the result takes O(n) time, which is slower than using `SortedList`.
+** Cons: Slower than `SortedList` as it takes O(n) time to iterate through list to display results.
 
 ===== Aspect: Method of sorting
 * **Alternative 1 (current choice):** Use `Comparator` and `Comparable`.
