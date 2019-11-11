@@ -2,10 +2,9 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:xrefstyle: full
 
 == PROJECT: ORGANice
-
----
 
 :sectnums:
 == Introduction
@@ -26,14 +25,14 @@ with either enhancing or morphing a Command Line Interface (CLI) desktop address
 We chose to morph it into an organ transplant manager, ORGANice.
 It has a Graphical User Interface (GUI) which is created with JavaFX.
 
-The target audiences of ORGANice are the hospital administrative staffs as we aim to help ease their
+The target audience of ORGANice are the hospital administrative staffs as we aim to help ease their
 workload when trying to match all their patients with all the donors' organs they have.
 
 === Project Summary
 
 ORGANice is an organ transplant manager.
 Currently, hospital administrative staffs have many patients and organ donors information in their records.
-Whenever, they have a new patient who needed an organ, they often have to go through many manual search and
+Whenever they have a new patient who needed an organ, they often have to go through many manual searches and
 matching to find a compatible donor. We aim to reduce such menial work using ORGANice and speed up this process.
 
 ORGANice is able to:
@@ -60,26 +59,44 @@ image::snPPP1.png[width="790"]
 
 === Key formatting
 
+This section explains the formatting used in this document.
+
+[%autowidth]
+
+|===
+
+|`text` |
+
+A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
+
+| [blue]#`Patient`# |
+
+Blue text with grey highlight indicates a component, class or object in
+the architecture of the application.
+
+
+|===
+
 == Summary of Contributions
 
 This section lists the codes and documentations I contributed to ORGANice.
 
-I was responsible of implementing the `processing`, `processingMarkDone` and `done` commands.
+I was responsible for implementing the `processing`, `processingMarkDone` and `done` commands.
 I also ensured the code quality is up to standard.
 
 === Main Feature : `Processing`
 
-This section will explain the command, `processing` I implemented for ORGANice.
+This section will explain the command, `processing` which I implemented for ORGANice.
 
 *** What it does: +
-It allow user to view a whole list of administrative tasks which needs to be done to arrange for cross-matching test
+It allow users to view a whole list of administrative tasks which needs to be done to arrange for cross-matching test
 between a patient and a donor.
 
 *** Justification: +
 Hospital staffs often need to do a lot of paper work and administrative tasks.
 There is now an increasing number of patients admitting to hospitals and if they need an organ,
-there will be a standard operating procedure which need to be followed.
-With ORGANice, staffs will not need to manually keep track of which tasks are not yet done for every patients.
+there will be a standard operating procedure which needs to be followed
+With ORGANice, staff will not need to manually keep track of which tasks are not done yet for every patients.
 
 *** Highlights: +
 A default task list will be generated when the user use the command with valid NRICs of donor and patient.
@@ -94,7 +111,7 @@ it is impossible to have a donor matching with more than one patient or a patien
 
 === Main Feature : `ProcessingMarkDone`
 
-This section will explain the command, `processingMarkDone` I implemented for ORGANice.
+This section will explain the command, `processingMarkDone` which I implemented for ORGANice.
 
 *** What it does: +
 It allows users to mark a task on the list of administrative tasks as done.
@@ -116,13 +133,13 @@ It will be very intuitive for the hospital staffs to determine which tasks are d
 
 === Main Feature : `Done`
 
-This section will explain the command, `done` I implemented for ORGANice.
+This section will explain the command, `done` which I implemented for ORGANice.
 
 *** What it does: +
-It allows users to determine if a patient and a donor is all done.
-Meaning, the patient and donor have gone through a test and we know know if the patient rejected the organ from the donor or not.
-If the patient is not compatible with the donor, then both the patient and donor will be saved back into ORGANice and available for future organ matching detection.
-However, they will not be able to match each other anymore.
+It allows users to determine if a patient and a donor is all done. +
+Meaning, the patient and donor have gone through a test and we know know if the patient rejected the organ from the donor or not. +
+If the patient is not compatible with the donor, then both the patient and donor will be saved back into ORGANice and available for future organ matching detection. +
+However, they will not be able to match each other anymore. +
 If the patient is compatible with the donor, then both of the patient and donor will be removed from ORGANice.
 
 *** Justification: +
@@ -174,20 +191,53 @@ Please refer to this link to view the code I wrote:
 
 *** Updated User Guide +
 (Pull request
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/128[#128],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/135[#135],
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/128[#128]],
+[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/135[#135]],
 [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/269[#269]])
 
 ** **Community**
 
+*** Reviewed Pull Requests (with non-trivial review comments):
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/85[#85]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/88[#88]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/97[#97]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/115[#115]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/130[#130]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/138[#138]],
+ [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/251[#251]].
+
+*** Reported bugs and offered suggestions for other teams in the class.
+(Examples: https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/54[1],
+https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/110[2])
+
+
 == Contributions to User Guide
 
-=== Current Enhancement
+|===
+|Given below are sections I contributed to the User Guide.
+They showcase my ability to write documentation targeting end-users.
+|===
 
-=== Proposed Enhancement for v2.0
+_{Start of First Extract from User Guide}_
+
+include::../UserGuide.adoc[tag=process]
+
+_{End of First Extract from User Guide}_
+
+_{Start of Second Extract from User Guide}_
+
+include::../UserGuide.adoc[tag=mark]
+
+_{End of Second Extract from User Guide}_
+
+_{Start of Third Extract from User Guide}_
+
+include::../UserGuide.adoc[tag=done]
+
+_{End of Third Extract from User Guide}_
 
 == Contributions to Developer Guide
 
-=== Current Enhancement
-
-=== Proposed Enhancement for v2.0
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===

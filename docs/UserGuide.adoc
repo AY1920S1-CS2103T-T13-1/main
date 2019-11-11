@@ -576,9 +576,9 @@ The donor and patient need to be in `Processing` state to be considered valid.
 Example:
 `processingMarkDone ic/S6764235G ic/S5234567D 1`
 
-// end::process[]
+// end::mark[]
 
-// tag::mark[]
+// tag::done[]
 
 === Mark as done : `done`
 
@@ -617,9 +617,9 @@ match detection with other patients and donors.
 Example:
 
 * `done ic/S6764235G ic/S5234567D res/pass`
-* `done ic/S6764235G ic/S5234567D res/fail`
+* `done ic/S5234567D ic/S6764235G  res/fail`
 
-// end::mark[]
+// end::done[]
 
 === Exiting the program : `exit`
 
