@@ -607,7 +607,6 @@ TODO diagram
 //Todo store the patient and donor information as archive instead of removing it
 
 
-
 ==== Design considerations
 This section will explain the reason for having an aspect.
 
