@@ -15,6 +15,7 @@ This section covers the project scope and description, followed an explanation o
 
 ORGANice is the product of a software engineering project done by a team of 5 students, including myself, who are second-year Computer Science students from the National University of Singapore (NUS).
 Under a two-month-long time frame, we conceptualised ORGANice and moulded it from an existing application, known as "Address Book", that stores and manages people's contact information.
+My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
 === 1.1 About ORGANice
