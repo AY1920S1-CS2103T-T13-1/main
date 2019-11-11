@@ -564,6 +564,7 @@ This will allow you to be able to know what other administrative things you need
 for the specific donor and patient before the cross-matching test.
 Beside each task on the task list, there will be either a cross, ✘, or a tick, ✓.
 A tick would mean that the task is completed and a cross will mean that the task has not yet been completed.
+A screenshot of the list generated can be shown below:
 
 .Screenshot of the screen after you use the command on a valid donor and patient and a valid task number
 

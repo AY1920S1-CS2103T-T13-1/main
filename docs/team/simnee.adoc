@@ -60,18 +60,20 @@ image::snPPP1.png[width="790"]
 
 This section explains the formatting used in this document.
 
-[%autowidth]
-
 |===
 
 |`text` |
 
-A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
+A purple font (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
 
 | `Text` |
 
-A grey highlight which starts with a capital letter indicates a component, class or object in
+A purple font which starts with a capital letter indicates a component, class or object in
 the architecture of the application.
+
+| `Text#text` |
+
+A purple font text with a hash-tag in between indicates that the `Text` contains that method, `text`.
 |===
 
 == Summary of Contributions
@@ -115,7 +117,7 @@ This will reduce the chance of hospital staffs doing a single task for more than
 *** Highlights:
 This feature cannot be used if the patient and donor have not been processed before.
 This will ensure that the correct list is edited instead of a wrong one.
-The list will also be generated with either a cross, ✘, or a tick, ✓ beside each task.
+The list will also be generated with either a cross or a tick beside each task.
 It will be very intuitive for the hospital staffs to determine which tasks are done already.
 
 === Main Feature : `Done`
@@ -196,7 +198,7 @@ https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/110[2])
 == Contributions to User Guide
 
 |===
-|Given below are sections I contributed to the User Guide.
+|Given below are some of the sections I contributed to the User Guide.
 They showcase my ability to write documentation targeting end-users.
 |===
 
@@ -208,7 +210,25 @@ _{End of First Extract from User Guide}_
 
 _{Start of Second Extract from User Guide}_
 
-include::../UserGuide.adoc[tag=mark]
+=== Checking the task list : `processingMarkDone`
+
+As introduced above, this command serves to help you mark a task on the task list as done.
+This will allow you to be able to know what other administrative things you need to do
+for the specific donor and patient before the cross-matching test.
+Beside each task on the task list, there will be either a cross or a tick.
+A tick would mean that the task is completed and a cross will mean that the task has not yet been completed.
+A screenshot of the list generated can be shown below:
+
+.Screenshot of the screen after you use the command on a valid donor and patient and a valid task number
+
+image::processingMarkDone.png[width="790"]
+
+Format: `processingMarkDone ic/**PATIENT NRIC** ic/**DONOR NRIC** **TASK NUMBER**` +
+The order of the NRICs does not matter, as long as the task number, patient and donor must be valid.
+The donor and patient need to be in `Processing` state to be considered valid.
+
+Example:
+`processingMarkDone ic/S6764235G ic/S5234567D 1`
 
 _{End of Second Extract from User Guide}_
 
@@ -221,7 +241,7 @@ _{End of Third Extract from User Guide}_
 == Contributions to Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are some of the sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 _{Start of First Extract from Developer Guide}_

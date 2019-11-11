@@ -509,9 +509,10 @@ It will then check if there is a need to generate a new default task list or the
 Then, the `Status` of the patient and donor will be set to `processing`.
 It will then display the list out.
 
-Following is a class diagram to show the processing feature
+Following is an activity diagram to show the processing feature.
 
-TODO diagram
+.Activity Diagram of the Processing Command
+image::ProcessingActivity.png[]
 
 //Todo: additional feature such as add, edit and delete tasks
 
@@ -597,13 +598,15 @@ Then, the patient and donor will have their `Status` set to `not processing` so 
 If the patient and donor did a cross-matching test and the result of the test is a pass,
 then the patient and donor can be removed from ORGANice already.
 
+// end::doneDG[]
+
 Following is an object diagram to show the processingMarkDone feature
 
 TODO diagram
 
 //Todo store the patient and donor information as archive instead of removing it
 
-// end::doneDG[]
+
 
 ==== Design considerations
 This section will explain the reason for having an aspect.
