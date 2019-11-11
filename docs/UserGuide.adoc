@@ -503,7 +503,7 @@ The `Status` of patient and donor can be either `Not Processing`, `Processing` o
 
 * `Not Processing` : The current donor or patient is not yet matched with anyone and is not going for any cross-matching test yet.
 
-* `Processing` : The current donor or patient found a match already and is in the midst of preparing for a cross-matching test.
+* `Processing` : The current donor or patient has already found a match and is in the midst of preparing for a cross-matching test.
 
 * `Done` : The current donor or patient have completed the cross-matching and the result of the cross-matching shows a positive result.
 Hence, this donor or patient does not need to be in ORGANice anymore.
