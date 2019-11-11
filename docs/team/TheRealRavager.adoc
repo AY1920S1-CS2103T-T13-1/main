@@ -69,9 +69,11 @@ features such as rebasing and stashing.
 ** Updated User Guide and Developer Guide to reflect changes to `find` (Pull Requests
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/158[#158],
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277[#277])
-** Added a guide for developer to understand how classes interact among each other in the form mode feature to Developer Guide: https://github.com/AY1920S1-CS2103T-T13-1/main/pull/154[#154]
 * Community:
-** Contributed to forum discussions (Examples: PLACEHOLDER)
+** Contributed to forum discussions (Examples:
+https://github.com/nus-cs2103-AY1920S1/forum/issues/9[#9],
+https://github.com/nus-cs2103-AY1920S1/forum/issues/11[#11],
+https://github.com/nus-cs2103-AY1920S1/forum/issues/21[#21])
 ** Reviewed Pull Requests (PLACEHOLDER)
 
 == Contributions to the User Guide
