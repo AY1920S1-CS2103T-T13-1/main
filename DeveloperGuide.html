@@ -30,7 +30,7 @@
 <ul class="sectlevel2">
 <li><a href="#list-feature">4.1. List feature</a></li>
 <li><a href="#matching-feature">4.2. Matching feature</a></li>
-<li><a href="#add-person-code-form-code-mode-feature">4.3. Add person <code>Form</code> mode feature</a></li>
+<li><a href="#form-mode-feature">4.3. Form mode feature</a></li>
 <li><a href="#sort-feature">4.4. Sort feature</a></li>
 <li><a href="#processing-feature">4.5. Processing feature</a></li>
 <li><a href="#processingmarkdone-feature">4.6. ProcessingMarkDone feature</a></li>
@@ -625,21 +625,33 @@ and displayed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-person-code-form-code-mode-feature"><a class="link" href="#add-person-code-form-code-mode-feature">4.3. Add person <code>Form</code> mode feature</a></h3>
+<h3 id="form-mode-feature"><a class="link" href="#form-mode-feature">4.3. Form mode feature</a></h3>
 <div class="paragraph">
-<p>This section explains the implementation of the adding person in <code>Form</code> mode feature.</p>
+<p>This section explains the implementation of the form mode feature.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">4.3.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>Form</code> mode mechanism is facilitated by <code>FormUiManager</code>.
-It modifies the <code>CommandBox</code> as well as <code>PersonPanelListPlaceholder</code> each time a user input a specific attribute.
-Additionally, it implements the following operations:</p>
+<p>The form mode mechanism is facilitated by <code>FormUiManager</code>.
+It modifies the <code>CommandBox</code> as well as <code>PersonPanelListPlaceholder</code> each time you input a specific attribute.
+The following object diagram models the relationship and dependencies between <code>FormUiManager</code> and other objects:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FormUiManagerObjectDiagram.png" alt="FormUiManagerObjectDiagram" width="300">
+</div>
+<div class="title">Figure 11. Object Diagram for the <code>FormUiManager</code> object</div>
+</div>
+<div class="paragraph">
+<p><code>FormUiManager</code> will need an object of class <code>Type</code> in order to determine what type of form(patient, doctor, or donor) will be displayed to you.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, <code>FormUiManager</code> implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>FormUiManager#getPersonField()</code>&#8201;&#8212;&#8201;Modifies <code>CommandBox</code> and prompts the user to input a specific attribute.</p>
+<p><code>FormUiManager#getPersonDetails()</code>&#8201;&#8212;&#8201;Modifies <code>CommandBox</code> and prompts the user to input the attributes required.</p>
 </li>
 <li>
 <p><code>FormUiManager#setPersonDetails()</code>&#8201;&#8212;&#8201;Sets the value for all required attributes of a specific type of person.</p>
@@ -656,22 +668,45 @@ Additionally, it implements the following operations:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Logic</code> interface when the specific command is invoked by the user.</p>
+<p>These operations are exposed in the <code>Logic</code> interface when the specific command is invoked by you.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the <code>Form</code> mode mechanism behaves at each step:</p>
+<p>Given below is an example usage scenario and how the form mode mechanism behaves at each step so that you can better understand how the different classes interact with each other:</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time.</p>
+<p>Step 1. A user launches the application for the first time.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>add t/doctor</code> command to add a doctor in a <code>Form</code> mode. The <code>add</code> command calls <code>AddressBookParser#parseCommand()</code> that will return a new <code>AddCommand</code> instance.</p>
+<p>Step 2. The user executes <code>add t/doctor</code> command to add a doctor in the form mode. The <code>add</code> command calls <code>AddressBookParser#parseCommand()</code> that will return a new <code>AddCommand</code> instance.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The <code>LogicManager</code> executes the command and notice that the <code>Command</code> is a <code>Form</code> type command and thus will create a new <code>FormUiManager</code> instance.</p>
+<p>Step 3. The <code>LogicManager</code> executes the command and notice that the <code>CommandResult</code> having a boolean value <code>isForm</code> and thus will create a new <code>FormUiManager</code> instance. The code snippet below demonstrates how the <code>FormUiManager</code> is created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>if (commandResult.isForm()) {
+    resultDisplayPlaceholder.setMinHeight(100);
+    FormAnimation.fadingAnimation(this);
+    Type formType = commandResult.getFormType();
+    FormUiManager formUiManager = new FormUiManager(this, formType, model, logger);
+    personListPanelPlaceholder.getChildren().clear();
+    if (formType.isDoctor()) {
+        form = new DoctorForm();
+        personListPanelPlaceholder.getChildren().add(((DoctorForm) form).getRoot());
+    } else if (formType.isDonor()) {
+        form = new DonorForm();
+        personListPanelPlaceholder.getChildren().add(((DonorForm) form).getRoot());
+    } else if (formType.isPatient()) {
+        form = new PatientForm(this);
+                    personListPanelPlaceholder.getChildren().add(((PatientForm) form).getRoot());
+                }
+                formUiManager.getPersonDetails();
+                return commandResult;
+            }</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Step 4. The <code>FormUiManager</code> changes the display of the application based on the type of the person specified in Step 1 by modifying the content of the <code>PersonListPanelPlaceholder</code> as well as the <code>CommandExecutor</code> in the <code>CommandBox</code> object by calling <code>FormUiManager#getPersonFields()</code>.</p>
+<p>Step 4. The <code>FormUiManager</code> changes the display of the application based on the type of the person specified in Step 1 by modifying the content of the <code>PersonListPanelPlaceholder</code> as well as the <code>CommandExecutor</code> in the <code>CommandBox</code> object by calling <code>FormUiManager#getPersonDetails()</code>.</p>
 </div>
 <div class="paragraph">
 <p>Step 5. The user inputs the attribute that is prompted until all the required attributes are specified.</p>
@@ -682,6 +717,24 @@ Additionally, it implements the following operations:</p>
 <div class="paragraph">
 <p>Step 7. <code>FormUiManager</code> calls the <code>AddressBookParser#parseCommand()</code> to add the person and save it in the <code>Storage</code> interface.</p>
 </div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the Logic component when a user typed in <code>add t/doctor</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddFormSequenceDiagram.png" alt="AddFormSequenceDiagram">
+</div>
+<div class="title">Figure 12. Sequential Diagram for the form mode feature</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when you execute the <code>add t/<strong>TYPE</strong></code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Form.png" alt="Form" width="300" height="300">
+</div>
+<div class="title">Figure 13. Activity Diagram for adding a person using form mode feature</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.2. Design Considerations</a></h4>
@@ -689,7 +742,7 @@ Additionally, it implements the following operations:</p>
 <p>This section will explain the reason for having some aspects.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<h5 id="aspect-how-form-mode-feature-executes"><a class="link" href="#aspect-how-form-mode-feature-executes">Aspect: How form mode feature executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -697,7 +750,7 @@ Additionally, it implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Easy to implement. This is the reason why this alternative is chosen as it does not take too much time to implement.</p>
 </li>
 <li>
 <p>Cons: May not be the best approach since one command will have two different modes.</p>
@@ -780,7 +833,7 @@ assuming the user has entered a valid <code>match ic/<strong>NRIC</strong></code
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 11. Sequential Diagram of the <code>sort rate</code> command</div>
+<div class="title">Figure 14. Sequential Diagram of the <code>sort rate</code> command</div>
 </div>
 <div class="paragraph">
 <p>After the command is given by the user, it would be parsed by the <code>AddressBookParser</code>.
@@ -1002,7 +1055,7 @@ It will then display the list out.</p>
 <div class="content">
 <img src="images/ProcessingActivity.png" alt="ProcessingActivity">
 </div>
-<div class="title">Figure 12. Activity Diagram of the Processing Command</div>
+<div class="title">Figure 15. Activity Diagram of the Processing Command</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
@@ -1910,4 +1963,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:19:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:26:22 UTC</div></div></div></body></html>
