@@ -46,22 +46,39 @@ and executed by the application.
 == Summary of contributions
 This section shows a summary of my coding, documentation and other helpful contributions to the team project.
 
-*Feature Implemeted*: I added the ability to search for persons based on their attributes.
+*Major Enhancement*: I added the ability to search for persons based on their attributes.
 
 * What it does: Allows the user to search for specific persons (i.e. patients, doctors and donors) based on their
 attributes (e.g. name).
-* Justification: This feature improves the product significantly as a user can look for specific persons quickly rather
+* Justification: This feature improves ORGA__Nice__ significantly as a user can look for specific persons quickly rather
 than having to scroll through the entire list of persons in ORGA__Nice__.
 * Highlights: This feature performs fuzzy matching on the inputted name, NRIC and phone number to allow for relevant
 search results to be displayed even if the user makes a typo.
+* Pull Requests:
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/143[#143],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/174[#174],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/184[#184]
+
+*Minor Enhancement*: I added NRIC checksum validation to ensure input NRICs are valid.
+
+* What it does: Checks that the NRIC input by the user is a valid NRIC.
+* Justification: This feature is crucial to the functionality of ORGA__Nice__ as credential correctness is crucial for
+hospital administrative workflow.
+* Pull Request: https://github.com/AY1920S1-CS2103T-T13-1/main/commit/36a54c909e8a621bacfb0626b0161179f6c3a2d6[#255]
+
+*Minor Enhancement*: I added dummy data generation for initial startup of ORGA__Nice__.
+
+* What it does: Generates dummy data consisting of 10 doctors, 20 patients and 20 donors on inital application startup.
+* Justification: This feature is beneficial for hospitals transitioning to using ORGA__Nice__ as it provides users with
+data to test out and familiarise themselves with the various commands available in ORGA__Nice__ before using it for
+daily work.
+* Pull Request: https://github.com/AY1920S1-CS2103T-T13-1/main/commit/9707403685db8ad694d45602b892f3ddece18e5d[#172]
 
 *Code contributed*: Click https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=TheRealRavager&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=TheRealRavager&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[here]
 to view my code contributions.
 
 *Other contributions*:
 
-* NRIC Checksum Validation (Pull Request https://github.com/AY1920S1-CS2103T-T13-1/main/commit/36a54c909e8a621bacfb0626b0161179f6c3a2d6[#255])
-* Dummy Data Generation (Pull Request https://github.com/AY1920S1-CS2103T-T13-1/main/commit/9707403685db8ad694d45602b892f3ddece18e5d[#172])
 * Git Workflow Management:
 ** Helped team members resolve Git related issues such as merge conflicts and taught them how to use more complicated
 features such as rebasing and stashing.
@@ -72,6 +89,7 @@ features such as rebasing and stashing.
 ** Updated User Guide and Developer Guide to reflect changes to `find` (Pull Requests
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/158[#158],
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277[#277])
+** Reworded User Guide and Developer Guide to ensure grammatical correctness and tone uniformity.
 * Community:
 ** Contributed to forum discussions (Examples:
 https://github.com/nus-cs2103-AY1920S1/forum/issues/9[#9],
