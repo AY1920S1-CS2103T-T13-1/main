@@ -509,7 +509,7 @@ Step 4: A list containing all persons except exact matches is obtained and fuzzy
 Step 5: Fuzzy matching uses [blue]`StringUtil#calculateLevenshteinDistance` to filter out possible matches. The matches
 are then sorted in ascending order of similarity to input keywords.
 
-Step 6: [blue]`setDisplayedPersonList` is called.
+Step 6: [blue]`#setDisplayedPersonList` is called.
 
 The following sequence diagram illustrates steps 1 to 6: +
 
