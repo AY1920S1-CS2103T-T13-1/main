@@ -47,8 +47,7 @@ Figure 1 shows how the application looks like after starting it.
 
 image::Ui.png[width="790"]
 
-If what you are seeing on your screen looks like what is shown in Figure 1, congratulations! You have successfully started the application.
-From this point on, do note the following symbols and formatting used in this document:
+If what you are seeing on your screen looks like what is shown in Figure 1, congratulations! You have successfully started the application. From this point on, do note the following symbols and formatting used in this document:
 
 NOTE: This section contains important information.
 
