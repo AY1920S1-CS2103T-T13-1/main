@@ -12,8 +12,9 @@ ORGA__Nice__ is a team project done by a group of five developers including myse
 students from the National University of Singapore. ORGA__Nice__ was developed as part of CS2103T, an introductory
 Software Engineering module. ORGA__Nice__ is a desktop application created to help hospital administration staff manage
 organ transplants. ORGA__Nice__ was developed with the assumption that they prefer typing compared to other forms of
-usage. ORGA__Nice__ is adapted from https://se-education.org/addressbook-level3/[AddressBook-Level3],
-an address book management application that utilises a Command Line Interface (CLI).
+usage. As such, ORGA__Nice__ utilises a Command Line Interface - a text-based system where users type in commands to
+execute tasks rather than clicking buttons. As part of the module, ORGA__Nice__ is morphed from an existing project,
+https://se-education.org/addressbook-level3/[AddressBook-Level3], an address book management application.
 
 This is what ORGA__Nice__ looks like:
 
