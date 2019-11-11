@@ -28,7 +28,6 @@ made during the development of ORGANice.
 This guide is meant for developers who would like to further develop ORGANice.
 
 == Setting up
-
 To set up the developer tools needed to develop ORGANice, refer to the guide <<SettingUp#, here>>.
 
 == Design
@@ -628,55 +627,55 @@ This section will explain the reason for having an aspect.
 This section explains the implementation of the find persons by attributes feature.
 
 ==== Current Implementation
-The find feature is facilitated by [blue]`PersonContainsPrefixesPredicate` and [blue]`FindCommand`. +
+The find feature is facilitated by `PersonContainsPrefixesPredicate` and `FindCommand`. +
 
 ===== PersonContainsPrefixesPredicate
-[blue]`PersonContainsPrefixesPredicate` implements [blue]`Predicate` and is used to test whether a person's attributes
+`PersonContainsPrefixesPredicate` implements `Predicate` and is used to test whether a person's attributes
 match exactly with at least one of the input keywords in each attribute category.
 
 ===== FindCommand
-[blue]`FindCommand` extends [blue]`Command` with a [blue]`predicate` that is used to determine whether a given
-[blue]`person` should be displayed. It implements [blue]`Command#execute(Model model)` which replaces the
-[blue]`predicate` of the current [blue]`model.filteredPersons` with the input predicate of [blue]`ExactFindCommand`.
+`FindCommand` extends `Command` with a `predicate` that is used to determine whether a given
+`person` should be displayed. It implements `Command#execute(Model model)` which replaces the
+`predicate` of the current `model.filteredPersons` with the input predicate of `ExactFindCommand`.
 This triggers a change in the displayed persons to the list of filtered persons.
 
 ===== Execution Behaviour
-The behaviour of [blue]`FindCommand` is consistent with that of other commands as described in <<Design-Logic>>.
+The behaviour of `FindCommand` is consistent with that of other commands as described in <<Design-Logic>>.
 Therefore, this section will gloss over higher-level details and instead zoom-in to the behaviour of
-[blue]`FindCommand#execute`.
+`FindCommand#execute`.
 
 ====== FindCommand Execution
-Given below is a step by step description of the behaviour of [blue]`FindCommand#execute`:
+Given below is a step by step description of the behaviour of `FindCommand#execute`:
 
-Step 1: The full list of all persons in ORGA__Nice__ is retrieved and stored as [blue]`allPersons`.
+Step 1: The full list of all persons in ORGA__Nice__ is retrieved and stored as `allPersons`.
 
-Step 2: A list of exact matches is obtained by filtering [blue]`allPersons` using
-[blue]`PersonContainsPrefixesPredicate`.
+Step 2: A list of exact matches is obtained by filtering `allPersons` using
+`PersonContainsPrefixesPredicate`.
 
 Step 3: A list containing all persons except exact matches is obtained and fuzzy matching is performed on it.
 
-Step 4: Fuzzy matching uses [blue]`StringUtil#calculateLevenshteinDistance` to filter out possible matches. The matches
+Step 4: Fuzzy matching uses `StringUtil#calculateLevenshteinDistance` to filter out possible matches. The matches
 are then sorted in ascending order of similarity to input keywords.
 
-Step 5: [blue]`#setDisplayedPersonList` is called.
+Step 5: `#setDisplayedPersonList` is called.
 
 The following sequence diagram illustrates steps 1 to 5: +
 
 image::ExactFindSequenceDiagram.png[]
 
-NOTE: The above diagram heavily simplifies the execution of [blue]`#fuzzyMatch` as it is further explained in the
+NOTE: The above diagram heavily simplifies the execution of `#fuzzyMatch` as it is further explained in the
 section below.
 
 ====== Fuzzy Matching
-[blue]`FindCommand#execute` performs fuzzy matching between input keywords and person attributes to detect possible
+`FindCommand#execute` performs fuzzy matching between input keywords and person attributes to detect possible
 matches. This behaviour is facilitated by
-[blue]`FindCommand#fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList)`. The behaviour of
-[blue]`#fuzzyMatch` is detailed in the below activity diagram:
+`FindCommand#fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList)`. The behaviour of
+`#fuzzyMatch` is detailed in the below activity diagram:
 
 image::FuzzyMatchActivityDiagram.png[]
 
-As seen from the above diagram, [blue]`#fuzzyMatch` traverses the [blue]`inputList` of persons and tags each person with a
-calculated minimum [blue]`combinedLevenshteinDistance`(LD). In the event that no keywords are present, all persons are
+As seen from the above diagram, `#fuzzyMatch` traverses the `inputList` of persons and tags each person with a
+calculated minimum `combinedLevenshteinDistance`(LD). In the event that no keywords are present, all persons are
 tagged with an LD higher than the acceptable threshold. Once all persons have been tagged, those persons whose LD
 exceeds the threshold are removed from the list. The final list is then sorted in ascending order of LD.
 
@@ -686,7 +685,7 @@ This section will explain the main aspect considered in designing the find by pr
 ===== Aspect: Method of calculating similarity of keywords
 * **Alternative 1 (current choice):** Calculate Levenshtein Distance.
 ** Pros: Able to detect most typos effectively.
-** Cons: Creation of requisite [blue]`costMatrix` is computationally expensive and may affect performance for long
+** Cons: Creation of requisite `costMatrix` is computationally expensive and may affect performance for long
 keywords.
 * **Alternative 2:** Use Natural Language Processing Libraries.
 ** Pros: Will be able to detect typos more effectively.
