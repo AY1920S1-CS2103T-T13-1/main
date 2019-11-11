@@ -17,6 +17,7 @@ endif::[]
 
 By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 // tag:: intro[]
+
 == Introduction
 
 This user guide explains how to use ORGA__Nice__ to manage organ transplants.
