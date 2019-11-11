@@ -66,7 +66,9 @@ features such as rebasing and stashing.
 ** Helped the team migrate to a branching Git workflow (Issue https://github.com/AY1920S1-CS2103T-T13-1/main/issues/39[#39])
 ** Set up team's GitHub repository including branch protection and requiring Travis checks and reviews before merging.
 * Documentation:
-** Updated User Guide and Developer Guide to reflect changes to `find` (Pull Request [PLACEHOLDER])
+** Updated User Guide and Developer Guide to reflect changes to `find` (Pull Requests
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/158[#158],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277[#277])
 ** Added a guide for developer to understand how classes interact among each other in the form mode feature to Developer Guide: https://github.com/AY1920S1-CS2103T-T13-1/main/pull/154[#154]
 * Community:
 ** Contributed to forum discussions (Examples: PLACEHOLDER)
