@@ -48,7 +48,7 @@ This section elaborates on the enhancements I did to ORGANice with the relevant 
 * *Major enhancement*: Added the ability to sort matches according to different criteria. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/145[#145])
 ** What it does: Allows the user to sort patient-donor pairs according to compatibility rate, the priority of the patients, or donors' organ expiry date.
 ** Justification: Helps the hospital to make more informed decisions after knowing which pairs are the most compatible, which patient to prioritize, and which organs are expiring soon respectively.
-** Highlights: Able to in more sorting options in future enhancements. The implementation is challenging as it required an in-depth analysis of how the match feature is implemented.
+** Highlights: Able to add in more sorting options in future enhancements. The implementation is challenging as it required an in-depth analysis of how the match feature is implemented.
 
 * *Minor enhancement*: Added a list feature that allows the user to list down all persons or persons of a specified type in ORGANice. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/113[#113])
 
