@@ -476,7 +476,8 @@ This section explains the implementation of the find persons by attributes featu
 The find feature is facilitated by `PersonContainsPrefixesPredicate` and `FindCommand`. +
 
 ===== PersonContainsPrefixesPredicate
-`PersonContainsPrefixesPredicate` is used t
+`PersonContainsPrefixesPredicate` implements `Predicate` and is used to test whether a person's attributes match exactly
+with at least one of the input keywords in each attribute category.
 
 ===== FindCommand
 `FindCommand` extends extends `Command` with a `predicate` that is used to determine whether a given `person` should be
@@ -484,16 +485,11 @@ displayed. It implements `Command#execute(Model model)` which replaces the `pred
 `model.filteredPersons` with the input predicate of `ExactFindCommand`. This triggers a change in the displayed persons
 to the list of filtered persons.
 
-
-TODO
-
 ===== Execution Behaviour
-The behaviour of `FindCommand` and `ExactFindCommand` is consistent with that of other commands as described in
-<<Design-Logic>>. Therefore, this section will gloss over higher-level details and instead zoom-in to the behaviour of
-`FindCommand#execute` and `ExactFindCommand#execute.
+The behaviour of `FindCommand` is consistent with that of other commands as described in <<Design-Logic>>. Therefore,
+this section will gloss over higher-level details and instead zoom-in to the behaviour of `FindCommand#execute`.
 
 ====== FindCommand Execution
-
 Given below is a step by step description of the behaviour of `FindCommand#execute`
 
 Step 1: The full list of all persons in ORGA__Nice__ is retrieved and stored as [blue]`allPersons`.
@@ -514,18 +510,33 @@ The following sequence diagram illustrates steps 1 to 6: +
 
 image::ExactFindSequenceDiagram.png[]
 
-NOTE: The above diagram heavily simplifies the execution of `fuzzyMatch` as it is further explained in the section
+NOTE: The above diagram heavily simplifies the execution of `#fuzzyMatch` as it is further explained in the section
 below.
 
-======= Fuzzy Matching
+====== Fuzzy Matching
+`FindCommand#execute` performs fuzzy matching between input keywords and person attributes to detect possible matches.
+This behaviour is facilitated by `FindCommand#fuzzyMatch(ArgumentMultimap argMultimap, List<Person> inputList)`. The
+behaviour of `#fuzzyMatch` is detailed in the below activity diagram:
 
+image::FuzzyMatchActivityDiagram.png[]
 
+As seen from the above diagram, `#fuzzyMatch` traverses the `inputList` of persons and tags each person with a
+calculated minimum `combinedLevenshteinDistance`(LD). In the event that no keywords are present, all persons are tagged
+with an LD higher than the acceptable threshold. Once all persons have been tagged, those persons whose LD exceeds the
+threshold are removed from the list. The final list is then sorted in ascending order of LD.
 
 ==== Design Considerations
+This section will explain the main aspect considered in designing the find by prefix feature.
 
+===== Aspect: Method of calculating similarity of keywords
+* **Alternative 1 (current choice):** Calculate Levenshtein Distance.
+** Pros: Able to detect most typos effectively.
+** Cons: Creation of requisite `costMatrix` is computationally expensive and may affect performance for long keywords.
+* **Alternative 2:** Use Natural Language Processing Libraries.
+** Pros: Will be able to detect typos more effectively.
+** Cons: Will take up more system resources.
 
 === Logging
-
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
