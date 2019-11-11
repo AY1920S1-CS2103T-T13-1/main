@@ -177,7 +177,7 @@ Therefore, in addition to the existing `PREDICATE_SHOW_ALL_PERSONS` predicate, t
 in the `Model` interface to update the list.
 The code snippet below shows what these predicates are:
 
-```
+``` java
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
@@ -402,7 +402,7 @@ and numeric order for Sorting integers.
 In particular, the `PriorityComparator` makes use of the `compareTo` method implemented in the `Priority` class.
 A code snippet of this method is shown below.
 
-```
+``` java
 @Override
 public int compareTo(Priority priority) {
 Integer thisPriorityNumber = 0;
