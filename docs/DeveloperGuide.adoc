@@ -574,7 +574,7 @@ Following is an object diagram to show the processingMarkDone feature
 TODO diagram
 
 ==== Design considerations
-This section will explain the reason for having some aspects.
+This section will explain the reason for having an aspect.
 
 ===== Aspect:
 * **Alternative 1 (current choice):**
@@ -583,14 +583,6 @@ This section will explain the reason for having some aspects.
 * **Alternative 2:**
 ** Pros:
 ** Cons:
-
-===== Aspect: Using specific prefixes for Nric inputs
-* **Alternative 1 (current choice):** Nrics of patient and donor can be inputted in no particular order.
-** Pros: More user friendly as users do not need to make sure the Nric must be in correct order. (For example, patient's Nric must come before donor's Nric)
-** Cons: It is harder to implement and more exceptions need to be taken care of.
-* **Alternative 2:** Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.
-** Pros: It is easier to implement as `icP/PATIENT NRIC` and `icD/DONOR NRIC` will be easier to parse to the Command method.
-** Cons: It is less user friendly as users need to remember more prefixes for this entire application.
 
 // end::processingMarkDoneDG[]
 
@@ -623,7 +615,7 @@ TODO diagram
 //Todo store the patient and donor information as archive instead of removing it
 
 ==== Design considerations
-This section will explain the reason for having some aspects.
+This section will explain the reason for having an aspect.
 
 ===== Aspect:
 * **Alternative 1 (current choice):**
@@ -632,14 +624,6 @@ This section will explain the reason for having some aspects.
 * **Alternative 2:**
 ** Pros:
 ** Cons:
-
-===== Aspect: Using specific prefixes for Nric inputs
-* **Alternative 1 (current choice):** Nrics of patient and donor can be inputted in no particular order.
-** Pros: More user friendly as users do not need to make sure the Nric must be in correct order. (For example, patient's Nric must come before donor's Nric)
-** Cons: It is harder to implement and more exceptions need to be taken care of.
-* **Alternative 2:** Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.
-** Pros: It is easier to implement as `icP/PATIENT NRIC` and `icD/DONOR NRIC` will be easier to parse to the Command method.
-** Cons: It is less user friendly as users need to remember more prefixes for this entire application.
 
 // end::doneDG[]
 

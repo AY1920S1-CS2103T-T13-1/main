@@ -60,7 +60,7 @@ image::snPPP1.png[width="790"]
 
 This section explains the formatting used in this document.
 
-[%footer%autowidth]
+[%autowidth]
 
 |===
 
@@ -72,8 +72,6 @@ A grey highlight (called a mark-up) indicates that this is a command that can be
 
 Blue text with grey highlight indicates a component, class or object in
 the architecture of the application.
-
-
 |===
 
 == Summary of Contributions
@@ -85,11 +83,7 @@ I also ensured that the code quality is up to standard.
 
 === Main Feature : `Processing`
 
-This section will explain the command, `processing` which I implemented for ORGANice. +
-(Pull requests
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/127[#127]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/176[#176]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/267[#267]])
+This section will explain the command, `processing` which I implemented for ORGANice.
 
 *** What it does:
 It allow users to view a whole list of administrative tasks which needs to be done to arrange for cross-matching test
@@ -109,11 +103,7 @@ it is impossible to have a donor matching with more than one patient or a patien
 
 === Main Feature : `ProcessingMarkDone`
 
-This section will explain the command, `processingMarkDone` which I implemented for ORGANice. +
-(Pull requests
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/127[#127]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/176[#176]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/267[#267]])
+This section will explain the command, `processingMarkDone` which I implemented for ORGANice.
 
 *** What it does:
 It allows users to mark a task on the list of administrative tasks as done.
@@ -130,11 +120,7 @@ It will be very intuitive for the hospital staffs to determine which tasks are d
 
 === Main Feature : `Done`
 
-This section will explain the command, `done` which I implemented for ORGANice. +
-(Pull requests
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/155[#155]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/230[#230]],
-[https://github.com/AY1920S1-CS2103T-T13-1/main/pull/261[#261]])
+This section will explain the command, `done` which I implemented for ORGANice.
 
 *** What it does:
 It allows users to determine if a patient and a donor is all done. +
