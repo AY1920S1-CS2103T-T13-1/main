@@ -219,17 +219,17 @@ donor have compatible blood and tissue types. For the context of this applicatio
 pair with compatible blood and tissue types is considered as a potential match.
 
 
-// TODO: find a way to explain that there are two types of matches
 The following operations in `ModelManager` accesses the `match` method:
 
 * `ModelManager#matchDonors(Patient patient)` -- Matches all donors in ORGANice with the specified patient.
-For each donor that potentially matches the patient, a `MatchedDonor` object is created to store
+For each potential donor, a `MatchedDonor` object is created to store
 the compatibility rate of the donor with the patient.
 * `ModelManager#matchPatients()` -- Matches all donors with all patients. For every patient in ORGANice,
 a `MatchedPatient` object is created to store the number of donors that are potential matches with that patient.
 
 `MatchedDonor` and `MatchedPatient` objects are stored in an `ObservableList` called
-`listOfMatches`. This `ObservableList` can be accessed by `Logic` and displayed by the `UI`
+`listOfMatches`. Contents of `listOfMatches` are copied to `displayedPersons`, which is another
+`ObservableList` that can be accessed by `Logic` and is displayed by the `UI`
 component.
 
 Each time a user invokes the match feature, the contents of `listOfMatches` are deleted.
@@ -238,22 +238,28 @@ New `MatchedPatient` and `MatchedDonor` objects are created and stored in the li
 Given below is an example usage scenario and how the match feature works at each step:
 
 Step 1. The user opens up the application with an existing list of patients and donors.
+As seen in the diagram below, there are 2 `Patient` and 2 `Donor` objects in ORGANice,
+and no objects in `listOfMatches`.
 
-.Initial state of ORGANice
+.Object diagram of initial state of ORGANice
 image::MatchState0.png[]
 
 Step 2. The user types in the command `match ic/all`. Each patient will be matched with
 all donors via the `MatchCommand#match` operation. A `MatchedPatient` object is created
-for each patient, which stores the patient's attributes and the number of potential donors the patient has.
+for each patient, which stores the number of potential donors the patient has. The figure below
+illustrates this with the addition of `mp1` and `mp2`, which are `MatchedPatient` objects of
+`p1` and `p2` respectively.
 
 .State of ORGANice after matching all patients
 image::MatchState1.png[]
 
 Step 3. The user types in the command `match ic/**PATIENT NRIC**`, where **PATIENT NRIC** is the NRIC of a patient in
-ORGANice.
-Existing objects in the `listOfMatches` are removed.
+ORGANice. Existing objects in the `listOfMatches` are removed.
 For each potential donor of the specified patient, a `MatchedDonor`object is created,
 accompanied with the compatibility rate.
+As seen in the figure below, `mp1` and `mp2` are removed from `listOfMatches`.
+MatchedDonor objects `md1` and `md2` are created to represent `d1` and `d2` respectively.
+All `MatchedDonor` objects are then added to the `listOfMatches`.
 
 .State of ORGANice after matching a specific patient
 image::MatchState2.png[]
@@ -261,15 +267,15 @@ image::MatchState2.png[]
 
 The following activity diagram summarises what happens when a user executes the match feature:
 
-.Activity Diagram of the Match Command
+.Activity diagram of the match command
 image::MatchActivityDiagram.png[]
 
 
 ==== Design considerations
-This section will explain the reason for having some aspects.
+This section will explain some aspects that were considered when designing the match feature.
 
-===== Aspect: Storage of match results
-This section explores several ways of storing match results of patients and donors.
+===== Aspect 1: Storage of match results
+This section explores several choices of storing match results of patients and donors.
 
 * **Choice 1 (current choice)**: Delete `MatchedPatient` and `MatchedDonor` objects
 created in previous `MatchCommand` executions when there is a new `MatchCommand` executed.
@@ -285,7 +291,7 @@ the match results to the hard disk.
 ** Pros: A history of match results is stored, thus reducing redundant matching.
 ** Cons: More code to needs to be written to store match results to the hard disk.
 
-==== Aspect: Display of match results
+==== Aspect 2: Display of match results
 This section explains some considerations for displaying match results,
 which are stored in `MatchedPatient` and `MatchedDonor` objects.
 
