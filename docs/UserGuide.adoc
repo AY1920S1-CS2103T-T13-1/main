@@ -353,7 +353,9 @@ image::findByPrefix.png[width="790"]
 
 In Figure 12, you can see that `find n/Duncan n/Loinel n/Helen t/patient t/donor` shows a list of 44 matches. The two
 exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
-keywords. 'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan's name matches
+keywords.
+
+'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan's name matches
 either of 'Duncan' **OR** 'Loinel' **OR** 'Helen' **AND** he is also either a 'patient' **OR** 'donor'. The same is true
 for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
 picked up on that typo or we'd have missed Lionel!
@@ -362,17 +364,17 @@ NOTE: The only exception to this rule is tissue type matching, which uses `AND` 
 
 Lets take a look at some examples and pointers showcasing the use of `find`:
 
-__Use case with multiple keywords per prefix__ +
+1. Use case with multiple keywords per prefix +
 * `find n/Laura n/Marisha Ray b/A b/B b/O` +
 Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.
 
-__Use case demonstrating prefix order insensitivity__ +
+2. Use case demonstrating prefix order insensitivity +
 * `find b/A n/Benson Carter b/O n/Alice b/B` +
 Displays the same result as the preceding example.
 
-__Use case demonstrating tissue type finding__ +
+3. Use case demonstrating tissue type finding +
 * `find tt/4,1,2,3` +
-Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.
+Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order. +
 
 [TIP]
 Looking for exact matches only? No problem! Just replace `find` with `exactFind`!
