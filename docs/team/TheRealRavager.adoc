@@ -74,7 +74,11 @@ https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277[#277])
 https://github.com/nus-cs2103-AY1920S1/forum/issues/9[#9],
 https://github.com/nus-cs2103-AY1920S1/forum/issues/11[#11],
 https://github.com/nus-cs2103-AY1920S1/forum/issues/21[#21])
-** Reviewed Pull Requests (PLACEHOLDER)
+** Reviewed Pull Requests (
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/96[#96],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/98[#98],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/134[#134],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/141[#141])
 
 == Contributions to the User Guide
 |===
