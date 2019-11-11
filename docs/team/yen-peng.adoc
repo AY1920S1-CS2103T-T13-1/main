@@ -27,7 +27,7 @@ finding compatible donors for patients awaiting organ transplants, and following
 
 **ORGANice is able to do the following for you:**
 
-* Store and maintain doctors, donors, and patients information using `add` and `edit`
+* Maintain the information of doctors, donors, and patients using `add` and `edit`
 * Find information quickly using `find` and `list`
 * Find compatible organ donors for patients using `match`
 * Sort matches according to different criteria using `sort`
@@ -38,14 +38,14 @@ finding compatible donors for patients awaiting organ transplants, and following
 **This is what ORGANice looks like:**
 
 .The graphical user interface for ORGANice
-image::pppyp.png[width="750"]
+image::pppyp.png[width="700"]
 
 
 === 1.2 Meaning of the Formats Used
 
 The following is a list of various formats used and what they mean:
 
-* `sort`  --  Grey highlighted texts in the excerpts of sections 3 and 4 are technical terms used in this project.
+* `sort`  --  Purple texts are technical terms used in this project.
 * https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]  --  Blue underlined texts consist of a link that brings you to relevant information on the webpage.
 
 == 2. Summary of Contributions
@@ -74,7 +74,7 @@ This section elaborates on the enhancements I did to ORGANice with the relevant 
 ** Documentation
 *** Updated information about our team in the "About Us" section of ORGANice. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/11[#11])
 *** Authored the sections that guide users through the features 'Edit', 'List', 'Sort' and 'Help' in the User Guide. (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/133[#133])
-*** Authored the implementations and use cases of the 'List' and 'Sort' features in the Developer Guide, and amended the Model Diagram. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/131[#131],
+*** Authored the implementations and use cases of the 'List' and 'Sort' features in the Developer Guide, and amended the Model Class Diagram. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/131[#131],
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153])
 ** Community
 *** Reviewed pull requests with non-trivial review comments. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/148[#148], https://github.com/AY1920S1-CS2103T-T13-1/main/pull/150[#150])
@@ -100,7 +100,7 @@ include::../UserGuide.adoc[tag=help]
 This section showcases my ability to write technical documentation and to visually represent a system using
 Unified Modelling Language (UML) diagrams in the Developer Guide.
 
-The following is a Model Diagram that I have updated in order to reflect the changes made to the application:
+The following is a Model Class Diagram that I have updated in order to reflect the changes made to the application:
 
 include::../DeveloperGuide.adoc[tag=modeldiagram]
 

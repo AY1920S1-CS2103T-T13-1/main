@@ -136,7 +136,7 @@ NOTE: The lifeline for `EditCommandParser` should end at the destroy marker (X) 
 
 // tag::modeldiagram[]
 .Structure of the Model Component
-image::ModelClassDiagram.png[width=790]
+image::ModelClassDiagram.png[width=700]
 // end::modeldiagram[]
 
 The `Model`,
