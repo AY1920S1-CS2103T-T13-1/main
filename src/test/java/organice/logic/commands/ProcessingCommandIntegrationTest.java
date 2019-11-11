@@ -26,6 +26,9 @@ import organice.testutil.PatientBuilder;
  */
 public class ProcessingCommandIntegrationTest {
 
+    private static final String VALID_NRIC_NOT_IN_ORGANICE = "S8266747D";
+    private static final String INVALID_NRIC = "G123A";
+
     private Model model;
 
     @BeforeEach
@@ -49,17 +52,15 @@ public class ProcessingCommandIntegrationTest {
     }
 
     @Test
-    public void execute_patientNotInORGANICE_returnNotProcessedMessage() {
+    public void execute_patientNotInOrganice_returnNotProcessedMessage() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        String VALID_NRIC_NOT_IN_ORGANICE = "S8266747D";
         ProcessingCommand processingCommand = new ProcessingCommand(VALID_NRIC_DONOR_IRENE_DONOR,
                 VALID_NRIC_NOT_IN_ORGANICE);
         assertCommandSuccess(processingCommand, model, ProcessingCommand.MESSAGE_NOT_PROCESSED, expectedModel);
     }
 
     @Test
-    public void execute_notMatchInORGANice_returnNotProcessedMessage() {
+    public void execute_notMatchInOrganice_returnNotProcessedMessage() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         ProcessingCommand processingCommand = new ProcessingCommand(VALID_NRIC_DONOR_JOHN,
                 VALID_NRIC_PATIENT_IRENE);
@@ -68,7 +69,6 @@ public class ProcessingCommandIntegrationTest {
 
     @Test
     public void execute_invalidNric_throwIllegalArgumentException() {
-        String INVALID_NRIC = "G123A";
         assertThrows(IllegalArgumentException.class, Nric.MESSAGE_CONSTRAINTS, () -> new ProcessingCommand(INVALID_NRIC,
                 VALID_NRIC_PATIENT_IRENE).execute(model));
     }

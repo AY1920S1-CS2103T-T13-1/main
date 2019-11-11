@@ -61,8 +61,8 @@ public class MatchCommandIntegrationTest {
         Model initialModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         new MatchCommand(VALID_NRIC_PATIENT_IRENE).execute(initialModel);
-        EditCommand editPatientIrene = new EditCommandParser().parse(VALID_NRIC_PATIENT_IRENE +
-                BLOOD_TYPE_DESC_PATIENT_BOB);
+        EditCommand editPatientIrene = new EditCommandParser().parse(VALID_NRIC_PATIENT_IRENE
+                + BLOOD_TYPE_DESC_PATIENT_BOB);
         editPatientIrene.execute(initialModel);
 
         //execute matching again
