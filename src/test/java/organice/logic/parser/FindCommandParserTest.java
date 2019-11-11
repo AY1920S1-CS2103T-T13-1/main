@@ -1,12 +1,13 @@
 package organice.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import organice.logic.commands.FindCommand;
-
 import static organice.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static organice.logic.parser.CliSyntax.PREFIX_NAME;
 import static organice.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static organice.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import organice.logic.commands.FindCommand;
 
 public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();

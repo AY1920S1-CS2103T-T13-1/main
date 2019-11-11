@@ -150,14 +150,12 @@ public class StringUtilTest {
 
     @Test
     public void calculateLevenshteinDistance_firstStringEmpty_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> StringUtil.calculateLevenshteinDistance("", "String1"));
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.calculateLevenshteinDistance("", "String1"));
     }
 
     @Test
     public void calculateLevenshteinDistance_secondStringEmpty_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> StringUtil.calculateLevenshteinDistance("String1", ""));
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.calculateLevenshteinDistance("String1", ""));
     }
 
     @Test
