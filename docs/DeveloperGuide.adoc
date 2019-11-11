@@ -596,6 +596,12 @@ This section will explain the reason for having some aspects.
 
 // tag::doneDG[]
 
+=== Done feature
+This section describes how the done feature is implemented.
+
+
+// end::doneDG[]
+
 === Finding feature
 This section explains the implementation of the find persons by attributes feature.
 

@@ -33,9 +33,8 @@ workload when trying to match all their patients with all the donors' organs the
 ORGANice is an organ transplant manager.
 Currently, hospital administrative staffs have many patients and organ donors information in their records.
 Whenever they have a new patient who needed an organ, they often have to go through many manual searches and
-matching to find a compatible donor. We aim to reduce such menial work using ORGANice and speed up this process.
-
-ORGANice is able to:
+matching to find a compatible donor. We aim to reduce such menial work using ORGANice and speed up this process. +
+ORGANice is able to: +
 
 * `add` and `edit` patients, donors and doctors information.
 
@@ -69,7 +68,7 @@ This section explains the formatting used in this document.
 
 A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
 
-| [blue]#`Patient`# |
+| `Patient` |
 
 Blue text with grey highlight indicates a component, class or object in
 the architecture of the application.
@@ -242,4 +241,21 @@ _{End of Third Extract from User Guide}_
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+_{Start of First Extract from Developer Guide}_
+
+include::../DeveloperGuide.adoc[tag=processingDG]
+
+_{End of First Extract from Developer Guide}_
+
+_{Start of Second Extract from Developer Guide}_
+
+include::../DeveloperGuide.adoc[tag=processingMarkDoneDG]
+
+_{End of Second Extract from Developer Guide}_
+
+_{Start of Third Extract from Developer Guide}_
+
+include::../DeveloperGuide.adoc[tag=doneDG]
+
+_{End of Third Extract from Developer Guide}_
 
