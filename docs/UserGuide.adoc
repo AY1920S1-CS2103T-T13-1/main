@@ -298,8 +298,6 @@ This list command can show you the list of persons in ORGANice.
 ==== Listing all persons
 Simply type `list` in the Command Box and press kbd:[Enter]. ORGANice will show you all patients, doctors, and donors present in the system.
 
-Format: `list`
-
 ==== Listing persons of a specified type
 If you wish to see a certain type of person only, you can provide the type parameter in the list command.
 
