@@ -73,6 +73,9 @@ This section elaborates on the enhancements I did to ORGANice with the relevant 
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153])
 ** Community
 *** Reviewed pull requests with non-trivial review comments. (Pull requests https://github.com/AY1920S1-CS2103T-T13-1/main/pull/148[#148], https://github.com/AY1920S1-CS2103T-T13-1/main/pull/150[#150])
+*** Reported bugs and offered suggestions for other teams in the class together with my teammates, Sim Nee and Iskandar.
+(Examples: https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/54[1],
+https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/110[2])
 
 <<<
 
