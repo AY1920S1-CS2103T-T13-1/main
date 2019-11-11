@@ -463,7 +463,6 @@ If the user makes any changes to the `ProcessingList`, the list will be saved to
 
 //Todo: additional feature such as add tasks, delete tasks etc
 
-// tag::find[]
 ==== Design considerations
 This section will explain the reason for having some aspects.
 
@@ -475,6 +474,7 @@ This section will explain the reason for having some aspects.
 ** Pros: Able to implement more specific methods for the ProcessingList.
 ** Cons: More methods and test cases needed and it is harder to implement.
 
+// tag::find[]
 === Finding feature
 This section explains the implementation of the find persons by attributes feature.
 

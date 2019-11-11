@@ -12,7 +12,7 @@ ORGA__Nice__ is a team project done by a group of five developers including myse
 students from the National University of Singapore. ORGA__Nice__ was developed as part of CS2103T, an introductory
 Software Engineering module. ORGA__Nice__ is a desktop application created to help hospital administration staff manage
 organ transplants. ORGA__Nice__ was developed with the assumption that they prefer typing compared to other forms of
-usage. ORGA__Nice__ is adapted from (https://se-education.org/addressbook-level3/)[AddressBook-Level3],
+usage. ORGA__Nice__ is adapted from https://se-education.org/addressbook-level3/[AddressBook-Level3],
 an address book management application that utilises a Command Line Interface (CLI).
 
 This is what ORGA__Nice__ looks like:
@@ -35,9 +35,11 @@ features, including the relevant documentation for both users and developers.
 
 Do note the following symbols and formatting used in this document:
 
-NOTE:       This sentence contains important information
+NOTE: This section contains important information.
 
-`find`   A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command box
+TIP: This section contains a helpful tip!
+
+`find` A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command box
 and executed by the application.
 
 == Summary of contributions
