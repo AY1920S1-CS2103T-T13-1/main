@@ -573,17 +573,6 @@ Following is an object diagram to show the processingMarkDone feature
 
 TODO diagram
 
-==== Design considerations
-This section will explain the reason for having an aspect.
-
-===== Aspect:
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
-
 // end::processingMarkDoneDG[]
 
 // tag::doneDG[]
@@ -618,12 +607,12 @@ TODO diagram
 This section will explain the reason for having an aspect.
 
 ===== Aspect:
-* **Alternative 1 (current choice):**
-** Pros:
-** Cons:
-* **Alternative 2:**
-** Pros:
-** Cons:
+* **Alternative 1 (current choice):** To remove the patient and donor details if they pass the cross-matching test.
+** Pros: It is easier to implement given the short amount of time we have to complete this project.
+** Cons: It will be harder for users to do data analysis regarding the past successful matches.
+* **Alternative 2:** Archive the details of patient and donor.
+** Pros: The data can be accessed for analysis.
+** Cons: It is harder to implement and space taken may increase exponentially.
 
 // end::doneDG[]
 
