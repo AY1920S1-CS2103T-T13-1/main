@@ -6,24 +6,22 @@
 
 == Project Portfolio for ORGANice
 
-The purpose of this project portfolio is to present my main contributions to ORGANice.
-
 :sectnums:
 == Introduction
 
-This section covers the project scope and description, followed an explanation of the formats used.
+The purpose of this project portfolio is to provide an overview of my main contributions to ORGANice.
+My role in this project is to design and write the code for the `list` and `sort` features.
 
 === Project scope
 
 ORGANice is the product of a software engineering project done by a team of 5 students, including myself, who are second-year Computer Science students from the National University of Singapore (NUS).
 Under a two-month-long time frame, we conceptualised ORGANice and molded it from an existing application, known as "Address Book", that stores and manages people's contact information.
-My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
 === Project description
 
 ORGANice is a Command Line Interface (CLI) desktop application, meaning that user interaction is mainly through typing in commands.
-This application is targeted at hospital administrators and its main features include storing hospital information,
+This application is targeted at hospital administrators to help ease their workload by
 finding compatible donors for patients awaiting organ transplants, and following up on administrative matters related to the organ matching process.
 
 **ORGANice has the following features:**
@@ -40,6 +38,7 @@ The following is a list of various formats used and what they mean:
 
 * `sort`  --  Purple texts are technical terms used in this project.
 * https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153]  --  Blue underlined texts consist of a link that opens up a relevant webpage.
+* `Text#text` -- Purple texts with a hashtag in-between means Class#method, indicating that the Class contains that method.
 
 <<<
 
