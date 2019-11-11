@@ -158,10 +158,10 @@ is also acceptable.
 There may be times where you need more information on how ORGANice works.
 To access the user guide of ORGANice, you can do the following:
 
-Simply use the `help` command and you see a link to our user guide given in a pop-up window.
-You may click on this link to see our user guide for more information on how to use ORGANice.
+Simply type `help` in the Command Box and press kbd:[Enter]. You will see a link given in a pop-up "Help" window.
+You may click on the kbd:[Copy URL] button and paste it in a browser to see our user guide for more information on how to use ORGANice.
 
-To exit the window, click the 'x' button found near the top of the window to close it and return to the default display.
+To exit the window, click the kbd:[x] button found near the top of the window to close it and return to the default display.
 // end::help[]
 
 // tag::add[]
@@ -296,7 +296,7 @@ image::undoCommand.png[width="790"]
 This list command can show you the list of persons in ORGANice.
 
 ==== Listing all persons
-Simply type `list` in the Command Box and ORGANice will show you all patients, doctors and donors present in the system.
+Simply type `list` in the Command Box and press kbd:[Enter]. ORGANice will show you all patients, doctors and donors present in the system.
 
 Format: `list`
 
@@ -431,6 +431,7 @@ Following this, you can sort the matches based on different criteria to
 determine which patient to prioritize. Head over to the next section to find out
 how to sort matches.
 // end::match[]
+
 // tag::sort[]
 === Sorting matches: `sort`
 After using the match command, you can sort the list of matches to determine which patient to prioritize for organ transplant.
