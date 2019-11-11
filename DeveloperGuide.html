@@ -457,7 +457,7 @@ If the parameter is not valid, an error message will be displayed to indicate th
 <div class="sect2">
 <h3 id="matching-feature"><a class="link" href="#matching-feature">4.2. Matching feature</a></h3>
 <div class="paragraph">
-<p>This section describes how the matching feature is implemented.</p>
+<p>This section explains the current implementation and design considerations of the matching feature.</p>
 </div>
 <div class="paragraph">
 <p>Matching is facilitated by the <code>MatchCommand</code> class, which extends the <code>Command</code> class.
@@ -483,7 +483,8 @@ a <code>MatchedPatient</code> object is created to store the number of donors th
 </div>
 <div class="paragraph">
 <p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects are stored in an <code>ObservableList</code> called
-<code>listOfMatches</code>. This <code>ObservableList</code> can be accessed by <code>Logic</code> and displayed by the <code>UI</code>
+<code>listOfMatches</code>. Contents of <code>listOfMatches</code> are copied to <code>displayedPersons</code>, which is another
+<code>ObservableList</code> that can be accessed by <code>Logic</code> and is displayed by the <code>UI</code>
 component.</p>
 </div>
 <div class="paragraph">
@@ -494,34 +495,44 @@ New <code>MatchedPatient</code> and <code>MatchedDonor</code> objects are create
 <p>Given below is an example usage scenario and how the match feature works at each step:</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user opens up the application with an existing list of patients and donors.</p>
+<p>Step 1. The user opens up the application with an existing list of patients and donors.
+As seen in the diagram below, there are 2 <code>Patient</code> and 2 <code>Donor</code> objects in ORGANice,
+and no objects in <code>listOfMatches</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/MatchState0.png" alt="MatchState0">
 </div>
+<div class="title">Figure 10. Object diagram of initial state of ORGANice</div>
 </div>
 <div class="paragraph">
 <p>Step 2. The user types in the command <code>match ic/all</code>. Each patient will be matched with
 all donors via the <code>MatchCommand#match</code> operation. A <code>MatchedPatient</code> object is created
-for each patient, which stores the patient&#8217;s attributes and the number of potential donors the patient has.</p>
+for each patient, which stores the number of potential donors the patient has. The figure below
+illustrates this with the addition of <code>mp1</code> and <code>mp2</code>, which are <code>MatchedPatient</code> objects of
+<code>p1</code> and <code>p2</code> respectively.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/MatchState1.png" alt="MatchState1">
 </div>
+<div class="title">Figure 11. State of ORGANice after matching all patients</div>
 </div>
 <div class="paragraph">
 <p>Step 3. The user types in the command <code>match ic/<strong>PATIENT NRIC</strong></code>, where <strong>PATIENT NRIC</strong> is the NRIC of a patient in
 ORGA<em>Nice</em>.
 Existing objects in the <code>listOfMatches</code> are removed.
-For each potential donor of the specified patient, a `MatchedDonor`object is created,
-accompanied with the compatibility rate.</p>
+For each potential donor of the specified patient, a <code>MatchedDonor`object is created,
+accompanied with the compatibility rate.
+As seen in the figure below, `mp1</code> and <code>mp2</code> are removed from <code>listOfMatches</code>.
+MatchedDonor objects <code>md1</code> and <code>md2</code> are created to represent <code>d1</code> and <code>d2</code> respectively.
+All <code>MatchedDonor</code> objects are then added to the <code>listOfMatches</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/MatchState2.png" alt="MatchState2">
 </div>
+<div class="title">Figure 12. State of ORGANice after matching a specific patient</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarises what happens when a user executes the match feature:</p>
@@ -530,17 +541,17 @@ accompanied with the compatibility rate.</p>
 <div class="content">
 <img src="images/MatchActivityDiagram.png" alt="MatchActivityDiagram">
 </div>
-<div class="title">Figure 10. Activity Diagram of the Match Command</div>
+<div class="title">Figure 13. Activity diagram of the match command</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.1. Design considerations</a></h4>
 <div class="paragraph">
-<p>This section will explain the reason for having some aspects.</p>
+<p>This section will explain some aspects that were considered when designing the match feature.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect-storage-of-match-results"><a class="link" href="#aspect-storage-of-match-results">Aspect: Storage of match results</a></h5>
+<h5 id="aspect-1-storage-of-match-results"><a class="link" href="#aspect-1-storage-of-match-results">Aspect 1: Storage of match results</a></h5>
 <div class="paragraph">
-<p>This section explores several ways of storing match results of patients and donors.</p>
+<p>This section explores several choices of storing match results of patients and donors.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -552,11 +563,12 @@ created in previous <code>MatchCommand</code> executions when there is a new <co
 <li>
 <p>Pros: No need to write extra code to store match results in the hard disk. Previous match results are overriden with new results
 from the latest match command.
-A scenario in which this would be important is if a user matches a patient, edits the patient information,
-then runs the matching again. The matching would be based on the latest patient data.</p>
+A scenario in which this would be important is if a user matches a patient again after editing
+the patient&#8217;s information. The matching would be based on the updated patient&#8217;s information.</p>
 </li>
 <li>
-<p>Cons: Redundant matching occurs in a scenario where the user executes a match command with the same parameters twice.</p>
+<p>Cons: Redundant matching occurs in a scenario where the user
+executes a match command with the same parameters twice.</p>
 </li>
 </ul>
 </div>
@@ -567,10 +579,10 @@ the match results to the hard disk.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: A history of match results can be stored. It reduces redundant matching.</p>
+<p>Pros: A history of match results is stored, thus reducing redundant matching.</p>
 </li>
 <li>
-<p>Cons: More code to write to store match results to the hard disk.</p>
+<p>Cons: More code to needs to be written to store match results to the hard disk.</p>
 </li>
 </ul>
 </div>
@@ -580,7 +592,7 @@ the match results to the hard disk.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aspect-display-of-match-results"><a class="link" href="#aspect-display-of-match-results">4.2.2. Aspect: Display of match results</a></h4>
+<h4 id="aspect-2-display-of-match-results"><a class="link" href="#aspect-2-display-of-match-results">4.2.2. Aspect 2: Display of match results</a></h4>
 <div class="paragraph">
 <p>This section explains some considerations for displaying match results,
 which are stored in <code>MatchedPatient</code> and <code>MatchedDonor</code> objects.</p>
@@ -640,7 +652,7 @@ The following object diagram models the relationship and dependencies between <c
 <div class="content">
 <img src="images/FormUiManagerObjectDiagram.png" alt="FormUiManagerObjectDiagram" width="300">
 </div>
-<div class="title">Figure 11. Object Diagram for the <code>FormUiManager</code> object</div>
+<div class="title">Figure 14. Object Diagram for the <code>FormUiManager</code> object</div>
 </div>
 <div class="paragraph">
 <p><code>FormUiManager</code> will need an object of class <code>Type</code> in order to determine what type of form(patient, doctor, or donor) will be displayed to you.</p>
@@ -724,7 +736,7 @@ The following object diagram models the relationship and dependencies between <c
 <div class="content">
 <img src="images/AddFormSequenceDiagram.png" alt="AddFormSequenceDiagram">
 </div>
-<div class="title">Figure 12. Sequential Diagram for the form mode feature</div>
+<div class="title">Figure 15. Sequential Diagram for the form mode feature</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarizes what happens when you execute the <code>add t/<strong>TYPE</strong></code> command:</p>
@@ -733,7 +745,7 @@ The following object diagram models the relationship and dependencies between <c
 <div class="content">
 <img src="images/Form.png" alt="Form" width="300" height="300">
 </div>
-<div class="title">Figure 13. Activity Diagram for adding a person using form mode feature</div>
+<div class="title">Figure 16. Activity Diagram for adding a person using form mode feature</div>
 </div>
 </div>
 <div class="sect3">
@@ -833,7 +845,7 @@ assuming the user has entered a valid <code>match ic/<strong>NRIC</strong></code
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 14. Sequential Diagram of the <code>sort rate</code> command</div>
+<div class="title">Figure 17. Sequential Diagram of the <code>sort rate</code> command</div>
 </div>
 <div class="paragraph">
 <p>After the command is given by the user, it would be parsed by the <code>AddressBookParser</code>.
@@ -1055,7 +1067,7 @@ It will then display the list out.</p>
 <div class="content">
 <img src="images/ProcessingActivity.png" alt="ProcessingActivity">
 </div>
-<div class="title">Figure 15. Activity Diagram of the Processing Command</div>
+<div class="title">Figure 18. Activity Diagram of the Processing Command</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
@@ -1963,4 +1975,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:39:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:42:37 UTC</div></div></div></body></html>

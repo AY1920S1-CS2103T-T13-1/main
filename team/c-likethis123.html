@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chow Jia Ying - Project Portfolio</title><link rel="stylesheet" href="./gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chow Jia Ying - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-organice"><a class="link" href="#project-organice">PROJECT: ORGANice</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">1. Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document is written to document my role and contributions to ORGANice. ORGANice is a project
+undertaken in CS2103T, the introductory Software Engineering module offered by NUS.
+I was required to work with 4 other students to morph Address Book 3, an existing desktop application,
+to another desktop application within 7 weeks.<br></p>
+</div>
+<div class="paragraph">
+<p>As part of the module constraints, the application must have a Command Line Interface (CLI).
+This means that users must be able to use the application&#8217;s features by typing commands instead of
+clicking buttons.<br></p>
+</div>
+<div class="paragraph">
+<p>Our team chose to morph Address Book 3 to ORGANice, an organ matching desktop application designed for
+hospital administration staff who prefer typing. It is written in Java, and has about 10,000 lines of code (LoC). The JavaFX framework is used to create the
+Graphical User Interface (GUI) of this application.<br></p>
+</div>
+<div class="paragraph">
+<p>The main features of ORGANice includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>storing information of patients, donors and donors</p>
+</li>
+<li>
+<p>finding potential organ donors for patients</p>
+</li>
+<li>
+<p>managing administrative procedures relating to organ matching.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note the formatting used in this document:</p>
+</div>
+<div class="paragraph">
+<p><code>match</code> - Words highlighted in grey (called a mark-up) indicates that this is a command that can
+be executed by the application or a technical term.</p>
+</div>
+<div class="paragraph">
+<p><kbd>Enter</kbd> - Words highlighted in white and encased in a box indicates that it is a key on a keyboard.</p>
+</div>
+<div class="paragraph">
+<p><a href="#summary-of-contributions">Section 2, &#8220;Summary of contributions&#8221;</a> - Words in blue and underlined indicates that it is a clickable link.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Some link">[Some link]</a> - Words in blue, underlined and encased in square brackets indicates that the links
+are not clickable. Note that they appear in the excerpts because they are links to other documents
+that are not in the excerpts.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following sections presents the enhancements I implemented in greater detail.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement 1</strong>: added the ability to match patients and donors</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: identifies potential donors for patients in the application.</p>
+</li>
+<li>
+<p>Justification: allows users to find suitable donors for patients efficiently
+based on compatibility between patients and donors.</p>
+</li>
+<li>
+<p>Highlights: Other features, such as sorting and processing matches, depend on this feature.
+Therefore, I had to think of a design solution that allows for the seamless integration of other features.
+Also, implementing this feature required a deep understanding of how to store and change the list
+displayed in Address Book 3.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement 2</strong>: added the ability to add patients in ORGANice.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows patients to be added and stored in ORGANice</p>
+</li>
+<li>
+<p>Justification: allows users to easily manage patient data. Storing patient data is also
+required for matching of patients and donors to take place.</p>
+</li>
+<li>
+<p>Highlights: The addition of this feature required careful consideration of how
+to display, store and differentiate patients from other types of people in ORGANice.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement 1</strong>: added coloured tags to patients and donors.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: indicates the statuses of patients and donors.</p>
+</li>
+<li>
+<p>Justification: allows users to identify unmatched patients and donors at a glance.</p>
+</li>
+<li>
+<p>Highlights: The tags are coloured differently depending on the statuses displayed.
+While this feature is minor, it still required careful thought to implement this.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=c-likethis123&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=C-likethis123&amp;tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D">RepoSense</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Created issues to keep track of work to be done.</p>
+</li>
+<li>
+<p>Managed release v1.3.1 on Github</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote additional unit and integration tests for existing features to increase coverage
+(Pull request <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/275">#275</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Authored the 'Introduction', 'Quick Start', 'Components of ORGANice' and
+'Detecting matches' sub-sections in the 'Features' section
+(Pull request <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/138/files">#138</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Initiated discussions: <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/issues/110">#110</a></p>
+</li>
+<li>
+<p>Reviewed PRs:
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/127">#127</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/18">#18</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/113">#113</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">3. Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section documents my contributions to the User Guide. I wrote the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduction</p>
+</li>
+<li>
+<p>Quick Start</p>
+</li>
+<li>
+<p>Components of ORGANice</p>
+</li>
+<li>
+<p>Detecting matches</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an excerpt of my contribution to the User Guide.</p>
+</div>
+<div class="paragraph">
+<p><em>(Start of extract from User Guide)</em></p>
+</div>
+<div class="paragraph">
+<p><em>(End of extract from User Guide)</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">4. Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section documents my contributions to the Developer Guide. I wrote the following sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduction</p>
+</li>
+<li>
+<p>Setting up</p>
+</li>
+<li>
+<p>'Matching feature'</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an excerpt of my contribution to the Developer Guide.</p>
+</div>
+<div class="paragraph">
+<p><em>(Start of extract from Developer Guide)</em></p>
+</div>
+<div class="sect2">
+<h3 id="matching-feature"><a class="link" href="#matching-feature">4.1. Matching feature</a></h3>
+<div class="paragraph">
+<p>This section explains the current implementation and design considerations of the matching feature.</p>
+</div>
+<div class="paragraph">
+<p>Matching is facilitated by the <code>MatchCommand</code> class, which extends the <code>Command</code> class.
+It implements the <code>MatchCommand#match(Person donor, Patient patient)</code> operation, which checks if the given patient and
+donor have compatible blood and tissue types. For the context of this application, a patient and donor
+pair with compatible blood and tissue types is considered as a potential match.</p>
+</div>
+<div class="paragraph">
+<p>The following operations in <code>ModelManager</code> accesses the <code>match</code> method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGA<em>Nice</em> with the specified patient.
+For each donor that potentially matches the patient, a <code>MatchedDonor</code> object is created to store
+the compatibility rate of the donor with the patient.</p>
+</li>
+<li>
+<p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients. For every patient in ORGA<em>Nice</em>,
+a <code>MatchedPatient</code> object is created to store the number of donors that are potential matches with that patient.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>MatchedDonor</code> and <code>MatchedPatient</code> objects are stored in an <code>ObservableList</code> called
+<code>listOfMatches</code>. Contents of <code>listOfMatches</code> are copied to <code>displayedPersons</code>, which is another
+<code>ObservableList</code> that can be accessed by <code>Logic</code> and is displayed by the <code>UI</code>
+component.</p>
+</div>
+<div class="paragraph">
+<p>Each time a user invokes the match feature, the contents of <code>listOfMatches</code> are deleted.
+New <code>MatchedPatient</code> and <code>MatchedDonor</code> objects are created and stored in the list again.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the match feature works at each step:</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user opens up the application with an existing list of patients and donors.
+As seen in the diagram below, there are 2 <code>Patient</code> and 2 <code>Donor</code> objects in ORGANice,
+and no objects in <code>listOfMatches</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MatchState0.png" alt="MatchState0">
+</div>
+<div class="title">Figure 1. Object diagram of initial state of ORGANice</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user types in the command <code>match ic/all</code>. Each patient will be matched with
+all donors via the <code>MatchCommand#match</code> operation. A <code>MatchedPatient</code> object is created
+for each patient, which stores the number of potential donors the patient has. The figure below
+illustrates this with the addition of <code>mp1</code> and <code>mp2</code>, which are <code>MatchedPatient</code> objects of
+<code>p1</code> and <code>p2</code> respectively.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MatchState1.png" alt="MatchState1">
+</div>
+<div class="title">Figure 2. State of ORGANice after matching all patients</div>
+</div>
+<div class="paragraph">
+<p>Step 3. The user types in the command <code>match ic/<strong>PATIENT NRIC</strong></code>, where <strong>PATIENT NRIC</strong> is the NRIC of a patient in
+ORGA<em>Nice</em>.
+Existing objects in the <code>listOfMatches</code> are removed.
+For each potential donor of the specified patient, a <code>MatchedDonor`object is created,
+accompanied with the compatibility rate.
+As seen in the figure below, `mp1</code> and <code>mp2</code> are removed from <code>listOfMatches</code>.
+MatchedDonor objects <code>md1</code> and <code>md2</code> are created to represent <code>d1</code> and <code>d2</code> respectively.
+All <code>MatchedDonor</code> objects are then added to the <code>listOfMatches</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MatchState2.png" alt="MatchState2">
+</div>
+<div class="title">Figure 3. State of ORGANice after matching a specific patient</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarises what happens when a user executes the match feature:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MatchActivityDiagram.png" alt="MatchActivityDiagram">
+</div>
+<div class="title">Figure 4. Activity diagram of the match command</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain some aspects that were considered when designing the match feature.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-1-storage-of-match-results"><a class="link" href="#aspect-1-storage-of-match-results">Aspect 1: Storage of match results</a></h5>
+<div class="paragraph">
+<p>This section explores several choices of storing match results of patients and donors.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Choice 1 (current choice)</strong>: Delete <code>MatchedPatient</code> and <code>MatchedDonor</code> objects
+created in previous <code>MatchCommand</code> executions when there is a new <code>MatchCommand</code> executed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to write extra code to store match results in the hard disk. Previous match results are overriden with new results
+from the latest match command.
+A scenario in which this would be important is if a user matches a patient again after editing
+the patient&#8217;s information. The matching would be based on the updated patient&#8217;s information.</p>
+</li>
+<li>
+<p>Cons: Redundant matching occurs in a scenario where the user
+executes a match command with the same parameters twice.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Choice 2:</strong> For each patient, keep a list of match results. After every <code>MatchCommand</code> is executed, save
+the match results to the hard disk.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A history of match results is stored, thus reducing redundant matching.</p>
+</li>
+<li>
+<p>Cons: More code to needs to be written to store match results to the hard disk.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-2-display-of-match-results"><a class="link" href="#aspect-2-display-of-match-results">4.1.2. Aspect 2: Display of match results</a></h4>
+<div class="paragraph">
+<p>This section explains some considerations for displaying match results,
+which are stored in <code>MatchedPatient</code> and <code>MatchedDonor</code> objects.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Choice 1 (current choice):</strong>: Display <code>MatchedDonor</code> and <code>MatchedPatient</code> objects in <code>PersonListPanel</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement because additional code is added to <code>PersonListPanel</code>, which is a UI component already existing in
+AddressBook 3.
+The constructor of <code>PersonListPanel</code> takes in an <code>ObservableList&lt;Person&gt;</code> object and creates
+a list of <code>PersonListViewCell</code> objects to be displayed.</p>
+</li>
+<li>
+<p>Cons: The <code>MatchedDonor</code> and <code>MatchedPatient</code> classes need to inherit from the <code>Person</code> class, even though they represent
+match results, not people.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Choice 2:</strong> Create a new list panel called <code>MatchListPanel</code>, which displays objects of the <code>Match</code> class.
+<code>MatchedDonor</code> and <code>MatchedPatient</code> classes extend from the <code>Match</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: <code>MatchedDonor</code> and <code>MatchedPatient</code> classes do not inherit unwanted methods from <code>Person</code> class.
+The <code>Match</code> class can contain methods more specific to matching.</p>
+</li>
+<li>
+<p>Cons: There would be two types of list panels. Upon executing each command, the correct list panel must be selected
+and displayed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>(End of extract from Developer Guide)</em></p>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:42:37 UTC</div></div></div></body></html>
