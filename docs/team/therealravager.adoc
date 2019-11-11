@@ -89,7 +89,6 @@ features such as rebasing and stashing.
 ** Updated User Guide and Developer Guide to reflect changes to `find` (Pull Requests
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/158[#158],
 https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277[#277])
-** Reworded User Guide and Developer Guide to ensure grammatical correctness and tone uniformity.
 * Community:
 ** Contributed to forum discussions (Examples:
 https://github.com/nus-cs2103-AY1920S1/forum/issues/9[#9],
