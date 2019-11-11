@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>ORGANice - Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>ORGANice - Developer Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>ORGA<em>Nice</em> - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>CS2103T-T13-1</code>      Since: <code>Sep 2019</code>      Licence: <code>MIT</code></p>
@@ -36,9 +36,8 @@
 <li><a href="#processingmarkdone-feature">4.6. ProcessingMarkDone feature</a></li>
 <li><a href="#done-feature">4.7. Done feature</a></li>
 <li><a href="#finding-feature">4.8. Finding feature</a></li>
-<li><a href="#proposed-data-encryption">4.9. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">4.10. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.11. Configuration</a></li>
+<li><a href="#logging">4.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a></li>
@@ -69,20 +68,51 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to ORGANice! ORGANice is an organ transplant manager desktop application
+<p>Welcome to ORGA<em>Nice</em>! ORGA<em>Nice</em> is an organ transplant manager desktop application
 specifically designed for hospital administration staff who prefer typing.</p>
+</div>
+<div class="paragraph">
+<p>Do note the following symbols and formatting used in this document:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This section contains important information.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This section contains a helpful tip!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>find</code> A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command box
+and executed by the application.</p>
 </div>
 <div class="sect2">
 <h3 id="purpose"><a class="link" href="#purpose">1.1. Purpose</a></h3>
 <div class="paragraph">
 <p>This guide documents the software design and considerations
-made during the development of ORGANice.</p>
+made during the development of ORGA<em>Nice</em>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="intended-audience"><a class="link" href="#intended-audience">1.2. Intended audience</a></h3>
 <div class="paragraph">
-<p>This guide is meant for developers who would like to further develop ORGANice.</p>
+<p>This guide is meant for developers who would like to further develop ORGA<em>Nice</em>.</p>
 </div>
 </div>
 </div>
@@ -91,7 +121,7 @@ made during the development of ORGANice.</p>
 <h2 id="setting-up"><a class="link" href="#setting-up">2. Setting up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To set up the developer tools needed to develop ORGANice, refer to the guide <a href="SettingUp.html">here</a>.</p>
+<p>To set up the developer tools needed to develop ORGA<em>Nice</em>, refer to the guide <a href="SettingUp.html">here</a>.</p>
 </div>
 </div>
 </div>
@@ -99,7 +129,7 @@ made during the development of ORGANice.</p>
 <h2 id="design"><a class="link" href="#design">3. Design</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section provides a high-level overview of ORGANice&#8217;s codebase.
+<p>This section provides a high-level overview of ORGA<em>Nice</em>'s codebase.
 It is divided into 6 subsections:</p>
 </div>
 <div class="ulist">
@@ -127,7 +157,7 @@ It is divided into 6 subsections:</p>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
 <div class="paragraph">
-<p>The Architecture section is meant to explain the high-level design of ORGANice.</p>
+<p>The Architecture section is meant to explain the high-level design of ORGA<em>Nice</em>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -168,10 +198,10 @@ It is responsible for performing the following tasks:</p>
 <div class="paragraph">
 <p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. For example,
 the <code>LogsCenter</code> class is in the <code>Commons</code> collection because it is used by many classes
-to write log messages to the ORGANice&#8217;s log file.</p>
+to write log messages to the ORGA<em>Nice</em>'s log file.</p>
 </div>
 <div class="paragraph">
-<p>The rest of ORGANice consists of four components.</p>
+<p>The rest of ORGA<em>Nice</em> consists of four components.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -364,7 +394,7 @@ The lifeline for <code>EditCommandParser</code> should end at the destroy marker
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">3.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>organice.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>ORGA<em>Nice</em>.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -373,7 +403,7 @@ The lifeline for <code>EditCommandParser</code> should end at the destroy marker
 <h2 id="implementation"><a class="link" href="#implementation">4. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes some noteworthy details on how features in ORGANice are implemented.</p>
+<p>This section describes some noteworthy details on how features in ORGA<em>Nice</em> are implemented.</p>
 </div>
 <div class="sect2">
 <h3 id="list-feature"><a class="link" href="#list-feature">4.1. List feature</a></h3>
@@ -418,8 +448,8 @@ in the <code>Model</code> interface to update the list.</p>
 </div>
 <div class="paragraph">
 <p>When the user enters a list command, the result differs depending on the parameter of the command.
-If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients, and donors on the list.
-If there is a parameter, ORGANice will check if it is a valid <code>TYPE</code> parameter and display the correct list of persons
+If there is no parameter after 'list', ORGA<em>Nice</em> will simply list all existing doctors, patients, and donors on the list.
+If there is a parameter, ORGA<em>Nice</em> will check if it is a valid <code>TYPE</code> parameter and display the correct list of persons
 that corresponds to this type.
 If the parameter is not valid, an error message will be displayed to indicate that the command is invalid.</p>
 </div>
@@ -441,12 +471,12 @@ pair with compatible blood and tissue types is considered as a potential match.<
 <div class="ulist">
 <ul>
 <li>
-<p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGANice with the specified patient.
+<p><code>ModelManager#matchDonors(Patient patient)</code>&#8201;&#8212;&#8201;Matches all donors in ORGA<em>Nice</em> with the specified patient.
 For each donor that potentially matches the patient, a <code>MatchedDonor</code> object is created to store
 the compatibility rate of the donor with the patient.</p>
 </li>
 <li>
-<p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients. For every patient in ORGANice,
+<p><code>ModelManager#matchPatients()</code>&#8201;&#8212;&#8201;Matches all donors with all patients. For every patient in ORGA<em>Nice</em>,
 a <code>MatchedPatient</code> object is created to store the number of donors that are potential matches with that patient.</p>
 </li>
 </ul>
@@ -483,7 +513,7 @@ for each patient, which stores the patient&#8217;s attributes and the number of 
 </div>
 <div class="paragraph">
 <p>Step 3. The user types in the command <code>match ic/<strong>PATIENT NRIC</strong></code>, where <strong>PATIENT NRIC</strong> is the NRIC of a patient in
-ORGANice.
+ORGA<em>Nice</em>.
 Existing objects in the <code>listOfMatches</code> are removed.
 For each potential donor of the specified patient, a `MatchedDonor`object is created,
 accompanied with the compatibility rate.</p>
@@ -827,11 +857,11 @@ Therefore, they are converted into <code>Integer</code> for easier comparison. A
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
+<p>Pros: Fast iteration time of O(n * log n), which is important for ORGA<em>Nice</em> to load and display the sorted result, and more harmonious
 with current implementations (able to wrap <code>ObservableList</code> and sort the content).</p>
 </li>
 <li>
-<p>Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.</p>
+<p>Cons: Not the most efficient algorithm for insertions or deletions, but ORGA<em>Nice</em> does not require them.</p>
 </li>
 </ul>
 </div>
@@ -861,7 +891,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Simpler implementation as able to make use of existing methods in ORGANice such as <code>setComparator</code>.</p>
+<p>Pros: Simpler implementation as able to make use of existing methods in ORGA<em>Nice</em> such as <code>setComparator</code>.</p>
 </li>
 <li>
 <p>Cons: More coding involved.</p>
@@ -877,7 +907,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <p>Pros: Has a time complexity of O(n*log(n)) which is relatively fast.</p>
 </li>
 <li>
-<p>Cons: Cannot make use of existing methods in ORGANice that work for Comparator.</p>
+<p>Cons: Cannot make use of existing methods in ORGA<em>Nice</em> that work for Comparator.</p>
 </li>
 </ul>
 </div>
@@ -911,7 +941,7 @@ If the donor already have a <code>ProcessingList</code>, it means that the donor
 Then, this method will check if the patient given by the user is the same patient being processed together with this donor.<br>
 This is done by checking the <code>Patient</code> attribute that is tagged to the <code>ProcessingList</code> of the donor.<br>
 Finally, the method will check if the patient and donor given by the user is valid by checking if
-they are able to be matched or not and if they exist in ORGANice.<br>
+they are able to be matched or not and if they exist in ORGA<em>Nice</em>.<br>
 A code snippet of the method is shown below: This code aims to get the <code>Donor</code> and <code>Patient</code> from the given Nrics given by the user.<br>
 This method is necessary since user is able to give the Nrics input in no particular order.</p>
 </div>
@@ -1117,7 +1147,7 @@ Then, the patient and donor will have their <code>Status</code> set to <code>not
 </div>
 <div class="paragraph">
 <p>If the patient and donor did a cross-matching test and the result of the test is a pass,
-then the patient and donor can be removed from ORGANice already.</p>
+then the patient and donor can be removed from ORGA<em>Nice</em> already.</p>
 </div>
 <div class="paragraph">
 <p>Following is an object diagram to show the processingMarkDone feature</p>
@@ -1173,76 +1203,147 @@ then the patient and donor can be removed from ORGANice already.</p>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">4.8.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The find feature is facilitated by <code>FindCommand</code> and <code>PersonContainsPrefixesPredicate</code>.<br></p>
-</div>
-<div class="sect4">
-<h5 id="findcommand"><a class="link" href="#findcommand">FindCommand</a></h5>
-<div class="paragraph">
-<p><code>FindCommand</code> extends <code>Command</code> with a <code>predicate</code> that is used to determine whether a given <code>person</code> should be
-displayed. It implements <code>Command#execute(Model model)</code> which replaces the <code>predicate</code> of the current
-<code>model.filteredPersons</code> with the input predicate of <code>FindCommand</code>, which triggers an update *INSERT JAVAFX STUFF.<br></p>
-</div>
-<div class="paragraph">
-<p>TODO</p>
-</div>
+<p>The find feature is facilitated by <code>PersonContainsPrefixesPredicate</code> and <code>FindCommand</code>.<br></p>
 </div>
 <div class="sect4">
 <h5 id="personcontainsprefixespredicate"><a class="link" href="#personcontainsprefixespredicate">PersonContainsPrefixesPredicate</a></h5>
 <div class="paragraph">
-<p>TODO</p>
+<p><code>PersonContainsPrefixesPredicate</code> implements <code>Predicate</code> and is used to test whether a person&#8217;s attributes
+match exactly with at least one of the input keywords in each attribute category.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="findcommand"><a class="link" href="#findcommand">FindCommand</a></h5>
+<div class="paragraph">
+<p><code>FindCommand</code> extends <code>Command</code> with a <code>predicate</code> that is used to determine whether a given
+<code>person</code> should be displayed. It implements <code>Command#execute(Model model)</code> which replaces the
+<code>predicate</code> of the current <code>model.filteredPersons</code> with the input predicate of <code>ExactFindCommand</code>.
+This triggers a change in the displayed persons to the list of filtered persons.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="execution-behaviour"><a class="link" href="#execution-behaviour">Execution Behaviour</a></h5>
 <div class="paragraph">
-<p>The behaviour of <code>FindCommand</code> is consistent with that of other commands as described in <a href="#Design-Logic">Section 3.3, &#8220;Logic component&#8221;</a>. Therefore,
-this section will gloss over higher-level details and instead zoom-in to the behaviour of <code>FindCommand#execute</code>.</p>
+<p>The behaviour of <code>FindCommand</code> is consistent with that of other commands as described in <a href="#Design-Logic">Section 3.3, &#8220;Logic component&#8221;</a>.
+Therefore, this section will gloss over higher-level details and instead zoom-in to the behaviour of
+<code>FindCommand#execute</code>.</p>
+</div>
+<div class="sect5">
+<h6 id="findcommand-execution"><a class="link" href="#findcommand-execution">FindCommand Execution</a></h6>
+<div class="paragraph">
+<p>Given below is a step by step description of the behaviour of <code>FindCommand#execute</code>:</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and the behaviour of <code>#execute</code> at each step.<br></p>
+<p>Step 1: The full list of all persons in ORGA<em>Nice</em> is retrieved and stored as <code>allPersons</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 1: The user inputs a find command, e.g. <code>find n/Alice Carl Elle t/doctor donor</code>. It is parsed by
-<code>FindCommandParser</code> and used to create an <code>ArgumentMultimap</code>: <code>argMultimap</code>.</p>
+<p>Step 2: A list of exact matches is obtained by filtering <code>allPersons</code> using
+<code>PersonContainsPrefixesPredicate</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2: <code>argMultimap</code> is used to initialize a <code>PersonContainsPrefixesPredicate</code> object: <code>predicate</code>.</p>
+<p>Step 3: A list containing all persons except exact matches is obtained and fuzzy matching is performed on it.</p>
 </div>
 <div class="paragraph">
-<p>Step 3: <code>predicate</code> is used to initialize a <code>FindCommand</code> object. <code>#execute</code> is then called on it.</p>
+<p>Step 4: Fuzzy matching uses <code>StringUtil#calculateLevenshteinDistance</code> to filter out possible matches. The matches
+are then sorted in ascending order of similarity to input keywords.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: <code>#execute</code> calls the <code>#updateFilteredPersonList</code> of the current <code>Model</code> which causes it&#8217;s
-<code>FilteredList&lt;Person&gt;</code>: <code>filteredPersons</code> to automatically remove <code>persons</code> that fail <code>predicate#test</code>.</p>
+<p>Step 5: <code>#setDisplayedPersonList</code> is called.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram illustrates steps x to y:<br></p>
+<p>The following sequence diagram illustrates steps 1 to 5:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExactFindSequenceDiagram.png" alt="ExactFindSequenceDiagram">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above diagram heavily simplifies the execution of <code>#fuzzyMatch</code> as it is further explained in the
+section below.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect5">
+<h6 id="fuzzy-matching"><a class="link" href="#fuzzy-matching">Fuzzy Matching</a></h6>
+<div class="paragraph">
+<p><code>FindCommand#execute</code> performs fuzzy matching between input keywords and person attributes to detect possible
+matches. This behaviour is facilitated by
+<code>FindCommand#fuzzyMatch(ArgumentMultimap argMultimap, List&lt;Person&gt; inputList)</code>. The behaviour of
+<code>#fuzzyMatch</code> is detailed in the below activity diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FuzzyMatchActivityDiagram.png" alt="FuzzyMatchActivityDiagram">
+</div>
 </div>
 <div class="paragraph">
-<p><em>insertar diagrama de secuencia</em></p>
+<p>As seen from the above diagram, <code>#fuzzyMatch</code> traverses the <code>inputList</code> of persons and tags each person with a
+calculated minimum <code>combinedLevenshteinDistance</code>(LD). In the event that no keywords are present, all persons are
+tagged with an LD higher than the acceptable threshold. Once all persons have been tagged, those persons whose LD
+exceeds the threshold are removed from the list. The final list is then sorted in ascending order of LD.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.2. Design Considerations</a></h4>
-
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.9. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>This section will explain the main aspect considered in designing the find by prefix feature.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-method-of-calculating-similarity-of-keywords"><a class="link" href="#aspect-method-of-calculating-similarity-of-keywords">Aspect: Method of calculating similarity of keywords</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Calculate Levenshtein Distance.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to detect most typos effectively.</p>
+</li>
+<li>
+<p>Cons: Creation of requisite <code>costMatrix</code> is computationally expensive and may affect performance for long
+keywords.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Natural Language Processing Libraries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will be able to detect typos more effectively.</p>
+</li>
+<li>
+<p>Cons: Will take up more system resources.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.11, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1273,7 +1374,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.11. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1457,7 +1558,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>ORGANice</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>ORGA<em>Nice</em></code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-add-patient-donor-doctor-in-a-form-mode" class="discrete">Use case: Add patient/donor/doctor in a form mode</h3>
 <div class="paragraph">
@@ -1469,25 +1570,25 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <p>User requests to add a patient/doctor/donor in a form mode.</p>
 </li>
 <li>
-<p>ORGANice shows a form depending on the type of person specified by the User.</p>
+<p>ORGA<em>Nice</em> shows a form depending on the type of person specified by the User.</p>
 </li>
 <li>
 <p>OGRANice prompts the User to type in the required attributes one at a time.</p>
 </li>
 <li>
-<p>User inputs in the attribute of the person prompted by ORGANice.</p>
+<p>User inputs in the attribute of the person prompted by ORGA<em>Nice</em>.</p>
 <div class="paragraph">
 <p>Steps 3-4 are repeated until the user has inputted all the required attributes for a specific type of person.</p>
 </div>
 </li>
 <li>
-<p>ORGANice prompts the User to confirm the attributes of the person.</p>
+<p>ORGA<em>Nice</em> prompts the User to confirm the attributes of the person.</p>
 </li>
 <li>
 <p>User confirms the attributes specified.</p>
 </li>
 <li>
-<p>ORGANice adds the person to the list.</p>
+<p>ORGA<em>Nice</em> adds the person to the list.</p>
 </li>
 </ol>
 </div>
@@ -1503,13 +1604,13 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>4a1. ORGANice shows a warning to the User and specifies the pattern of a valid input.</p>
+<p>4a1. ORGA<em>Nice</em> shows a warning to the User and specifies the pattern of a valid input.</p>
 </li>
 <li>
 <p>4a2. User inputs a new value for the attribute.</p>
 </li>
 <li>
-<p>Steps 4a1-4a2 are repeated until the input data is valid for the current attribute prompted by ORGANice.</p>
+<p>Steps 4a1-4a2 are repeated until the input data is valid for the current attribute prompted by ORGA<em>Nice</em>.</p>
 </li>
 <li>
 <p>Use case resumes from step 3 if there are more attributes to fill in, if not it will resumes from step 5.</p>
@@ -1522,7 +1623,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>*a1. ORGANice nullifies the form.</p>
+<p>*a1. ORGA<em>Nice</em> nullifies the form.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -1540,13 +1641,13 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <p>User requests to list potential donors for a particular patient</p>
 </li>
 <li>
-<p>ORGANice shows a list of potential donors for the patient</p>
+<p>ORGA<em>Nice</em> shows a list of potential donors for the patient</p>
 </li>
 <li>
 <p>User requests to process the patient with a specified donor</p>
 </li>
 <li>
-<p>ORGANice matches the patient and the specified donor</p>
+<p>ORGA<em>Nice</em> matches the patient and the specified donor</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1578,7 +1679,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <p>User requests to sort the list of donors of a particular patient.</p>
 </li>
 <li>
-<p>ORGANice sorts the list of donors according to the parameters.</p>
+<p>ORGA<em>Nice</em> sorts the list of donors according to the parameters.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1591,11 +1692,11 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. ORGANice detects invalid parameter(s).</p>
+<p>1a. ORGA<em>Nice</em> detects invalid parameter(s).</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. ORGANice prompts for valid parameter(s).</p>
+<p>1a1. ORGA<em>Nice</em> prompts for valid parameter(s).</p>
 </li>
 <li>
 <p>1a2. User enters correct parameter(s).</p>
@@ -1623,7 +1724,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <p>User requests to list patients/donors/doctors.</p>
 </li>
 <li>
-<p>ORGANice shows the list of patients/donors/doctors.</p>
+<p>ORGA<em>Nice</em> shows the list of patients/donors/doctors.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1636,11 +1737,11 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. ORGANice detects an invalid parameter.</p>
+<p>1a. ORGA<em>Nice</em> detects an invalid parameter.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. ORGANice returns error message.</p>
+<p>1a1. ORGA<em>Nice</em> returns error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1809,4 +1910,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:54:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:19:36 UTC</div></div></div></body></html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Iskandar Zulkarnaien - Project Portfolio for ORGANice</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Iskandar Zulkarnaien - Project Portfolio for ORGA<em>Nice</em></h1></div><div id="content"><div class="sect1">
+<h2 id="about-the-project"><a class="link" href="#about-the-project">About the project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This project portfolio serves to showcase my contributions to the development and documentation of ORGA<em>Nice</em>.
+The following sections will introduce the ORGA<em>Nice</em> project and my role in its development.</p>
+</div>
+<div class="sect2">
+<h3 id="what-is-orga-em-nice-em"><a class="link" href="#what-is-orga-em-nice-em">What is ORGA<em>Nice</em>?</a></h3>
+<div class="paragraph">
+<p>ORGA<em>Nice</em> is a team project done by a group of five developers including myself. We are second year Computer Science
+students from the National University of Singapore. ORGA<em>Nice</em> was developed as part of CS2103T, an introductory
+Software Engineering module. ORGA<em>Nice</em> is a desktop application created to help hospital administration staff manage
+organ transplants. ORGA<em>Nice</em> was developed with the assumption that they prefer typing compared to other forms of
+usage. As such, ORGA<em>Nice</em> utilises a Command Line Interface - a text-based system where users type in commands to
+execute tasks rather than clicking buttons. As part of the module, ORGA<em>Nice</em> is morphed from an existing project,
+<a href="https://se-education.org/addressbook-level3/">AddressBook-Level3</a>, an address book management application.</p>
+</div>
+<div class="paragraph">
+<p>This is what ORGA<em>Nice</em> looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ORGANiceComponents.png" alt="ORGANiceComponents" width="790" height="500">
+</div>
+<div class="title">Figure 1. The graphical user interface for ORGANice</div>
+</div>
+<div class="paragraph">
+<p>These are the main features of ORGA<em>Nice</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Managing patients, donors and doctors</p>
+</li>
+<li>
+<p>Matching patients with potential donors</p>
+</li>
+<li>
+<p>Sorting matches by priority, compatibility and organ expiry date</p>
+</li>
+<li>
+<p>Finding persons by attributes</p>
+</li>
+<li>
+<p>Managing administrative work relating to organ transplants</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="how-did-i-contribute"><a class="link" href="#how-did-i-contribute">How did I contribute?</a></h3>
+<div class="paragraph">
+<p>My role was to design and implement the find by attribute feature and handle the automatic generation of dummy data on
+initial application startup. The following sections illustrate the contributions I have made in implementing said
+features, including the relevant documentation for both users and developers.</p>
+</div>
+<div class="paragraph">
+<p>Do note the following symbols and formatting used in this document:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This section contains important information.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This section contains a helpful tip!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>find</code> A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command box
+and executed by the application.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a summary of my coding, documentation and other helpful contributions to the team project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Major Enhancement</strong>: I added the ability to search for persons based on their attributes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows the user to search for specific persons (i.e. patients, doctors and donors) based on their
+attributes (e.g. name).</p>
+</li>
+<li>
+<p>Justification: This feature improves ORGA<em>Nice</em> significantly as a user can look for specific persons quickly rather
+than having to scroll through the entire list of persons in ORGA<em>Nice</em>.</p>
+</li>
+<li>
+<p>Highlights: This feature performs fuzzy matching on the inputted name, NRIC and phone number to allow for relevant
+search results to be displayed even if the user makes a typo.</p>
+</li>
+<li>
+<p>Pull Requests:
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/143">#143</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/174">#174</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/184">#184</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Minor Enhancement</strong>: I added NRIC checksum validation to ensure input NRICs are valid.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Checks that the NRIC input by the user is a valid NRIC.</p>
+</li>
+<li>
+<p>Justification: This feature is crucial to the functionality of ORGA<em>Nice</em> as credential correctness is crucial for
+hospital administrative workflow.</p>
+</li>
+<li>
+<p>Pull Request: <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/commit/36a54c909e8a621bacfb0626b0161179f6c3a2d6">#255</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Minor Enhancement</strong>: I added dummy data generation for initial startup of ORGA<em>Nice</em>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Generates dummy data consisting of 10 doctors, 20 patients and 20 donors on inital application startup.</p>
+</li>
+<li>
+<p>Justification: This feature is beneficial for hospitals transitioning to using ORGA<em>Nice</em> as it provides users with
+data to test out and familiarise themselves with the various commands available in ORGA<em>Nice</em> before using it for
+daily work.</p>
+</li>
+<li>
+<p>Pull Request: <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/commit/9707403685db8ad694d45602b892f3ddece18e5d">#172</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: Click <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=TheRealRavager&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=TheRealRavager&amp;tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D">here</a>
+to view my code contributions.</p>
+</div>
+<div class="paragraph">
+<p><strong>Other contributions</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Git Workflow Management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped team members resolve Git related issues such as merge conflicts and taught them how to use more complicated
+features such as rebasing and stashing.</p>
+</li>
+<li>
+<p>Helped the team migrate to a branching Git workflow (Issue <a href="https://github.com/AY1920S1-CS2103T-T13-1/main/issues/39">#39</a>)</p>
+</li>
+<li>
+<p>Set up team&#8217;s GitHub repository including branch protection and requiring Travis checks and reviews before merging.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated User Guide and Developer Guide to reflect changes to <code>find</code> (Pull Requests
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/158">#158</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/277">#277</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Contributed to forum discussions (Examples:
+<a href="https://github.com/nus-cs2103-AY1920S1/forum/issues/9">#9</a>,
+<a href="https://github.com/nus-cs2103-AY1920S1/forum/issues/11">#11</a>,
+<a href="https://github.com/nus-cs2103-AY1920S1/forum/issues/21">#21</a>)</p>
+</li>
+<li>
+<p>Reviewed Pull Requests (
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/96">#96</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/98">#98</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/134">#134</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/141">#141</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Shown below is an extract from our User Guide detailing the usage of the <code>find</code> command. I wrote this section to
+specifically target the end users who may not be tech savvy.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="finding-persons-by-attributes-code-find-code"><a class="link" href="#finding-persons-by-attributes-code-find-code">Finding persons by attributes: <code>find</code></a></h3>
+<div class="paragraph">
+<p>You can use the <code>find</code> command to search for persons whose attributes match your input keywords. A list of matching
+persons along with the number of exact and possible matches will be displayed.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find <em>PREFIX</em>/<em>KEYWORD</em> (<em>PREFIX</em>/<em>KEYWORD</em>&#8230;&#8203;)</code></p>
+</div>
+<div class="paragraph">
+<p>Optional parameters: Multiple <em>keyword</em>s per <em>prefix</em>, multiple <em>prefix</em>es in the same find command.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may wish to reference <a href="#List of Attributes">[List of Attributes]</a>, to view the list of available prefixes to search by.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The find command is <strong>case insensitive</strong> and performs <strong>OR</strong> matching within a prefix and <strong>AND</strong> matching between
+prefixes. It also matches similar looking words to account for possible typos in your keywords. The following example
+illustrates these concepts:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findByPrefix.png" alt="findByPrefix" width="790">
+</div>
+<div class="title">Figure 2. Find command with multiple prefixes and multiple keywords per prefix.</div>
+</div>
+<div class="paragraph">
+<p>In Figure 12, you can see that <code>find n/Duncan n/Loinel n/Helen t/patient t/donor</code> shows a list of 44 matches. The two
+exact matches are listed at the top; those below are possible matches, sorted according to how closely they match your
+keywords.</p>
+</div>
+<div class="paragraph">
+<p>'Duncan Chua' and 'Helen Davidson' are among the matched persons due to the fact that Duncan&#8217;s name matches
+either of 'Duncan' <strong>OR</strong> 'Loinel' <strong>OR</strong> 'Helen' <strong>AND</strong> he is also either a 'patient' <strong>OR</strong> 'donor'. The same is true
+for Helen. 'Lionel Lim' also appears in the search results as his name is similar to 'Loinel'. Hey, good thing we
+picked up on that typo or we&#8217;d have missed Lionel!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The only exception to this rule is tissue type matching, which uses <code>AND</code> matching within the prefix.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Lets take a look at some examples and pointers showcasing the use of <code>find</code>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use case with multiple keywords per prefix<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find n/Laura n/Marisha Ray b/A b/B b/O</code><br>
+Displays all persons whose name contains either 'Laura' or 'Marisha Ray' and whose blood type is either 'A', 'B' or 'O'.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Use case demonstrating prefix order insensitivity<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find b/A n/Benson Carter b/O n/Alice b/B</code><br>
+Displays the same result as the preceding example.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Use case demonstrating tissue type finding<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find tt/4,1,2,3</code><br>
+Displays all persons whose tissue type contains tissues: 4, 1, 2 and 3; in any order.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Looking for exact matches only? No problem! Just replace <code>find</code> with <code>exactFind</code>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>That&#8217;s it for this section. Congratulations, you now know how to use the <code>find</code> command!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Shown below is an extract from our Developer Guide detailing the architecture and execution of the <code>find</code> command.
+I wrote this section to specifically target new developers with little Software Engineering experience.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="finding-feature"><a class="link" href="#finding-feature">Finding feature</a></h3>
+<div class="paragraph">
+<p>This section explains the implementation of the find persons by attributes feature.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The find feature is facilitated by <code>PersonContainsPrefixesPredicate</code> and <code>FindCommand</code>.<br></p>
+</div>
+<div class="sect4">
+<h5 id="personcontainsprefixespredicate"><a class="link" href="#personcontainsprefixespredicate">PersonContainsPrefixesPredicate</a></h5>
+<div class="paragraph">
+<p><code>PersonContainsPrefixesPredicate</code> implements <code>Predicate</code> and is used to test whether a person&#8217;s attributes
+match exactly with at least one of the input keywords in each attribute category.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="findcommand"><a class="link" href="#findcommand">FindCommand</a></h5>
+<div class="paragraph">
+<p><code>FindCommand</code> extends <code>Command</code> with a <code>predicate</code> that is used to determine whether a given
+<code>person</code> should be displayed. It implements <code>Command#execute(Model model)</code> which replaces the
+<code>predicate</code> of the current <code>model.filteredPersons</code> with the input predicate of <code>ExactFindCommand</code>.
+This triggers a change in the displayed persons to the list of filtered persons.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="execution-behaviour"><a class="link" href="#execution-behaviour">Execution Behaviour</a></h5>
+<div class="paragraph">
+<p>The behaviour of <code>FindCommand</code> is consistent with that of other commands as described in <a href="#Design-Logic">[Design-Logic]</a>.
+Therefore, this section will gloss over higher-level details and instead zoom-in to the behaviour of
+<code>FindCommand#execute</code>.</p>
+</div>
+<div class="sect5">
+<h6 id="findcommand-execution"><a class="link" href="#findcommand-execution">FindCommand Execution</a></h6>
+<div class="paragraph">
+<p>Given below is a step by step description of the behaviour of <code>FindCommand#execute</code>:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: The full list of all persons in ORGA<em>Nice</em> is retrieved and stored as <code>allPersons</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2: A list of exact matches is obtained by filtering <code>allPersons</code> using
+<code>PersonContainsPrefixesPredicate</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: A list containing all persons except exact matches is obtained and fuzzy matching is performed on it.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: Fuzzy matching uses <code>StringUtil#calculateLevenshteinDistance</code> to filter out possible matches. The matches
+are then sorted in ascending order of similarity to input keywords.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: <code>#setDisplayedPersonList</code> is called.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates steps 1 to 5:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ExactFindSequenceDiagram.png" alt="ExactFindSequenceDiagram">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above diagram heavily simplifies the execution of <code>#fuzzyMatch</code> as it is further explained in the
+section below.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect5">
+<h6 id="fuzzy-matching"><a class="link" href="#fuzzy-matching">Fuzzy Matching</a></h6>
+<div class="paragraph">
+<p><code>FindCommand#execute</code> performs fuzzy matching between input keywords and person attributes to detect possible
+matches. This behaviour is facilitated by
+<code>FindCommand#fuzzyMatch(ArgumentMultimap argMultimap, List&lt;Person&gt; inputList)</code>. The behaviour of
+<code>#fuzzyMatch</code> is detailed in the below activity diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FuzzyMatchActivityDiagram.png" alt="FuzzyMatchActivityDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>As seen from the above diagram, <code>#fuzzyMatch</code> traverses the <code>inputList</code> of persons and tags each person with a
+calculated minimum <code>combinedLevenshteinDistance</code>(LD). In the event that no keywords are present, all persons are
+tagged with an LD higher than the acceptable threshold. Once all persons have been tagged, those persons whose LD
+exceeds the threshold are removed from the list. The final list is then sorted in ascending order of LD.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain the main aspect considered in designing the find by prefix feature.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-method-of-calculating-similarity-of-keywords"><a class="link" href="#aspect-method-of-calculating-similarity-of-keywords">Aspect: Method of calculating similarity of keywords</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Calculate Levenshtein Distance.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to detect most typos effectively.</p>
+</li>
+<li>
+<p>Cons: Creation of requisite <code>costMatrix</code> is computationally expensive and may affect performance for long
+keywords.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use Natural Language Processing Libraries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will be able to detect typos more effectively.</p>
+</li>
+<li>
+<p>Cons: Will take up more system resources.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:19:36 UTC</div></div></div></body></html>

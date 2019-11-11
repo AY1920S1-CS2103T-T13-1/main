@@ -261,12 +261,12 @@ You can then run <code>sort rate</code> to obtain the list of donors with higher
 <div class="sect2">
 <h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">3.2. Listing persons: <code>list</code></a></h3>
 <div class="paragraph">
-<p>This list command can show you the list of persons in ORGANice.</p>
+<p>This list command can show you the list of persons in ORGA<em>Nice</em>.</p>
 </div>
 <div class="sect3">
 <h4 id="listing-all-persons"><a class="link" href="#listing-all-persons">3.2.1. Listing all persons</a></h4>
 <div class="paragraph">
-<p>Simply type <code>list</code> in the Command Box and press <kbd>Enter</kbd>. ORGANice will show you all patients, doctors, and donors present in the system.</p>
+<p>Simply type <code>list</code> in the Command Box and press <kbd>Enter</kbd>. ORGA<em>Nice</em> will show you all patients, doctors, and donors present in the system.</p>
 </div>
 </div>
 <div class="sect3">
@@ -286,12 +286,12 @@ You can then run <code>sort rate</code> to obtain the list of donors with higher
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.3. Viewing help: <code>help</code></a></h3>
 <div class="paragraph">
-<p>There may be times where you need more information on how ORGANice works.
-To access the user guide of ORGANice, you can do the following:</p>
+<p>There may be times where you need more information on how ORGA<em>Nice</em> works.
+To access the user guide of ORGA<em>Nice</em>, you can do the following:</p>
 </div>
 <div class="paragraph">
 <p>Simply type <code>help</code> in the Command Box and press <kbd>Enter</kbd>. You will see a link given in a pop-up "Help" window.
-You may click on the <kbd>Copy URL</kbd> button and paste it in a browser to see our user guide for more information on how to use ORGANice.</p>
+You may click on the <kbd>Copy URL</kbd> button and paste it in a browser to see our user guide for more information on how to use ORGA<em>Nice</em>.</p>
 </div>
 <div class="paragraph">
 <p>To exit the window, click the <kbd>x</kbd> button found near the top of the window to close it and return to the default display.</p>
@@ -315,7 +315,7 @@ as follows: <code>edit S8732457G p/91234567</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>You can only make changes to attributes that the person has.</strong>
-For example, you cannot change a doctor&#8217;s age because a doctor does not have that attribute in ORGANice.</p>
+For example, you cannot change a doctor&#8217;s age because a doctor does not have that attribute in ORGA<em>Nice</em>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Besides that, some attributes cannot be edited.</strong> These include:</p>
@@ -331,7 +331,7 @@ For example, you cannot change a doctor&#8217;s age because a doctor does not ha
 </ul>
 </div>
 <div class="paragraph">
-<p>You may want to refer to <a href="#List of Attributes">[List of Attributes]</a> to see what attributes apply to each type of person in ORGANice.</p>
+<p>You may want to refer to <a href="#List of Attributes">[List of Attributes]</a> to see what attributes apply to each type of person in ORGA<em>Nice</em>.</p>
 </div>
 <div class="paragraph">
 <p><span class="teal">{End of the excerpt from User Guide}</span></p>
@@ -361,7 +361,7 @@ Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence s
 <p>User requests to list patients/donors/doctors.</p>
 </li>
 <li>
-<p>ORGANice shows the list of patients/donors/doctors.</p>
+<p>ORGA<em>Nice</em> shows the list of patients/donors/doctors.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -374,11 +374,11 @@ Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. ORGANice detects an invalid parameter.</p>
+<p>1a. ORGA<em>Nice</em> detects an invalid parameter.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. ORGANice returns error message.</p>
+<p>1a1. ORGA<em>Nice</em> returns error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -400,7 +400,7 @@ Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence s
 <p>User requests to sort the list of donors of a particular patient.</p>
 </li>
 <li>
-<p>ORGANice sorts the list of donors according to the parameters.</p>
+<p>ORGA<em>Nice</em> sorts the list of donors according to the parameters.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -413,11 +413,11 @@ Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. ORGANice detects invalid parameter(s).</p>
+<p>1a. ORGA<em>Nice</em> detects invalid parameter(s).</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. ORGANice prompts for valid parameter(s).</p>
+<p>1a1. ORGA<em>Nice</em> prompts for valid parameter(s).</p>
 </li>
 <li>
 <p>1a2. User enters correct parameter(s).</p>
@@ -477,8 +477,8 @@ in the <code>Model</code> interface to update the list.</p>
 </div>
 <div class="paragraph">
 <p>When the user enters a list command, the result differs depending on the parameter of the command.
-If there is no parameter after 'list', ORGANice will simply list all existing doctors, patients, and donors on the list.
-If there is a parameter, ORGANice will check if it is a valid <code>TYPE</code> parameter and display the correct list of persons
+If there is no parameter after 'list', ORGA<em>Nice</em> will simply list all existing doctors, patients, and donors on the list.
+If there is a parameter, ORGA<em>Nice</em> will check if it is a valid <code>TYPE</code> parameter and display the correct list of persons
 that corresponds to this type.
 If the parameter is not valid, an error message will be displayed to indicate that the command is invalid.</p>
 </div>
@@ -617,11 +617,11 @@ Therefore, they are converted into <code>Integer</code> for easier comparison. A
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Fast iteration time of O(n * log n), which is important for ORGANice to load and display the sorted result, and more harmonious
+<p>Pros: Fast iteration time of O(n * log n), which is important for ORGA<em>Nice</em> to load and display the sorted result, and more harmonious
 with current implementations (able to wrap <code>ObservableList</code> and sort the content).</p>
 </li>
 <li>
-<p>Cons: Not the most efficient algorithm for insertions or deletions, but ORGANice does not require them.</p>
+<p>Cons: Not the most efficient algorithm for insertions or deletions, but ORGA<em>Nice</em> does not require them.</p>
 </li>
 </ul>
 </div>
@@ -651,7 +651,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Simpler implementation as able to make use of existing methods in ORGANice such as <code>setComparator</code>.</p>
+<p>Pros: Simpler implementation as able to make use of existing methods in ORGA<em>Nice</em> such as <code>setComparator</code>.</p>
 </li>
 <li>
 <p>Cons: More coding involved.</p>
@@ -667,7 +667,7 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <p>Pros: Has a time complexity of O(n*log(n)) which is relatively fast.</p>
 </li>
 <li>
-<p>Cons: Cannot make use of existing methods in ORGANice that work for Comparator.</p>
+<p>Cons: Cannot make use of existing methods in ORGA<em>Nice</em> that work for Comparator.</p>
 </li>
 </ul>
 </div>
@@ -690,4 +690,4 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:54:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:19:36 UTC</div></div></div></body></html>
