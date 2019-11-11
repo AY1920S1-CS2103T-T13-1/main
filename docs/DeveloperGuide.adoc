@@ -475,7 +475,7 @@ This is done by checking the `Patient` attribute that is tagged to the `Processi
 Finally, the method will check if the patient and donor given by the user is valid by checking if
 they are able to be matched or not and if they exist in ORGANice. +
 A code snippet of the method is shown below: This code aims to get the `Donor` and `Patient` from the given Nrics given by the user. +
-This method is necessary since users able to give the Nrics input in no particular order.
+This method is necessary since user is able to give the Nrics input in no particular order.
 ```
 if (model.hasDonor(firstNric)) {
     donorNric = firstNric;
@@ -494,7 +494,7 @@ if (model.hasDonor(firstNric)) {
 
 `Status` class is also  created and it is one of the attributes of `Patient` and `Donor`.
 However, this cannot be edited or added by users. +
-Processing command make changes to the `Status` of the patient and donor.
+The status of the 'Patient' and 'Donor' will change when Processing command is executed on that pair of patient and donor.
 
 * When a new `Patient` or `Donor` object is created, the `Status` of the new object will be set to `not processing`.
 
@@ -588,17 +588,17 @@ This section describes how the done feature is implemented.
 
 Done is facilitated by the `DoneCommand` class, which extends the `Command` class.
 
-Done is done by accessing `Patient` and `Donor` in `ModelManager`,
+Done is executed by accessing `Patient` and `Donor` in `ModelManager`,
 then determine if the patient and donor can match each other or not.
 
 It implements the `DoneCommand#isPass(String result)` boolean operation. +
-This method check if the result of the cross-matching test. +
+This method check whether the result of the cross-matching test. +
 
 If the patient and donor did a cross-matching test and the result of the test is a fail,
-then the patient and donor will need to be send back to find new matches and they
+then the patient and donor needs to be sent back to find new matches and they
 should not be able to match each other anymore. +
 `Donor` will have an ArrayList `patientsMatchedBefore` which stores all the patients' Nric which fails to match with it.
-Then, the patient and donor will have their `Status` set to `not processing` so that it will be able to find a match in ORGANice.
+Then, the patient and donor will have their `Status` set to `not processing` so that they can find another match and be considered in future matching results.
 
 If the patient and donor did a cross-matching test and the result of the test is a pass,
 then the patient and donor can be removed from ORGANice already.
