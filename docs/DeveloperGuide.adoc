@@ -507,6 +507,7 @@ When the user execute the processing feature, the method, `ProcessingCommand#isV
 to determine if the user give a valid patient and donor input. +
 It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself. +
 Then, the `Status` of the patient and donor will be set to `processing`.
+It will then display the list out.
 
 Following is a class diagram to show the processing feature
 
@@ -540,10 +541,60 @@ This section will explain the reason for having some aspects.
 === ProcessingMarkDone feature
 This section describes how the processingMarkDone feature is implemented.
 
-Processing is facilitated by the `ProcessingCommand` class, which extends the `Command` class.
+ProcessingMarkDone is facilitated by the `ProcessingMarkDoneCommand` class, which extends the `Command` class.
 
-Processing is done by accessing `Patient` and `Donor` in `ModelManager`,
-then creating a `ProcessingList` which acts like ArrayList to store the tasks which needs to be done.
+ProcessingMarkDone is done by accessing `Patient` and `Donor` in `ModelManager`,
+then, it will get the `ProcessingList` from the `Donor` and then marking a task as done.
+
+It implements the `ProcessingMarkDoneCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` boolean operation. +
+This method works similar to `ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` method but with a slight difference. +
+This method just need to check the `Status` of the `Donor` and `Patient` object and make sure it is `processing`. +
+However, this method still need to determine which Nric belongs to a patient and which Nric belongs to a donor
+since the input allows user to give two Nric in no particular order. +
+A code snippet of the method is shown below: This part of the method is different from the `ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` method.
+
+```
+if (model.hasPatient(patientNric) && model.hasDonor(donorNric)
+        && patient.getStatus().isProcessing() && donor.getStatus().isProcessing()
+        && match(donor, patient)) {
+    return true;
+} else {
+    return false;
+}
+```
+
+When the user execute the processingMarkDone feature, the method, `ProcessingMarkDoneCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)` will be called
+to determine if the user give a valid patient and donor input. +
+It will also check if the task number given is valid. +
+Then, it will call `Donor#markTaskAsDone(int taskNumber)` to mark the task on the `ProcessingList` of that donor.
+It will then display the list out.
+
+Following is an object diagram to show the processingMarkDone feature
+
+TODO diagram
+
+==== Design considerations
+This section will explain the reason for having some aspects.
+
+===== Aspect:
+* **Alternative 1 (current choice):**
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+===== Aspect: Using specific prefixes for Nric inputs
+* **Alternative 1 (current choice):** Nrics of patient and donor can be inputted in no particular order.
+** Pros: More user friendly as users do not need to make sure the Nric must be in correct order. (For example, patient's Nric must come before donor's Nric)
+** Cons: It is harder to implement and more exceptions need to be taken care of.
+* **Alternative 2:** Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.
+** Pros: It is easier to implement as `icP/PATIENT NRIC` and `icD/DONOR NRIC` will be easier to parse to the Command method.
+** Cons: It is less user friendly as users need to remember more prefixes for this entire application.
+
+// end::processingMarkDoneDG[]
+
+// tag::doneDG[]
 
 === Finding feature
 This section explains the implementation of the find persons by attributes feature.
