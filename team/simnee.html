@@ -1,0 +1,671 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chua Sim Nee - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chua Sim Nee - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-organice"><a class="link" href="#project-organice">PROJECT: ORGANice</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document aims to show an overview of my involvements in the project, ORGANice.
+My role in this project was to implement the task list for the users to track the
+administrative tasks that needs to be done.</p>
+</div>
+<div class="sect2">
+<h3 id="project-description"><a class="link" href="#project-description">1.1. Project Description</a></h3>
+<div class="paragraph">
+<p>ORGANice is developed by a team of five students in National University of Singapore (NUS).
+All of us are year 2 Computer Science students,taking the Software Engineering module, CS2103T.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="project-scope"><a class="link" href="#project-scope">1.2. Project Scope</a></h3>
+<div class="paragraph">
+<p>ORGANice was made for our CS2103T module&#8217;s team project (TP). Over the course of 6 weeks, we were tasked
+with either enhancing or morphing a Command Line Interface (CLI) desktop addressbook application.
+We chose to morph it into an organ transplant manager, ORGANice.
+It has a Graphical User Interface (GUI) which is created with JavaFX.</p>
+</div>
+<div class="paragraph">
+<p>The target audience of ORGANice are the hospital administrative staffs as we aim to help ease their
+workload when trying to match all their patients with all the donors' organs they have.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="project-summary"><a class="link" href="#project-summary">1.3. Project Summary</a></h3>
+<div class="paragraph">
+<p>ORGANice is an organ transplant manager.
+Currently, hospital administrative staffs have many patients and organ donors information in their records.
+Whenever they have a new patient who needed an organ, they often have to go through many manual searches and
+matching to find a compatible donor. We aim to reduce such menial work using ORGANice and speed up this process.<br>
+ORGANice is able to:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add</code> and <code>edit</code> patients, donors and doctors information.</p>
+</li>
+<li>
+<p><code>list</code> the entire database information.</p>
+</li>
+<li>
+<p><code>match</code> the patients and show potential compatible donor&#8217;s information.</p>
+</li>
+<li>
+<p><code>sort</code> the result after using <code>match</code> command.</p>
+</li>
+<li>
+<p><code>find</code> a specific patient, donor or doctor in ORGANice.</p>
+</li>
+<li>
+<p><code>processing</code> a patient and a donor who are compatible to generate a
+list of administrative tasks to do for the patient and donor.</p>
+</li>
+<li>
+<p><code>done</code> processing a patient and donor pair and determine if they can be removed from the matching pool.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is what ORGANice looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/snPPP1.png" alt="snPPP1" width="790">
+</div>
+<div class="title">Figure 1. The graphical user interface for ORGANice.</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="key-formatting"><a class="link" href="#key-formatting">1.4. Key formatting</a></h3>
+<div class="paragraph">
+<p>This section explains the formatting used in this document.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A purple font (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A purple font which starts with a capital letter indicates a component, class or object in
+the architecture of the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Text#text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A purple font text with a hash-tag in between indicates that the <code>Text</code> contains that method, <code>text</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">2. Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section lists the codes and documentations I contributed to ORGANice.</p>
+</div>
+<div class="paragraph">
+<p>I was responsible for implementing the <code>processing</code>, <code>processingMarkDone</code> and <code>done</code> commands.
+I also ensured that the code quality is up to standard.</p>
+</div>
+<div class="sect2">
+<h3 id="main-feature-code-processing-code"><a class="link" href="#main-feature-code-processing-code">2.1. Main Feature : <code>Processing</code></a></h3>
+<div class="paragraph">
+<p>This section will explain the command, <code>processing</code> which I implemented for ORGANice.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does:
+It allow users to view a whole list of administrative tasks which needs to be followed to arrange for cross-matching test
+between a patient and a donor.</p>
+</li>
+<li>
+<p>Justification:
+Hospital staffs often need to do a lot of paper work and administrative tasks.
+There is now an increasing number of patients admitting to hospitals and if they need an organ,
+there will be a standard operating procedure which needs to be followed
+With ORGANice, staff will not need to manually keep track of which tasks are not done yet for every patients.</p>
+</li>
+<li>
+<p>Highlights:
+A default task list will be generated when the user uses the command with valid NRICs of donor and patient.
+The task list generated belong to the donor and patient only.
+This will not lead to any confusions as
+it is impossible to have a donor matching with more than one patient or a patient matching with more than one donor.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="main-feature-code-processingmarkdone-code"><a class="link" href="#main-feature-code-processingmarkdone-code">2.2. Main Feature : <code>ProcessingMarkDone</code></a></h3>
+<div class="paragraph">
+<p>This section will explain the command, <code>processingMarkDone</code> which I implemented for ORGANice.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does:
+It allows users to mark a task on the list of administrative tasks as done.</p>
+</li>
+<li>
+<p>Justification:
+This command will allow the hospital staffs to have a better overview of what are the existing tasks which need to be done.
+This will reduce the chance of hospital staffs doing a single task for more than one time or miss out a task by accident.</p>
+</li>
+<li>
+<p>Highlights:
+This feature cannot be used if the patient and donor have not been processed before.
+This will ensure that the correct list is edited instead of a wrong one.
+The list will also be generated with either a cross or a tick beside each task.
+It will be very intuitive for the hospital staffs to determine which tasks are done already.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="main-feature-code-done-code"><a class="link" href="#main-feature-code-done-code">2.3. Main Feature : <code>Done</code></a></h3>
+<div class="paragraph">
+<p>This section will explain the command, <code>done</code> which I implemented for ORGANice.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does:
+It allows users to determine if a patient and a donor is all done.<br>
+Meaning, the patient and donor have gone through a test and we know know if the patient rejected the organ from the donor or not.<br>
+If the patient is not compatible with the donor, then both the patient and donor will be saved back into ORGANice and available for future organ matching detection.<br>
+However, they will not be able to match each other anymore.<br>
+If the patient is compatible with the donor, then both of the patient and donor will be removed from ORGANice.</p>
+</li>
+<li>
+<p>Justification:
+Our algorithm is only able to find the compatibility of the blood type and tissue type of the patient and donor pair.
+However, a cross-matching test is needed to determine if the patient will reject the donor&#8217;s organ.
+Hence, there is a chance that the result of the cross-matching test is negative and the patient and donor will need to find another match.</p>
+</li>
+<li>
+<p>Highlights:
+This feature will save a history of all rejected patients a donor have so as to not allow the donor to be matched again with them.
+This will ensure that the same patient and donor do not go through another round of cross-matching just to return the same negative result.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-contributed"><a class="link" href="#code-contributed">2.4. Code Contributed</a></h3>
+<div class="paragraph">
+<p>Please refer to this link to view the code I wrote:
+ [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=SimNee&amp;tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D">RepoSense</a>]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">2.5. Other Contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Enhancements</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Enhance the <code>edit</code> feature to allow users to edit a person&#8217;s by their NRIC instead of their index number.<br>
+(Pull request
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/119">#119</a>])</p>
+</li>
+<li>
+<p>Enhance the <code>edit</code> feature to allow users to edit other attributes of a person.<br>
+(Pull request
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/177">#177</a>])</p>
+</li>
+<li>
+<p>Added <code>BloodType</code> and <code>TissueType</code> attributes to the <code>Donor</code> and <code>Patient</code> classes.<br>
+(Pull requests
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/82">#82</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/89">#89</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/96">#96</a>])</p>
+</li>
+<li>
+<p>Added <code>Status</code> attribute to the <code>Donor</code> and <code>Patient</code> classes for the <code>processing</code> feature.<br>
+(Pull request
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/139">#139</a>])</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Documentations</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated ReadMe from the given addressbook&#8217;s ReadMe to be for ORGANice.<br>
+(Pull request
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/34">#34</a>])</p>
+</li>
+<li>
+<p>Updated User Guide<br>
+(Pull request
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/128">#128</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/135">#135</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/269">#269</a>])</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Community</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Reviewed Pull Requests (with non-trivial review comments):<br>
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/85">#85</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/88">#88</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/97">#97</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/115">#115</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/130">#130</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/138">#138</a>],
+[<a href="https://github.com/AY1920S1-CS2103T-T13-1/main/pull/251">#251</a>].</p>
+</li>
+<li>
+<p>Reported bugs and offered suggestions for other teams in the class.
+(Examples: <a href="https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/54">1</a>,
+<a href="https://github.com/nus-cs2103-AY1920S1/addressbook-level3/pull/110">2</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-user-guide"><a class="link" href="#contributions-to-user-guide">3. Contributions to User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Given below are some of the sections I contributed to the User Guide.
+They showcase my ability to write documentation targeting end-users.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>{Start of First Extract from User Guide}</em></p>
+</div>
+<div class="sect2">
+<h3 id="processing-potential-matches-code-processing-code"><a class="link" href="#processing-potential-matches-code-processing-code">3.1. Processing potential matches: <code>processing</code></a></h3>
+<div class="paragraph">
+<p>After finding a list of matches, the hospital will be able to schedule a cross-matching test between
+a specific donor and patient.
+To schedule a cross-matching test, there will be a lot of other administrative tasks to be done.
+Hence, this command will be able to allow you to have an overview of what kind of tasks you need to do for that
+particular pair of donor and patient before the cross-matching.</p>
+</div>
+<div class="sect3">
+<h4 id="code-status-code-of-the-donor-and-patient-pair"><a class="link" href="#code-status-code-of-the-donor-and-patient-pair">3.1.1. <code>Status</code> of the donor and patient pair</a></h4>
+<div class="paragraph">
+<p>You can also view the current state of every donor and patient in ORGANice by looking at their <code>Status</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Status</code> of patient and donor can be either <code>Not Processing</code>, <code>Processing</code> or <code>Done</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Not Processing</code> : The current donor or patient is not yet matched with anyone and is not going for any cross-matching test yet.</p>
+</li>
+<li>
+<p><code>Processing</code> : The current donor or patient has already found a match and is in the midst of preparing for a cross-matching test.</p>
+</li>
+<li>
+<p><code>Done</code> : The current donor or patient have completed the cross-matching and the result of the cross-matching shows a positive result.
+Hence, this donor or patient does not need to be in ORGANice anymore.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All the patients and donors should be <code>Not Processing</code> initially.<br>
+When the command is used for the first time for the patient and donor pair, the <code>Status</code> of the patient and donor will change from <code>Not Processing</code> to <code>Processing</code>.<br>
+If the patient and donor is being processed, their <code>Status</code> will remain as <code>Processing</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="task-list-for-the-donor-and-patient"><a class="link" href="#task-list-for-the-donor-and-patient">3.1.2. Task list for the donor and patient</a></h4>
+<div class="paragraph">
+<p>This command will show you the task list for the <code>Processing</code> donor and patient for you to be able to keep track of the necessary standard of procedure easily.</p>
+</div>
+<div class="paragraph">
+<p>Currently you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generate a default task list automatically for newly processed patient and donor if they are <code>Not Processing</code> initially.</p>
+</li>
+<li>
+<p>View the list which belongs to the patient and donor pair who are already <code>Processing</code>.</p>
+</li>
+<li>
+<p>Mark a task as done in the task list generated from the patient and donor using another command
+<code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code>
+which will be explained further later.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-processing-code-the-donor-and-patient"><a class="link" href="#code-processing-code-the-donor-and-patient">3.1.3. <code>Processing</code> the donor and patient</a></h4>
+<div class="paragraph">
+<p>When you use this command, the following will occur:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A default task list will be generated to show the necessary tasks the hospital needs to do for the respective donor and patient.</p>
+</li>
+<li>
+<p>The task list will be unique to the specific donor and patient.</p>
+</li>
+<li>
+<p>The task list can be updated using another command,<code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code></p>
+</li>
+<li>
+<p>The task list will be saved automatically.</p>
+</li>
+<li>
+<p>A donor can only be in <code>Processing</code> state with only one patient and vice versa.
+This means, if a donor and a patient is already in <code>Processing</code> state, they will not be able to be processed with another donor or patient.</p>
+</li>
+<li>
+<p>A screenshot of the list generated can be shown below:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/processing.png" alt="processing" width="790">
+</div>
+<div class="title">Figure 2. Screenshot of the screen after you use the command on a valid donor and patient</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>processing ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong></code><br>
+The order of the NRICs does not matter, as long as the patient and the donor must be valid.</p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>processing ic/S6764235G ic/S5234567D</code></p>
+</div>
+<div class="paragraph">
+<p><em>{End of First Extract from User Guide}</em></p>
+</div>
+<div class="paragraph">
+<p><em>{Start of Second Extract from User Guide}</em></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-the-task-list-code-processingmarkdone-code"><a class="link" href="#checking-the-task-list-code-processingmarkdone-code">3.2. Checking the task list : <code>processingMarkDone</code></a></h3>
+<div class="paragraph">
+<p>As introduced above, this command serves to help you mark a task on the task list as done.
+This will allow you to be able to know what other administrative things you need to do
+for the specific donor and patient before the cross-matching test.
+Beside each task on the task list, there will be either a cross or a tick.
+A tick would mean that the task is completed and a cross will mean that the task has not yet been completed.
+A screenshot of the list generated can be shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/processingMarkDone.png" alt="processingMarkDone" width="790">
+</div>
+<div class="title">Figure 3. Screenshot of the screen after you use the command on a valid donor and patient and a valid task number</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>processingMarkDone ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> <strong>TASK NUMBER</strong></code><br>
+The order of the NRICs does not matter, as long as the task number, patient and donor must be valid.
+The donor and patient need to be in <code>Processing</code> state to be considered valid.</p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>processingMarkDone ic/S6764235G ic/S5234567D 1</code></p>
+</div>
+<div class="paragraph">
+<p><em>{End of Second Extract from User Guide}</em></p>
+</div>
+<div class="paragraph">
+<p><em>{Start of Third Extract from User Guide}</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mark-as-done-code-done-code"><a class="link" href="#mark-as-done-code-done-code">3.3. Mark as done: <code>done</code></a></h3>
+<div class="paragraph">
+<p>After the hospital has the results of the cross matching test, they can
+update the results in ORGANice.
+Cross matching tests have two possible results: pass or fail.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>done ic/<strong>PATIENT NRIC</strong> ic/<strong>DONOR NRIC</strong> res/[pass/fail]</code></p>
+</div>
+<div class="paragraph">
+<p>The order of the NRICs does not matter, as long as the patient and the donor must both be valid.</p>
+</div>
+<div class="paragraph">
+<p>The following section outlines what happens based on the two results:<br></p>
+</div>
+<div class="paragraph">
+<p>If the result of the cross matching is a 'pass':</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the command based on the given format</p>
+</li>
+<li>
+<p>It is up to you to schedule an organ transplant surgery
+between the patient and donor.</p>
+</li>
+<li>
+<p>Mark the patient and donor as <code>Done</code>, based on the command format.</p>
+</li>
+<li>
+<p>The patient and donor statuses will be marked as <code>Done</code>.</p>
+</li>
+<li>
+<p>After running the command, the system removes the patient and donor from ORGANice.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the result of the cross matching is a 'fail':<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the command based on the given format</p>
+</li>
+<li>
+<p>The donor and patient will be added back to the matching pool for
+match detection with other patients and donors.</p>
+</li>
+<li>
+<p>The patient and donor statuses will be marked as <code>Not Processing</code>.</p>
+</li>
+<li>
+<p>The donor and patient pair will not be considered a potential match anymore in future match detections.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>done ic/S6764235G ic/S5234567D res/pass</code></p>
+</li>
+<li>
+<p><code>done ic/S5234567D ic/S6764235G  res/fail</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>{End of Third Extract from User Guide}</em></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-developer-guide"><a class="link" href="#contributions-to-developer-guide">4. Contributions to Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are some of the sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>{Start of First Extract from Developer Guide}</em></p>
+</div>
+<div class="sect2">
+<h3 id="processing-feature"><a class="link" href="#processing-feature">4.1. Processing feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the processing feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>Processing is facilitated by the <code>ProcessingCommand</code> class, which extends the <code>Command</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Processing is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>,
+then creating a <code>ProcessingList</code> which acts like ArrayList to store the tasks which needs to be done.</p>
+</div>
+<div class="paragraph">
+<p>It implements the <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> boolean operation.<br>
+This method will first determine which Nric belongs to a patient and which Nric belongs to a donor
+since the input allows user to give two Nric in no particular order.<br>
+It will also get the <code>Donor</code> and <code>Patient</code> objects with the NRIC given.<br>
+Then, it will check if the donor have a <code>ProcessingList</code> generated before.<br>
+If the donor have an empty <code>ProcessingList</code>, it means that the donor is newly processed.<br>
+Hence, it will mean that the donor may be able to pair with the given patient.<br>
+If the donor already have a <code>ProcessingList</code>, it means that the donor is already being processed with a patient.<br>
+Then, this method will check if the patient given by the user is the same patient being processed together with this donor.<br>
+This is done by checking the <code>Patient</code> attribute that is tagged to the <code>ProcessingList</code> of the donor.<br>
+Finally, the method will check if the patient and donor given by the user is valid by checking if
+they are able to be matched or not and if they exist in ORGANice.<br>
+A code snippet of the method is shown below: This code aims to get the <code>Donor</code> and <code>Patient</code> from the given Nrics given by the user.<br>
+This method is necessary since user is able to give the Nrics input in no particular order.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>if (model.hasDonor(firstNric)) {
+    donorNric = firstNric;
+    donor = model.getDonor(donorNric);
+
+    patientNric = secondNric;
+    patient = model.getPatient(patientNric);
+} else {
+    patientNric = firstNric;
+    patient = model.getPatient(patientNric);
+
+    donorNric = secondNric;
+    donor = model.getDonor(donorNric);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Status</code> class is also  created and it is one of the attributes of <code>Patient</code> and <code>Donor</code>.
+However, this cannot be edited or added by users.<br>
+The status of the 'Patient' and 'Donor' will change when Processing command is executed on that pair of patient and donor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When a new <code>Patient</code> or <code>Donor</code> object is created, the <code>Status</code> of the new object will be set to <code>not processing</code>.</p>
+</li>
+<li>
+<p>When the <code>Processing</code> command is being executed, <code>Status</code> of the <code>Patient</code> and the <code>Donor</code> will be changed to <code>processing</code>,
+provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
+</li>
+<li>
+<p>When the <code>Done</code> command is being executed, <code>Status</code> of the <code>Patient</code> and the <code>Donor</code> will be changed to <code>done</code>,
+provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the donor and patient have never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
+</div>
+<div class="paragraph">
+<p>If the user makes any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
+</div>
+<div class="paragraph">
+<p>When the user execute the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
+to determine if the user give a valid patient and donor input.<br>
+It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself.<br>
+Then, the <code>Status</code> of the patient and donor will be set to <code>processing</code>.
+It will then display the list out.</p>
+</div>
+<div class="paragraph">
+<p>Following is an activity diagram to show the processing feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ProcessingActivity.png" alt="ProcessingActivity">
+</div>
+<div class="title">Figure 4. Activity Diagram of the Processing Command</div>
+</div>
+<div class="paragraph">
+<p><em>{End of First Extract from Developer Guide}</em></p>
+</div>
+<div class="paragraph">
+<p><em>{Start of Second Extract from Developer Guide}</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="done-feature"><a class="link" href="#done-feature">4.2. Done feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the done feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>Done is facilitated by the <code>DoneCommand</code> class, which extends the <code>Command</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Done is executed by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>,
+then determine if the patient and donor can match each other or not.</p>
+</div>
+<div class="paragraph">
+<p>It implements the <code>DoneCommand#isPass(String result)</code> boolean operation.<br>
+This method check whether the result of the cross-matching test.<br></p>
+</div>
+<div class="paragraph">
+<p>If the patient and donor did a cross-matching test and the result of the test is a fail,
+then the patient and donor needs to be sent back to find new matches and they
+should not be able to match each other anymore.<br>
+<code>Donor</code> will have an ArrayList <code>patientsMatchedBefore</code> which stores all the patients' Nric which fails to match with it.
+Then, the patient and donor will have their <code>Status</code> set to <code>not processing</code> so that they can find another match and be considered in future matching results.</p>
+</div>
+<div class="paragraph">
+<p>If the patient and donor did a cross-matching test and the result of the test is a pass,
+then the patient and donor can be removed from ORGANice already.</p>
+</div>
+<div class="paragraph">
+<p><em>{End of Second Extract from Developer Guide}</em></p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:06:31 UTC</div></div></div></body></html>

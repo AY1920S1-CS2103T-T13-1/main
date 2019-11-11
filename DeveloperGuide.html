@@ -33,10 +33,12 @@
 <li><a href="#add-person-code-form-code-mode-feature">4.3. Add person <code>Form</code> mode feature</a></li>
 <li><a href="#sort-feature">4.4. Sort feature</a></li>
 <li><a href="#processing-feature">4.5. Processing feature</a></li>
-<li><a href="#finding-feature">4.6. Finding feature</a></li>
-<li><a href="#proposed-data-encryption">4.7. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">4.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.9. Configuration</a></li>
+<li><a href="#processingmarkdone-feature">4.6. ProcessingMarkDone feature</a></li>
+<li><a href="#done-feature">4.7. Done feature</a></li>
+<li><a href="#finding-feature">4.8. Finding feature</a></li>
+<li><a href="#proposed-data-encryption">4.9. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">4.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a></li>
@@ -891,13 +893,86 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <p>This section describes how the processing feature is implemented.</p>
 </div>
 <div class="paragraph">
-<p>Processing is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>, then creating an ArrayList named, <code>ProcessingList</code> to store the tasks needed to do.</p>
+<p>Processing is facilitated by the <code>ProcessingCommand</code> class, which extends the <code>Command</code> class.</p>
 </div>
 <div class="paragraph">
-<p>If the donor and patient pair has never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
+<p>Processing is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>,
+then creating a <code>ProcessingList</code> which acts like ArrayList to store the tasks which needs to be done.</p>
+</div>
+<div class="paragraph">
+<p>It implements the <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> boolean operation.<br>
+This method will first determine which Nric belongs to a patient and which Nric belongs to a donor
+since the input allows user to give two Nric in no particular order.<br>
+It will also get the <code>Donor</code> and <code>Patient</code> objects with the NRIC given.<br>
+Then, it will check if the donor have a <code>ProcessingList</code> generated before.<br>
+If the donor have an empty <code>ProcessingList</code>, it means that the donor is newly processed.<br>
+Hence, it will mean that the donor may be able to pair with the given patient.<br>
+If the donor already have a <code>ProcessingList</code>, it means that the donor is already being processed with a patient.<br>
+Then, this method will check if the patient given by the user is the same patient being processed together with this donor.<br>
+This is done by checking the <code>Patient</code> attribute that is tagged to the <code>ProcessingList</code> of the donor.<br>
+Finally, the method will check if the patient and donor given by the user is valid by checking if
+they are able to be matched or not and if they exist in ORGANice.<br>
+A code snippet of the method is shown below: This code aims to get the <code>Donor</code> and <code>Patient</code> from the given Nrics given by the user.<br>
+This method is necessary since user is able to give the Nrics input in no particular order.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>if (model.hasDonor(firstNric)) {
+    donorNric = firstNric;
+    donor = model.getDonor(donorNric);
+
+    patientNric = secondNric;
+    patient = model.getPatient(patientNric);
+} else {
+    patientNric = firstNric;
+    patient = model.getPatient(patientNric);
+
+    donorNric = secondNric;
+    donor = model.getDonor(donorNric);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Status</code> class is also  created and it is one of the attributes of <code>Patient</code> and <code>Donor</code>.
+However, this cannot be edited or added by users.<br>
+The status of the 'Patient' and 'Donor' will change when Processing command is executed on that pair of patient and donor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When a new <code>Patient</code> or <code>Donor</code> object is created, the <code>Status</code> of the new object will be set to <code>not processing</code>.</p>
+</li>
+<li>
+<p>When the <code>Processing</code> command is being executed, <code>Status</code> of the <code>Patient</code> and the <code>Donor</code> will be changed to <code>processing</code>,
+provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
+</li>
+<li>
+<p>When the <code>Done</code> command is being executed, <code>Status</code> of the <code>Patient</code> and the <code>Donor</code> will be changed to <code>done</code>,
+provided that the <code>Patient</code> and <code>Donor</code> are valid.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the donor and patient have never been processed before, a default <code>ProcessingList</code> will be generated and it will belong to the patient and donor pair uniquely.</p>
 </div>
 <div class="paragraph">
 <p>If the user makes any changes to the <code>ProcessingList</code>, the list will be saved to the donor as one of its attribute which takes in a parameter of the patient&#8217;s NRIC.</p>
+</div>
+<div class="paragraph">
+<p>When the user execute the processing feature, the method, <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
+to determine if the user give a valid patient and donor input.<br>
+It will then check if there is a need to generate a new default task list or the donor already have a list tagged to itself.<br>
+Then, the <code>Status</code> of the patient and donor will be set to <code>processing</code>.
+It will then display the list out.</p>
+</div>
+<div class="paragraph">
+<p>Following is an activity diagram to show the processing feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ProcessingActivity.png" alt="ProcessingActivity">
+</div>
+<div class="title">Figure 12. Activity Diagram of the Processing Command</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
@@ -909,27 +984,60 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use ArrayList to store the tasks.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: It is not the most efficient algorithm and the huge number of <code>ProcessingList</code> may take up a huge datafile at the end of the day.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use a new class that works like ArrayList.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a new class, <code>TaskList</code> that works like ArrayList.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Able to implement more specific methods for the ProcessingList.</p>
 </li>
 <li>
-<p>Cons: More methods and test cases needed and it is harder to implement.</p>
+<p>Cons: More methods and test cases needed which are harder to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use ArrayList to store the tasks.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement as the default methods are already created.</p>
+</li>
+<li>
+<p>Cons: Future extension on this will be difficult as the <code>ProcessingList</code> is unique to this feature.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-using-specific-prefixes-for-nric-inputs"><a class="link" href="#aspect-using-specific-prefixes-for-nric-inputs">Aspect: Using specific prefixes for Nric inputs</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Nrics of patient and donor can be inputted in no particular order.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More user friendly as users do not need to make sure the Nric must be in correct order. (For example, patient&#8217;s Nric must come before donor&#8217;s Nric)</p>
+</li>
+<li>
+<p>Cons: It is harder to implement and more exceptions need to be taken care of.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: It is easier to implement as <code>icP/PATIENT NRIC</code> and <code>icD/DONOR NRIC</code> will be easier to parse to the Command method.</p>
+</li>
+<li>
+<p>Cons: It is less user friendly as users need to remember more prefixes for this entire application.</p>
 </li>
 </ul>
 </div>
@@ -940,12 +1048,130 @@ with current implementations (able to wrap <code>ObservableList</code> and sort 
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-feature"><a class="link" href="#finding-feature">4.6. Finding feature</a></h3>
+<h3 id="processingmarkdone-feature"><a class="link" href="#processingmarkdone-feature">4.6. ProcessingMarkDone feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the processingMarkDone feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>ProcessingMarkDone is facilitated by the <code>ProcessingMarkDoneCommand</code> class, which extends the <code>Command</code> class.</p>
+</div>
+<div class="paragraph">
+<p>ProcessingMarkDone is done by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>,
+then, it will get the <code>ProcessingList</code> from the <code>Donor</code> and then marking a task as done.</p>
+</div>
+<div class="paragraph">
+<p>It implements the <code>ProcessingMarkDoneCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> boolean operation.<br>
+This method works similar to <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> method but with a slight difference.<br>
+This method just need to check the <code>Status</code> of the <code>Donor</code> and <code>Patient</code> object and make sure it is <code>processing</code>.<br>
+However, this method still need to determine which Nric belongs to a patient and which Nric belongs to a donor
+since the input allows user to give two Nric in no particular order.<br>
+A code snippet of the method is shown below: This part of the method is different from the <code>ProcessingCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>if (model.hasPatient(patientNric) &amp;&amp; model.hasDonor(donorNric)
+        &amp;&amp; patient.getStatus().isProcessing() &amp;&amp; donor.getStatus().isProcessing()
+        &amp;&amp; match(donor, patient)) {
+    return true;
+} else {
+    return false;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the user execute the processingMarkDone feature, the method, <code>ProcessingMarkDoneCommand#isValidDonorPatientPair(Nric firstNric, Nric secondNric, Model model)</code> will be called
+to determine if the user give a valid patient and donor input.<br>
+It will also check if the task number given is valid.<br>
+Then, it will call <code>Donor#markTaskAsDone(int taskNumber)</code> to mark the task on the <code>ProcessingList</code> of that donor.
+It will then display the list out.</p>
+</div>
+<div class="paragraph">
+<p>Following is an object diagram to show the processingMarkDone feature</p>
+</div>
+<div class="paragraph">
+<p>TODO diagram</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="done-feature"><a class="link" href="#done-feature">4.7. Done feature</a></h3>
+<div class="paragraph">
+<p>This section describes how the done feature is implemented.</p>
+</div>
+<div class="paragraph">
+<p>Done is facilitated by the <code>DoneCommand</code> class, which extends the <code>Command</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Done is executed by accessing <code>Patient</code> and <code>Donor</code> in <code>ModelManager</code>,
+then determine if the patient and donor can match each other or not.</p>
+</div>
+<div class="paragraph">
+<p>It implements the <code>DoneCommand#isPass(String result)</code> boolean operation.<br>
+This method check whether the result of the cross-matching test.<br></p>
+</div>
+<div class="paragraph">
+<p>If the patient and donor did a cross-matching test and the result of the test is a fail,
+then the patient and donor needs to be sent back to find new matches and they
+should not be able to match each other anymore.<br>
+<code>Donor</code> will have an ArrayList <code>patientsMatchedBefore</code> which stores all the patients' Nric which fails to match with it.
+Then, the patient and donor will have their <code>Status</code> set to <code>not processing</code> so that they can find another match and be considered in future matching results.</p>
+</div>
+<div class="paragraph">
+<p>If the patient and donor did a cross-matching test and the result of the test is a pass,
+then the patient and donor can be removed from ORGANice already.</p>
+</div>
+<div class="paragraph">
+<p>Following is an object diagram to show the processingMarkDone feature</p>
+</div>
+<div class="paragraph">
+<p>TODO diagram</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design considerations</a></h4>
+<div class="paragraph">
+<p>This section will explain the reason for having an aspect.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect"><a class="link" href="#aspect">Aspect:</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> To remove the patient and donor details if they pass the cross-matching test.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: It is easier to implement given the short amount of time we have to complete this project.</p>
+</li>
+<li>
+<p>Cons: It will be harder for users to do data analysis regarding the past successful matches.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Archive the details of patient and donor.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The data can be accessed for analysis.</p>
+</li>
+<li>
+<p>Cons: It is harder to implement and space taken may increase exponentially.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-feature"><a class="link" href="#finding-feature">4.8. Finding feature</a></h3>
 <div class="paragraph">
 <p>This section explains the implementation of the find persons by attributes feature.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">4.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The find feature is facilitated by <code>FindCommand</code> and <code>PersonContainsPrefixesPredicate</code>.<br></p>
 </div>
@@ -998,25 +1224,25 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.2. Design Considerations</a></h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.7. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.9. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1047,7 +1273,7 @@ this section will gloss over higher-level details and instead zoom-in to the beh
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1583,4 +1809,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:49:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:06:31 UTC</div></div></div></body></html>
