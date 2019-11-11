@@ -68,9 +68,9 @@ This section explains the formatting used in this document.
 
 A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
 
-| `Patient` |
+| `Text` |
 
-Blue text with grey highlight indicates a component, class or object in
+A grey highlight which starts with a capital letter indicates a component, class or object in
 the architecture of the application.
 |===
 
@@ -179,7 +179,7 @@ Please refer to this link to view the code I wrote:
 
 ** **Community**
 
-*** Reviewed Pull Requests (with non-trivial review comments):
+*** Reviewed Pull Requests (with non-trivial review comments): +
  [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/85[#85]],
  [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/88[#88]],
  [https://github.com/AY1920S1-CS2103T-T13-1/main/pull/97[#97]],
@@ -232,13 +232,7 @@ _{End of First Extract from Developer Guide}_
 
 _{Start of Second Extract from Developer Guide}_
 
-include::../DeveloperGuide.adoc[tag=processingMarkDoneDG]
-
-_{End of Second Extract from Developer Guide}_
-
-_{Start of Third Extract from Developer Guide}_
-
 include::../DeveloperGuide.adoc[tag=doneDG]
 
-_{End of Third Extract from Developer Guide}_
+_{End of Second Extract from Developer Guide}_
 

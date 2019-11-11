@@ -515,6 +515,8 @@ TODO diagram
 
 //Todo: additional feature such as add, edit and delete tasks
 
+// end::processingDG[]
+
 ==== Design considerations
 This section will explain the reason for having some aspects.
 
@@ -533,8 +535,6 @@ This section will explain the reason for having some aspects.
 * **Alternative 2:** Using specific prefixes for Nric input to differentiate the Nrics of donor and patient.
 ** Pros: It is easier to implement as `icP/PATIENT NRIC` and `icD/DONOR NRIC` will be easier to parse to the Command method.
 ** Cons: It is less user friendly as users need to remember more prefixes for this entire application.
-
-// end::processingDG[]
 
 // tag::processingMarkDoneDG[]
 
@@ -603,6 +603,8 @@ TODO diagram
 
 //Todo store the patient and donor information as archive instead of removing it
 
+// end::doneDG[]
+
 ==== Design considerations
 This section will explain the reason for having an aspect.
 
@@ -613,8 +615,6 @@ This section will explain the reason for having an aspect.
 * **Alternative 2:** Archive the details of patient and donor.
 ** Pros: The data can be accessed for analysis.
 ** Cons: It is harder to implement and space taken may increase exponentially.
-
-// end::doneDG[]
 
 === Finding feature
 This section explains the implementation of the find persons by attributes feature.
