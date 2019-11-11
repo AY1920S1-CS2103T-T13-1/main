@@ -73,25 +73,18 @@ features such as rebasing and stashing.
 ** Reviewed Pull Requests (PLACEHOLDER)
 
 == Contributions to the User Guide
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Shown below is an extract from our User Guide detailing the usage of the `find` command. I wrote this section to
+specifically target the end users who may not be tech savvy._
 |===
 
-{start of extract}
-
-include::../UserGuide.adoc[tag=add]
-
-{end of extract}
+include::../UserGuide.adoc[tag=find]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Shown below is an extract from our Developer Guide detailing the architecture and execution of the `find` command.
+I wrote this section to specifically target new developers with little Software Engineering experience._
 |===
 
-{start of extract}
-
-include::../DeveloperGuide.adoc[tag=formmode]
-
-{end of extract}
+include::../DeveloperGuide.adoc[tag=find]

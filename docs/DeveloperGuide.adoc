@@ -463,6 +463,7 @@ If the user makes any changes to the `ProcessingList`, the list will be saved to
 
 //Todo: additional feature such as add tasks, delete tasks etc
 
+// tag::find[]
 ==== Design considerations
 This section will explain the reason for having some aspects.
 
@@ -540,6 +541,7 @@ This section will explain the main aspect considered in designing the find by pr
 * **Alternative 2:** Use Natural Language Processing Libraries.
 ** Pros: Will be able to detect typos more effectively.
 ** Cons: Will take up more system resources.
+// end::find[]
 
 === Logging
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
