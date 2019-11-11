@@ -2,23 +2,25 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:xrefstyle: full
 
 == Project Portfolio for ORGANice
 
 The purpose of this project portfolio is to present my main contributions to ORGANice.
 
-== 1. Introduction
+:sectnums:
+== Introduction
 
 This section covers the project scope and description, followed an explanation of the formats used.
 
-=== 1.1 Project scope
+=== Project scope
 
 ORGANice is the product of a software engineering project done by a team of 5 students, including myself, who are second-year Computer Science students from the National University of Singapore (NUS).
 Under a two-month-long time frame, we conceptualised ORGANice and molded it from an existing application, known as "Address Book", that stores and manages people's contact information.
 My role in this project is to design and write the code for the `list` and `sort` features for ORGANice, and to offer advice for the design aspect of the application.
 For the languages used, ORGANice is written in Java while its Graphical User Interface (GUI) is written in JavaFX.
 
-=== 1.1 Project description
+=== Project description
 
 ORGANice is a Command Line Interface (CLI) desktop application, meaning that user interaction is mainly through typing in commands.
 This application is targeted at hospital administrators and its main features include storing hospital information,
@@ -32,7 +34,7 @@ finding compatible donors for patients awaiting organ transplants, and following
 * Keep track of patient-donor pairs slated for further compatibility tests using `processing` and subsequent administrative tasks using `processingmarkdone`
 * Mark patient-donor pair as `done` to remove from future matching results
 
-=== 1.2 Meaning of the formats used
+=== Meaning of the formats used
 
 The following is a list of various formats used and what they mean:
 
@@ -41,7 +43,7 @@ The following is a list of various formats used and what they mean:
 
 <<<
 
-== 2. Summary of Contributions
+== Summary of Contributions
 
 This section elaborates on the enhancements I did to ORGANice with the relevant links (in blue).
 
@@ -74,7 +76,7 @@ https://github.com/AY1920S1-CS2103T-T13-1/main/pull/153[#153])
 
 <<<
 
-== 3. Contributions to the User Guide
+== Contributions to the User Guide
 
 This section showcases my ability to write documentation targeting end-users through an excerpt of what I have written for the User Guide,
 and this includes the `sort`, `list`, `help` and `edit` features.
@@ -91,7 +93,7 @@ include::../UserGuide.adoc[tag=edit]
 
 [teal]#{End of the excerpt from User Guide}#
 
-== 4. Contributions to the Developer Guide
+== Contributions to the Developer Guide
 
 This section showcases my ability to write technical documentation and to visually represent a system using
 Unified Modelling Language (UML) diagrams in the Developer Guide. The sequence shown in the excerpt below will be use cases for
