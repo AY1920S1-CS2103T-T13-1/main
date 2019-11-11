@@ -7,7 +7,6 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
-:experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -20,7 +19,7 @@ By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 // tag::intro[]
 == Introduction
-
+:page-partial:
 This user guide explains how to use ORGANice to manage organ transplants.
 ORGANice is a desktop application for hospital administration staff who prefer
 to use Command Line Interface applications to manage organ transplants.
@@ -133,6 +132,7 @@ same 6 unique numbers.
 ** Applicable to: donors
 ** Valid input: a valid date in DD-MMM-YYYY format
 
+//end::intro[]
 
 [[Features]]
 == Features
@@ -169,7 +169,7 @@ ORGANice. To access the user guide of ORGANice, you can do the following:
 image::HelpWindow.png[width="790"]
 // end::help[]
 
-// tag::add[]
+//tag::normalAdd[]
 === Adding a person: `add`
 
 This command allows you to add a patient, doctor, or donor to ORGANice with the attributes given,
@@ -201,8 +201,9 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
 
 Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE**`
 
-[TIP]
-View the List of Attributes in the beginning of <<Features>> to find out the meaning of each parameter.
+
+You may view the List of Attributes in the beginning of <<Features>> to
+find out the meaning of each attribute.
 
 Examples:
 
@@ -211,7 +212,9 @@ d/S2235456D a/29`
 * `add t/donor n/Betsy Kim o/kidney b/AB- tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
 exp/23-Nov-2020 a/21`
 * `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
+// end::normalAdd[]
 
+// tag::add[]
 ==== Form mode
 
 In this mode, instead of typing a long command at one go, you can add a person's attribute one by one.
@@ -412,7 +415,7 @@ Here is an example. Suppose you want to find potential donors for a patient "Joh
 Type `match ic/S1234568R` in the Command Box and press kbd:[Enter].
 
 You will see a list of potential donors for John Doe along with the compatibility
-rate of each donor, similar to Figure 13.
+rate of each donor, similar to the figure below.
 
 //TODO need to change this to another screenshot
 .List of potential donors for John Doe
@@ -429,7 +432,7 @@ type `match ic/all` in the Command Box and press kbd:[Enter].
 You will see a list of all the patients in ORGANice along with the number of
 potential donors for each patient.
 
-As seen in Figure 14, 'Someone edited' is displayed with the red text 'Matches: 3'.
+As seen in the figure below, 'Someone edited' is displayed with the red text 'Matches: 3'.
 This means that 'Someone edited' has 3 potential donors.
 
 .List of Persons with number of matching donors

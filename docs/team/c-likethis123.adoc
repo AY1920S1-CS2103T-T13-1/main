@@ -1,30 +1,47 @@
 = Chow Jia Ying - Project Portfolio
+
+== PROJECT: ORGANice
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
-
-== PROJECT: ORGANice
+:xrefstyle: full
+:experimental:
+:sectnums:
 
 == Overview
-This document is written to document my role and contributions to ORGANice. It is a team project developed
-for the module CS2103T, the introductory Software Engineering module in NUS.
+This document is written to document my role and contributions to ORGANice.
 
-=== About the team
-We are a group of 5 Year 2 Computer Science undergraduates. It took us two months to conceptualise
-and implement this project.
+ORGANice was created for an assignment for the module CS2103T, the introductory Software Engineering module offered by NUS.
+The assignment required me to work with 4 other students to morph Address Book 3, an existing desktop application,
+to another desktop application within 7 weeks. +
 
-=== About ORGANice
-ORGANice is an organ matching desktop application designed for hospital administration staff who prefer typing. +
-It allows hospital administrators to store hospital data, find potential organ donors for
-patients and follow up on administrative procedures regarding organ matching.
+As part of the module constraints, the application must have a Command Line Interface (CLI).
+This means that users must be able to use the application's features by typing commands instead of
+clicking buttons. +
 
-It is morphed from Address Book 3, which is a desktop application used for teaching Software Engineering principles.
-The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI)
-created with JavaFX.
-It is written in Java, and has about 10,000 lines of code (LoC).
+Our team chose to morph Address Book 3 to ORGANice, an organ matching desktop application designed for
+hospital administration staff who prefer typing. It is written in Java, and has about 10,000 lines of code (LoC). The JavaFX framework is used to create the
+Graphical User Interface (GUI) of this application. +
 
-=== Formatting used in this document
-Words highlighted in grey refers to technical terms in this application.
+The main features of ORGANice includes:
+
+* storing information of patients, donors and donors
+* finding potential organ donors for patients
+* managing administrative procedures regarding organ matching.
+
+
+Note the formatting used in this document:
+
+`match` - Words highlighted in grey (called a mark-up) indicates that this is a command that can
+be executed by the application or a technical term.
+
+kbd:[Enter] - Words highlighted in white and encased in a box indicates that it is a key on a keyboard.
+
+<<Summary of contributions>> - Words in blue and underlined indicates that it is a clickable link.
+
+<<Some link>> - Words in blue, underlined and encased in square brackets indicates that the links
+are not clickable. Note that they appear in the excerpts because they are links to other documents
+that are not in the excerpts.
 
 
 == Summary of contributions
@@ -43,12 +60,15 @@ how to store and change the list displayed in Address Book 3.
 
 * *Major enhancement 2*: added the Patient class, which extends the Person class.
 ** What it does: allows patients to be added and stored in ORGANice
-** Justification: allows users to manage patient data easily.
+** Justification: allows users to easily manage patient data. Storing patient data is also
+required for matching of patients and donors to take place.
 ** Highlights: The addition of this feature required careful consideration of how
 to display, store and differentiate patients from other types of people in ORGANice.
 
 * *Minor enhancement 1*: added coloured tags to patients and donors
+** What it does: indicates the statuses of patients and donors
  (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/169[#169]).
+** Justification: allows users to identify unmatched patients and donors at a glance.
 
 * *Code contributed*: [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=c-likethis123&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=C-likethis123&tabRepo=AY1920S1-CS2103T-T13-1%2Fmain%5Bmaster%5D[RepoSense]]
 
@@ -60,19 +80,21 @@ to display, store and differentiate patients from other types of people in ORGAN
 *** Arranged for system and acceptance testing.
 *** Managed release v1.3.1 on Github
 ** Enhancements to existing features:
-*** Wrote additional unit and integration tests for existing features
+*** Wrote additional unit and integration tests for existing features (Pull requests )
 to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 *** Refactored code to improve code quality
-*** Implemented logging to the match feature (Pull request [])
-*** Fixed bugs
+*** Fixed bugs (Pull requests )
 ** Documentation:
 *** Authored the 'Introduction', 'Quick Start', 'Components of ORGANice' and
 'Detecting matches' sub-sections in the 'Features' section
 (Pull request https://github.com/AY1920S1-CS2103T-T13-1/main/pull/138/files[#138])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** PRs reviewed (with non-trivial review comments):
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/127[#127],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/18[#18],
+https://github.com/AY1920S1-CS2103T-T13-1/main/pull/113[#113]
+*** Contributed to forum discussions
+(examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 
 == Contributions to the User Guide
 This section documents my contributions to the User Guide. I authored the following sections:
@@ -80,13 +102,13 @@ This section documents my contributions to the User Guide. I authored the follow
 * Introduction
 * Quick Start
 * Components of ORGANice
-* 'Detecting matches' in the 'Features' section
+* Detecting matches
 
 Given below are excerpts of my contribution to the User Guide.
 
 {Start of extract from User Guide}
 
-include::../UserGuide.adoc[tag=match]
+include::../UserGuide.adoc[tag=intro,match]
 
 {End of extract from User Guide}
 

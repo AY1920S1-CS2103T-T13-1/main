@@ -205,7 +205,7 @@ or donors that corresponds to the input.
 
 
 === Matching feature
-This section describes how the matching feature is implemented.
+This section explains the current implementation and design considerations of the matching feature.
 
 Matching is facilitated by the `MatchCommand` class, which extends the `Command` class.
 It implements the `MatchCommand#match(Person donor, Patient patient)` operation, which checks if the given patient and
@@ -233,12 +233,14 @@ Given below is an example usage scenario and how the match feature works at each
 
 Step 1. The user opens up the application with an existing list of patients and donors.
 
+.Initial state of ORGANice
 image::MatchState0.png[]
 
 Step 2. The user types in the command `match ic/all`. Each patient will be matched with
 all donors via the `MatchCommand#match` operation. A `MatchedPatient` object is created
 for each patient, which stores the patient's attributes and the number of potential donors the patient has.
 
+.State of ORGANice after matching all patients
 image::MatchState1.png[]
 
 Step 3. The user types in the command `match ic/**PATIENT NRIC**`, where **PATIENT NRIC** is the NRIC of a patient in
@@ -247,6 +249,7 @@ Existing objects in the `listOfMatches` are removed.
 For each potential donor of the specified patient, a `MatchedDonor`object is created,
 accompanied with the compatibility rate.
 
+.State of ORGANice after matching a specific patient
 image::MatchState2.png[]
 
 
@@ -266,14 +269,15 @@ This section explores several ways of storing match results of patients and dono
 created in previous `MatchCommand` executions when there is a new `MatchCommand` executed.
 ** Pros: No need to write extra code to store match results in the hard disk. Previous match results are overriden with new results
 from the latest match command.
-A scenario in which this would be important is if a user matches a patient, edits the patient information,
-then runs the matching again. The matching would be based on the latest patient data.
-** Cons: Redundant matching occurs in a scenario where the user executes a match command with the same parameters twice.
+A scenario in which this would be important is if a user matches a patient again after editing
+the patient's information. The matching would be based on the updated patient's information.
+** Cons: Redundant matching occurs in a scenario where the user
+executes a match command with the same parameters twice.
 
 * **Choice 2:** For each patient, keep a list of match results. After every `MatchCommand` is executed, save
 the match results to the hard disk.
-** Pros: A history of match results can be stored. It reduces redundant matching.
-** Cons: More code to write to store match results to the hard disk.
+** Pros: A history of match results is stored, thus reducing redundant matching.
+** Cons: More code to needs to be written to store match results to the hard disk.
 
 ==== Aspect: Display of match results
 This section explains some considerations for displaying match results,
@@ -600,7 +604,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * ` |user |add multiple data using external file|reduce the time to add in a data into the system
 
 |`* * ` |user |find a patient/donor/doctor with incomplete keywords|reduce the time to type in the whole keyword
-|=======================================================================
+= |=======================================================================
 
 _{More to be added}_
 
